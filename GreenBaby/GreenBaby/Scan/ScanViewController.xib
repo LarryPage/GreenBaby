@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ScanViewController">
+            <connections>
+                <outlet property="mask_bottom_View" destination="35" id="39"/>
+                <outlet property="mask_left_View" destination="36" id="40"/>
+                <outlet property="mask_right_View" destination="37" id="41"/>
+                <outlet property="mask_top_View" destination="34" id="38"/>
+                <outlet property="readerView" destination="8" id="10"/>
+                <outlet property="scan_target_IV" destination="15" id="NXn-qZ-cp2"/>
+                <outlet property="scroll_across_IV" destination="43" id="44"/>
+                <outlet property="tipLabel" destination="21" id="Rbs-A7-7wg"/>
+                <outlet property="topConstraint" destination="yuh-fO-6nr" id="ZwC-iD-rHD"/>
+                <outlet property="view" destination="6" id="7"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="6">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8" customClass="ZBarReaderView">
+                    <rect key="frame" x="-2" y="-2" width="604" height="604"/>
+                    <animations/>
+                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="34">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="146"/>
+                    <animations/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="146" id="3he-RO-Sq4"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="36">
+                    <rect key="frame" x="0.0" y="146" width="61" height="478"/>
+                    <animations/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="61" id="HUm-LN-nWD"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="37">
+                    <rect key="frame" x="539" y="146" width="61" height="454"/>
+                    <animations/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="61" id="iBp-fv-x0a"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="35">
+                    <rect key="frame" x="0.0" y="600" width="600" height="0.0"/>
+                    <subviews>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="将二维码放入取景框中即可自动扫描" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="21">
+                            <rect key="frame" x="0.0" y="30" width="600" height="21"/>
+                            <animations/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="21" id="8ZC-BD-R0x"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <animations/>
+                    <constraints>
+                        <constraint firstItem="21" firstAttribute="top" secondItem="35" secondAttribute="top" constant="30" id="T3T-0U-0PR"/>
+                        <constraint firstItem="21" firstAttribute="leading" secondItem="35" secondAttribute="leading" id="YuJ-6p-EYp"/>
+                        <constraint firstAttribute="trailing" secondItem="21" secondAttribute="trailing" id="bPO-vO-zhs"/>
+                    </constraints>
+                </view>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="scan-target" translatesAutoresizingMaskIntoConstraints="NO" id="15">
+                    <rect key="frame" x="59" y="144" width="482" height="482"/>
+                    <animations/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="15" secondAttribute="height" multiplier="1:1" id="uCL-o8-ZRW"/>
+                    </constraints>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="scan-scroll-across-pad" translatesAutoresizingMaskIntoConstraints="NO" id="43">
+                    <rect key="frame" x="61" y="138" width="476" height="23"/>
+                    <animations/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="23" id="7t0-ts-xid"/>
+                    </constraints>
+                </imageView>
+            </subviews>
+            <animations/>
+            <color key="backgroundColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstItem="36" firstAttribute="height" secondItem="15" secondAttribute="height" constant="-4" id="1Qz-TX-No9"/>
+                <constraint firstItem="8" firstAttribute="top" secondItem="6" secondAttribute="top" constant="-2" id="80P-KI-yPo"/>
+                <constraint firstItem="36" firstAttribute="top" secondItem="34" secondAttribute="bottom" id="BOW-TD-Jzn"/>
+                <constraint firstAttribute="trailing" secondItem="15" secondAttribute="trailing" constant="59" id="CST-M7-40Q"/>
+                <constraint firstItem="15" firstAttribute="top" secondItem="6" secondAttribute="top" constant="144" id="FuN-sE-Rji"/>
+                <constraint firstAttribute="trailing" secondItem="35" secondAttribute="trailing" id="OLT-gU-jPH"/>
+                <constraint firstItem="36" firstAttribute="height" secondItem="15" secondAttribute="height" id="VeY-Dk-5wO"/>
+                <constraint firstAttribute="trailing" secondItem="8" secondAttribute="trailing" constant="-2" id="Vl9-UH-Lew"/>
+                <constraint firstItem="34" firstAttribute="top" secondItem="6" secondAttribute="top" id="Vu8-xt-7Cn"/>
+                <constraint firstItem="35" firstAttribute="top" secondItem="37" secondAttribute="bottom" id="WXe-dS-nQ2"/>
+                <constraint firstItem="35" firstAttribute="leading" secondItem="6" secondAttribute="leading" id="XR9-ll-uO7"/>
+                <constraint firstItem="36" firstAttribute="leading" secondItem="6" secondAttribute="leading" id="YPc-Bd-UG2"/>
+                <constraint firstItem="8" firstAttribute="leading" secondItem="6" secondAttribute="leading" constant="-2" id="ZGc-Uj-KzB"/>
+                <constraint firstAttribute="trailing" secondItem="37" secondAttribute="trailing" id="cOR-c3-Rg7"/>
+                <constraint firstItem="37" firstAttribute="top" secondItem="34" secondAttribute="bottom" id="eR9-EK-tD9"/>
+                <constraint firstItem="34" firstAttribute="leading" secondItem="6" secondAttribute="leading" id="fZT-jJ-i9j"/>
+                <constraint firstAttribute="trailing" secondItem="34" secondAttribute="trailing" id="i04-ed-v4F"/>
+                <constraint firstItem="43" firstAttribute="leading" secondItem="36" secondAttribute="trailing" id="iBD-MB-cWm"/>
+                <constraint firstItem="43" firstAttribute="leading" secondItem="36" secondAttribute="trailing" id="imG-mH-uBr"/>
+                <constraint firstItem="37" firstAttribute="leading" secondItem="43" secondAttribute="trailing" constant="2" id="jPR-yE-Bqo"/>
+                <constraint firstItem="36" firstAttribute="height" secondItem="37" secondAttribute="height" priority="750" id="l3V-ed-bK2"/>
+                <constraint firstItem="15" firstAttribute="leading" secondItem="6" secondAttribute="leading" constant="59" id="lfE-Yl-Pmm"/>
+                <constraint firstAttribute="bottom" secondItem="35" secondAttribute="bottom" id="pm9-OS-tUy"/>
+                <constraint firstItem="37" firstAttribute="leading" secondItem="43" secondAttribute="trailing" constant="2" id="sBH-Dd-d6W"/>
+                <constraint firstAttribute="bottom" secondItem="8" secondAttribute="bottom" constant="-2" id="yWK-cb-exE"/>
+                <constraint firstItem="43" firstAttribute="top" secondItem="6" secondAttribute="top" constant="138" id="yuh-fO-6nr"/>
+            </constraints>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="VeY-Dk-5wO"/>
+                    <exclude reference="imG-mH-uBr"/>
+                    <exclude reference="sBH-Dd-d6W"/>
+                </mask>
+            </variation>
+            <point key="canvasLocation" x="335" y="378"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="scan-scroll-across-pad" width="357" height="23"/>
+        <image name="scan-target" width="365" height="365"/>
+    </resources>
+</document>

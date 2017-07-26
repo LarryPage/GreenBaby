@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CitySelectViewController">
+            <connections>
+                <outlet property="resultTable" destination="FrJ-vy-TKa" id="EJV-zk-5wJ"/>
+                <outlet property="searchBar" destination="tFQ-Tx-WrU" id="QHa-nv-3kz"/>
+                <outlet property="searchDisplayController" destination="DkJ-uc-fYV" id="sQc-Wi-aQX"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <searchDisplayController id="DkJ-uc-fYV">
+            <connections>
+                <outlet property="delegate" destination="-1" id="3ZT-CK-sHX"/>
+                <outlet property="searchBar" destination="tFQ-Tx-WrU" id="A9N-Ov-hoq"/>
+                <outlet property="searchContentsController" destination="-1" id="fZs-2b-WMn"/>
+                <outlet property="searchResultsDataSource" destination="-1" id="xam-gL-l3A"/>
+                <outlet property="searchResultsDelegate" destination="-1" id="xzp-xF-YkA"/>
+            </connections>
+        </searchDisplayController>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <searchBar contentMode="redraw" placeholder="输入城市名称或首字母" translatesAutoresizingMaskIntoConstraints="NO" id="tFQ-Tx-WrU">
+                    <rect key="frame" x="0.0" y="64" width="600" height="44"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="44" id="6YZ-Lp-jSY"/>
+                    </constraints>
+                    <color key="tintColor" red="0.88627457620000005" green="0.88627457620000005" blue="0.88627457620000005" alpha="1" colorSpace="deviceRGB"/>
+                    <textInputTraits key="textInputTraits"/>
+                    <connections>
+                        <outlet property="delegate" destination="-1" id="2f5-EK-Ob2"/>
+                    </connections>
+                </searchBar>
+                <tableView clipsSubviews="YES" tag="1" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="FrJ-vy-TKa" userLabel="TableView">
+                    <rect key="frame" x="0.0" y="108" width="600" height="492"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="separatorColor" red="0.90196078430000004" green="0.90196078430000004" blue="0.90196078430000004" alpha="1" colorSpace="deviceRGB"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="xXx-rE-Vd1"/>
+                        <outlet property="delegate" destination="-1" id="QSn-3r-c7m"/>
+                    </connections>
+                </tableView>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="FrJ-vy-TKa" secondAttribute="trailing" id="15z-OZ-4AF"/>
+                <constraint firstItem="FrJ-vy-TKa" firstAttribute="top" secondItem="tFQ-Tx-WrU" secondAttribute="bottom" id="3wT-Sb-WYI"/>
+                <constraint firstAttribute="trailing" secondItem="tFQ-Tx-WrU" secondAttribute="trailing" id="6eM-zb-Fae"/>
+                <constraint firstItem="tFQ-Tx-WrU" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="64" id="Fkz-8A-Ah8"/>
+                <constraint firstItem="FrJ-vy-TKa" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="NEh-WH-Clc"/>
+                <constraint firstAttribute="bottom" secondItem="FrJ-vy-TKa" secondAttribute="bottom" id="adh-GL-A88"/>
+                <constraint firstItem="tFQ-Tx-WrU" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="my8-Pj-XEd"/>
+            </constraints>
+            <point key="canvasLocation" x="426" y="442"/>
+        </view>
+    </objects>
+</document>
