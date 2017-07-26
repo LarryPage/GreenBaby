@@ -60,9 +60,9 @@
 
 - (void)registerAPNS{
     if ([[UIDevice currentDevice].systemVersion floatValue] >= 8.0) {
-        UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:(UIRemoteNotificationTypeBadge
-                                                                                             |UIRemoteNotificationTypeSound
-                                                                                             |UIRemoteNotificationTypeAlert) categories:nil];
+        UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeBadge
+                                                                                             |UIUserNotificationTypeSound
+                                                                                             |UIUserNotificationTypeAlert) categories:nil];
         [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
         if (![[UIApplication sharedApplication] isRegisteredForRemoteNotifications]) {
             [[NSNotificationCenter defaultCenter] postNotificationName:PushRegistNotification object:nil];
@@ -605,7 +605,7 @@ void UncaughtExceptionHandler(NSException *exception){
 
 #ifdef __IPHONE_8_0
 - (void)application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings{
-    //register to receive notifications
+    //register to receive Remote notifications
     [application registerForRemoteNotifications];
 }
 

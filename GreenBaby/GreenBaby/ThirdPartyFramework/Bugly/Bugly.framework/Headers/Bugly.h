@@ -2,7 +2,7 @@
 //  Bugly.h
 //  Bugly
 //
-//  Version: 2.2(3)
+//  Version: 2.4(8)
 //
 //  Copyright (c) 2016年 Bugly. All rights reserved.
 //
@@ -33,6 +33,17 @@ BLY_START_NONNULL
                 config:(BuglyConfig * BLY_NULLABLE)config;
 
 /**
+ *  使用指定配置初始化Bugly
+ *
+ *  @param appId 注册Bugly分配的应用唯一标识
+ *  @param development 是否开发设备
+ *  @param config 传入配置的 BuglyConfig
+ */
++ (void)startWithAppId:(NSString * BLY_NULLABLE)appId
+     developmentDevice:(BOOL)development
+                config:(BuglyConfig * BLY_NULLABLE)config;
+
+/**
  *  设置用户标识
  *
  *  @param userId 用户标识
@@ -49,8 +60,8 @@ BLY_START_NONNULL
 /**
  *  设置关键数据，随崩溃信息上报
  *
- *  @param value
- *  @param key
+ *  @param value KEY
+ *  @param key VALUE
  */
 + (void)setUserValue:(NSString *)value
               forKey:(NSString *)key;
@@ -81,7 +92,7 @@ BLY_START_NONNULL
  *
  *  @return 设备ID
  */
-+ (NSString *)deviceId;
++ (NSString *)buglyDeviceId;
 
 /**
  *  上报自定义Objective-C异常
@@ -112,9 +123,19 @@ BLY_START_NONNULL
 /**
  *  SDK 版本信息
  *
- *  @return
+ *  @return SDK版本号
  */
 + (NSString *)sdkVersion;
+
+/**
+ *  App 是否发生了连续闪退
+ *  如果启动SDK 且 5秒内 闪退，且次数达到 3次 则判定为连续闪退
+ *
+ *  @return 是否连续闪退
+ */
++ (BOOL)isAppCrashedOnStartUpExceedTheLimit;
+
++ (void)setComponentIdentifier:(NSString *)componentId version:(NSString *)version;
 
 BLY_END_NONNULL
 
