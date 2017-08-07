@@ -16,9 +16,9 @@
  */
 //greenbaby://huijiame.com/common/web?data=josnstring
 //宝贝详情: taobao://item.taobao.com/item.htm?id=12688928896
-//建议使用：greenbaby://huijiame.com/common/web?title=网页名
+//建议使用：greenbaby://huijiame.com/common/web?url=url&title=网页名
 
-//打开新的网页:greenbaby://huijiame.com/common/web?title=网页名
+//打开新的网页:greenbaby://huijiame.com/common/web?url=url&title=网页名
 #define COMMON_WEB                  @"common/web"
 
 #endif

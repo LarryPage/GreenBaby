@@ -16,13 +16,14 @@
     [FFRouteManager addRoute:COMMON_WEB handler:^id(NSDictionary *parameters) {
         BaseViewController *curVC=(BaseViewController *)[[AppDelegate sharedAppDelegate].window topViewController];
         
-        NSURL *url = parameters[kFFRouteURLKey];
-        CLog(@"%@:%@:%@",[url scheme],[url path],[url query]);
-        //NSArray *paths=[[url path] componentsSeparatedByString:@"/"];
-        //NSDictionary *params=[[url query] queryDictionaryUsingEncoding:NSUTF8StringEncoding];
+        NSURL *routeUrl = parameters[kFFRouteURLKey];
+        CLog(@"%@:%@:%@",[routeUrl scheme],[routeUrl path],[routeUrl query]);
+        //NSArray *paths=[[routeUrl path] componentsSeparatedByString:@"/"];
+        //NSDictionary *params=[[routeUrl query] queryDictionaryUsingEncoding:NSUTF8StringEncoding];
+        NSString *url = parameters[@"url"];
         NSString *title = parameters[@"title"];
         
-        WebViewController *vc = [[WebViewController alloc] initWithUrl:[url absoluteString] title:title];
+        WebViewController *vc = [[WebViewController alloc] initWithUrl:url title:title];
         vc.hidesBottomBarWhenPushed=YES;
         [curVC.navigationController pushViewController:vc animated:YES];
         

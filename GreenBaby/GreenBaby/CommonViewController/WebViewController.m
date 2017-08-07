@@ -438,7 +438,11 @@
             [FFRouteManager routeURL: url];
         }
         else{
-            [[TKAlertCenter defaultCenter]postAlertWithMessage:@"当前版本不支持该scheme!"];
+#ifdef DEBUG
+            [[TKAlertCenter defaultCenter] postAlertWithMessage:@"当前版本不支持该scheme!"];
+#else
+            CLog(@"Route降级处理!");
+#endif
         }
         return NO;
     }
