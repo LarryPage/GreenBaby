@@ -278,10 +278,10 @@ void UncaughtExceptionHandler(NSException *exception){
     
     [self.window makeKeyAndVisible];
     
-    // 0.configRouteIMP
+    // 1.configRouteIMP
     [FFRouteManager addRouteImps:@[[FFCommonRouteImp new]]];
     
-    // 1.Handle local notification 定时本地通知
+    // 2.Handle local notification 定时本地通知
     UILocalNotification *localNotif = [launchOptions objectForKey:UIApplicationLaunchOptionsLocalNotificationKey];
     if (localNotif) {
         CLog(@"Recieved Local Notification %@",localNotif);
@@ -301,7 +301,7 @@ void UncaughtExceptionHandler(NSException *exception){
         // it will be handled in applicationDidBecomeActive
     }
     
-    // 2.apple push notification 远程通知
+    // 3.apple push notification 远程通知
     NSDictionary *aps = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
     if(aps) {
         _pushPayload=nil;
@@ -310,13 +310,13 @@ void UncaughtExceptionHandler(NSException *exception){
         // it will be handled in applicationDidBecomeActive
     }
     
-    //3.ShortcutItem
+    //4.ShortcutItem
     UIApplicationShortcutItem *shortcutItem = [launchOptions objectForKey:UIApplicationLaunchOptionsShortcutItemKey];
     if(shortcutItem){
         [self handleShortCutItem:shortcutItem];
     }
     
-    //4.InHouse版本
+    //5.InHouse版本
     if ([kBundleIdentifier isEqualToString:@"com.dianshang.wanhui.InHouse"]) {
         [API appVersionCheckOnCompletion:^(NSError *error,id responseDic){
             if (!error) {
@@ -445,7 +445,7 @@ void UncaughtExceptionHandler(NSException *exception){
             [FFRouteManager routeURL: url];
         }
         else{
-            [[TKAlertCenter defaultCenter]postAlertWithMessage:@"当前版本不支持该scheme!"];
+            [FFRouteManager routeReduceURL:url];
         }
     }
     else{
@@ -526,7 +526,7 @@ void UncaughtExceptionHandler(NSException *exception){
             [FFRouteManager routeURL: url];
         }
         else{
-            [[TKAlertCenter defaultCenter]postAlertWithMessage:@"当前版本不支持该scheme!"];
+            [FFRouteManager routeReduceURL:url];
         }
         return YES;
     }

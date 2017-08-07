@@ -435,14 +435,10 @@
     NSURL *url = [request URL];
     if ([FFRouteManager supportSchemeURL:url]) {//APPInScheme:内部跳转Scheme
         if([FFRouteManager canRouteURL:url]){
-            [FFRouteManager routeURL: url];
+            [FFRouteManager routeURL:url];
         }
         else{
-#ifdef DEBUG
-            [[TKAlertCenter defaultCenter] postAlertWithMessage:@"当前版本不支持该scheme!"];
-#else
-            CLog(@"Route降级处理!");
-#endif
+            [FFRouteManager routeReduceURL:url];
         }
         return NO;
     }

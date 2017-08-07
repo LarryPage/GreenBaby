@@ -86,8 +86,8 @@ static NSMutableDictionary<NSString*, FFRoute *> *routeMap;
         }
         return nil;
     }
-    NSString * scheme = URL.scheme;
-    FFRoute * route = [routeMap objectForKey:scheme];
+    NSString *scheme = URL.scheme;
+    FFRoute *route = [routeMap objectForKey:scheme];
     if(!route)
     {
         if(FF_ROUTE_LOG_ENABLED)
@@ -111,9 +111,36 @@ static NSMutableDictionary<NSString*, FFRoute *> *routeMap;
 }
 + (id)routeURLStr:(NSString *)URLStr withParameters:(NSDictionary *)parameters completed:(void (^)(id result))completedBlock
 {
-    NSURL * url = [FFRouteManager urlStrToNSURL:URLStr];
+    NSURL *url = [FFRouteManager urlStrToNSURL:URLStr];
     NSAssert(url, @"url格式错误，请检查url格式:%@",URLStr);
     return [FFRouteManager routeURL:url withParameters:parameters completed:completedBlock];
+}
+
++ (void)routeReduceURL:(NSURL *)URL
+{
+#ifdef DEBUG
+    [[TKAlertCenter defaultCenter] postAlertWithMessage:@"当前版本不支持该scheme!"];
+#else
+    if(FF_ROUTE_LOG_ENABLED)
+    {
+        CLog(@"执行Route降级操作!");
+    }
+    
+    BaseViewController *curVC=(BaseViewController *)[[AppDelegate sharedAppDelegate].window topViewController];
+    
+    NSString *urlStr = [url absoluteString];
+    urlStr = [urlStr stringByReplacingOccurrencesOfString:url.scheme withString:@"https"];
+    
+    WebViewController *vc = [[WebViewController alloc] initWithUrl:urlStr title:urlStr];
+    vc.hidesBottomBarWhenPushed=YES;
+    [curVC.navigationController pushViewController:vc animated:YES];
+#endif
+}
+
++ (void)routeReduceURLStr:(NSString *)URLStr
+{
+    NSURL *url = [self urlStrToNSURL:URLStr];
+    [FFRouteManager routeReduceURL:url];
 }
 
 + (BOOL)supportSchemeURL:(NSURL *)URL
@@ -143,13 +170,13 @@ static NSMutableDictionary<NSString*, FFRoute *> *routeMap;
 }
 
 + (BOOL)supportSchemeURLStr:(NSString *)URLStr{
-    NSURL * url = [self urlStrToNSURL:URLStr];
+    NSURL *url = [self urlStrToNSURL:URLStr];
     return [FFRouteManager supportSchemeURL:url];
 }
 
 + (BOOL)canRouteURLStr:(NSString *)URLStr
 {
-    NSURL * url = [self urlStrToNSURL:URLStr];
+    NSURL *url = [self urlStrToNSURL:URLStr];
     return [FFRouteManager canRouteURL:url];
 }
 
@@ -168,10 +195,10 @@ static NSMutableDictionary<NSString*, FFRoute *> *routeMap;
     return @"greenbabyout";
 }
 
-+(NSURL *) urlStrToNSURL:(NSString *)urlStr
++(NSURL *)urlStrToNSURL:(NSString *)urlStr
 {
     NSURL * url = nil;
-    if([urlStr hasPrefix:[FFRouteManager APPInScheme]] || [urlStr hasPrefix:[FFRouteManager APPOutScheme]])
+    if([urlStr hasPrefix:[FFRouteManager APPScheme]] || [urlStr hasPrefix:[FFRouteManager APPInScheme]] || [urlStr hasPrefix:[FFRouteManager APPOutScheme]])
     {
         url = [NSURL URLWithString:urlStr];
     }

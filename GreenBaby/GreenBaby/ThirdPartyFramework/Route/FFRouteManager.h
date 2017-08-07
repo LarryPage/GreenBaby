@@ -57,6 +57,12 @@
 //执行Route操作，route完成后执行block
 + (id)routeURLStr:(NSString *)URLStr withParameters:(NSDictionary *)parameters completed:(void (^)(id result))completedBlock;
 
+//执行Route降级操作
++ (void)routeReduceURL:(NSURL *)URL;
+
+//执行Route降级操作
++ (void)routeReduceURLStr:(NSString *)URLStr;
+
 //判断当前URL是否支持Scheme
 + (BOOL)supportSchemeURL:(NSURL *)URL;
 //判断当前URL是否可以Route
