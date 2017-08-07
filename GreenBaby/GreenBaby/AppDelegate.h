@@ -51,6 +51,7 @@
 #import "StartViewController.h"
 #import "CustomTabBarController.h"
 #import "WebViewController.h"
+#import "FFCommonRouteImp.h"
 
 #define PushRegistNotification      @"PushRegistNotification"//注册远程通知DeviceToken
 
@@ -67,8 +68,7 @@
 @property (nonatomic, assign) long long timestamp;//进入页面时间
 
 - (void)handlePushPayload;// 处理推送信息
-- (BOOL)handleUrl:(NSURL *)url;// 处理scheme信息
-- (BOOL)handleUrl:(NSURL *)url title:(NSString *)title;// 处理url
+- (void)handleUrl:(NSURL *)url title:(NSString *)title;// 处理url
 - (void)killApp;
 @end
 

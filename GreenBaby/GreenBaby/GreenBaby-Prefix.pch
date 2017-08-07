@@ -76,6 +76,7 @@
     #import "FSMediaPicker.h"
     #import "NJKWebViewProgress.h"
     #import "NJKWebViewProgressView.h"
+    #import "FFRouteManager.h"
     #import "WBUIWebView.h"
     #import "WBWebViewConsole.h"
     #import "WBWebDebugConsoleViewController.h"

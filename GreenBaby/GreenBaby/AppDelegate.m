@@ -278,6 +278,9 @@ void UncaughtExceptionHandler(NSException *exception){
     
     [self.window makeKeyAndVisible];
     
+    // 0.configRouteIMP
+    [FFRouteManager addRouteImps:@[[FFCommonRouteImp new]]];
+    
     // 1.Handle local notification 定时本地通知
     UILocalNotification *localNotif = [launchOptions objectForKey:UIApplicationLaunchOptionsLocalNotificationKey];
     if (localNotif) {
@@ -436,9 +439,14 @@ void UncaughtExceptionHandler(NSException *exception){
 #pragma mark handleOpenURL
 
 // 处理url
-- (BOOL)handleUrl:(NSURL *)url title:(NSString *)title{
-    if ([[url scheme] isEqualToString:@"huijiame0405"]){
-        return [self handleUrl:url];
+- (void)handleUrl:(NSURL *)url title:(NSString *)title{
+    if ([FFRouteManager supportSchemeURL:url]) {//APPInScheme:内部跳转Scheme
+        if([FFRouteManager canRouteURL:url]){
+            [FFRouteManager routeURL: url];
+        }
+        else{
+            [[TKAlertCenter defaultCenter]postAlertWithMessage:@"当前版本不支持该scheme!"];
+        }
     }
     else{
         BaseViewController *curVC=(BaseViewController *)[self.window topViewController];
@@ -448,49 +456,7 @@ void UncaughtExceptionHandler(NSException *exception){
         vc.navBarHidden=[params[@"hide_navbar"] integerValue];
         vc.hidesBottomBarWhenPushed=YES;
         [curVC.navigationController pushViewController:vc animated:YES];
-        return YES;
     }
-}
-
-// 处理scheme信息
-- (BOOL)handleUrl:(NSURL *)url{
-    /*Scheme定义:https://bitbucket.org/rrlt/huijiame_wiki/wiki/doc/Scheme定义
-     http://phab.51meilin.com/w/开发文档/app/hybrid交互接口定义/
-     http://phab.51meilin.com/w/开发文档/app/schema定义/
-     调试：http://192.168.1.14:12345/svn/dev/common/2.1/dev数据/MyTest.html
-     */
-    //huijiame0405://huijiame.com/common/web?type=0&jobid=934586&jobtype=job1
-    //宝贝详情: taobao://item.taobao.com/item.htm?id=12688928896
-    //建议使用：huijiame0405://huijiame.com?data=josnstring
-    CLog(@"%@:%@:%@",[url scheme],[url path],[url query]);
-    NSArray *paths=[[url path] componentsSeparatedByString:@"/"];
-    NSDictionary *params=[[url query] queryDictionaryUsingEncoding:NSUTF8StringEncoding];
-    
-    BOOL bResult=FALSE;
-    BaseViewController *curVC=(BaseViewController *)[self.window topViewController];
-    if ([paths count]>1) {
-        if ([paths[1] isEqualToString:@""]) {//0.启动
-            bResult=YES;
-        }
-        else if ([paths[1] isEqualToString:@"common"]) {//1.一般功能：common
-            if ([paths count]==2) {//common.启动
-                bResult=YES;
-            }
-            else if ([paths count]>2) {
-                if ([paths[2] isEqualToString:@"web"]) {
-                    WebViewController *vc = [[WebViewController alloc]initWithUrl:params[@"url"] title:params[@"title"]];
-                    vc.hidesBottomBarWhenPushed=YES;
-                    [curVC.navigationController pushViewController:vc animated:YES];
-                    bResult=YES;
-                }
-            }
-        }
-    }
-    
-    if (!bResult) {
-        [[TKAlertCenter defaultCenter]postAlertWithMessage:@"当前版本不支持该信息!"];
-    }
-    return bResult;
 }
 
 - (BOOL)application:(UIApplication *)application
@@ -555,8 +521,13 @@ void UncaughtExceptionHandler(NSException *exception){
         }
         return YES;
     }
-    else if ([[url scheme] isEqualToString:@"GreenBaby1225"]) {
-        [self performSelector:@selector(handleUrl:) withObject:url afterDelay:0.0];
+    else if ([FFRouteManager supportSchemeURL:url]) {//APPOutScheme:外部跳转Scheme
+        if([FFRouteManager canRouteURL:url]){
+            [FFRouteManager routeURL: url];
+        }
+        else{
+            [[TKAlertCenter defaultCenter]postAlertWithMessage:@"当前版本不支持该scheme!"];
+        }
         return YES;
     }
     
@@ -668,7 +639,7 @@ void UncaughtExceptionHandler(NSException *exception){
 - (void)handlePushPayload{
     //测试push notification
 //    _pushPayload=nil;
-//    NSString *pushStr=@"{\"aps\" : {\"alert\" : \"你的订阅有新的５个职位 \ue415 \", \"badge\" : \"1\", \"sound\" : \"default\"}, \"m\" : \"1" , \"u\" : \"huijiame0405://huijiame.com/activity\"}";//有表情
+//    NSString *pushStr=@"{\"aps\" : {\"alert\" : \"你的订阅有新的５个职位 \ue415 \", \"badge\" : \"1\", \"sound\" : \"default\"}, \"m\" : \"1" , \"u\" : \"greenbaby://huijiame.com/activity\"}";//有表情
 //    _pushPayload=[NSMutableDictionary dictionaryWithDictionary:[pushStr JSONValue]];
 //    CLog(@"receive Test push:%@", _pushPayload);
     /*
@@ -678,7 +649,7 @@ void UncaughtExceptionHandler(NSException *exception){
      sound = default;
      };
      "m" : "1";
-     "u" : "huijiame0405://huijiame.com/activity";
+     "u" : "greenbaby://huijiame.com/activity";
      ...
      */
     
@@ -690,12 +661,8 @@ void UncaughtExceptionHandler(NSException *exception){
 //            CLog(@"push alertTitle[1]:%@", alertTitle);
 //        }
         
-        //Scheme
-        //NSString *m=_pushPayload[@"m"];//消息id
-        NSString *u=_pushPayload[@"u"];//Scheme
-        
-        //deprecated
-        NSArray *params=_pushPayload[@"params"];
+        NSString *m=_pushPayload[@"m"];//消息id
+        NSString *u=_pushPayload[@"u"];//url
         
         UserInfo *user = [UserInfo loadCurRecord];
         if (user && user.user_id) {//已登录
@@ -709,9 +676,8 @@ void UncaughtExceptionHandler(NSException *exception){
                 
                 _pushPayload = nil;
             }
-            else if (params && params.count>0) {
-                NSInteger type=[[params objectAtIndex:1] integerValue];
-                switch (type) {
+            else if (m && m.length>0) {
+                switch ([m integerValue]) {
                     case 0://0--职位订阅
                     {
                         if (![UIApplication sharedApplication].statusBarHidden) {
@@ -740,7 +706,7 @@ void UncaughtExceptionHandler(NSException *exception){
                     }
                     case 1://1--系统网址消息
                     {
-                        NSURL *url=[NSURL URLWithString:[params objectAtIndex:0]];
+                        NSURL *url=[NSURL URLWithString:u];
                         
                         //[[UIApplication sharedApplication] openURL:url];
                         UIViewController *vc=[self.window topViewController];

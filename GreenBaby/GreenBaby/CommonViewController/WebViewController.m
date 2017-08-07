@@ -432,18 +432,14 @@
 //通过js来调用objc http://blog.csdn.net/xdonx/article/details/6973521
 //ehomeapp:apply:succeed
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
-    
-    NSString *requestString = [[request URL] absoluteString];
-    NSArray *components = [requestString componentsSeparatedByString:@":"];//ehomeapp:apply:succeed
-    if ([components count] > 1 && [(NSString *)[components objectAtIndex:0] isEqualToString:@"huijiame0405"]) {
-        [[AppDelegate sharedAppDelegate] handleUrl:[request URL]];
-        
-//        if([(NSString *)[components objectAtIndex:1] isEqualToString:@"apply"])//ehomeapp:apply:succeed
-//        {
-//            NSString *desc=[[components objectAtIndex:2] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];//utf8-gb2312
-//            if ([desc isEqualToString:@"succeed"]) {
-//            }
-//        }
+    NSURL *url = [request URL];
+    if ([FFRouteManager supportSchemeURL:url]) {//APPInScheme:内部跳转Scheme
+        if([FFRouteManager canRouteURL:url]){
+            [FFRouteManager routeURL: url];
+        }
+        else{
+            [[TKAlertCenter defaultCenter]postAlertWithMessage:@"当前版本不支持该scheme!"];
+        }
         return NO;
     }
     return YES;
