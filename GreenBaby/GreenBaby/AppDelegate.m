@@ -661,8 +661,8 @@ void UncaughtExceptionHandler(NSException *exception){
 //            CLog(@"push alertTitle[1]:%@", alertTitle);
 //        }
         
-        NSString *m=_pushPayload[@"m"];//消息id
-        NSString *u=_pushPayload[@"u"];//url
+        NSString *m=_pushPayload[@"m"];//消息 id
+        NSString *u=_pushPayload[@"u"];//route url
         
         UserInfo *user = [UserInfo loadCurRecord];
         if (user && user.user_id) {//已登录
