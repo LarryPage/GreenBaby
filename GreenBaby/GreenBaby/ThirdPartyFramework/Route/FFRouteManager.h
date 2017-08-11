@@ -79,4 +79,10 @@
 //外部跳转Scheme
 + (NSString *)APPOutScheme;
 
+//判断是否是http,https开口的url
++ (BOOL)isHttpURL:(NSURL *)URL;
+
+//判断是否是http,https开口的url
++ (BOOL)isHttpURLStr:(NSString *)URLStr;
+
 @end

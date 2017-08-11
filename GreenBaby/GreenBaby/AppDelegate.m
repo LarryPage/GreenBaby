@@ -279,7 +279,7 @@ void UncaughtExceptionHandler(NSException *exception){
     [self.window makeKeyAndVisible];
     
     // 1.configRouteIMP
-    [FFRouteManager addRouteImps:@[[FFCommonRouteImp new]]];
+    [FFRouteManager addRouteImps:@[[FFRouteImp new]]];
     
     // 2.Handle local notification 定时本地通知
     UILocalNotification *localNotif = [launchOptions objectForKey:UIApplicationLaunchOptionsLocalNotificationKey];
@@ -440,15 +440,15 @@ void UncaughtExceptionHandler(NSException *exception){
 
 // 处理url
 - (void)handleUrl:(NSURL *)url title:(NSString *)title{
-    if ([FFRouteManager supportSchemeURL:url]) {//APPInScheme:内部跳转Scheme
+    if ([FFRouteManager supportSchemeURL:url]) {//是否支持Scheme跳转
         if([FFRouteManager canRouteURL:url]){
-            [FFRouteManager routeURL: url];
+            [FFRouteManager routeURL:url];
         }
         else{
             [FFRouteManager routeReduceURL:url];
         }
     }
-    else{
+    else if ([FFRouteManager isHttpURL:url]){//是否是http,https开口的url
         BaseViewController *curVC=(BaseViewController *)[self.window topViewController];
         
         NSDictionary *params=[[url query] queryDictionaryUsingEncoding:NSUTF8StringEncoding];
@@ -456,6 +456,9 @@ void UncaughtExceptionHandler(NSException *exception){
         vc.navBarHidden=[params[@"hide_navbar"] integerValue];
         vc.hidesBottomBarWhenPushed=YES;
         [curVC.navigationController pushViewController:vc animated:YES];
+    }
+    else{
+        [[TKAlertCenter defaultCenter] postAlertWithMessage:@"不合法的连接!"];
     }
 }
 

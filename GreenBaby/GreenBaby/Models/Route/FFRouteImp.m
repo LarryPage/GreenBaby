@@ -1,14 +1,14 @@
 //
-//  FFCommonRouteImp.m
-//  FFRouteManager
+//  FFRouteImp.m
+//  GreenBaby
 //
-//  Created by LiXiangCheng on 16/10/14.
-//  Copyright © 2016年 wanda. All rights reserved.
+//  Created by LiXiangCheng on 2017/8/11.
+//  Copyright © 2017年 LiXiangCheng. All rights reserved.
 //
 
-#import "FFCommonRouteImp.h"
+#import "FFRouteImp.h"
 
-@implementation FFCommonRouteImp
+@implementation FFRouteImp
 
 -(void) registerRoute
 {
@@ -22,8 +22,10 @@
         //NSDictionary *params=[[routeUrl query] queryDictionaryUsingEncoding:NSUTF8StringEncoding];
         NSString *url = parameters[@"url"];
         NSString *title = parameters[@"title"];
+        BOOL navBarHidden = [parameters[@"hide_navbar"] integerValue];
         
         WebViewController *vc = [[WebViewController alloc] initWithUrl:url title:title];
+        vc.navBarHidden=navBarHidden;
         vc.hidesBottomBarWhenPushed=YES;
         [curVC.navigationController pushViewController:vc animated:YES];
         
@@ -37,4 +39,5 @@
     } impClass:[self class]];
     
 }
+
 @end

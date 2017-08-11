@@ -1,13 +1,12 @@
 //
-//  FFCommonRouteURL.h
-//  FFRouteManager
+//  FFRouteImp.h
+//  GreenBaby
 //
-//  Created by LiXiangCheng on 16/10/14.
-//  Copyright © 2016年 wanda. All rights reserved.
+//  Created by LiXiangCheng on 2017/8/11.
+//  Copyright © 2017年 LiXiangCheng. All rights reserved.
 //
 
-#ifndef FFCommonRouteURL_h
-#define FFCommonRouteURL_h
+#import <Foundation/Foundation.h>
 
 /*Scheme定义:https://bitbucket.org/rrlt/huijiame_wiki/wiki/doc/Scheme定义
  http://phab.51meilin.com/w/开发文档/app/hybrid交互接口定义/
@@ -16,9 +15,10 @@
  */
 //greenbaby://huijiame.com/common/web?data=josnstring
 //宝贝详情: taobao://item.taobao.com/item.htm?id=12688928896
-//建议使用：greenbaby://huijiame.com/common/web?url=url&title=网页名
+//建议使用：greenbaby://huijiame.com/common/web?url=url&title=网页名&hide_navbar=1
 
-//打开新的网页:greenbaby://huijiame.com/common/web?url=url&title=网页名
 #define COMMON_WEB                  @"common/web"
 
-#endif
+@interface FFRouteImp : NSObject<FFRouteImpProtocol>
+
+@end

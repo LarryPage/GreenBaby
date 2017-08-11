@@ -209,4 +209,21 @@ static NSMutableDictionary<NSString*, FFRoute *> *routeMap;
     return url;
 }
 
++ (BOOL)isHttpURL:(NSURL *)URL
+{
+    if([URL.scheme isEqualToString:@"http"] || [URL.scheme isEqualToString:@"https"])
+    {
+        return YES;
+    }
+    else
+    {
+        return NO;
+    }
+}
+
++ (BOOL)isHttpURLStr:(NSString *)URLStr
+{
+    return [FFRouteManager isHttpURL:[NSURL URLWithString:URLStr]];
+}
+
 @end
