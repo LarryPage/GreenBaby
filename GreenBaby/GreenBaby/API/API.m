@@ -12,130 +12,308 @@
 #import "SystemInfo.h"
 #import "UserInfo.h"
 
+typedef enum ApiType {
+    kApiTypeGet,                      // Get方式
+    kApiTypeDelete,                   // Delete方式
+    kApiTypePut,                      // Put方式
+    kApiTypePost,                     // Post方式
+    kApiTypePostMultipartFormData,    // PostMultipart方式
+}ApiType;
+
 
 @implementation API
 
 /**
- *  根据API路径得到完整的URL
+ *  获取API的基础URL
  *
- *  @param path API路径
- *
- *  @return 完整的NSURL
+ *  @return 基础URL http://api.abc.com
  */
-NSURL *fullURLWithPath(NSString *API) {
-    return [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", APIServer,API]];
+NSURL *baseURL(){
+    return [NSURL URLWithString:APIServer];
+}
+
+/**
+ *  根据API路径获取完整的URL
+ *
+ *  @param path API路径 /index.php
+ *
+ *  @return 完整的NSURL http://api.abc.com/index.php
+ */
+NSURL *fullURLWithPath(NSString *path) {
+    return [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", APIServer,path]];
 }
 
 /**
  *  请求包加密
+ *
+ *  @param pathParam API路径+参数(GET|DELETE)  /index.php?key1=value1&key2=value2
+ *
+ *  @return
  */
-+ (void)encryptRequest:(ASIFormDataRequest *)request authBase64String:(NSString *)authBase64String{
+void encryptRequest(AFHTTPSessionManager *manager,NSString *pathParam)
+{
+    NSString *base64AuthCredentials = @"";
+    //Basic Auth
+    NSString *basicAuth = [manager.requestSerializer valueForHTTPHeaderField:@"Authorization"];
+    if (basicAuth && basicAuth.length) {
+        base64AuthCredentials = [basicAuth stringByReplacingOccurrencesOfString:@"Basic " withString:@""];
+    }
+    
     long long time=[[NSDate date] timeIntervalSince1970];
     NSString *t=[NSString stringWithFormat:@"%@",@(time)];
-    NSString *urlPath=[request.url path];
-    NSString *urlQuery=[request.url query];
-    NSString *pathstr=[NSString stringWithFormat:@"%@%@%@",urlPath,(urlQuery && urlQuery.length)?@"?":@"",(urlQuery && urlQuery.length)?urlQuery:@""];
-    NSString *pathauth=[NSString stringWithFormat:@"%@%@Q~E)ej5#vE+8D)ju",authBase64String,pathstr];
-    NSString *m=[NSString stringWithFormat:@"4XJ\\wX_=T&$x[?$p%@%@",t,pathauth.md5Hash];
-    [request addRequestHeader:@"X-Auth-T" value:t];
-    [request addRequestHeader:@"X-Auth-M" value:[m md5Hash]];
+    NSString *authPath=[NSString stringWithFormat:@"%@%@Q~E)ej5#vE+8D)ju",base64AuthCredentials,pathParam];
+    NSString *m=[NSString stringWithFormat:@"4XJ\\wX_=T&$x[?$p%@%@",t,authPath.md5Hash];
+    
+    [manager.requestSerializer setValue:t forHTTPHeaderField:@"X-Auth-T"];
+    [manager.requestSerializer setValue:[m md5Hash] forHTTPHeaderField:@"X-Auth-M"];
+}
+
+//HTTPS,客户端自带证书
+AFSecurityPolicy *customSecurityPolicyWithCerName(NSString *cerName)
+{
+    //先导入证书
+    AFSecurityPolicy *securityPolicy;
+    
+    securityPolicy = [AFSecurityPolicy policyWithPinningMode:AFSSLPinningModePublicKey];
+    NSString *cerPath = [[NSBundle mainBundle] pathForResource:cerName ofType:@"cer"];//证书的路径
+    NSData *certData = [NSData dataWithContentsOfFile:cerPath];
+    securityPolicy.pinnedCertificates = [NSSet setWithObject:certData];
+    
+    securityPolicy.allowInvalidCertificates = NO;//万达还是有钱的
+    securityPolicy.validatesDomainName = YES;//如果为NO，有可能引发中间人攻击
+    
+    return securityPolicy;
+}
+
+//默认模式，HTTPS,客户端不自带证书
+AFSecurityPolicy *defaultSecurityPolicy()
+{
+    AFSecurityPolicy *securityPolicy;
+    securityPolicy = [AFSecurityPolicy policyWithPinningMode:AFSSLPinningModeNone];
+    
+    securityPolicy.allowInvalidCertificates = NO;//万达还是有钱的
+    securityPolicy.validatesDomainName = YES;//如果为NO，有可能引发中间人攻击
+    
+    return securityPolicy;
 }
 
 /**
- *  创建Request
+ *  执行ANF Request，支持gzip，自动解压
  *
- *  @param path       API路径
- *  @param auth       是否Base Auth
- *  @param method     请求方法：GET|POST
- *  @param delegate   委托对象
- *  @param completion 回调
+ *  @param path             API路径,/index.php
+ *  @param paramDic         API参数,key1=value1 key2=value2
+ *  @param auth             是否Base Auth
+ *  @param ApiType          请求方法：GET|DELETE|PUT|POST|PostMultipart
+ *  @param formdataBlock    API 仅在PostMultipart请求要上传文件Block,可为nil
+ *  @param progressBlock    API请求进度Block,只有GET(下载文件代表下载进度)|POST|PostMultipart（上传文件代表上传进度）,可为nil
+ *  @param completionBlock  API请求的回调Block
  *
- *  @return 一个ASIFormDataRequest对象
+ *  @return
  */
-ASIFormDataRequest *createRequest(NSString *path,BOOL auth,NSString *method,NSDictionary *paramDic,id delegate,APICompletion completion){
-    ASIFormDataRequest *request = [[ASIFormDataRequest alloc] initWithURL:fullURLWithPath(path)];
-    // YES is the default, you can turn off gzip compression by setting this to NO
-    [request setAllowCompressedResponse:AllowCompressedResponse];//gzip
-    [request addRequestHeader:@"Content-Type" value:@"application/x-www-form-urlencoded; charset=utf-8"];
-    //[request addRequestHeader:@"Content-Type" value:@"application/json"];
-    [request addRequestHeader:@"Accept" value:@"application/json"];
-    [request addRequestHeader:@"User-Agent" value:[[NetworkCenter sharedInstance] getRequestUserAgent]];
-    
+void executeRequest(NSString *path,NSDictionary *paramDic,BOOL auth,ApiType apiType,APIFormData formdataBlock,APIProgress progressBlock,APICompletion completionBlock){
+    AFHTTPSessionManager* manager = [[AFHTTPSessionManager alloc] initWithBaseURL:baseURL()];
+    //0.设置安全策略
+    [manager setSecurityPolicy:defaultSecurityPolicy()];//默认模式，HTTPS,客户端不自带证书
+    //1.构造requestSerializer
+    //设置cookie,默认YES，允许请求带cookies，响应设置cookies，风控针对一些接口如登录必须使用
+    [manager.requestSerializer setHTTPShouldHandleCookies:YES];
+    //设置超时
+    manager.requestSerializer.timeoutInterval = (apiType==kApiTypePostMultipartFormData)?180:30;//默认60
+    //设置Content-Type
+    //[manager.requestSerializer setValue:@"application/x-www-form-urlencoded; charset=utf-8" forHTTPHeaderField:@"Content-Type"];
+    //[manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    //设置User-Agent
+    [manager.requestSerializer setValue:[[NetworkCenter sharedInstance] getRequestUserAgent] forHTTPHeaderField:@"User-Agent"];
+    //设置Basic Auth
     UserInfo *user = [UserInfo loadCurRecord];
-    NSString *authString = @"";
-    NSString *authBase64String = @"";
     if (auth && user && user.user_id) {
-        authString = [NSString stringWithFormat:@"%@:%@", user.username, user.password];
-        authBase64String = [NSString base64encode:authString];
-        [request addRequestHeader:@"Authorization" value:[NSString stringWithFormat:@"Basic %@", authBase64String]];
+        [manager.requestSerializer setAuthorizationHeaderFieldWithUsername:user.username password:user.password];
     }
+    //请求包加密
+    __block NSString *pathParam=path;//pathParam=/index.php?key1=value1&key2=value2
+    if (apiType == kApiTypeGet || apiType == kApiTypeDelete) {
+        [paramDic enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+            NSString *value=[NSString stringWithFormat:@"%@",obj];
+            if (value && value.length) {
+                value=[value stringByURLEncodingStringParameterWithEncoding:NSUTF8StringEncoding];
+            }
+            pathParam= [pathParam stringByAppendingFormat:@"%@%@=%@",[pathParam rangeOfString:@"?"].length > 0 ? @"&" : @"?",key,value];
+        }];
+    }
+    encryptRequest(manager,pathParam);
+    //2.构造responseSerializer
+    manager.responseSerializer = [AFJSONResponseSerializer serializer];//application/json
+    //manager.responseSerializer = [AFXMLParserResponseSerializer serializer];//application/xml
+    //设置Status Code接受范围，默认200-300
+    //manager.responseSerializer.acceptableStatusCodes=[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(200, 100)];
+    //服务端不关心 contentType，因此客户端不做验证
+    manager.responseSerializer.acceptableContentTypes = nil;
+    //manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"text/html",@"application/json; charset=utf-8",@"text/json", @"text/plain", nil];
     
-    if (method && method.length>0) {
-        [request setRequestMethod:method];
+    CLog(@"开始调用 %@", fullURLWithPath(path));
+    switch (apiType) {
+        case kApiTypeGet:
+        {
+            [manager GET:path
+              parameters:paramDic
+                progress:^(NSProgress *downloadProgress)
+             {
+                 if(progressBlock)
+                     progressBlock(downloadProgress);
+             }
+                 success:^void(NSURLSessionDataTask *task,id response)
+             {
+                 parseResponse(task,nil,response,path,paramDic,completionBlock);
+             }
+                 failure:^void(NSURLSessionDataTask * task, NSError * error)
+             {
+                 parseResponse(task,error,nil,path,paramDic,completionBlock);
+             }];
+        }
+            break;
+        case kApiTypeDelete:
+        {
+            [manager DELETE:path
+                 parameters:paramDic
+                    success:^(NSURLSessionDataTask *task, id response)
+             {
+                 parseResponse(task,nil,response,path,paramDic,completionBlock);
+                 
+             }
+                    failure:^(NSURLSessionDataTask *task, NSError *error)
+             {
+                 parseResponse(task,error,nil,path,paramDic,completionBlock);
+             }];
+        }
+            break;
+        case kApiTypePut:
+        {
+            [manager PUT:path
+              parameters:paramDic
+                 success:^(NSURLSessionDataTask *task, id response)
+             {
+                 parseResponse(task,nil,response,path,paramDic,completionBlock);
+             }
+                 failure:^(NSURLSessionDataTask *task, NSError *error)
+             {
+                 parseResponse(task,error,nil,path,paramDic,completionBlock);
+             }];
+        }
+            break;
+        case kApiTypePost:
+        default:
+        {
+            [manager POST:path
+               parameters:paramDic
+                 progress:^(NSProgress *downloadProgress)
+             {
+                 if(progressBlock)
+                     progressBlock(downloadProgress);
+             }
+                  success:^void(NSURLSessionDataTask *task,id response)
+             {
+                 parseResponse(task,nil,response,path,paramDic,completionBlock);
+             }
+                  failure:^void(NSURLSessionDataTask * task, NSError * error)
+             {
+                 parseResponse(task,error,nil,path,paramDic,completionBlock);
+             }];
+        }
+            break;
+        case kApiTypePostMultipartFormData:
+        {
+            [manager POST:path
+               parameters:paramDic
+constructingBodyWithBlock:formdataBlock
+                 progress:^(NSProgress *downloadProgress)
+             {
+                 if(progressBlock)
+                     progressBlock(downloadProgress);
+             }
+                  success:^void(NSURLSessionDataTask * task, id response)
+             {
+                 parseResponse(task,nil,response,path,paramDic,completionBlock);
+             }
+                  failure:^ void(NSURLSessionDataTask * task, NSError * error)
+             {
+                 parseResponse(task,error,nil,path,paramDic,completionBlock);
+             }];
+        }
+            break;
+    }
+}
+
+void parseResponse(NSURLSessionDataTask *task,NSError *error,id response,NSString *path,NSDictionary *paramDic,APICompletion completionBlock)
+{
+    if (error){
+        NSString *domain=@"";
+        NSData *responseData=nil;
+        if (error.userInfo && error.userInfo.count>0) {
+            if (error.userInfo[NSLocalizedDescriptionKey]) {
+                domain=error.userInfo[NSLocalizedDescriptionKey];
+            }
+            else{
+                if (error.userInfo[NSUnderlyingErrorKey]) {
+                    NSError *underlyingError=error.userInfo[NSUnderlyingErrorKey];
+                    if (underlyingError.userInfo && underlyingError.userInfo.count>0) {
+                        if (underlyingError.userInfo[NSLocalizedDescriptionKey]) {
+                            domain=underlyingError.userInfo[NSLocalizedDescriptionKey];
+                        }
+                        if (underlyingError.userInfo[AFNetworkingOperationFailingURLResponseDataErrorKey]) {
+                            responseData=underlyingError.userInfo[AFNetworkingOperationFailingURLResponseDataErrorKey];
+                        }
+                    }
+                }
+            }
+        }
+        if (!domain.length) {
+            if (![Reachability reachabilityForInternetConnection].isReachable){
+                domain=@"当前无法连接到网络";
+            }
+            else{
+                domain=@"连接超时";
+            }
+        }
+//        if (![Reachability reachabilityForInternetConnection].isReachable){
+//            domain=@"当前无法连接到网络";
+//        }
+//        else{
+//            domain=@"连接超时";
+//        }
+        
+        NSError *newError = [NSError errorWithDomain:domain
+                                                code:-1//error.code
+                                            userInfo:error.userInfo];
+        completionBlock(newError, nil);
+        
+#ifndef RELEASE
+        NSString *responseString = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
+        CLog(@"responseString : %@",responseString);
+        
+        if (responseData) {
+            NSString *style = [NSString stringWithFormat:@"<style type=\"text/css\"> \n"
+                               "<!-- \n"
+                               "body {font-family: \"%@\";font-size: %dpx;color:rgb(%d,%d,%d);background-color:rgb(%d,%d,%d)} \n"
+                               "p {text-indent:2em; line-height:1.5em; margin-top:0; margin-bottom:0;} \n"
+                               "--> \n"
+                               "</style>",@"宋体",48,0,0,0,255,255,255];
+            NSString *html=[NSString stringWithFormat:@"%@<body>Url:<br>%@<br><br>Method:<br>%@<br><br>param:<br>%@<br><br>postData:<br>%@<br><br>Headers:<br>%@<br><br></body><br>responseString:<br>%@",style,task.currentRequest.URL,task.currentRequest.HTTPMethod,paramDic,[[NSString alloc] initWithData:task.currentRequest.HTTPBody encoding:NSUTF8StringEncoding],task.currentRequest.allHTTPHeaderFields,responseString];
+            UIViewController *curVC=[[AppDelegate sharedAppDelegate].window topViewController];
+            UIViewController *post = [[APIParseErrorViewController alloc] initWithHtml:html title:@"API调用失败"];
+            UINavigationController *nc = [[UINavigationController alloc] initWithRootViewController:post];
+            nc.navigationBar.translucent = NO;
+            [curVC presentViewController:nc animated:YES completion:nil];
+        }
+#endif
     }
     else{
-        [request setRequestMethod:@"POST"];
-    }
-    
-    if (paramDic && paramDic.count>0) {//POST,PUT
-        if ([request.requestMethod isEqualToString:@"POST"] || [request.requestMethod isEqualToString:@"PUT"]) {
-            [paramDic enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
-                [request addPostValue:obj forKey:key];
-            }];
-            //NSMutableData *postBody = [NSMutableData dataWithData:[[paramDic JSONRepresentation] dataUsingEncoding:NSUTF8StringEncoding]];
-            //[request setPostBody:postBody];
-        }
-        else{//GET,DELETE
-            __block NSString *urlStr=request.url.absoluteString;
-            [paramDic enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
-                NSString *value=[NSString stringWithFormat:@"%@",obj];
-                if (value && value.length) {
-                    value=[value stringByURLEncodingStringParameterWithEncoding:NSUTF8StringEncoding];
-                }
-                urlStr= [urlStr stringByAppendingFormat:@"%@%@=%@",[urlStr rangeOfString:@"?"].length > 0 ? @"&" : @"?",key,value];
-            }];
-            request.url=[NSURL URLWithString:urlStr];
-        }
-    }
-    
-    //请求包加密
-    [API encryptRequest:request authBase64String:authBase64String];
-    
-    request.delegate = delegate;
-    [request setValidatesSecureCertificate:NO];// As your certificate is self-signed, iOS can't validate the certificate
-    request.uploadProgressDelegate = delegate;
-    request.userInfo = @{@"Completion": completion};
-    
-    return request;
-}
-
-#pragma mark - ASIHTTPRequestDelegate
-
-- (void)request:(ASIHTTPRequest *)request didSendBytes:(long long)bytes{
-}
-
-+ (void)requestStarted:(ASIHTTPRequest *)request {
-    CLog(@"开始调用 %@", request.url);
-}
-
-+ (void)requestFinished:(ASIHTTPRequest *)request {
-    // 得到调用完成后执行的Block
-    APICompletion completion = request.userInfo[@"Completion"];
-    
-    // 将JSON Data解析为Foundation Object(NSDictionary)
-    NSError *error = nil;
-    NSString *responseString = [[NSString alloc] initWithData:[request responseData] encoding:NSUTF8StringEncoding];
-    CLog(@"responseString : %@",responseString);
-    NSDictionary *responseDic = [NSJSONSerialization JSONObjectWithData:request.responseData options:kNilOptions error:&error];
-    if (!error)
-    {
-        NSInteger code = [[NSNumber safeNumberFromObject:responseDic[@"code"]] integerValue];
+        NSInteger code = [[NSNumber safeNumberFromObject:response[@"code"]] integerValue];
         if (code == 0){// API调用成功
-            completion(nil, [NSDictionary safeDictionaryFromObject:responseDic[@"data"]]);
+            completionBlock(nil, [NSDictionary safeDictionaryFromObject:response[@"data"]]);
         }
         else if (code == 1212) {  //此版本放弃使用，请升级到最新版本
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示"
-                                                            message:[NSString safeStringFromObject:responseDic[@"message"]]
+                                                            message:[NSString safeStringFromObject:response[@"message"]]
                                                            delegate:nil
                                                   cancelButtonTitle:nil
                                                   otherButtonTitles:@"确定",nil];
@@ -144,210 +322,114 @@ ASIFormDataRequest *createRequest(NSString *path,BOOL auth,NSString *method,NSDi
             [alert show];
         }
         else{
-            NSError *error = [NSError errorWithDomain:[NSString safeStringFromObject:responseDic[@"message"]]
+            NSError *error = [NSError errorWithDomain:[NSString safeStringFromObject:response[@"message"]]
                                                  code:code
                                              userInfo:nil];
-            completion(error, nil);
+            completionBlock(error, nil);
         }
     }
-    else  // JSON解析失败
-    {
-        NSError *newError = [NSError errorWithDomain:@"数据格式解析失败"
-                                                code:error.code
-                                            userInfo:error.userInfo];
-        completion(newError, nil);
-#ifndef RELEASE
-        NSString *style = [NSString stringWithFormat:@"<style type=\"text/css\"> \n"
-                           "<!-- \n"
-                           "body {font-family: \"%@\";font-size: %dpx;color:rgb(%d,%d,%d);background-color:rgb(%d,%d,%d)} \n"
-                           "p {text-indent:2em; line-height:1.5em; margin-top:0; margin-bottom:0;} \n"
-                           "--> \n"
-                           "</style>",@"宋体",48,0,0,0,255,255,255];
-        NSString *html=[NSString stringWithFormat:@"%@<body>Url:<br>%@<br><br>Method:<br>%@<br><br>Headers:<br>%@<br><br>postData:<br>%@<br><br></body><br>responseString:<br>%@",style,request.url,request.requestMethod,request.requestHeaders,[[NSString alloc] initWithData:request.postBody encoding:NSUTF8StringEncoding],responseString];
-        UIViewController *curVC=[[AppDelegate sharedAppDelegate].window topViewController];
-        UIViewController *post = [[APIParseErrorViewController alloc] initWithHtml:html title:@"数据格式解析失败"];
-        UINavigationController *nc = [[UINavigationController alloc] initWithRootViewController:post];
-        nc.navigationBar.translucent = NO;
-        [curVC presentViewController:nc animated:YES completion:nil];
-#endif
-    }
-    
-    [ASIHTTPRequest setDefaultTimeOutSeconds:[ASIHTTPRequest defaultTimeOutSeconds]];
-}
-
-+ (void)requestFailed:(ASIHTTPRequest *)request {
-    APICompletion completion = request.userInfo[@"Completion"];
-    NSError *error = [request error];
-    
-    NSString *domain=@"";
-//    if (error.userInfo && error.userInfo.count>0 && error.userInfo[@"NSLocalizedDescription"]) {
-//        domain=error.userInfo[@"NSLocalizedDescription"];
-//    }
-//    else{
-//        if (![Reachability reachabilityForInternetConnection].isReachable){
-//            domain=@"当前无法连接到网络";
-//        }
-//        else{
-//            domain=@"连接超时";
-//        }
-//    }
-    if (![Reachability reachabilityForInternetConnection].isReachable){
-        domain=@"当前无法连接到网络";
-    }
-    else{
-        domain=@"连接超时";
-    }
-    
-    NSError *newError = [NSError errorWithDomain:domain
-                                            code:-1//error.code
-                                        userInfo:error.userInfo];
-    completion(newError, nil);
-    
-    [ASIHTTPRequest setDefaultTimeOutSeconds:[ASIHTTPRequest defaultTimeOutSeconds]];
 }
 
 #pragma mark - common
 + (void)appVersionCheckOnCompletion:(APICompletion)completion{
-    NSMutableDictionary *dic=[NSMutableDictionary dictionary];
-    [dic setObject:[UIDevice getSystemName] forKey:@"platform"];
-    [dic setObject:kBuildVersion forKey:@"build_version"];
-    
-    ASIFormDataRequest *request = createRequest(@"/v1/setting/check_update",NO,@"POST",dic,self,completion);
-    [request startAsynchronous];
+    NSMutableDictionary *paramDic=[NSMutableDictionary dictionary];
+    [paramDic setObject:[UIDevice getSystemName] forKey:@"platform"];
+    [paramDic setObject:kBuildVersion forKey:@"build_version"];
+    executeRequest(@"/v1/setting/check_update",paramDic,NO,kApiTypePost,nil,nil,completion);
 }
 
 + (void)regPushToken:(NSString *)pushToken completion:(APICompletion)completion{
-    NSMutableDictionary *dic=[NSMutableDictionary dictionary];
-    [dic setObject:pushToken forKey:@"deviceid"];//设备推送token信息
-    [dic setObject:[UIDevice getSystemName] forKey:@"os"];//系统信息。目前支持的值只能为ios或android
+    NSMutableDictionary *paramDic=[NSMutableDictionary dictionary];
+    [paramDic setObject:pushToken forKey:@"deviceid"];//设备推送token信息
+    [paramDic setObject:[UIDevice getSystemName] forKey:@"os"];//系统信息。目前支持的值只能为ios或android
     if ([kBundleIdentifier isEqualToString:@"com.ideal.GreenBaby.InHouse"]) {//InHouse版本
-        [dic setObject:@(2) forKey:@"apptype"];
+        [paramDic setObject:@(2) forKey:@"apptype"];
     }
     else{
-        [dic setObject:@(1) forKey:@"apptype"];
+        [paramDic setObject:@(1) forKey:@"apptype"];
     }
-    [dic setObject:kVersion forKey:@"version"];
-    [dic setObject:[UIDevice imei] forKey:@"imei"];//imei编号
-    [dic setObject:[[UIDevice getDevice] stringByReplacingOccurrencesOfString:@" " withString:@"_"] forKey:@"device"];//device
-    
-    ASIFormDataRequest *request = createRequest(@"/v1/user/register_device",YES,@"POST",dic,self,completion);
-    [request startAsynchronous];
+    [paramDic setObject:kVersion forKey:@"version"];
+    [paramDic setObject:[UIDevice imei] forKey:@"imei"];//imei编号
+    [paramDic setObject:[[UIDevice getDevice] stringByReplacingOccurrencesOfString:@" " withString:@"_"] forKey:@"device"];//device
+    executeRequest(@"/v1/user/register_device",paramDic,YES,kApiTypePost,nil,nil,completion);
 }
 
 + (void)postContacts:(NSString *)contacts completion:(APICompletion)completion{
-    NSMutableDictionary *dic=[NSMutableDictionary dictionary];
-    [dic setObject:contacts forKey:@"contacts"];//contacts
-    [dic setObject:[UIDevice getSystemName] forKey:@"platform"];
-    
-    ASIFormDataRequest *request = createRequest(@"/v1/contact/sync",YES,@"POST",dic,self,completion);
-    [request startAsynchronous];
+    NSMutableDictionary *paramDic=[NSMutableDictionary dictionary];
+    [paramDic setObject:contacts forKey:@"contacts"];//contacts
+    [paramDic setObject:[UIDevice getSystemName] forKey:@"platform"];
+    executeRequest(@"/v1/contact/sync",paramDic,YES,kApiTypePost,nil,nil,completion);
 }
 
 + (void)getPublicDataOnCompletion:(APICompletion)completion{
-    ASIFormDataRequest *request = createRequest(@"/v1/public/data",NO,@"GET",nil,self,completion);
-    [request startAsynchronous];
+    executeRequest(@"/v1/public/data",nil,NO,kApiTypeGet,nil,nil,completion);
 }
 
 + (void)getMessageCountOnCompletion:(APICompletion)completion{
-    NSMutableDictionary *dic=[NSMutableDictionary dictionary];
-    [dic setObject:@"request_count,message_count,tucao_new,feed_new,hposition_new,reward_position_new" forKey:@"type"];//type:消息类型（可选，apply_count,view_count,active_count,message_count）
-    
-    ASIFormDataRequest *request = createRequest(@"/v1/notification/has_new",YES,@"POST",dic,self,completion);
-    [request startAsynchronous];
+    NSMutableDictionary *paramDic=[NSMutableDictionary dictionary];
+    [paramDic setObject:@"request_count,message_count,tucao_new,feed_new,hposition_new,reward_position_new" forKey:@"type"];//type:消息类型（可选，apply_count,view_count,active_count,message_count）
+    executeRequest(@"/v1/notification/has_new",paramDic,YES,kApiTypePost,nil,nil,completion);
 }
 
 + (void)getWelcomeImgOnCompletion:(APICompletion)completion{
-    NSMutableDictionary *dic=[NSMutableDictionary dictionary];
-    [dic setObject:[UIDevice getSystemName] forKey:@"os"];
-    [dic setObject:@((int)[[UIScreen mainScreen] bounds].size.width*[[UIScreen mainScreen] scale]) forKey:@"width"];
-    [dic setObject:@((int)[[UIScreen mainScreen] bounds].size.height*[[UIScreen mainScreen] scale]) forKey:@"height"];
-    
-    ASIFormDataRequest *request = createRequest(@"/v1/public/welcome_image",NO,@"POST",dic,self,completion);
-    [request startAsynchronous];
+    NSMutableDictionary *paramDic=[NSMutableDictionary dictionary];
+    [paramDic setObject:[UIDevice getSystemName] forKey:@"os"];
+    [paramDic setObject:@((int)[[UIScreen mainScreen] bounds].size.width*[[UIScreen mainScreen] scale]) forKey:@"width"];
+    [paramDic setObject:@((int)[[UIScreen mainScreen] bounds].size.height*[[UIScreen mainScreen] scale]) forKey:@"height"];
+    executeRequest(@"/v1/public/welcome_image",paramDic,NO,kApiTypePost,nil,nil,completion);
 }
 
 + (void)updatePushStatusOnCompletion:(APICompletion)completion{
-    NSMutableDictionary *dic=[NSMutableDictionary dictionary];
-    [dic setObject:[UIDevice getSystemName] forKey:@"os"];
+    NSMutableDictionary *paramDic=[NSMutableDictionary dictionary];
+    [paramDic setObject:[UIDevice getSystemName] forKey:@"os"];
     UserInfo *user = [UserInfo loadCurRecord];
-    [dic setObject:@(user.push_status) forKey:@"pushstatus"];//pushstatus:0为关闭，1为打开
-    
-    ASIFormDataRequest *request = createRequest(@"/v1/setting/update_push_status",YES,@"POST",dic,self,completion);
-    [request startAsynchronous];
+    [paramDic setObject:@(user.push_status) forKey:@"pushstatus"];//pushstatus:0为关闭，1为打开
+    executeRequest(@"/v1/setting/update_push_status",paramDic,YES,kApiTypePost,nil,nil,completion);
 }
 
-+ (void)updateAvatar:(NSData *)fileData completion:(APICompletion)completion{
-    [ASIHTTPRequest setDefaultTimeOutSeconds:180];
-    
-    ASIFormDataRequest *request = [[ASIFormDataRequest alloc] initWithURL:fullURLWithPath(@"/v1/user/update_avatar")];
-    // YES is the default, you can turn off gzip compression by setting this to NO
-    [request setAllowCompressedResponse:AllowCompressedResponse];//gzip
-    [request addRequestHeader:@"Content-Type" value:@"multipart/form-data"];
-    [request addRequestHeader:@"Accept" value:@"application/json"];
-    [request addRequestHeader:@"User-Agent" value:[[NetworkCenter sharedInstance] getRequestUserAgent]];
-    
-    UserInfo *user = [UserInfo loadCurRecord];
-    NSString *authString = @"";
-    NSString *authBase64String = @"";
-    if (user && user.user_id) {
-        authString = [NSString stringWithFormat:@"%@:%@", user.username, user.password];
-        authBase64String = [NSString base64encode:authString];
-        [request addRequestHeader:@"Authorization" value:[NSString stringWithFormat:@"Basic %@", authBase64String]];
-    }
-    
-    [request addData:fileData withFileName:@"userfile.jpg" andContentType:@"image/jpeg" forKey:@"userfile"];//压缩大小
-    
-    //请求包加密
-    [API encryptRequest:request authBase64String:authBase64String];
-    
-    request.delegate = self;
-    request.uploadProgressDelegate = self;
-    request.userInfo = @{@"Completion": completion};
-    [request startAsynchronous];
++ (void)updateAvatar:(NSData *)fileData
+            progress:(APIProgress)progress
+          completion:(APICompletion)completion{
+    APIFormData formdata = ^(id <AFMultipartFormData> formData){
+        [formData appendPartWithFileData:fileData name:@"userfile" fileName:@"userfile.jpg" mimeType:@"image/jpeg"];
+    };
+    executeRequest(@"/v1/user/update_avatar",nil,YES,kApiTypePostMultipartFormData,formdata,progress,completion);
 }
 
 + (void)loginWithUsername:(NSString *)username
                  password:(NSString *)password
                completion:(APICompletion)completion{
-    NSMutableDictionary *dic=[NSMutableDictionary dictionary];
-    [dic setObject:username forKey:@"username"];
-    [dic setObject:password forKey:@"password"];
-    
-    ASIFormDataRequest *request = createRequest(@"/v1/user/login",NO,@"POST",dic,self,completion);
-    [request startAsynchronous];
+    NSMutableDictionary *paramDic=[NSMutableDictionary dictionary];
+    [paramDic setObject:username forKey:@"username"];
+    [paramDic setObject:password forKey:@"password"];
+    executeRequest(@"/v1/user/login",paramDic,NO,kApiTypePost,nil,nil,completion);
 }
 
 + (void)regWithUsername:(NSString *)username
                password:(NSString *)password
                    code:(NSString *)code
              completion:(APICompletion)completion{
-    NSMutableDictionary *dic=[NSMutableDictionary dictionary];
-    [dic setObject:username forKey:@"username"];
-    [dic setObject:password forKey:@"password"];
-    [dic setObject:code forKey:@"code"];
-    
-    ASIFormDataRequest *request = createRequest(@"/v1/user/reg",NO,@"POST",dic,self,completion);
-    [request startAsynchronous];
+    NSMutableDictionary *paramDic=[NSMutableDictionary dictionary];
+    [paramDic setObject:username forKey:@"username"];
+    [paramDic setObject:password forKey:@"password"];
+    [paramDic setObject:code forKey:@"code"];
+    executeRequest(@"/v1/user/reg",paramDic,NO,kApiTypePost,nil,nil,completion);
 }
 
 + (void)sendCodeWithMobile:(NSString *)mobile
                 completion:(APICompletion)completion{
-    NSMutableDictionary *dic=[NSMutableDictionary dictionary];
-    [dic setObject:mobile forKey:@"mobile"];
-    
-    ASIFormDataRequest *request = createRequest(@"/v1/user/SendPswCode",NO,@"POST",dic,self,completion);
-    [request startAsynchronous];
+    NSMutableDictionary *paramDic=[NSMutableDictionary dictionary];
+    [paramDic setObject:mobile forKey:@"mobile"];
+    executeRequest(@"/v1/user/SendPswCode",paramDic,NO,kApiTypePost,nil,nil,completion);
 }
 
 + (void)validateCodeWithMobile:(NSString *)mobile
                           code:(NSString *)code
                     completion:(APICompletion)completion{
-    NSMutableDictionary *dic=[NSMutableDictionary dictionary];
-    [dic setObject:mobile forKey:@"mobile"];
-    [dic setObject:code forKey:@"code"];
-    
-    ASIFormDataRequest *request = createRequest(@"/v1/user/ValidateCode",NO,@"POST",dic,self,completion);
-    [request startAsynchronous];
+    NSMutableDictionary *paramDic=[NSMutableDictionary dictionary];
+    [paramDic setObject:mobile forKey:@"mobile"];
+    [paramDic setObject:code forKey:@"code"];
+    executeRequest(@"/v1/user/ValidateCode",paramDic,NO,kApiTypePost,nil,nil,completion);
 }
 
 #pragma mark - Talk
@@ -355,19 +437,17 @@ ASIFormDataRequest *createRequest(NSString *path,BOOL auth,NSString *method,NSDi
                      count:(NSUInteger)count
                    startid:(NSUInteger)startid
                 completion:(APICompletion)completion{
-    NSMutableDictionary *dic=[NSMutableDictionary dictionary];
+    NSMutableDictionary *paramDic=[NSMutableDictionary dictionary];
     if (page > 0) {
-        [dic setObject:@(page) forKey:@"page"];
+        [paramDic setObject:@(page) forKey:@"page"];
     }
     if (count > 0) {
-        [dic setObject:@(count) forKey:@"count"];
+        [paramDic setObject:@(count) forKey:@"count"];
     }
     if (startid > 0) {
-        [dic setObject:@(startid) forKey:@"startid"];
+        [paramDic setObject:@(startid) forKey:@"startid"];
     }
-    
-    ASIFormDataRequest *request = createRequest(@"/v1/msg/list",YES,@"POST",dic,self,completion);
-    [request startAsynchronous];
+    executeRequest(@"/v1/msg/list",paramDic,YES,kApiTypePost,nil,nil,completion);
 }
 
 + (void)getMessageWithTouid:(NSInteger)touid//对方用户编号（必选）
@@ -375,18 +455,16 @@ ASIFormDataRequest *createRequest(NSString *path,BOOL auth,NSString *method,NSDi
                     startid:(NSInteger)startid//起始消息编号。（可选，默认为0）
                       count:(NSUInteger)count//每页的数量。（可选，默认为10）
                  completion:(APICompletion)completion{
-    NSMutableDictionary *dic=[NSMutableDictionary dictionary];
-    [dic setObject:@(touid) forKey:@"touid"];
-    [dic setObject:@(fetch_new) forKey:@"fetch_new"];
+    NSMutableDictionary *paramDic=[NSMutableDictionary dictionary];
+    [paramDic setObject:@(touid) forKey:@"touid"];
+    [paramDic setObject:@(fetch_new) forKey:@"fetch_new"];
     if (startid > 0) {
-        [dic setObject:@(startid) forKey:@"startid"];
+        [paramDic setObject:@(startid) forKey:@"startid"];
     }
     if (count > 0) {
-        [dic setObject:@(count) forKey:@"count"];
+        [paramDic setObject:@(count) forKey:@"count"];
     }
-    
-    ASIFormDataRequest *request = createRequest(@"/v1/msg/view",YES,@"POST",dic,self,completion);
-    [request startAsynchronous];
+    executeRequest(@"/v1/msg/view",paramDic,YES,kApiTypePost,nil,nil,completion);
 }
 
 + (void)sendMessageWithTouid:(NSInteger)touid//对方用户编号（必选）
@@ -395,88 +473,71 @@ ASIFormDataRequest *createRequest(NSString *path,BOOL auth,NSString *method,NSDi
                      content:(NSString *)content//消息内容(1文本含emoji,2:[图片])
                        image:(NSString *)image//图片信息(url+width+height)
                   completion:(APICompletion)completion{
-    NSMutableDictionary *dic=[NSMutableDictionary dictionary];
-    [dic setObject:@(touid) forKey:@"touid"];
+    NSMutableDictionary *paramDic=[NSMutableDictionary dictionary];
+    [paramDic setObject:@(touid) forKey:@"touid"];
     if (startid > 0) {
-        [dic setObject:@(startid) forKey:@"startid"];
+        [paramDic setObject:@(startid) forKey:@"startid"];
     }
-    [dic setObject:@(msg_type) forKey:@"msg_type"];
-    [dic setObject:content forKey:@"content"];
+    [paramDic setObject:@(msg_type) forKey:@"msg_type"];
+    [paramDic setObject:content forKey:@"content"];
     if (image && image.length) {
-        [dic setObject:image forKey:@"image"];
+        [paramDic setObject:image forKey:@"image"];
     }
-    
-    ASIFormDataRequest *request = createRequest(@"/v1/msg/send",YES,@"POST",dic,self,completion);
-    [request startAsynchronous];
+    executeRequest(@"/v1/msg/send",paramDic,YES,kApiTypePost,nil,nil,completion);
 }
 
 #pragma mark - 订单&支付
 + (void)getOrderInfo:(NSUInteger)order_id completion:(APICompletion)completion
 {
-    NSMutableDictionary *dic=[NSMutableDictionary dictionary];
-    [dic setObject:@(order_id) forKey:@"order_id"];
-    
-    ASIFormDataRequest *request = createRequest(@"/v1/order/info",YES,@"POST",dic,self,completion);
-    [request startAsynchronous];
+    NSMutableDictionary *paramDic=[NSMutableDictionary dictionary];
+    [paramDic setObject:@(order_id) forKey:@"order_id"];
+    executeRequest(@"/v1/order/info",paramDic,YES,kApiTypePost,nil,nil,completion);
 }
 
 + (void)cancelOrderInfo:(NSUInteger)order_id completion:(APICompletion)completion
 {
-    NSMutableDictionary *dic=[NSMutableDictionary dictionary];
-    [dic setObject:@(order_id) forKey:@"order_id"];
-    
-    ASIFormDataRequest *request = createRequest(@"/v1/order/cancel",YES,@"POST",dic,self,completion);
-    [request startAsynchronous];
+    NSMutableDictionary *paramDic=[NSMutableDictionary dictionary];
+    [paramDic setObject:@(order_id) forKey:@"order_id"];
+    executeRequest(@"/v1/order/cancel",paramDic,YES,kApiTypePost,nil,nil,completion);
 }
 
 + (void)getWeiXinPayWithOrderID:(NSString *)order_id completion:(APICompletion)completion
 {
-    NSMutableDictionary *dic=[NSMutableDictionary dictionary];
-    [dic setObject:order_id forKey:@"order_id"];
-    
-    ASIFormDataRequest *request = createRequest(@"/v1/order/weixin_pay",YES,@"POST",dic,self,completion);
-    [request startAsynchronous];
+    NSMutableDictionary *paramDic=[NSMutableDictionary dictionary];
+    [paramDic setObject:order_id forKey:@"order_id"];
+    executeRequest(@"/v1/order/weixin_pay",paramDic,YES,kApiTypePost,nil,nil,completion);
 }
 
 + (void)getAliPayWithOrderID:(NSString *)order_id completion:(APICompletion)completion
 {
-    NSMutableDictionary *dic=[NSMutableDictionary dictionary];
-    [dic setObject:order_id forKey:@"order_id"];
-    
-    ASIFormDataRequest *request = createRequest(@"/v1/order/apipay_pay",YES,@"POST",dic,self,completion);
-    [request startAsynchronous];
+    NSMutableDictionary *paramDic=[NSMutableDictionary dictionary];
+    [paramDic setObject:order_id forKey:@"order_id"];
+    executeRequest(@"/v1/order/apipay_pay",paramDic,YES,kApiTypePost,nil,nil,completion);
 }
 
 #pragma mark - 环信EaseMob
 + (void)getEasemobWelcomeMessageCompletion:(APICompletion)completion{
-    ASIFormDataRequest *request = createRequest(@"/v1/easemob/welcome_message",YES,@"POST",nil,self,completion);
-    [request startAsynchronous];
+    executeRequest(@"/v1/easemob/welcome_message",nil,YES,kApiTypePost,nil,nil,completion);
 }
 
 + (void)getEasemobChatterProfileWithChatter:(NSString *)chatter completion:(APICompletion)completion{
-    NSMutableDictionary *dic=[NSMutableDictionary dictionary];
-    [dic setObject:chatter forKey:@"chatter"];
-    
-    ASIFormDataRequest *request = createRequest(@"/v1/easemob/account_profile",YES,@"POST",dic,self,completion);
-    [request startAsynchronous];
+    NSMutableDictionary *paramDic=[NSMutableDictionary dictionary];
+    [paramDic setObject:chatter forKey:@"chatter"];
+    executeRequest(@"/v1/easemob/account_profile",paramDic,YES,kApiTypePost,nil,nil,completion);
 }
 
 + (void)getEasemobGroupMumber:(NSString *)groupId completion:(APICompletion)completion
 {
-    NSMutableDictionary *dic=[NSMutableDictionary dictionary];
-    [dic setObject:groupId forKey:@"groupId"];
-    
-    ASIFormDataRequest *request = createRequest(@"/v1/easemob/member_list",YES,@"POST",dic,self,completion);
-    [request startAsynchronous];
+    NSMutableDictionary *paramDic=[NSMutableDictionary dictionary];
+    [paramDic setObject:groupId forKey:@"groupId"];
+    executeRequest(@"/v1/easemob/member_list",paramDic,YES,kApiTypePost,nil,nil,completion);
 }
 
 + (void)sayHelloUserNo:(NSString *)user_no completion:(APICompletion)completion
 {
-    NSMutableDictionary *dic=[NSMutableDictionary dictionary];
-    [dic setObject:user_no forKey:@"user_no"];
-    
-    ASIFormDataRequest *request = createRequest(@"/v1/easemob/hello",YES,@"POST",dic,self,completion);
-    [request startAsynchronous];
+    NSMutableDictionary *paramDic=[NSMutableDictionary dictionary];
+    [paramDic setObject:user_no forKey:@"user_no"];
+    executeRequest(@"/v1/easemob/hello",paramDic,YES,kApiTypePost,nil,nil,completion);
 }
 
 @end

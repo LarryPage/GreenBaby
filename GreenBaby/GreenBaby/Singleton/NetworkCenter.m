@@ -113,7 +113,7 @@ SINGLETON_IMP(NetworkCenter)
     if (allContacts.count==0) {
         CLog(@"通讯录数据为空次数");
     }
-    NSString *pTotalString = [allContacts JSONRepresentation];
+    NSString *pTotalString = [allContacts jsonStringEncoded];
     CLog(@"allContacts:%@",pTotalString);
     
     NSData* pEncyptData = [self encryptString:pTotalString withKey:@"AbC13YH8kL90HBMN"];

@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "API.h"
 
 /**
  *  七牛上传图片的回调Block
@@ -23,15 +24,17 @@ typedef void (^QNUpCompletion)(NSError *error, NSString *filePath, NSDictionary 
  *  七牛上传图片
 [APIQN uploadFile:[Configs PathForBundleResource:@"AppIcon29x29@2x.png"]
               key:@"Btn_Back"
-            scope:QiniuBucketNameMsgPic
+            scope:QiniuBucketNameImg
             extra:nil
+         progress:nil
          complete:^(NSError *error, NSString *filePath, NSDictionary *resp) {
          }];
  */
 + (void)uploadFile:(NSString *)filePath
                key:(NSString *)key
-             scope:(NSString *)scope//QiniuBucketNameMsgPic
+             scope:(NSString *)scope//QiniuBucketNameImg
              extra:(QiniuPutExtra *)extra//默认传nil
-          complete:(QNUpCompletion)completion;
+     progressBlock:(APIProgress)progressBlock
+   completionBlock:(QNUpCompletion)completionBlock;
 
 @end

@@ -10,3 +10,8 @@
 #define kQiniuUpHost @"http://up.qiniu.com"
 
 #define kQiniuUndefinedKey @"?"
+
+#define kQiniuUserAgent  @"qiniu-ios-sdk"
+
+#import "QiniuPutExtra.h"
+#import "QiniuPutPolicy.h"

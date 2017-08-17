@@ -10,7 +10,6 @@
 
 extern NSString *APIServer;
 extern NSString *FileServer;
-extern Boolean AllowCompressedResponse;
 
 extern NSString *baiduMobStatAPPKey;
 extern NSString *baiduMobStatChannelID;
@@ -37,13 +36,13 @@ extern NSString *ShareSDK_APP_KEY;
 
 /*
  Qiniu app key id & Bucket Name
- https://portal.qiniu.com 当地人七牛账号
- apple@rrlt.com
- raycool
+ https://portal.qiniu.com 七牛账号
+ sbtjfdn@gmail.com
+ 565923
  */
 extern NSString *QiniuAccessKey;
 extern NSString *QiniuSecretKey;
-extern NSString *QiniuBucketNameMsgPic;
+extern NSString *QiniuBucketNameImg;
 
 // AppMacro
 #define kGender [NSArray arrayWithObjects:@"女",@"男",@"保密",nil]

@@ -27,64 +27,64 @@
 
     //******************Vendors******************//
     //MARC -fno-objc-arc
-    #import "ASIHTTPRequest.h"
-    #import "ASIFormDataRequest.h"
-    #import "Reachability.h"
-    #include "MeBase64.h"
-    #import "JSON.h"
-    #import "FFCache.h"
+    #include "MeBase64.h"//加密|解析responsebase64数据流
+    #import "JSON.h"//object<=>josnstring: JSONValue<=>JSONRepresentation
+    #import "FFCache.h"//response缓存
     #import "MLNavigationController.h"
     #import "NSAttributedString+Attributes.h"
     #import "OHAttributedLabel.h"
-    #import "OpenUDID.h"
-    #import "TKAlertCenter.h"
+    #import "OpenUDID.h"//设备唯一标识值
+    #import "TKAlertCenter.h"//toast
     //#import "WTStatusBar.h"
-    #import "CMOpenALSoundManager.h"
-    #import "QiniuPutPolicy.h"
-    #import "QiniuSimpleUploader.h"
+    #import "CMOpenALSoundManager.h"//播放音效
+    #import "QiniuConfig.h"//七牛上传配置
+    #import "QiniuGTMBase64.h"//七牛上传配置加密
     //ARC -fobjc-arc
-    #import "BaiduMobStat.h"
-    #import "FMDB.h"
-    #import "MBProgressHUD.h"
-    #import "UIImageView+WebCache.h"
+    #import "AFHTTPSessionManager.h"//AFN 网络请求解析
+    #import "Reachability.h"//网络状况监听
+    #import "BaiduMobStat.h"//百度统计
+    #import "FMDB.h"//SQLite库管理
+    #import "MBProgressHUD.h"//菊花
+    #import "UIImageView+WebCache.h"//图片异步加载显示
     #import "UIButton+WebCache.h"
-    #import "MWPhotoBrowser.h"
-    #import "SVWebViewController.h"
-    #import <ShareSDK/ShareSDK.h>
+    #import "MWPhotoBrowser.h"//图片集浏览
+    #import "SVWebViewController.h"//标配网页浏览器
+    #import <ShareSDK/ShareSDK.h>//集成分享
     //#import "FaceBoard.h"
-    #import "MLEmojiLabel.h"
-    #import "XHMessageInputView.h"
-    #import "XHPostInputView.h"
+    #import "MLEmojiLabel.h"//Emoji
+    #import "XHMessageInputView.h"//聊天输入视图
+    #import "XHPostInputView.h"//发言输入视图
     //#import "BHInputToolbar.h"
     //#import "TPKeyboardAvoidingScrollView.h"
     //#import "TPKeyboardAvoidingTableView.h"
-    #import "EAIntroView.h"
+    #import "EAIntroView.h"//启动宣传页
     #import "VerticalIntroView.h"
-    #import "EScrollerView.h"
-    #import "HZActivityIndicatorView.h"
-    #import "MultiTablesView.h"
+    #import "EScrollerView.h"//跑马灯
+    #import "HZActivityIndicatorView.h"//提示器
+    #import "MultiTablesView.h"//多个嵌套表格
     #import "CustomIOS7AlertView.h"
-    #import "SVPullToRefresh.h"
+    #import "SVPullToRefresh.h"//pull refresh
     //#import "ECSlidingViewController.h"
     //#import "CNimbus.h"
     //#import "MobClick.h"
-    #import "ZBarSDK.h"
-    #import "SoundManager.h"
+    #import "ZBarSDK.h"//扫描
+    #import "SoundManager.h"//音效管理
     //#import "ZYQAssetPickerController.h"
-    #import "MLSelectPhoto.h"
-    #import "SWTableViewCell.h"
-    #import "FSMediaPicker.h"
-    #import "NJKWebViewProgress.h"
+    #import "MLSelectPhoto.h"//选照片
+    #import "SWTableViewCell.h"//滑动cell
+    #import "FSMediaPicker.h"//拍照裁剪长方形
+    #import "NJKWebViewProgress.h"//网页加载进度条
     #import "NJKWebViewProgressView.h"
-    #import "FFRouteManager.h"
-    #import "WBUIWebView.h"
+    #import "FFRouteManager.h"//route管理
+    #import "Masonry.h"//AL布局
+    #import "WBUIWebView.h"//网页浏览器+调试器
     #import "WBWebViewConsole.h"
     #import "WBWebDebugConsoleViewController.h"
-    #import "THProgressView.h"
-    #import "LSImageListScrollView.h"
-    //#import "FSCalendar.h"
-    #import "LNNotificationsUI.h"
-    #import "SJAvatarBrowser.h"
+    #import "THProgressView.h"//进度条
+    #import "LSImageListScrollView.h"//跑马灯
+    //#import "FSCalendar.h"//日历
+    #import "LNNotificationsUI.h"//通知
+    #import "SJAvatarBrowser.h"//浏览头像
     //********************************************//
     #import "AppDelegate.h"
     #import "Configs.h"

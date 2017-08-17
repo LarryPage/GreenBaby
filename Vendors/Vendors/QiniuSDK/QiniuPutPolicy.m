@@ -8,7 +8,7 @@
 #import "QiniuPutPolicy.h"
 #import <CommonCrypto/CommonHMAC.h>
 #import "QiniuGTMBase64.h"
-#import "JSONKit.h"
+#import "JSON.h"
 
 @implementation QiniuPutPolicy
 
@@ -78,7 +78,7 @@
     }
     [dic setObject:deadlineNumber forKey:@"deadline"];
     
-    NSString *json = [dic JSONString];
+    NSString *json = [dic JSONRepresentation];
     
     return json;
 }

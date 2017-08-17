@@ -1328,22 +1328,29 @@
     WEAKSELF
     [APIQN uploadFile:filePath
                   key:key
-                scope:QiniuBucketNameMsgPic
+                scope:QiniuBucketNameImg
                 extra:nil
-             complete:^(NSError *error, NSString *filePath, NSDictionary *resp) {
-                 [weakSelf.uploadPics removeObjectAtIndex:0];
-                 if (!error) {
-                     NSString *path = [resp objectForKey:@"key"];
-                     NSString *urlStr=[NSString stringWithFormat:@"%@.qiniu.com/%@",QiniuBucketNameMsgPic,path];
-                     
-                     NSDictionary *msgDic=[NSDictionary dictionaryWithObjectsAndKeys:@(2), @"msg_type", urlStr, @"msg_content", nil];
-                     [weakSelf sendMessage:msgDic];//发送消息
-                 }
-                 else{
-                     [weakSelf hideHud];//隐藏
-                     [[TKAlertCenter defaultCenter] postAlertWithMessage:@"上传失败"];
-                 }
-             }];
+        progressBlock:^(NSProgress *progress) {
+            CLog(@"上传进度:%@",@(progress.fractionCompleted));
+//            dispatch_async(dispatch_get_main_queue(), ^{
+//                [self.progressView setProgress:progress.fractionCompleted];
+//            });
+        }
+      completionBlock:^(NSError *error, NSString *filePath, NSDictionary *resp) {
+          [weakSelf.uploadPics removeObjectAtIndex:0];
+          if (!error) {
+              NSString *path = [resp objectForKey:@"key"];
+              NSString *urlStr=[NSString stringWithFormat:@"%@.qiniudn.com/%@",QiniuBucketNameImg,path];
+              
+              NSDictionary *msgDic=[NSDictionary dictionaryWithObjectsAndKeys:@(2), @"msg_type", urlStr, @"msg_content", nil];
+              [weakSelf sendMessage:msgDic];//发送消息
+          }
+          else{
+              [weakSelf hideHud];//隐藏
+              //[[TKAlertCenter defaultCenter] postAlertWithMessage:error.domain];
+              [[TKAlertCenter defaultCenter] postAlertWithMessage:@"上传失败"];
+          }
+      }];
 }
 
 //发送消息接口

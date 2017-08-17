@@ -9,6 +9,18 @@
 #import <Foundation/Foundation.h>
 
 /**
+ *  API PostMultipart请求要上传文件Block
+ *
+ *  @param formData 上传文件数据
+ */
+typedef void (^APIFormData)(id <AFMultipartFormData> formData);
+/**
+ *  API请求的进度Block
+ *
+ *  @param progress GET请求的下载进度Block|POST请求的上传进度Block
+ */
+typedef void (^APIProgress)(NSProgress *progress);
+/**
  *  API请求的回调Block
  *
  *  @param error 返回的错误信息，如果调用成功则为nil，调用失败则通过error.domain获取错误信息
@@ -57,7 +69,9 @@ typedef void (^APICompletion)(NSError *error, id responseDic);
 /*
  *  更新头像信息
  */
-+ (void)updateAvatar:(NSData *)fileData completion:(APICompletion)completion;
++ (void)updateAvatar:(NSData *)fileData
+            progress:(APIProgress)progress
+          completion:(APICompletion)completion;
 
 /*
  *  登录

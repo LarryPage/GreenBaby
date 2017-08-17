@@ -15,8 +15,7 @@ NSString *APIServer = @"http://api.huijiame.com"; // release版本:
 NSString *APIServer = @"http://api.huijiame.com"; // debug版本:
 #endif
 
-NSString *FileServer = @"img.peng.me";//@"file.peng.me"
-Boolean AllowCompressedResponse=YES;
+NSString *FileServer = @"http://adhoc.qiniudn.com";//@"file.huijiame.com"
 
 // baiduMobStat app key ID
 NSString *baiduMobStatAPPKey = @"09088c50e3";
@@ -50,9 +49,9 @@ NSString *Rerren_APP_SECRET = @"619089569c6e471982843b043137644d";
 NSString *ShareSDK_APP_KEY = @"63b2f07d620";
 
 //Qiniu app key id & Bucket Name
-NSString *QiniuAccessKey = @"hJpfByk2kUiad2O8JJzd06W5w9njcvFuzuBYmsxE";
-NSString *QiniuSecretKey = @"KyieT2GIkb7GqyYAA59hdGl46BZoig7bo8kQdBa4";
-NSString *QiniuBucketNameMsgPic = @"rrlt-image-msg";
+NSString *QiniuAccessKey = @"fu3r4ZNUBh7joYaNPTQst5mxHyT4VUxYisnECPNg";
+NSString *QiniuSecretKey = @"q5uVQBDB-zqOpdirzx-Uw5xGTlD2uqZkwIZ-dLgR";
+NSString *QiniuBucketNameImg = @"adhoc";
 
 @implementation Configs
 
