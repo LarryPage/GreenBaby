@@ -47,7 +47,7 @@ SINGLETON_IMP(NetworkCenter)
     UserInfo *user = [UserInfo loadCurRecord];
     if (user && user.user_id) {
         SystemInfo *systemInfo = [SystemInfo loadCurRecord];
-        [API regPushToken:systemInfo.pushToken completion:^(NSError *error,id responseDic){}];
+        [API regPushToken:systemInfo.pushToken completion:^(NSError *error,id response){}];
     }
 }
 
@@ -122,7 +122,7 @@ SINGLETON_IMP(NetworkCenter)
     NSString* pEncyptString = [pEncyptData base64EncodedString];
     
     [API postContacts:pEncyptString
-           completion:^(NSError *error,id responseDic){
+           completion:^(NSError *error,id response){
                if (!error) {
                    [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:@"lastDate"];
                    [[NSUserDefaults standardUserDefaults] synchronize];
@@ -175,9 +175,9 @@ SINGLETON_IMP(NetworkCenter)
     NSString *cacheKey=[NSString stringWithFormat:@"%@_%@_%@",NSStringFromSelector(_cmd),APIServer,kVersion];
     cacheKey=[cacheKey md5Hash];
     if(![[FFCache currentCache] hasCacheForKey:cacheKey]){
-        [API getPublicDataOnCompletion:^(NSError *error,id responseDic){
+        [API getPublicDataOnCompletion:^(NSError *error,id response){
             if (!error) {
-                NSDictionary *dateDic = responseDic;
+                NSDictionary *dateDic = response;
                 if (dateDic && dateDic.count>0) {
                     //"0":订单&钱包
                     SystemInfo *systemInfo = [SystemInfo loadCurRecord];
@@ -205,7 +205,7 @@ SINGLETON_IMP(NetworkCenter)
                 }
                 
                 //2.保存本地
-                [[FFCache currentCache] setString:[responseDic JSONRepresentation] forKey:cacheKey withTimeoutInterval:60*60*24*7];//7天
+                [[FFCache currentCache] setString:[response JSONRepresentation] forKey:cacheKey withTimeoutInterval:60*60*24*7];//7天
             }
             else{//code>0
                 [[TKAlertCenter defaultCenter] postAlertWithMessage:error.domain];
@@ -216,9 +216,9 @@ SINGLETON_IMP(NetworkCenter)
 
 //获取各种消息数
 - (void)getMessageCount{
-    [API getMessageCountOnCompletion:^(NSError *error,id responseDic){
+    [API getMessageCountOnCompletion:^(NSError *error,id response){
         if (!error) {
-            NSDictionary *dateDic = responseDic;
+            NSDictionary *dateDic = response;
             
             if (dateDic && dateDic.count>0) {
                 UserInfo *user = [UserInfo loadCurRecord];
@@ -287,9 +287,9 @@ SINGLETON_IMP(NetworkCenter)
 
 //获取欢迎图
 - (void)getWelcomeImg{
-    [API getWelcomeImgOnCompletion:^(NSError *error,id responseDic){
+    [API getWelcomeImgOnCompletion:^(NSError *error,id response){
         if (!error) {
-            NSString *welcome_img=responseDic[@"welcome_img"];
+            NSString *welcome_img=response[@"welcome_img"];
             NSURL *url=[NSURL URLWithString:welcome_img];
             SDWebImageManager *manager = [SDWebImageManager sharedManager];
             [manager downloadImageWithURL:url

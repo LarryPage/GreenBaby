@@ -1258,13 +1258,13 @@
                    fetch_new:fetch_new
                      startid:startid
                        count:self.pagecount
-                  completion:^(NSError *error, id responseDic) {
+                  completion:^(NSError *error, id response) {
                       [weakSelf hideHud];
                       if (!error) {
                           NSMutableArray *moreList=[NSMutableArray array];
                           
                           //数据处理
-                          NSArray *msgs = responseDic[@"message_list"];
+                          NSArray *msgs = response[@"message_list"];
                           if (msgs && msgs.count>0) {
                               for (NSDictionary *msgDic in msgs) {
                                   MessageDetail *msg = [[MessageDetail alloc] initWithDic:msgDic];
@@ -1390,7 +1390,7 @@
                      msg_type:msg_type
                       content:msg_content
                         image:image
-                   completion:^(NSError *error, id responseDic) {
+                   completion:^(NSError *error, id response) {
                        [weakSelf hideHud];
                        if (!error) {
                            if (weakSelf.uploadPics.count>0) {
@@ -1407,7 +1407,7 @@
                            NSMutableArray *moreList=[NSMutableArray array];
                            
                            //数据处理
-                           NSArray *msgs = responseDic[@"message_list"];
+                           NSArray *msgs = response[@"message_list"];
                            if (msgs && msgs.count>0) {
                                for (NSDictionary *msgDic in msgs) {
                                    MessageDetail *msg = [[MessageDetail alloc] initWithDic:msgDic];

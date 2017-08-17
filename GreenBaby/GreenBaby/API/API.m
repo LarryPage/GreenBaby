@@ -14,10 +14,12 @@
 
 typedef enum ApiType {
     kApiTypeGet,                      // Get方式
+    kApiTypeGetImage,                 // Get方式,DownImage下载图片
+    kApiTypeGetFile,                  // Get方式,DownFile下载文件
     kApiTypeDelete,                   // Delete方式
     kApiTypePut,                      // Put方式
     kApiTypePost,                     // Post方式
-    kApiTypePostMultipartFormData,    // PostMultipart方式
+    kApiTypePostMultipartFormData,    // Post方式,Multipart上传文件
 }ApiType;
 
 
@@ -118,7 +120,22 @@ void executeRequest(NSString *path,NSDictionary *paramDic,BOOL auth,ApiType apiT
     //设置cookie,默认YES，允许请求带cookies，响应设置cookies，风控针对一些接口如登录必须使用
     [manager.requestSerializer setHTTPShouldHandleCookies:YES];
     //设置超时
-    manager.requestSerializer.timeoutInterval = (apiType==kApiTypePostMultipartFormData)?180:30;//默认60
+    NSTimeInterval timeoutInterval = 30;
+    switch (apiType) {
+        case kApiTypeGetImage:
+            timeoutInterval = 60;
+            break;
+        case kApiTypeGetFile:
+            timeoutInterval = 60;
+            break;
+        case kApiTypePostMultipartFormData:
+            timeoutInterval = 180;
+            break;
+        default:
+            timeoutInterval = 30;
+            break;
+    }
+    manager.requestSerializer.timeoutInterval = timeoutInterval;//默认60
     //设置Content-Type
     //[manager.requestSerializer setValue:@"application/x-www-form-urlencoded; charset=utf-8" forHTTPHeaderField:@"Content-Type"];
     //[manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
@@ -142,8 +159,18 @@ void executeRequest(NSString *path,NSDictionary *paramDic,BOOL auth,ApiType apiT
     }
     encryptRequest(manager,pathParam);
     //2.构造responseSerializer
-    manager.responseSerializer = [AFJSONResponseSerializer serializer];//application/json
-    //manager.responseSerializer = [AFXMLParserResponseSerializer serializer];//application/xml
+    switch (apiType) {
+        case kApiTypeGetImage:
+            manager.responseSerializer = [AFImageResponseSerializer serializer];//image/jpeg
+            break;
+        case kApiTypeGetFile:
+            manager.responseSerializer = [AFCompoundResponseSerializer serializer];//混合
+            break;
+        default:
+            manager.responseSerializer = [AFJSONResponseSerializer serializer];//application/json
+            //manager.responseSerializer = [AFXMLParserResponseSerializer serializer];//application/xml
+            break;
+    }
     //设置Status Code接受范围，默认200-300
     //manager.responseSerializer.acceptableStatusCodes=[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(200, 100)];
     //服务端不关心 contentType，因此客户端不做验证
@@ -163,11 +190,11 @@ void executeRequest(NSString *path,NSDictionary *paramDic,BOOL auth,ApiType apiT
              }
                  success:^void(NSURLSessionDataTask *task,id response)
              {
-                 parseResponse(task,nil,response,path,paramDic,completionBlock);
+                 parseResponse(task,nil,response,path,paramDic,apiType,completionBlock);
              }
                  failure:^void(NSURLSessionDataTask * task, NSError * error)
              {
-                 parseResponse(task,error,nil,path,paramDic,completionBlock);
+                 parseResponse(task,error,nil,path,paramDic,apiType,completionBlock);
              }];
         }
             break;
@@ -177,12 +204,12 @@ void executeRequest(NSString *path,NSDictionary *paramDic,BOOL auth,ApiType apiT
                  parameters:paramDic
                     success:^(NSURLSessionDataTask *task, id response)
              {
-                 parseResponse(task,nil,response,path,paramDic,completionBlock);
+                 parseResponse(task,nil,response,path,paramDic,apiType,completionBlock);
                  
              }
                     failure:^(NSURLSessionDataTask *task, NSError *error)
              {
-                 parseResponse(task,error,nil,path,paramDic,completionBlock);
+                 parseResponse(task,error,nil,path,paramDic,apiType,completionBlock);
              }];
         }
             break;
@@ -192,11 +219,11 @@ void executeRequest(NSString *path,NSDictionary *paramDic,BOOL auth,ApiType apiT
               parameters:paramDic
                  success:^(NSURLSessionDataTask *task, id response)
              {
-                 parseResponse(task,nil,response,path,paramDic,completionBlock);
+                 parseResponse(task,nil,response,path,paramDic,apiType,completionBlock);
              }
                  failure:^(NSURLSessionDataTask *task, NSError *error)
              {
-                 parseResponse(task,error,nil,path,paramDic,completionBlock);
+                 parseResponse(task,error,nil,path,paramDic,apiType,completionBlock);
              }];
         }
             break;
@@ -212,11 +239,11 @@ void executeRequest(NSString *path,NSDictionary *paramDic,BOOL auth,ApiType apiT
              }
                   success:^void(NSURLSessionDataTask *task,id response)
              {
-                 parseResponse(task,nil,response,path,paramDic,completionBlock);
+                 parseResponse(task,nil,response,path,paramDic,apiType,completionBlock);
              }
                   failure:^void(NSURLSessionDataTask * task, NSError * error)
              {
-                 parseResponse(task,error,nil,path,paramDic,completionBlock);
+                 parseResponse(task,error,nil,path,paramDic,apiType,completionBlock);
              }];
         }
             break;
@@ -232,18 +259,18 @@ constructingBodyWithBlock:formdataBlock
              }
                   success:^void(NSURLSessionDataTask * task, id response)
              {
-                 parseResponse(task,nil,response,path,paramDic,completionBlock);
+                 parseResponse(task,nil,response,path,paramDic,apiType,completionBlock);
              }
                   failure:^ void(NSURLSessionDataTask * task, NSError * error)
              {
-                 parseResponse(task,error,nil,path,paramDic,completionBlock);
+                 parseResponse(task,error,nil,path,paramDic,apiType,completionBlock);
              }];
         }
             break;
     }
 }
 
-void parseResponse(NSURLSessionDataTask *task,NSError *error,id response,NSString *path,NSDictionary *paramDic,APICompletion completionBlock)
+void parseResponse(NSURLSessionDataTask *task,NSError *error,id response,NSString *path,NSDictionary *paramDic,ApiType apiType,APICompletion completionBlock)
 {
     if (error){
         NSString *domain=@"";
@@ -251,6 +278,9 @@ void parseResponse(NSURLSessionDataTask *task,NSError *error,id response,NSStrin
         if (error.userInfo && error.userInfo.count>0) {
             if (error.userInfo[NSLocalizedDescriptionKey]) {
                 domain=error.userInfo[NSLocalizedDescriptionKey];
+                if (error.userInfo[AFNetworkingOperationFailingURLResponseDataErrorKey]) {
+                    responseData=error.userInfo[AFNetworkingOperationFailingURLResponseDataErrorKey];
+                }
             }
             else{
                 if (error.userInfo[NSUnderlyingErrorKey]) {
@@ -307,25 +337,37 @@ void parseResponse(NSURLSessionDataTask *task,NSError *error,id response,NSStrin
 #endif
     }
     else{
-        NSInteger code = [[NSNumber safeNumberFromObject:response[@"code"]] integerValue];
-        if (code == 0){// API调用成功
-            completionBlock(nil, [NSDictionary safeDictionaryFromObject:response[@"data"]]);
-        }
-        else if (code == 1212) {  //此版本放弃使用，请升级到最新版本
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示"
-                                                            message:[NSString safeStringFromObject:response[@"message"]]
-                                                           delegate:nil
-                                                  cancelButtonTitle:nil
-                                                  otherButtonTitles:@"确定",nil];
-            alert.tag=1;
-            alert.delegate=[AppDelegate sharedAppDelegate];
-            [alert show];
-        }
-        else{
-            NSError *error = [NSError errorWithDomain:[NSString safeStringFromObject:response[@"message"]]
-                                                 code:code
-                                             userInfo:nil];
-            completionBlock(error, nil);
+        switch (apiType) {
+            case kApiTypeGetImage:
+                completionBlock(nil, response);//response:UIImage
+                break;
+            case kApiTypeGetFile:
+                completionBlock(nil, response);//response:NSData
+                break;
+            default://response:NSDictionary
+            {
+                NSInteger code = [[NSNumber safeNumberFromObject:response[@"code"]] integerValue];
+                if (code == 0){// API调用成功
+                    completionBlock(nil, [NSDictionary safeDictionaryFromObject:response[@"data"]]);
+                }
+                else if (code == 1212) {  //此版本放弃使用，请升级到最新版本
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示"
+                                                                    message:[NSString safeStringFromObject:response[@"message"]]
+                                                                   delegate:nil
+                                                          cancelButtonTitle:nil
+                                                          otherButtonTitles:@"确定",nil];
+                    alert.tag=1;
+                    alert.delegate=[AppDelegate sharedAppDelegate];
+                    [alert show];
+                }
+                else{
+                    NSError *error = [NSError errorWithDomain:[NSString safeStringFromObject:response[@"message"]]
+                                                         code:code
+                                                     userInfo:nil];
+                    completionBlock(error, nil);
+                }
+            }
+                break;
         }
     }
 }
@@ -387,7 +429,17 @@ void parseResponse(NSURLSessionDataTask *task,NSError *error,id response,NSStrin
     executeRequest(@"/v1/setting/update_push_status",paramDic,YES,kApiTypePost,nil,nil,completion);
 }
 
-+ (void)updateAvatar:(NSData *)fileData
++ (void)downloadAvatarWithProgress:(APIProgress)progress
+                        completion:(APICompletion)completion{
+    executeRequest(@"/v1/user/avatar",nil,YES,kApiTypeGetImage,nil,progress,completion);
+}
+
++ (void)downloadAvatarFileWithProgress:(APIProgress)progress
+                            completion:(APICompletion)completion{
+    executeRequest(@"/v1/user/avatar",nil,YES,kApiTypeGetFile,nil,progress,completion);
+}
+
++ (void)uploadAvatar:(NSData *)fileData
             progress:(APIProgress)progress
           completion:(APICompletion)completion{
     APIFormData formdata = ^(id <AFMultipartFormData> formData){

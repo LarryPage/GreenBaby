@@ -24,9 +24,12 @@ typedef void (^APIProgress)(NSProgress *progress);
  *  API请求的回调Block
  *
  *  @param error 返回的错误信息，如果调用成功则为nil，调用失败则通过error.domain获取错误信息
- *  @param responseDic 返回的数据，等于API输出数据中"data"字段中的内容
+ *  @param response 返回的数据，数据类型如下:
+ *  ApiType=kApiTypeGetImage    response:UIImage
+ *  ApiType=kApiTypeGetFile     response:NSData
+ *  ApiType=其他类型(默认)        response:NSDictionary,等于API输出数据中"data"字段中的内容
  */
-typedef void (^APICompletion)(NSError *error, id responseDic);
+typedef void (^APICompletion)(NSError *error, id response);
 
 @interface API : NSObject
 
@@ -66,10 +69,22 @@ typedef void (^APICompletion)(NSError *error, id responseDic);
  */
 + (void)updatePushStatusOnCompletion:(APICompletion)completion;
 
-/*
- *  更新头像信息
+/**
+ *  下载头像图片,response:UIImage
  */
-+ (void)updateAvatar:(NSData *)fileData
++ (void)downloadAvatarWithProgress:(APIProgress)progress
+                        completion:(APICompletion)completion;
+
+/**
+ *  下载头像文件,response:NSData
+ */
++ (void)downloadAvatarFileWithProgress:(APIProgress)progress
+                            completion:(APICompletion)completion;
+
+/*
+ *  上传头像图片
+ */
++ (void)uploadAvatar:(NSData *)fileData
             progress:(APIProgress)progress
           completion:(APICompletion)completion;
 

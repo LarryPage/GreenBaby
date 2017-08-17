@@ -457,13 +457,13 @@
     [API getMsgListWithPage:_page
                       count:_pagecount
                     startid:_startid
-                 completion:^(NSError *error, id responseDic) {
+                 completion:^(NSError *error, id response) {
                      [weakSelf hideHud];
                      weakSelf.error=error;
                      weakSelf.isLoading=NO;
                      if (!error) {
                          NSMutableArray *moreList=[NSMutableArray array];
-                         NSArray *records = responseDic[@"message_list"];
+                         NSArray *records = response[@"message_list"];
                          if (records && records.count>0) {
                              for (NSDictionary *recordDic in records) {
                                  MessageDetail *record=[[MessageDetail alloc] initWithDic:recordDic];
