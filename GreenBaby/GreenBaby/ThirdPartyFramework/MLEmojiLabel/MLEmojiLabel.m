@@ -88,7 +88,8 @@ typedef struct CustomGlyphMetrics {
 } CustomGlyphMetrics, *CustomGlyphMetricsRef;
 
 static void deallocCallback(void *refCon) {
-	free(refCon), refCon = NULL;
+    free(refCon);
+    refCon = NULL;
 }
 
 static CGFloat ascentCallback(void *refCon) {

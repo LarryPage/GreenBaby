@@ -30,7 +30,7 @@ extern NSString* const LNNotificationWasTappedNotification;
 	
 	NSLayoutConstraint* _topConstraint;
 	
-	void (^_pendingCompletionHandler)();
+    void (^_pendingCompletionHandler)(void);
 }
 
 - (instancetype)initWithFrame:(CGRect)frame
@@ -85,7 +85,7 @@ extern NSString* const LNNotificationWasTappedNotification;
 	return _notificationViewShown;
 }
 
-- (void)presentNotification:(LNNotification *)notification completionBlock:(void (^)())completionBlock
+- (void)presentNotification:(LNNotification *)notification completionBlock:(void (^)(void))completionBlock
 {
 	NSDate* targetDate;
  
@@ -123,7 +123,7 @@ extern NSString* const LNNotificationWasTappedNotification;
 			dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(LNNotificationCutOffDuration * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
 				if(_pendingCompletionHandler)
 				{
-					void (^prevPendingCompletionHandler)() = _pendingCompletionHandler;
+                    void (^prevPendingCompletionHandler)(void) = _pendingCompletionHandler;
 					_pendingCompletionHandler = nil;
 					prevPendingCompletionHandler();
 				}
@@ -156,7 +156,7 @@ extern NSString* const LNNotificationWasTappedNotification;
 			dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(LNNotificationCutOffDuration * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
 				if(_pendingCompletionHandler)
 				{
-					void (^prevPendingCompletionHandler)() = _pendingCompletionHandler;
+                    void (^prevPendingCompletionHandler)(void) = _pendingCompletionHandler;
 					_pendingCompletionHandler = nil;
 					prevPendingCompletionHandler();
 				}
@@ -165,12 +165,12 @@ extern NSString* const LNNotificationWasTappedNotification;
 	}
 }
 
-- (void)dismissNotificationViewWithCompletionBlock:(void (^)())completionBlock
+- (void)dismissNotificationViewWithCompletionBlock:(void (^)(void))completionBlock
 {
 	[self _dismissNotificationViewWithCompletionBlock:completionBlock force:NO];
 }
 
-- (void)_dismissNotificationViewWithCompletionBlock:(void (^)())completionBlock force:(BOOL)forced
+- (void)_dismissNotificationViewWithCompletionBlock:(void (^)(void))completionBlock force:(BOOL)forced
 {
 	if(_notificationViewShown == NO)
 	{
@@ -207,7 +207,7 @@ extern NSString* const LNNotificationWasTappedNotification;
 		
 		if(_pendingCompletionHandler)
 		{
-			void (^prevPendingCompletionHandler)() = _pendingCompletionHandler;
+            void (^prevPendingCompletionHandler)(void) = _pendingCompletionHandler;
 			_pendingCompletionHandler = nil;
 			prevPendingCompletionHandler();
 		}

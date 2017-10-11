@@ -22,7 +22,7 @@
  */
 + (void)compressVideoWithPath:(NSString *)path
                      destPath:(NSString *)destPath
-                     finished:(void(^)())finishedHandler;
+                     finished:(void(^)(void))finishedHandler;
 
 
 /**

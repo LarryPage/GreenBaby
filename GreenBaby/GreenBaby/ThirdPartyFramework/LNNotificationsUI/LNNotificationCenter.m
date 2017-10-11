@@ -86,7 +86,7 @@ NSString* const LNNotificationWasTappedNotification = @"LNNotificationWasTappedN
 	
 	_currentlyAnimating = YES;
 	
-	void(^block)() = ^ {
+    void(^block)(void) = ^ {
 		_currentlyAnimating = NO;
 		
 		[self _handlePendingNotifications];

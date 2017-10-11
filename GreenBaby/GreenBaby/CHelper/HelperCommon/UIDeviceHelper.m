@@ -311,6 +311,12 @@ static NSString *COpenUDIDKey = @"COpenUDIDKey";
 + (BOOL)isOS9 {
     return [[UIDevice currentDevice].systemVersion hasPrefix:@"9."];
 }
++ (BOOL)isOS10 {
+    return [[UIDevice currentDevice].systemVersion hasPrefix:@"10."];
+}
++ (BOOL)isOS11 {
+    return [[UIDevice currentDevice].systemVersion hasPrefix:@"11."];
+}
 
 
 

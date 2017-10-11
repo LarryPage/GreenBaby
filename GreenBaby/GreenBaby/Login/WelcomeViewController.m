@@ -77,12 +77,16 @@
             imgstr=[NSString stringWithFormat:@"guide%d-568h@2x.jpg",i+1];
             bottom=85;
         }
-        else if (IS_IPHONE_6_7){
+        else if (IS_IPHONE_6_7_8){
             imgstr=[NSString stringWithFormat:@"guide%d-667h@2x.jpg",i+1];
             bottom=98;
         }
-        else if (IS_IPHONE_6P_7P){
-            imgstr=[NSString stringWithFormat:@"guide%d-736h@2x.jpg",i+1];
+        else if (IS_IPHONE_6P_6SP_7P_8P){
+            imgstr=[NSString stringWithFormat:@"guide%d-736h@3x.jpg",i+1];
+            bottom=105;
+        }
+        else if (IS_IPHONE_X){
+            imgstr=[NSString stringWithFormat:@"guide%d-812h@3x.jpg",i+1];
             bottom=105;
         }
         else if (IS_IPAD){

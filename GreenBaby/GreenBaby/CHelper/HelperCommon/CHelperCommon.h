@@ -18,10 +18,10 @@ extern CGFloat kSoftCornerRadius;
 extern CGFloat kDefaultCornerRadius;
 extern CGFloat kHardCornerRadius;
 
-static CGRect kApplicationFrame();
-static CGRect kApplicationBounds();
+static CGRect kApplicationFrame(void);
+static CGRect kApplicationBounds(void);
 
-static CGRect kTabViewFrame();
+static CGRect kTabViewFrame(void);
 
 void INLog(NSString *message, ...);
 

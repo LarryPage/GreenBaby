@@ -8,7 +8,7 @@
 
 #import "CitySelectViewController.h"
 
-@interface CitySelectViewController ()<UITableViewDataSource, UITableViewDelegate>{
+@interface CitySelectViewController ()<UITableViewDataSource, UITableViewDelegate,UISearchControllerDelegate, UISearchResultsUpdating>{
     NSIndexPath *_curSelectIndexPath;
     
     NSMutableArray *_cityList;
@@ -16,16 +16,11 @@
     NSMutableArray *_listContent;//list <NSMutableArray>
     NSMutableArray *_filteredListContent;//["City"]
 }
-
-@property (nonatomic, weak) IBOutlet UISearchBar *searchBar;
-@property (nonatomic, weak) IBOutlet UITableView *resultTable;
-
 @property (nonatomic, assign) NSInteger gpsCityID;
 @property (nonatomic, strong) NSString *gpsCityName;
 
-@property (nonatomic, strong) NSString *savedSearchTerm;
-@property (nonatomic, assign) NSInteger savedScopeButtonIndex;
-@property (nonatomic, assign) BOOL searchWasActive;
+@property (nonatomic, strong) UISearchController *searchController;
+@property (nonatomic, weak) IBOutlet UITableView *resultTable;
 @end
 
 @implementation CitySelectViewController
@@ -58,6 +53,24 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     self.title=@"选择城市";
+    
+    self.automaticallyAdjustsScrollViewInsets=NO;
+    
+    //不需要创建UISearchBar,表视图用同一个resultTable
+    _searchController = [[UISearchController alloc] initWithSearchResultsController:nil];
+    //设置代理
+    _searchController.delegate = self;
+    _searchController.searchResultsUpdater = self;
+    //搜索时，背景变暗色
+    _searchController.dimsBackgroundDuringPresentation = YES;
+    //以下两行为YES：UISearchBar会自动占据导航栏
+    self.definesPresentationContext = YES;
+    _searchController.hidesNavigationBarDuringPresentation = YES;
+    _searchController.searchBar.barTintColor = [UIColor grayColor];
+    //[_searchController.searchBar setBackgroundImage:[UIImage new]];//去掉上下的黑线
+    _searchController.searchBar.frame = CGRectMake(_searchController.searchBar.frame.origin.x, _searchController.searchBar.frame.origin.y, _searchController.searchBar.frame.size.width, 44.0);
+    
+    self.resultTable.tableHeaderView = _searchController.searchBar;
     
     [[LocationManager sharedInstance] start];
     [self locationChanged:nil];
@@ -100,17 +113,6 @@
 }
 
 -(void)sortedByAlphabet{
-    if (self.savedSearchTerm)
-    {
-        [self.searchDisplayController setActive:self.searchWasActive];
-        [self.searchDisplayController.searchBar setText:_savedSearchTerm];
-        
-        self.savedSearchTerm = nil;
-    }
-    
-    self.searchDisplayController.searchResultsTableView.scrollEnabled = YES;
-    self.searchDisplayController.searchBar.showsCancelButton = NO;
-    
     [_alphabets removeAllObjects];
     [_listContent removeAllObjects];
     [_filteredListContent removeAllObjects];
@@ -163,7 +165,7 @@
                                           reuseIdentifier:@"SelectCell"];
         }
         
-        if (tableView == self.searchDisplayController.searchResultsTableView){
+        if (self.searchController.active){
             City *city=[_filteredListContent objectAtIndex:indexPath.row];
             cell.textLabel.tag=city.cityid;
             cell.textLabel.text=city.cityname;
@@ -223,7 +225,7 @@
         }
         
         cell.textLabel.textColor=MKRGBA(66,66,66,255);
-        cell.textLabel.font=[UIFont systemFontOfSize:16];
+        cell.textLabel.font=CFont(16);
         //1.系统默认选择cell的颜色设置
         //cell.selectionStyle = UITableViewCellSelectionStyleNone;
         //2.自定义选择cell的背景图片设置
@@ -254,7 +256,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if ([_cityList count]>0 ){
-        if (tableView == self.searchDisplayController.searchResultsTableView) {
+        if (self.searchController.active){
             return [_filteredListContent count];
         } else {
             if (section==0) {
@@ -275,7 +277,7 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     if ([_cityList count]>0 ){
-        if (tableView == self.searchDisplayController.searchResultsTableView) {
+        if (self.searchController.active){
             return 1;
         } else {
             return 1+[_alphabets count];
@@ -289,7 +291,7 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if ([_cityList count]>0 ){
-        if (tableView == self.searchDisplayController.searchResultsTableView) {
+        if (self.searchController.active){
             return 44;//默认tableView rowHeight=44
         }
         else {
@@ -313,7 +315,7 @@
 - (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView
 {
     if ([_cityList count]>0 ){
-        if (tableView == self.searchDisplayController.searchResultsTableView) {
+        if (self.searchController.active){
             return nil;
         } else {
             return [[NSArray arrayWithObject:UITableViewIndexSearch] arrayByAddingObjectsFromArray:
@@ -328,13 +330,13 @@
 - (NSInteger)tableView:(UITableView *)tableView sectionForSectionIndexTitle:(NSString *)title atIndex:(NSInteger)index
 {
     if ([_cityList count]>0 ){
-        if (tableView == self.searchDisplayController.searchResultsTableView) {
+        if (self.searchController.active){
             return 0;
         } else {
             if (title == UITableViewIndexSearch) {
                 //滚动到顶部
                 [tableView scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:NO];
-                //[tableView scrollRectToVisible:self.searchDisplayController.searchBar.frame animated:NO];
+                //[tableView scrollRectToVisible:self.searchController.searchBar.frame animated:NO];
                 return -1;
             } else {
                 return index;
@@ -349,7 +351,7 @@
 - (UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     if ([_cityList count]>0 ){
-        if (tableView == self.searchDisplayController.searchResultsTableView) {
+        if (self.searchController.active){
             return nil;
         }
         else
@@ -377,7 +379,7 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
     if ([_cityList count]>0 ){
-        if (tableView == self.searchDisplayController.searchResultsTableView)
+        if (self.searchController.active)
             return 0;
         else{
             if (section==0) {
@@ -396,11 +398,9 @@
     }
 }
 
-/*
- - (UITableViewCellAccessoryType)tableView:(UITableView *)tableView accessoryTypeForRowWithIndexPath:(NSIndexPath *)indexPath {
- return UITableViewCellAccessoryDisclosureIndicator;
- }
- */
+//- (UITableViewCellAccessoryType)tableView:(UITableView *)tableView accessoryTypeForRowWithIndexPath:(NSIndexPath *)indexPath {
+//    return UITableViewCellAccessoryDisclosureIndicator;
+//}
 
 #pragma mark Table view delegate
 
@@ -427,9 +427,7 @@
         _curSelectIndexPath = indexPath;
         
         //保存选择项
-        if (tableView == self.searchDisplayController.searchResultsTableView) {
-            [self.searchDisplayController.searchResultsTableView deselectRowAtIndexPath:indexPath animated:YES];
-            
+        if (self.searchController.active) {
             City *city=[_filteredListContent objectAtIndex:indexPath.row];
             if (_selectCompletion) {
                 dispatch_async(dispatch_get_main_queue(), ^{
@@ -438,8 +436,6 @@
             }
         }
         else {
-            [tableView deselectRowAtIndexPath:indexPath animated:YES];
-            
             if (indexPath.section==0) {//GPS定位当前城市
                 if (_selectCompletion) {
                     dispatch_async(dispatch_get_main_queue(), ^{
@@ -448,7 +444,7 @@
                 }
             }
             else{
-                NSString * alphabet=[_alphabets objectAtIndex:indexPath.section-1];
+                NSString *alphabet=[_alphabets objectAtIndex:indexPath.section-1];
                 NSUInteger k = [kAlphabet indexOfObject:[alphabet uppercaseString]];
                 NSArray *tmp = (NSArray *)[_listContent objectAtIndex:k];
                 City *city = (City *)[tmp objectAtIndex:indexPath.row];
@@ -461,7 +457,7 @@
         }
         
     }
-    //[tableView deselectRowAtIndexPath:indexPath animated:YES];
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     [self.navigationController popViewControllerAnimated:YES];
 }
@@ -474,29 +470,36 @@
     return NO;
 }
 
-#pragma mark UISearchBarDelegate
+#pragma mark UISearchControllerDelegate
 
-- (void)searchBarTextDidBeginEditing:(UISearchBar *)_searchBar
-{
-    [self.searchDisplayController.searchBar setShowsCancelButton:YES];
+- (void)presentSearchController:(UISearchController *)searchController{
+    CLog(@"presentSearchController");
+}
+- (void)willPresentSearchController:(UISearchController *)searchController{
+    CLog(@"willPresentSearchController");
+}
+- (void)didPresentSearchController:(UISearchController *)searchController{
+    CLog(@"didPresentSearchController");
+}
+- (void)willDismissSearchController:(UISearchController *)searchController{
+    CLog(@"willDismissSearchController");
+}
+- (void)didDismissSearchController:(UISearchController *)searchController{
+    CLog(@"didDismissSearchController");
 }
 
-- (void)searchBarCancelButtonClicked:(UISearchBar *)_searchBar
-{
-    [self.searchDisplayController setActive:NO animated:YES];
-    [self.resultTable reloadData];
-}
+#pragma mark UISearchResultsUpdating
 
-- (void)searchBarSearchButtonClicked:(UISearchBar *)_searchBar
-{
-    //	[self.searchDisplayController setActive:NO animated:YES];
-    //	[self.searchDisplayController.searchResultsTableView reloadData];
-}
-
-#pragma mark ContentFiltering
-
-- (void)filterContentForSearchText:(NSString*)searchText scope:(NSString*)scope
-{
+-(void)updateSearchResultsForSearchController:(UISearchController *)searchController{
+    //修改取消按钮的颜色和文字
+    [_searchController.searchBar setShowsCancelButton:YES animated:NO];
+    UIButton *cancelBtn = [_searchController.searchBar valueForKey:@"cancelButton"];
+    if (cancelBtn) {
+        //[cancelBtn setTitle:@"取消" forState:UIControlStateNormal];
+        [cancelBtn setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+    }
+    
+    NSString *searchText = _searchController.searchBar.text;
     [_filteredListContent removeAllObjects];
     for (NSArray *section in _listContent) {
         for (City *city in section)
@@ -504,7 +507,7 @@
 //            NSComparisonResult result = [city.cityname compare:searchText options:(NSCaseInsensitiveSearch|NSDiacriticInsensitiveSearch) range:NSMakeRange(0, [searchText length])];
 //            if (result == NSOrderedSame)
 //            {
-//                [_filteredListContent addObject:user];
+//                [_filteredListContent addObject:city];
 //            }
             if (searchText && searchText.length>0) {
                 NSString *searchKey=[NSString stringWithFormat:@"%@,%@,%@",city.pinyin_second,city.pinyin_full,city.cityname];
@@ -515,55 +518,7 @@
             }
         }
     }
-}
-
-#pragma mark UISearchDisplayDelegate
-
--(void)searchDisplayControllerWillBeginSearch:(UISearchDisplayController *)controller {
-    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0) {
-        [UIView animateWithDuration:0.25 animations:^{
-            for (UIView *subview in self.view.subviews)
-                subview.transform = CGAffineTransformMakeTranslation(0,([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)?-44:-88);
-        }];
-    }
-}
-
--(void)searchDisplayControllerWillEndSearch:(UISearchDisplayController *)controller {
-    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0) {
-        [UIView animateWithDuration:0.25 animations:^{
-            for (UIView *subview in self.view.subviews)
-                subview.transform = CGAffineTransformIdentity;
-        }];
-    }
-}
-
--(void)searchDisplayController:(UISearchDisplayController *)controller didShowSearchResultsTableView:(UITableView *)tableView {
-    self.searchDisplayController.searchResultsTableView.separatorStyle=UITableViewCellSeparatorStyleSingleLine;
-    self.searchDisplayController.searchResultsTableView.separatorColor=MKRGBA(204,204,204,255);
-    self.searchDisplayController.searchResultsTableView.backgroundColor=MKRGBA(246,246,248,255);
-    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0) {
-        //self.searchDisplayController.searchResultsTableView.separatorInset=UIEdgeInsetsMake(0, 63, 0, 0);
-        //键盘
-//        UIEdgeInsets insets = UIEdgeInsetsMake(0, 0, 216, 0);
-//        self.searchDisplayController.searchResultsTableView.contentInset = insets;
-//        self.searchDisplayController.searchResultsTableView.scrollIndicatorInsets = insets;
-    }
-}
-
-- (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString
-{
-    [self filterContentForSearchText:searchString scope:
-     [[self.searchDisplayController.searchBar scopeButtonTitles] objectAtIndex:[self.searchDisplayController.searchBar selectedScopeButtonIndex]]];
-    
-    return YES;
-}
-
-- (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchScope:(NSInteger)searchOption
-{
-    [self filterContentForSearchText:[self.searchDisplayController.searchBar text] scope:
-     [[self.searchDisplayController.searchBar scopeButtonTitles] objectAtIndex:searchOption]];
-    
-    return YES;
+    [self.resultTable reloadData];
 }
 
 @end

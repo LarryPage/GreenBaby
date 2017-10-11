@@ -28,7 +28,7 @@ typedef void (^MOBFImageServiceFailHandler) (NSError *error) __deprecated;
 /**
  *  图片加载中事件
  */
-typedef void (^MOBFImageServiceLoadingHandler) () __deprecated;
+typedef void (^MOBFImageServiceLoadingHandler) (void) __deprecated;
 
 /**
  *  图片加载返回

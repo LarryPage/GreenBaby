@@ -6231,8 +6231,9 @@ static char pinyinFirstLetter(unsigned short hanzi)
 }
 
 - (NSData *)base64Data {
-	Byte inputData[[self lengthOfBytesUsingEncoding:NSUTF8StringEncoding]];//prepare a Byte[]
-	[[self dataUsingEncoding:NSUTF8StringEncoding] getBytes:inputData];//get the pointer of the data
+    NSUInteger len = [self lengthOfBytesUsingEncoding:NSUTF8StringEncoding];
+	Byte inputData[len];//prepare a Byte[]
+	[[self dataUsingEncoding:NSUTF8StringEncoding] getBytes:inputData length:len];//get the pointer of the data
 	size_t inputDataSize = (size_t)[self length];
 	size_t outputDataSize = MeEstimateBas64DecodedDataSize(inputDataSize);//calculate the decoded data size
 	Byte outputData[outputDataSize];//prepare a Byte[] for the decoded data

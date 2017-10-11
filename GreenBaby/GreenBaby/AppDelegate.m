@@ -59,21 +59,12 @@
 }
 
 - (void)registerAPNS{
-    if ([[UIDevice currentDevice].systemVersion floatValue] >= 8.0) {
-        UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeBadge
-                                                                                             |UIUserNotificationTypeSound
-                                                                                             |UIUserNotificationTypeAlert) categories:nil];
-        [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
-        if (![[UIApplication sharedApplication] isRegisteredForRemoteNotifications]) {
-            [[NSNotificationCenter defaultCenter] postNotificationName:PushRegistNotification object:nil];
-        }
-    }
-    else{
-        UIRemoteNotificationType myTypes = UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeSound;
-        [[UIApplication sharedApplication] registerForRemoteNotificationTypes:myTypes];
-        if ([[UIApplication sharedApplication] enabledRemoteNotificationTypes]==UIRemoteNotificationTypeNone) {
-            [[NSNotificationCenter defaultCenter] postNotificationName:PushRegistNotification object:nil];
-        }
+    UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeBadge
+                                                                                         |UIUserNotificationTypeSound
+                                                                                         |UIUserNotificationTypeAlert) categories:nil];
+    [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
+    if (![[UIApplication sharedApplication] isRegisteredForRemoteNotifications]) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:PushRegistNotification object:nil];
     }
 }
 
@@ -583,7 +574,14 @@ void UncaughtExceptionHandler(NSException *exception){
     [application registerForRemoteNotifications];
 }
 
-- (void)application:(UIApplication *)application handleActionWithIdentifier:(NSString *)identifier forRemoteNotification:(NSDictionary *)userInfo completionHandler:(void(^)())completionHandler{
+- (void)application:(UIApplication *)application
+handleActionWithIdentifier:(NSString *)identifier
+forLocalNotification:(UILocalNotification *)notification
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wstrict-prototypes"
+  completionHandler:(void (^)())completionHandler
+#pragma clang diagnostic pop
+{
     //handle the actions
     if ([identifier isEqualToString:@"declineAction"]){
     }

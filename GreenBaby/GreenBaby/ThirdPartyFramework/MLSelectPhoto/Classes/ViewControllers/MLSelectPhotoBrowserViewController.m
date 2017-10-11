@@ -202,7 +202,7 @@ static NSString *_cellIdentifier = @"collectionViewCell";
     navBar.barStyle = UIBarStyleBlackTranslucent;
     if ([[UINavigationBar class] respondsToSelector:@selector(appearance)]) {
         [navBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
-        [navBar setBackgroundImage:nil forBarMetrics:UIBarMetricsLandscapePhone];
+        [navBar setBackgroundImage:nil forBarMetrics:UIBarMetricsCompact];
     }
 }
 
@@ -234,7 +234,7 @@ static NSString *_cellIdentifier = @"collectionViewCell";
     toorBar.tintColor=[UIColor whiteColor];
     if ([[UIToolbar class] respondsToSelector:@selector(appearance)]) {
         [toorBar setBackgroundImage:nil forToolbarPosition:UIToolbarPositionAny barMetrics:UIBarMetricsDefault];
-        [toorBar setBackgroundImage:nil forToolbarPosition:UIToolbarPositionAny barMetrics:UIBarMetricsLandscapePhone];
+        [toorBar setBackgroundImage:nil forToolbarPosition:UIToolbarPositionAny barMetrics:UIBarMetricsCompact];
     }
     toorBar.barStyle = UIBarStyleBlackTranslucent;
     toorBar.translatesAutoresizingMaskIntoConstraints = NO;

@@ -3,7 +3,7 @@
 #import <UIKit/UIKit.h>
 
 typedef void (^DismissBlock)(NSInteger buttonIndex);
-typedef void (^CancelBlock)();
+typedef void (^CancelBlock)(void);
 
 @interface UIAlertView (Helper)
 /*

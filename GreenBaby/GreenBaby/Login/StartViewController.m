@@ -7,6 +7,7 @@
 //
 
 #import "StartViewController.h"
+#import "CitySelectViewController.h"
 
 @interface StartViewController ()
 
@@ -29,6 +30,16 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)back {
+    CitySelectViewController *vc=[[CitySelectViewController alloc] init];
+    vc.curSelectId=@"123";
+    WEAKSELF
+    vc.selectCompletion=^(NSString *selectId){
+        [weakSelf showHudInView:self.view hint:@"请稍等..."];
+    };
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 @end

@@ -52,16 +52,14 @@
 
 - (void)setBackBtnWithModal:(BOOL)isModal{
     if (isModal) {
-        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"BarBackBtnUnClicked.png"] style:UIBarButtonItemStyleBordered target:self action:@selector(dismissViewController)];
+        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"BarBackBtnUnClicked.png"] style:UIBarButtonItemStylePlain target:self action:@selector(dismissViewController)];
 	} else {
-		self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"BarBackBtnUnClicked.png"] style:UIBarButtonItemStyleBordered target:self action:@selector(popViewController)];
+		self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"BarBackBtnUnClicked.png"] style:UIBarButtonItemStylePlain target:self action:@selector(popViewController)];
 	}
 }
 
 #pragma mark BtnClicked
 - (void)dismissViewController{
-    //modify by lxc
-    //[self dismissModalViewControllerAnimated:YES];
     [self dismissViewControllerAnimated:YES completion:nil];//6.0
 }
 

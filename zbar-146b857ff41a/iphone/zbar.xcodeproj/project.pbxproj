@@ -121,6 +121,7 @@
 		DCDC6E3011ADCA8E00021380 /* ZBarReaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = DCDC6E2F11ADCA8E00021380 /* ZBarReaderView.m */; };
 		DCE9900D129719F100D2655C /* code93.c in Sources */ = {isa = PBXBuildFile; fileRef = DCE9900B129719F100D2655C /* code93.c */; };
 		DCF5C9AD11EA3AD100E7DC21 /* databar.c in Sources */ = {isa = PBXBuildFile; fileRef = DCF5C9AB11EA3AD100E7DC21 /* databar.c */; };
+		EFE9EEF31F7F2E200020715D /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EFE9EEF21F7F2E200020715D /* Default-568h@2x.png */; };
 		EFEC058E1BFB2BC3001FE54E /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = EFEC058D1BFB2BC3001FE54E /* libiconv.tbd */; };
 /* End PBXBuildFile section */
 
@@ -339,6 +340,7 @@
 		DCE9900C129719F100D2655C /* code93.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = code93.h; sourceTree = "<group>"; };
 		DCF5C9AB11EA3AD100E7DC21 /* databar.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = databar.c; sourceTree = "<group>"; };
 		DCF5C9AC11EA3AD100E7DC21 /* databar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = databar.h; sourceTree = "<group>"; };
+		EFE9EEF21F7F2E200020715D /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		EFEC058D1BFB2BC3001FE54E /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = usr/lib/libiconv.tbd; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -375,6 +377,7 @@
 		0867D691FE84028FC02AAC07 /* zbar */ = {
 			isa = PBXGroup;
 			children = (
+				EFE9EEF21F7F2E200020715D /* Default-568h@2x.png */,
 				DC50467B12034D60009FF359 /* README */,
 				DC3CF141121721A100D7A786 /* ChangeLog */,
 				DC50467C12034D71009FF359 /* COPYING */,
@@ -617,6 +620,7 @@
 		0867D690FE84028FC02AAC07 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastUpgradeCheck = 0900;
 			};
 			buildConfigurationList = 1DEB922208733DC00010E9CD /* Build configuration list for PBXProject "zbar" */;
 			compatibilityVersion = "Xcode 3.1";
@@ -649,6 +653,7 @@
 				DC299AA51208B63C006A023C /* zbar-help.html in Resources */,
 				DC299AA61208B63C006A023C /* zbar-helpicons.png in Resources */,
 				DC299AA71208B63C006A023C /* zbar-samples.png in Resources */,
+				EFE9EEF31F7F2E200020715D /* Default-568h@2x.png in Resources */,
 				DC48C5341219FDDE0047193B /* zbar-back.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -778,7 +783,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD)";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
@@ -791,7 +795,7 @@
 					../include,
 					../zbar,
 				);
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = zbar;
 				SKIP_INSTALL = YES;
@@ -802,7 +806,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD)";
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = include/prefix.pch;
@@ -811,7 +814,7 @@
 					../include,
 					../zbar,
 				);
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = zbar;
 				SKIP_INSTALL = YES;
@@ -821,8 +824,25 @@
 		1DEB922308733DC00010E9CD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD)";
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				EXCLUDED_SOURCE_FILE_NAMES = "";
 				"EXCLUDED_SOURCE_FILE_NAMES[sdk=iphoneos*][arch=*]" = ZBarReaderViewImpl_Simulator.m;
 				"EXCLUDED_SOURCE_FILE_NAMES[sdk=iphonesimulator*][arch=*]" = (
@@ -830,11 +850,17 @@
 					ZBarCaptureReader.m,
 				);
 				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = "DEBUG_OBJC=1";
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "-all_load";
 				PREBINDING = NO;
 				PROVISIONING_PROFILE = "";
@@ -847,8 +873,24 @@
 		1DEB922408733DC00010E9CD /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD)";
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				EXCLUDED_SOURCE_FILE_NAMES = "";
 				"EXCLUDED_SOURCE_FILE_NAMES[sdk=iphoneos*][arch=*]" = ZBarReaderViewImpl_Simulator.m;
 				"EXCLUDED_SOURCE_FILE_NAMES[sdk=iphonesimulator*][arch=*]" = (
@@ -856,10 +898,15 @@
 					ZBarCaptureReader.m,
 				);
 				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = "NDEBUG=1";
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				OTHER_LDFLAGS = "-all_load";
 				PREBINDING = NO;
 				PROVISIONING_PROFILE = "";
@@ -902,8 +949,9 @@
 				);
 				INFOPLIST_FILE = examples/readertest/readertest.plist;
 				INSTALL_PATH = "$(HOME)/Applications";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PREBINDING = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = net.sourceforge.zbar.test.readertest;
 				PRODUCT_NAME = readertest;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -924,8 +972,9 @@
 				);
 				INFOPLIST_FILE = examples/readertest/readertest.plist;
 				INSTALL_PATH = "$(HOME)/Applications";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PREBINDING = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = net.sourceforge.zbar.test.readertest;
 				PRODUCT_NAME = readertest;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				ZERO_LINK = NO;
@@ -935,8 +984,24 @@
 		DC3748D71357BC69004E69D6 /* Distribution */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD)";
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				EXCLUDED_SOURCE_FILE_NAMES = "";
 				"EXCLUDED_SOURCE_FILE_NAMES[sdk=iphoneos*][arch=*]" = ZBarReaderViewImpl_Simulator.m;
 				"EXCLUDED_SOURCE_FILE_NAMES[sdk=iphonesimulator*][arch=*]" = (
@@ -944,10 +1009,15 @@
 					ZBarCaptureReader.m,
 				);
 				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = "NDEBUG=1";
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				OTHER_LDFLAGS = "-all_load";
 				PREBINDING = NO;
 				PROVISIONING_PROFILE = "";
@@ -961,7 +1031,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD)";
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = include/prefix.pch;
@@ -970,7 +1039,7 @@
 					../include,
 					../zbar,
 				);
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = zbar;
 				SKIP_INSTALL = YES;
@@ -1013,8 +1082,9 @@
 				);
 				INFOPLIST_FILE = examples/readertest/readertest.plist;
 				INSTALL_PATH = "$(HOME)/Applications";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PREBINDING = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = net.sourceforge.zbar.test.readertest;
 				PRODUCT_NAME = readertest;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				ZERO_LINK = NO;

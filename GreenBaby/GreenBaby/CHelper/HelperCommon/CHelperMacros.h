@@ -13,10 +13,11 @@
 #define SCREEN_MIN_LENGTH (MIN(SCREEN_WIDTH, SCREEN_HEIGHT))
 
 //http://magicalboy.com/wp-content/uploads/2014/12/iPhone_6_and_6P_screen_size.png
-#define IS_IPHONE_4_OR_LESS (SCREEN_MAX_LENGTH < 568.0)//640, 960
-#define IS_IPHONE_5 (SCREEN_MAX_LENGTH == 568.0)//640, 1136
-#define IS_IPHONE_6_7 (SCREEN_MAX_LENGTH == 667.0)//750, 1334 缩放模式：640X1136
-#define IS_IPHONE_6P_7P (SCREEN_MAX_LENGTH == 736.0)//标准模式：1242, 2208 缩放模式：1125X2001
+#define IS_IPHONE_4_OR_LESS (SCREEN_MAX_LENGTH < 568.0)//960*640 @2x
+#define IS_IPHONE_5 (SCREEN_MAX_LENGTH == 568.0)//1136*640 iphone5Series @2x
+#define IS_IPHONE_6_7_8 (SCREEN_MAX_LENGTH == 667.0)//1334*750 缩放模式:1136*640 @2x
+#define IS_IPHONE_6P_6SP_7P_8P (SCREEN_MAX_LENGTH == 736.0)//标准模式:2208*1242  缩放模式:2001*1125 @3x
+#define IS_IPHONE_X (SCREEN_MAX_LENGTH == 812.0)//标准模式:2436*1125 @3x
 
 #define KUIScreeHeight [UIScreen mainScreen].bounds.size.height
 #define KUIScreeWidth  [UIScreen mainScreen].bounds.size.width

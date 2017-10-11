@@ -35,6 +35,8 @@
 + (BOOL)isOS7;
 + (BOOL)isOS8;
 + (BOOL)isOS9;
++ (BOOL)isOS10;
++ (BOOL)isOS11;
 
 + (BOOL)isIPad ;// 是否是IPAD
 + (BOOL)isGestureSupported ;// 是否支持手势

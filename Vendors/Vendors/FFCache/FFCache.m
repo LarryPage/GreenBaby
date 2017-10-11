@@ -245,12 +245,12 @@ static FFCache* __instance;
 #pragma mark Property List methods
 
 - (NSData*)plistForKey:(NSString*)key; {  
-	NSData* plistData = [self dataForKey:key];
-	
-	return [NSPropertyListSerialization propertyListFromData:plistData
-											mutabilityOption:NSPropertyListImmutable
-													  format:nil
-											errorDescription:nil];
+    NSData* plistData = [self dataForKey:key];
+    
+    return [NSPropertyListSerialization propertyListWithData:plistData
+                                                     options:NSPropertyListImmutable
+                                                      format:NULL
+                                                       error:nil];
 }
 
 - (void)setPlist:(id)plistObject forKey:(NSString*)key; {
@@ -258,12 +258,13 @@ static FFCache* __instance;
 }
 
 - (void)setPlist:(id)plistObject forKey:(NSString*)key withTimeoutInterval:(NSTimeInterval)timeoutInterval; {
-	// Binary plists are used over XML for better performance
-	NSData* plistData = [NSPropertyListSerialization dataFromPropertyList:plistObject 
-																   format:NSPropertyListBinaryFormat_v1_0
-														 errorDescription:NULL];
-	
-	[self setData:plistData forKey:key withTimeoutInterval:timeoutInterval];
+    // Binary plists are used over XML for better performance
+    NSData* plistData = [NSPropertyListSerialization dataWithPropertyList:plistObject
+                                                                   format:NSPropertyListBinaryFormat_v1_0
+                                                                  options:0
+                                                                    error:nil];
+    
+    [self setData:plistData forKey:key withTimeoutInterval:timeoutInterval];
 }
 
 #pragma mark -

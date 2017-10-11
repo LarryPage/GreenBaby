@@ -78,24 +78,19 @@
 - (void) drawRect:(CGRect)rect{
 	[[UIColor colorWithWhite:0 alpha:0.8] set];
 	[self _drawRoundRectangleInRect:rect withRadius:10];
-	[[UIColor whiteColor] set];
+    //modify by lxc for ios7
+//    [[UIColor whiteColor] set];
 //    [_text drawInRect:_messageRect
 //             withFont:[UIFont boldSystemFontOfSize:14]
 //        lineBreakMode:NSLineBreakByWordWrapping
 //            alignment:NSTextAlignmentCenter];
-    //modify by lxc for ios4-7
-    if ([[UIDevice currentDevice].systemVersion floatValue] >= 6.0) {
-        [_text drawInRect:_messageRect
-                 withFont:[UIFont boldSystemFontOfSize:14]
-            lineBreakMode:NSLineBreakByWordWrapping
-                alignment:NSTextAlignmentCenter];
-    }
-    else{
-        [_text drawInRect:_messageRect
-                 withFont:[UIFont boldSystemFontOfSize:14]
-            lineBreakMode:NSLineBreakByWordWrapping
-                alignment:NSTextAlignmentCenter];
-    }
+    NSMutableParagraphStyle* paragraphStyle = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
+    paragraphStyle.lineBreakMode = NSLineBreakByWordWrapping;
+    paragraphStyle.alignment = NSTextAlignmentCenter;
+    [_text drawInRect:_messageRect
+       withAttributes:@{NSFontAttributeName:[UIFont boldSystemFontOfSize:14],
+                        NSForegroundColorAttributeName:[UIColor whiteColor],
+                        NSParagraphStyleAttributeName:paragraphStyle}];
 	
 	CGRect r = CGRectZero;
 	r.origin.y = 15;
@@ -108,7 +103,6 @@
 #pragma mark Setter Methods
 - (void) adjust{
 	//modify by lxc for ios7
-    //CGSize s = [_text sizeWithFont:[UIFont boldSystemFontOfSize:14] constrainedToSize:CGSizeMake(160,200) lineBreakMode:UILineBreakModeWordWrap];
     CGSize s;
     if ([[UIDevice currentDevice].systemVersion floatValue] >= 7.0) {
         // code here for iOS 7.0
@@ -117,8 +111,11 @@
         s=CGSizeMake(ceilf(labelRect.size.width), ceilf(labelRect.size.height));
     }
     else {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
         // code here for iOS 5.0,6.0 and so on
         s=[_text sizeWithFont:[UIFont boldSystemFontOfSize:14] constrainedToSize:CGSizeMake(160,200) lineBreakMode:NSLineBreakByWordWrapping];
+#pragma clang diagnostic pop
     }
 	
 	float imageAdjustment = 0;

@@ -163,7 +163,7 @@
     [formatter setTimeStyle:NSDateFormatterNoStyle];
 	
     // Initialize the calendar and flags.
-    unsigned unitFlags = NSYearCalendarUnit | NSMonthCalendarUnit |  NSDayCalendarUnit | NSWeekdayCalendarUnit;
+    unsigned unitFlags = NSCalendarUnitYear | NSCalendarUnitMonth |  NSCalendarUnitDay | NSCalendarUnitWeekday;
     NSCalendar* calendar = [NSCalendar currentCalendar];
 	
     // Create reference date for supplied date.
