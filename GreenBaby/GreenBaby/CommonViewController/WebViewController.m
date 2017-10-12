@@ -360,8 +360,7 @@
         }
         else
         {
-            UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:@"Can not get current selected element" message:nil delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-            [alertView show];
+            [UIAlertController alert:nil title:@"Can not get current selected element" bTitle:@"确定"];
         }
     }];
 }

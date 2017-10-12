@@ -15,31 +15,41 @@
 	NSLog(@"base alert view");
 }
 
--(void)showAlertView:(NSString*)title msg:(NSString*)msg{
-	UIAlertView* av = [[UIAlertView alloc] initWithTitle:title message:msg delegate:nil cancelButtonTitle:nil otherButtonTitles:@"确认",nil];
-    av.delegate = self;
-	[av show];
+-(void)successAlertController{
+    [UIAlertController showWithTitle:@"成功"
+                             message:@"操作已成功!"
+                   cancelButtonTitle:nil
+                   defultButtonTitle:@"确认"
+              destructiveButtonTitle:nil
+                            onCancel:nil
+                            onDefult:nil
+                       onDestructive:nil];
 }
 
--(void)successAlertView{
-	UIAlertView* av = [[UIAlertView alloc] initWithTitle:@"成功" message:@"操作已成功!" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"确认",nil];
-	
-	//av.delegate = self;
-	av.tag = SUCCESSALERT_TAG;
-	[av show];
+-(void)showAlertController:(NSString*)title msg:(NSString*)msg{
+    [UIAlertController showWithTitle:title
+                             message:msg
+                   cancelButtonTitle:nil
+                   defultButtonTitle:@"确认"
+              destructiveButtonTitle:nil
+                            onCancel:nil
+                            onDefult:nil
+                       onDestructive:nil];
 }
 
--(void)queryAlertView:(NSString*)title msg:(NSString*)msg{
-	UIAlertView* av = [[UIAlertView alloc] initWithTitle:title message:msg delegate:nil cancelButtonTitle:NSLocalizedString(@"取消", nil) otherButtonTitles:NSLocalizedString(@"确定",nil),nil];
-	av.delegate = self;
-	[av show];
-}
-
--(void)queryAlertView:(NSString*)title msg:(NSString*)msg withTag:(NSInteger)tag{
-	UIAlertView* av = [[UIAlertView alloc] initWithTitle:title message:msg delegate:nil cancelButtonTitle:@"取消" otherButtonTitles:@"确定",nil];
-    av.tag = tag;
-	av.delegate = self;
-	[av show];
+-(void)queryAlertController:(NSString*)title msg:(NSString*)msg{
+    [UIAlertController showWithTitle:title
+                             message:msg
+                   cancelButtonTitle:NSLocalizedString(@"取消", nil)
+                   defultButtonTitle:NSLocalizedString(@"确定",nil)
+              destructiveButtonTitle:nil
+                            onCancel:^(UIAlertAction *action) {
+                                NSLog(@"base alert view");
+                            }
+                            onDefult:^(UIAlertAction *action) {
+                                NSLog(@"base alert view");
+                            }
+                       onDestructive:nil];
 }
 
 - (UIBarButtonItem *)backButtonWithTarget:(id)target action:(SEL)action {

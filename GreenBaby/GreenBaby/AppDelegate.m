@@ -319,9 +319,17 @@ void UncaughtExceptionHandler(NSException *exception){
                         NSInteger force_update=[dateDic[@"force_update"] integerValue];
                         
                         if ([kBuildVersion integerValue]<[version integerValue]) {
-                            UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"版本升级" message:description delegate:self cancelButtonTitle:force_update?nil:@"下次再说" otherButtonTitles:@"立即更新", nil];
-                            av.tag = 1;
-                            [av show];
+                            [UIAlertController showWithTitle:@"版本升级"
+                                                     message:description
+                                           cancelButtonTitle:force_update?nil:@"下次再说"
+                                           defultButtonTitle:@"立即更新"
+                                      destructiveButtonTitle:nil
+                                                    onCancel:^(UIAlertAction *action) {
+                                                    }
+                                                    onDefult:^(UIAlertAction *action) {
+                                                        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://itunes.apple.com/cn/app/ren-ren-lie-tou/id558470197?mt=8"]];
+                                                    }
+                                               onDestructive:nil];
                         }
                     }
                     else{
@@ -619,9 +627,9 @@ forLocalNotification:(UILocalNotification *)notification
         [self performSelector:@selector(handlePushPayload) withObject:nil afterDelay:0.0];
         
         //app运行中收到消息进行提示
-//        if (pushPayload) {
-//            NSDictionary *apsDic=[pushPayload valueForKey:@"aps"];
-//            [UIAlertView alert:[apsDic valueForKey:@"alert"] title:nil bTitle:@"确定"];
+//        if (_pushPayload) {
+//            NSDictionary *apsDic=[_pushPayload valueForKey:@"aps"];
+//            [UIAlertController alert:[apsDic valueForKey:@"alert"] title:nil bTitle:@"确定"];
 //        }
         
         //声音提示 1012 -iphone   1152 ipad  1109 ipad
@@ -833,9 +841,7 @@ forLocalNotification:(UILocalNotification *)notification
 
 - (void)notificationWasTapped:(NSNotification*)notification{
     LNNotification* tappedNotification = notification.object;
-    
-    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:tappedNotification.title message:tappedNotification.message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-    [alert show];
+    [UIAlertController alert:tappedNotification.message title:tappedNotification.title bTitle:@"确定"];
 }
 
 #pragma mark - WXApiDelegate
@@ -891,18 +897,6 @@ forLocalNotification:(UILocalNotification *)notification
         }
         //发出消息
         [[NSNotificationCenter defaultCenter] postNotificationName:KNOTIFICATION_WXPAY object:@(pay_status) userInfo:nil];
-    }
-}
-
-#pragma mark UIAlertViewDelegate
-
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
-    if (alertView.tag == 1) {// 下载更新
-        if (buttonIndex == alertView.cancelButtonIndex) {//取消
-        }
-        else{
-            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://itunes.apple.com/cn/app/ren-ren-lie-tou/id558470197?mt=8"]];
-        }
     }
 }
 

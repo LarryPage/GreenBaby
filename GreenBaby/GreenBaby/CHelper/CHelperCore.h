@@ -34,7 +34,7 @@
 #import "UIWindowHelper.h"
 #import "UIResponderHelper.h"
 #import "UIDeviceHelper.h"
-#import "UIAlertViewHelper.h"
+#import "UIAlertControllerHelper.h"
 #import "UIImageHelper.h"
 #import "UIColorHelper.h"
 #import "UITableViewControllerHelper.h"

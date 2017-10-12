@@ -528,8 +528,7 @@
         }
         
         if (tmp.length>140) {
-            UIAlertView* av = [[UIAlertView alloc] initWithTitle:@"提示" message:@"最多140个字以内!" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"确认",nil];
-            [av show];
+            [UIAlertController alert:@"最多140个字以内!" title:@"提示" bTitle:@"确定"];
         }
         else{
             [self showHudInView:self.view hint:@"请稍等..."];//显示

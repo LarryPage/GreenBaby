@@ -8,7 +8,7 @@
 
 #import "LocationManager.h"
 
-@interface LocationManager ()<CLLocationManagerDelegate,UIAlertViewDelegate>{
+@interface LocationManager ()<CLLocationManagerDelegate>{
     CLLocationManager *_locationManager;
     
     //CLGeocoder可正反解析，ios5以上
@@ -201,10 +201,24 @@ SINGLETON_IMP(LocationManager)
         
         if ([CLLocationManager authorizationStatus]==kCLAuthorizationStatusDenied) {
             float fSystemVersion = [[[UIDevice currentDevice] systemVersion] floatValue];
-//            [[TKAlertCenter defaultCenter] postAlertWithMessage:[NSString stringWithFormat:fSystemVersion >= 6.0f?@"%@需要打开定位服务，请在[设置->隐私->定位服务]里开启":@"%@需要打开定位服务，请在[设置->定位服务]里开启",kProductName]];
+            //            [[TKAlertCenter defaultCenter] postAlertWithMessage:[NSString stringWithFormat:fSystemVersion >= 6.0f?@"%@需要打开定位服务，请在[设置->隐私->定位服务]里开启":@"%@需要打开定位服务，请在[设置->定位服务]里开启",kProductName]];
             
-            UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"提示" message:[NSString stringWithFormat:fSystemVersion >= 6.0f?@"%@需要打开定位服务，请在[设置->隐私->定位服务]里开启":@"%@需要打开定位服务，请在[设置->定位服务]里开启",kProductName] delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确认", nil];
-            [av show];
+            [UIAlertController showWithTitle:@"提示"
+                                     message:[NSString stringWithFormat:fSystemVersion >= 6.0f?@"%@需要打开定位服务，请在[设置->隐私->定位服务]里开启":@"%@需要打开定位服务，请在[设置->定位服务]里开启",kProductName]
+                           cancelButtonTitle:@"取消"
+                           defultButtonTitle:@"确认"
+                      destructiveButtonTitle:nil
+                                    onCancel:^(UIAlertAction *action) {
+                                    }
+                                    onDefult:^(UIAlertAction *action) {
+                                        if ([[[UIDevice currentDevice] systemVersion] floatValue]>=8.0) {
+                                            [[UIApplication sharedApplication] openURL:[NSURL URLWithString: UIApplicationOpenSettingsURLString]];//如果点击打开的话，需要记录当前的状态，从设置回到应用的时候会用到
+                                        }
+                                        else{
+                                            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"prefs:root=WIFI"]];
+                                        }
+                                    }
+                               onDestructive:nil];
         }
 	}
 	
@@ -243,21 +257,6 @@ SINGLETON_IMP(LocationManager)
     [NSObject cancelPreviousPerformRequestsWithTarget:self];
     _placemark = nil;
     [self startGeoCoder];
-}
-
-#pragma mark UIAlertViewDelegate
-
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
-    if (buttonIndex == alertView.cancelButtonIndex) {//取消
-    }
-    else{
-        if ([[[UIDevice currentDevice] systemVersion] floatValue]>=8.0) {
-            [[UIApplication sharedApplication] openURL:[NSURL URLWithString: UIApplicationOpenSettingsURLString]];//如果点击打开的话，需要记录当前的状态，从设置回到应用的时候会用到
-        }
-        else{
-            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"prefs:root=WIFI"]];
-        }
-    }
 }
 
 @end

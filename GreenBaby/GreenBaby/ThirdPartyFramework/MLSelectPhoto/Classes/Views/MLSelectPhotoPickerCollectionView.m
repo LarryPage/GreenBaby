@@ -164,8 +164,7 @@
             if (maxCount == 0) {
                 format = [NSString stringWithFormat:@"您已经选满了图片呦."];
             }
-            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提醒" message:format delegate:self cancelButtonTitle:nil otherButtonTitles:@"好的", nil];
-            [alertView show];
+            [UIAlertController alert:format title:@"提醒" bTitle:@"好的"];
             return ;
         }
         

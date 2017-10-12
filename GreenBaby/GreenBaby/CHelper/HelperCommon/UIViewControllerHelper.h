@@ -9,15 +9,11 @@
 #import <Foundation/Foundation.h>
 #import <QuartzCore/QuartzCore.h>
 
-#define TEXTFIELDCELLTAG 0x10
-#define SUCCESSALERT_TAG 0x20
+@interface UIViewController(Helper)
 
-@interface UIViewController(Helper) <UIAlertViewDelegate>
-
-- (void)successAlertView;
-- (void)showAlertView:(NSString*)title msg:(NSString*)msg;
-- (void)queryAlertView:(NSString*)title msg:(NSString*)msg;
-- (void)queryAlertView:(NSString*)title msg:(NSString*)msg withTag:(NSInteger)tag;
+- (void)successAlertController;
+- (void)showAlertController:(NSString*)title msg:(NSString*)msg;
+- (void)queryAlertController:(NSString*)title msg:(NSString*)msg;
 
 - (void)setBackBtnWithModal:(BOOL)isModal;
 - (UIBarButtonItem *)backButtonWithTarget:(id)target action:(SEL)action;

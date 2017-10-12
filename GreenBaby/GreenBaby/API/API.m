@@ -351,14 +351,16 @@ void parseResponse(NSURLSessionDataTask *task,NSError *error,id response,NSStrin
                     completionBlock(nil, [NSDictionary safeDictionaryFromObject:response[@"data"]]);
                 }
                 else if (code == 1212) {  //此版本放弃使用，请升级到最新版本
-                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示"
-                                                                    message:[NSString safeStringFromObject:response[@"message"]]
-                                                                   delegate:nil
-                                                          cancelButtonTitle:nil
-                                                          otherButtonTitles:@"确定",nil];
-                    alert.tag=1;
-                    alert.delegate=[AppDelegate sharedAppDelegate];
-                    [alert show];
+                    [UIAlertController showWithTitle:@"提示"
+                                             message:[NSString safeStringFromObject:response[@"message"]]
+                                   cancelButtonTitle:nil
+                                   defultButtonTitle:NSLocalizedString(@"确定",nil)
+                              destructiveButtonTitle:nil
+                                            onCancel:nil
+                                            onDefult:^(UIAlertAction *action) {
+                                                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://itunes.apple.com/cn/app/ren-ren-lie-tou/id558470197?mt=8"]];
+                                            }
+                                       onDestructive:nil];
                 }
                 else{
                     NSError *error = [NSError errorWithDomain:[NSString safeStringFromObject:response[@"message"]]

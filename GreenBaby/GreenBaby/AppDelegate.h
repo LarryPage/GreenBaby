@@ -55,7 +55,7 @@
 
 #define PushRegistNotification      @"PushRegistNotification"//注册远程通知DeviceToken
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate,WXApiDelegate,UIAlertViewDelegate>
+@interface AppDelegate : UIResponder <UIApplicationDelegate,WXApiDelegate>
 
 @property (nonatomic, strong) UIWindow *window;
 @property (nonatomic, strong) NSMutableDictionary *pushPayload;// apple push notification payload

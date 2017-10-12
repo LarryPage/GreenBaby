@@ -57,7 +57,7 @@
 - (UIViewController*)topViewController {
     //return [self topViewControllerWithRootViewController:[UIApplication sharedApplication].keyWindow.rootViewController];
     
-    //避免UIAlertView没完全消失时
+    //避免UIAlertController没完全消失时
     UIWindow *window = [[UIApplication sharedApplication] keyWindow];
     if (window.windowLevel != UIWindowLevelNormal) {
         NSArray *windows = [[UIApplication sharedApplication] windows];

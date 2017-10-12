@@ -26,8 +26,6 @@ notification.date = [[NSDate date] dateByAddingTimeInterval:-60 * 60 * 24];
 
 - (void)notificationWasTapped:(NSNotification*)notification{
     LNNotification* tappedNotification = notification.object;
-    
-    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:tappedNotification.title message:tappedNotification.message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-    [alert show];
+    [UIAlertController alert:tappedNotification.message title:tappedNotification.title bTitle:@"确定"];
 }
 */

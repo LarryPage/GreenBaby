@@ -273,8 +273,7 @@ static NSString *_cellIdentifier = @"collectionViewCell";
     }else{
         if (self.doneAssets.count >= self.maxCount) {
             NSString *format = [NSString stringWithFormat:@"最多只能选择%zd张图片",self.maxCount];
-            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提醒" message:format delegate:self cancelButtonTitle:nil otherButtonTitles:@"好的", nil];
-            [alertView show];
+            [UIAlertController alert:format title:@"提醒" bTitle:@"好的"];
             return ;
         }
         

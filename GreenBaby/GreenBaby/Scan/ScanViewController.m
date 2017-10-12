@@ -8,7 +8,7 @@
 
 #import "ScanViewController.h"
 
-@interface ScanViewController ()<UIActionSheetDelegate,UIPopoverControllerDelegate,ZBarReaderViewDelegate,ZBarReaderDelegate,UIAlertViewDelegate>{
+@interface ScanViewController ()<UIActionSheetDelegate,UIPopoverControllerDelegate,ZBarReaderViewDelegate,ZBarReaderDelegate>{
     ZBarCameraSimulator *_cameraSim;
     
     BOOL _bCrossMoveIng;
@@ -288,42 +288,6 @@
     
 }
 
-#pragma mark UIAlertViewDelegate
-
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-    switch (alertView.tag) {
-        case 101:
-        {
-            [_readerView start];
-            if (!_bCrossMoveIng) {
-                _bCrossMoveIng=TRUE;
-                //展现扫描光标图循环移动的动画
-                [self showAnimateaCrossMove];
-            }
-            
-            if (buttonIndex == alertView.cancelButtonIndex) {
-            }
-            else{
-                //打开_scanCode
-                NSString *urlStr=[_scanCode stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding];
-                SVWebViewController *sv = [[SVWebViewController alloc] initWithURL:[NSURL URLWithString:urlStr]];
-                [sv setTitle:urlStr];
-                sv.hidesBottomBarWhenPushed=YES;
-                [self.navigationController pushViewController:sv animated:YES];
-            }
-            return;
-            break;
-        }
-        default:
-        {
-            if (buttonIndex == alertView.cancelButtonIndex) {
-                return;
-            }
-            break;
-        } 
-    }
-}
-
 #pragma mark UIActionSheetDelegate
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
@@ -367,10 +331,36 @@
             _bCrossMoveIng=FALSE;
             
             _scanCode=[[NSString alloc]initWithString:_scanCode];
-            UIAlertView* av = [[UIAlertView alloc] initWithTitle:@"提示" message:@"你扫描的二维码为外部链接，是否继续访问？" delegate:nil cancelButtonTitle:NSLocalizedString(@"取消",nil) otherButtonTitles:NSLocalizedString(@"确定",nil),nil];
-            av.delegate = self;
-            av.tag=101;
-            [av show];
+            
+            [UIAlertController showWithTitle:@"提示"
+                                     message:@"你扫描的二维码为外部链接，是否继续访问？"
+                           cancelButtonTitle:NSLocalizedString(@"取消", nil)
+                           defultButtonTitle:NSLocalizedString(@"确定",nil)
+                      destructiveButtonTitle:nil
+                                    onCancel:^(UIAlertAction *action) {
+                                        [_readerView start];
+                                        if (!_bCrossMoveIng) {
+                                            _bCrossMoveIng=TRUE;
+                                            //展现扫描光标图循环移动的动画
+                                            [self showAnimateaCrossMove];
+                                        }
+                                    }
+                                    onDefult:^(UIAlertAction *action) {
+                                        [_readerView start];
+                                        if (!_bCrossMoveIng) {
+                                            _bCrossMoveIng=TRUE;
+                                            //展现扫描光标图循环移动的动画
+                                            [self showAnimateaCrossMove];
+                                        }
+                                        
+                                        //打开_scanCode
+                                        NSString *urlStr=[_scanCode stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding];
+                                        SVWebViewController *sv = [[SVWebViewController alloc] initWithURL:[NSURL URLWithString:urlStr]];
+                                        [sv setTitle:urlStr];
+                                        sv.hidesBottomBarWhenPushed=YES;
+                                        [self.navigationController pushViewController:sv animated:YES];
+                                    }
+                               onDestructive:nil];
         }
         break;
     }

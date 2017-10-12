@@ -442,8 +442,7 @@
 #pragma mark MLEmojiLabelDelegate
 
 - (void)DisplayAlertWithTitle:(NSString *)title message:(NSString *)message{
-    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-    [alert show];
+    [UIAlertController alert:message title:title bTitle:@"确定"];
 }
 
 - (void)mlEmojiLabel:(MLEmojiLabel*)emojiLabel didSelectLink:(NSString*)link withType:(MLEmojiLabelLinkType)type{
@@ -596,13 +595,7 @@
     }
     
     if (result == MFMailComposeResultSent || result == MFMailComposeResultFailed) {
-        UIAlertView *errorAlert = [[UIAlertView alloc]
-                                   initWithTitle: @"提示"
-                                   message: resultStr
-                                   delegate:nil
-                                   cancelButtonTitle:@"确定"
-                                   otherButtonTitles:nil];
-        [errorAlert show];
+        [UIAlertController alert:resultStr title:@"提示" bTitle:@"确定"];
     }
     
     [controller dismissViewControllerAnimated:YES completion:nil];//6.0

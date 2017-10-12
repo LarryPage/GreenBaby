@@ -132,14 +132,14 @@
 - (void)downloadProcessStart
 {
 	if (_fileURL == nil) {
-		[UIAlertView alert:NSLocalizedString(@"url不存在",nil) title:nil bTitle:nil];
+        [UIAlertController alert:NSLocalizedString(@"url不存在",nil) title:nil bTitle:nil];
 		return;
 	}
 	
     //检测网络状态
     Reachability *r =[Reachability reachabilityWithHostName:[_fileURL host]];
     if ([r currentReachabilityStatus] == NotReachable) {
-        [UIAlertView alert:NSLocalizedString(@"Cannot connect to Download Server",nil) title:nil bTitle:nil];
+        [UIAlertController alert:NSLocalizedString(@"Cannot connect to Download Server",nil) title:nil bTitle:nil];
         return ;
     }
 	
@@ -177,7 +177,7 @@
 		[[NSFileManager defaultManager] removeItemAtPath:_filePath error:&error];
 	}
     
-	[UIAlertView alert:NSLocalizedString(@"下载取消",nil) title:nil bTitle:nil];
+    [UIAlertController alert:NSLocalizedString(@"下载取消",nil) title:nil bTitle:nil];
 }
 
 -(void)writeToFile:(NSData *)data{
@@ -271,7 +271,7 @@
 #else
     [self.progressAlertView dismissWithClickedButtonIndex:0 animated:YES];
 #endif
-	[UIAlertView alert:NSLocalizedString(@"下载失败",nil) title:nil bTitle:nil];
+    [UIAlertController alert:NSLocalizedString(@"下载失败",nil) title:nil bTitle:nil];
 }
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection
