@@ -1,5 +1,5 @@
 //
-//  MessageDetail.h
+//  MessageModel.h
 //  EHome
 //
 //  Created by LiXiangCheng on 15/3/30.
@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 
 //消息内容
-@JSONInterface(MessageDetail) : NSObject
+@JSONInterface(MessageModel) : NSObject
 
 @property (nonatomic, assign) NSInteger msgid;//消息内容Id,主键值唯一
 @property (nonatomic, strong) NSString *time;//"2015-03-25 15:32:20"

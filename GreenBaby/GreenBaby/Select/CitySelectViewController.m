@@ -14,7 +14,7 @@
     NSMutableArray *_cityList;
     NSMutableArray *_alphabets;//["A"]
     NSMutableArray *_listContent;//list <NSMutableArray>
-    NSMutableArray *_filteredListContent;//["City"]
+    NSMutableArray *_filteredListContent;//["CityModel"]
 }
 @property (nonatomic, assign) NSInteger gpsCityID;
 @property (nonatomic, strong) NSString *gpsCityName;
@@ -34,7 +34,7 @@
         // Custom initialization
         _curSelectIndexPath=[NSIndexPath indexPathForRow:0 inSection:0];
         
-        _cityList=[City loadHistory];
+        _cityList=[CityModel loadHistory];
         _alphabets=[[NSMutableArray alloc] init];
         _listContent = [[NSMutableArray alloc] initWithCapacity:[kAlphabet count]];
         _filteredListContent = [NSMutableArray new];
@@ -100,7 +100,7 @@
         NSString *cityName=[NSString stringWithFormat:@"%@,%@",mPlacemark.locality,mPlacemark.administrativeArea];
         self.gpsCityName =(cityName && cityName.length>0)? cityName: @"正在定位城市";
         
-        City *city=[City findRecordbyGprs:self.gpsCityName];
+        CityModel *city=[CityModel findRecordbyGprs:self.gpsCityName];
         if (city) {
             self.gpsCityID=city.cityid;
             self.gpsCityName=city.cityname;
@@ -126,7 +126,7 @@
     NSUInteger count=_cityList.count;
     for(NSUInteger i = 0;i < count;++i)
     {
-        City *city=[_cityList objectAtIndex:i];
+        CityModel *city=[_cityList objectAtIndex:i];
         
         NSString * alphabet = city.pinyin_first;
         NSUInteger k = [kAlphabet indexOfObject:[alphabet uppercaseString]];
@@ -166,7 +166,7 @@
         }
         
         if (self.searchController.active){
-            City *city=[_filteredListContent objectAtIndex:indexPath.row];
+            CityModel *city=[_filteredListContent objectAtIndex:indexPath.row];
             cell.textLabel.tag=city.cityid;
             cell.textLabel.text=city.cityname;
             
@@ -205,7 +205,7 @@
                 NSString * alphabet=[_alphabets objectAtIndex:indexPath.section-1];
                 NSUInteger k = [kAlphabet indexOfObject:[alphabet uppercaseString]];
                 NSArray *tmp = (NSArray *)[_listContent objectAtIndex:k];
-                City *city = (City *)[tmp objectAtIndex:indexPath.row];
+                CityModel *city = (CityModel *)[tmp objectAtIndex:indexPath.row];
                 cell.textLabel.tag=city.cityid;
                 cell.textLabel.text=city.cityname;
                 
@@ -428,7 +428,7 @@
         
         //保存选择项
         if (self.searchController.active) {
-            City *city=[_filteredListContent objectAtIndex:indexPath.row];
+            CityModel *city=[_filteredListContent objectAtIndex:indexPath.row];
             if (_selectCompletion) {
                 dispatch_async(dispatch_get_main_queue(), ^{
                     _selectCompletion([NSString stringWithFormat:@"%@",@(city.cityid)]);
@@ -447,7 +447,7 @@
                 NSString *alphabet=[_alphabets objectAtIndex:indexPath.section-1];
                 NSUInteger k = [kAlphabet indexOfObject:[alphabet uppercaseString]];
                 NSArray *tmp = (NSArray *)[_listContent objectAtIndex:k];
-                City *city = (City *)[tmp objectAtIndex:indexPath.row];
+                CityModel *city = (CityModel *)[tmp objectAtIndex:indexPath.row];
                 if (_selectCompletion) {
                     dispatch_async(dispatch_get_main_queue(), ^{
                         _selectCompletion([NSString stringWithFormat:@"%@",@(city.cityid)]);
@@ -502,7 +502,7 @@
     NSString *searchText = _searchController.searchBar.text;
     [_filteredListContent removeAllObjects];
     for (NSArray *section in _listContent) {
-        for (City *city in section)
+        for (CityModel *city in section)
         {
 //            NSComparisonResult result = [city.cityname compare:searchText options:(NSCaseInsensitiveSearch|NSDiacriticInsensitiveSearch) range:NSMakeRange(0, [searchText length])];
 //            if (result == NSOrderedSame)

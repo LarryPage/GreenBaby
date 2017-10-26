@@ -72,19 +72,19 @@ extern NSString *QiniuBucketNameImg;
 + (NSDictionary *)faceMap;//表情字典
 
 #pragma mark - memoryDB and files
-+ (NSString*)SystemInfoCurRecordPlistPath;
-+ (NSString*)UserInfoCurRecordPlistPath;
-+ (NSString*)CityRecordPlistPath;
-+ (NSString*)RegionRecordPlistPath;
-+ (NSString*)MessageDetailRecordPlistPath;
++ (NSString*)DeviceModelCurRecordPlistPath;
++ (NSString*)UserModelCurRecordPlistPath;
++ (NSString*)CityModelRecordPlistPath;
++ (NSString*)RegionModelRecordPlistPath;
++ (NSString*)MessageModelRecordPlistPath;
 
 #pragma mark - memoryDB and sqlite3
 + (NSString*)dbPath;
 
-+ (NSString*)SystemInfoCurRecordTableName;
-+ (NSString*)UserInfoCurRecordTableName;
-+ (NSString*)CityRecordTableName;
-+ (NSString*)RegionRecordTableName;
-+ (NSString*)MessageDetailRecordTableName;
++ (NSString*)DeviceModelCurRecordTableName;
++ (NSString*)UserModelCurRecordTableName;
++ (NSString*)CityModelRecordTableName;
++ (NSString*)RegionModelRecordTableName;
++ (NSString*)MessageModelRecordTableName;
 
 @end

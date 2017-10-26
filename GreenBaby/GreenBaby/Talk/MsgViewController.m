@@ -141,7 +141,7 @@
         //This will show the cell clearly and blur the rest of the screen for our peek.
         previewingContext.sourceRect = [self.resultTable rectForRowAtIndexPath:indexPath];
         
-        MessageDetail *record = [self.searchList objectAtIndex:indexPath.row];
+        MessageModel *record = [self.searchList objectAtIndex:indexPath.row];
         FriendTalkViewController *vc=[[FriendTalkViewController alloc] initWithMsg:record];
         vc.hidesBottomBarWhenPushed = YES;
         return vc;
@@ -166,7 +166,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if ([self.searchList count]>0 ){
-        MessageDetail *record = [self.searchList objectAtIndex:indexPath.row];
+        MessageModel *record = [self.searchList objectAtIndex:indexPath.row];
         
         NSString *identifier=@"MsgCell1";
         MsgCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
@@ -273,7 +273,7 @@
     if([self.searchList count]==0)
         return tableView.frame.size.height;
     else{
-        MessageDetail *record = [self.searchList objectAtIndex:indexPath.row];
+        MessageModel *record = [self.searchList objectAtIndex:indexPath.row];
         return [MsgCell calcCellHeight:record];
     }
 }
@@ -330,7 +330,7 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     if ([self.searchList count]>0){
-        MessageDetail *record = [self.searchList objectAtIndex:indexPath.row];
+        MessageModel *record = [self.searchList objectAtIndex:indexPath.row];
         record.unread = 0;
         
         MsgCell *cell = (MsgCell *)[tableView cellForRowAtIndexPath:indexPath];
@@ -448,7 +448,7 @@
     }
     else{
         if ([self.searchList count]>0) {
-            MessageDetail *record = [self.searchList objectAtIndex:0];
+            MessageModel *record = [self.searchList objectAtIndex:0];
             _startid=record.msgid;
         }
     }
@@ -466,7 +466,7 @@
                          NSArray *records = response[@"message_list"];
                          if (records && records.count>0) {
                              for (NSDictionary *recordDic in records) {
-                                 MessageDetail *record=[[MessageDetail alloc] initWithDic:recordDic];
+                                 MessageModel *record=[[MessageModel alloc] initWithDic:recordDic];
                                  [moreList addObject:record];
                              }
                              //[moreList sortUsingFunction:newsPositionSort context:nil];
@@ -475,8 +475,8 @@
                                  [self.searchList removeAllObjects];
                                  
                                  //缓存
-                                 [MessageDetail clearHistory];
-                                 [MessageDetail addRecords:moreList];
+                                 [MessageModel clearHistory];
+                                 [MessageModel addRecords:moreList];
                              }
                              weakSelf.page+=1;
                          }
@@ -497,7 +497,7 @@
                          [[TKAlertCenter defaultCenter] postAlertWithMessage:error.domain];
                          
                          if (weakSelf.searchList.count == 0) {  //加载缓存数据
-                             NSArray *records=[MessageDetail loadHistory];
+                             NSArray *records=[MessageModel loadHistory];
                              if (records && records.count>0) {
                                  [weakSelf.searchList addObjectsFromArray:records];
                                  _page+=1;

@@ -45,8 +45,8 @@
 #import <MOBFoundation/MOBFoundation.h>
 //＝＝＝＝＝＝＝＝＝＝ShareSDK＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
 
-#import "SystemInfo.h"
-#import "UserInfo.h"
+#import "DeviceModel.h"
+#import "UserModel.h"
 #import "WelcomeViewController.h"
 #import "StartViewController.h"
 #import "CustomTabBarController.h"

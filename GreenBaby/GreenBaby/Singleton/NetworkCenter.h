@@ -7,12 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "SystemInfo.h"
-#import "UserInfo.h"
+#import "DeviceModel.h"
+#import "UserModel.h"
 #import <AudioToolbox/AudioToolbox.h>
 
-#import "City.h"
-#import "Region.h"
+#import "CityModel.h"
+#import "RegionModel.h"
 
 @interface NetworkCenter : NSObject
 

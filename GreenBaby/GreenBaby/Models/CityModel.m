@@ -1,14 +1,14 @@
 //
-//  City.m
+//  CityModel.m
 //  GreenBaby
 //
 //  Created by LiXiangCheng on 15/7/29.
 //  Copyright (c) 2015年 LiXiangCheng. All rights reserved.
 //
 
-#import "City.h"
+#import "CityModel.h"
 
-@JSONImplementation(City)
+@JSONImplementation(CityModel)
 
 #pragma mark override
 
@@ -27,10 +27,10 @@
 }
 
 // 查找指定cityname的城市记录//用于gprs定位城市
-+ (City *)findRecordbyGprs:(NSString *)_cityname{
++ (CityModel *)findRecordbyGprs:(NSString *)_cityname{
     if (_cityname && _cityname.length>0) {
         NSMutableArray* records = [self loadHistory];
-        for (City *record in records) {
+        for (CityModel *record in records) {
             NSRange range = [[_cityname lowercaseString] rangeOfString:[record.cityname lowercaseString]];
             if (range.location!=NSNotFound) {
                 return record;

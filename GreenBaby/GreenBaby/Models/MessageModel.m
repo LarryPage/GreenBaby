@@ -1,14 +1,14 @@
 //
-//  MessageDetail.m
+//  MessageModel.m
 //  EHome
 //
 //  Created by LiXiangCheng on 15/3/30.
 //  Copyright (c) 2015年 MeiLin. All rights reserved.
 //
 
-#import "MessageDetail.h"
+#import "MessageModel.h"
 
-@JSONImplementation(MessageDetail)
+@JSONImplementation(MessageModel)
 
 #pragma mark override
 

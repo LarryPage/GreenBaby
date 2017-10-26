@@ -441,6 +441,30 @@ static NSString *COpenUDIDKey = @"COpenUDIDKey";
         else if ([model isEqualToString:@"iPhone9,2"]) {
             gDevice = @"iPhone 7 Plus LTE";
         }
+        else if ([model isEqualToString:@"iPhone9,3"]) {
+            gDevice = @"iPhone 7 GSM";
+        }
+        else if ([model isEqualToString:@"iPhone9,4"]) {
+            gDevice = @"iPhone 7 Plus GSM";
+        }
+        else if ([model isEqualToString:@"iPhone10,1"]) {
+            gDevice = @"iPhone 8 LTE";
+        }
+        else if ([model isEqualToString:@"iPhone10,2"]) {
+            gDevice = @"iPhone 8 Plus LTE";
+        }
+        else if ([model isEqualToString:@"iPhone10,3"]) {
+            gDevice = @"iPhone X LTE";
+        }
+        else if ([model isEqualToString:@"iPhone10,4"]) {
+            gDevice = @"iPhone 8 GSM";
+        }
+        else if ([model isEqualToString:@"iPhone10,5"]) {
+            gDevice = @"iPhone 8 Plus GSM";
+        }
+        else if ([model isEqualToString:@"iPhone10,6"]) {
+            gDevice = @"iPhone X GSM";
+        }
         else if ([model isEqualToString:@"iPad1,1"]) {//iPad
             gDevice = @"iPad 1nd 一代 (WiFi)";
         }

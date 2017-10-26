@@ -1,5 +1,5 @@
 //
-//  Region.h
+//  RegionModel.h
 //  GreenBaby
 //
 //  Created by LiXiangCheng on 15/7/29.
@@ -7,14 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "City.h"
+#import "CityModel.h"
 
 //省份
-@JSONInterface(Region) : NSObject
+@JSONInterface(RegionModel) : NSObject
 
 @property (nonatomic, assign) NSInteger regionid;
 @property (nonatomic, strong) NSString *regionname;
-//@property (nonatomic, strong) JSONMutableArray(City) *citys;
+//@property (nonatomic, strong) JSONMutableArray(CityModel) *citys;
 
 @property (nonatomic, strong) NSString *record_id;//PK,用于数据存储
 

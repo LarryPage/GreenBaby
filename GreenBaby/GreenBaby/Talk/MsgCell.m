@@ -58,8 +58,8 @@
 
 #pragma mark - Actions
 
-- (void)showMessage:(MessageDetail *)record{
-    UserInfo *user = [UserInfo loadCurRecord];
+- (void)showMessage:(MessageModel *)record{
+    UserModel *user = [UserModel loadCurRecord];
     
     NSString *fromname=(user.user_id==record.fromuid)?record.touname:record.fromuname;
     fromname=(fromname && fromname.length>0)?fromname:@" ";
@@ -90,7 +90,7 @@
     self.contentLbl.text=record.title;
 }
 
-+ (NSInteger)calcCellHeight:(MessageDetail *)record{
++ (NSInteger)calcCellHeight:(MessageModel *)record{
     return 72;
 }
 

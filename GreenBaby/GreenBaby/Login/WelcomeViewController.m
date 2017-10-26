@@ -152,7 +152,7 @@
         [[NSUserDefaults standardUserDefaults] setBool:showedGuidInVersion forKey:[NSString stringWithFormat:@"showedGuidInVersion%@",kVersion]];
         [[NSUserDefaults standardUserDefaults] synchronize];
         
-        UserInfo *user = [UserInfo loadCurRecord];
+        UserModel *user = [UserModel loadCurRecord];
         if (user && user.user_id) {
             CustomTabBarController *mtabBarController = [[CustomTabBarController alloc] init];
             [UIApplication sharedApplication].keyWindow.rootViewController = mtabBarController;

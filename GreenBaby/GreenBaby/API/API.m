@@ -9,8 +9,8 @@
 #import "API.h"
 #import "APIParseErrorViewController.h"
 
-#import "SystemInfo.h"
-#import "UserInfo.h"
+#import "DeviceModel.h"
+#import "UserModel.h"
 
 typedef enum ApiType {
     kApiTypeGet,                      // Get方式
@@ -55,7 +55,7 @@ NSURL *fullURLWithPath(NSString *path) {
 void encryptRequest(AFHTTPSessionManager *manager,NSString *pathParam)
 {
     NSString *base64AuthCredentials = @"";
-    //Basic Auth
+    //Basic认证字符串，不需要'Basic '
     NSString *basicAuth = [manager.requestSerializer valueForHTTPHeaderField:@"Authorization"];
     if (basicAuth && basicAuth.length) {
         base64AuthCredentials = [basicAuth stringByReplacingOccurrencesOfString:@"Basic " withString:@""];
@@ -139,10 +139,14 @@ void executeRequest(NSString *path,NSDictionary *paramDic,BOOL auth,ApiType apiT
     //设置Content-Type
     //[manager.requestSerializer setValue:@"application/x-www-form-urlencoded; charset=utf-8" forHTTPHeaderField:@"Content-Type"];
     //[manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    DeviceModel *device = [DeviceModel loadCurRecord];
+    if (device.vid.length > 0) {
+        [manager.requestSerializer setValue:device.vid forHTTPHeaderField:@"Visitor-Id"];
+    }
     //设置User-Agent
     [manager.requestSerializer setValue:[[NetworkCenter sharedInstance] getRequestUserAgent] forHTTPHeaderField:@"User-Agent"];
     //设置Basic Auth
-    UserInfo *user = [UserInfo loadCurRecord];
+    UserModel *user = [UserModel loadCurRecord];
     if (auth && user && user.user_id) {
         [manager.requestSerializer setAuthorizationHeaderFieldWithUsername:user.username password:user.password];
     }
@@ -426,8 +430,11 @@ void parseResponse(NSURLSessionDataTask *task,NSError *error,id response,NSStrin
 + (void)updatePushStatusOnCompletion:(APICompletion)completion{
     NSMutableDictionary *paramDic=[NSMutableDictionary dictionary];
     [paramDic setObject:[UIDevice getSystemName] forKey:@"os"];
-    UserInfo *user = [UserInfo loadCurRecord];
-    [paramDic setObject:@(user.push_status) forKey:@"pushstatus"];//pushstatus:0为关闭，1为打开
+    DeviceModel *device = [DeviceModel  loadCurRecord];
+    if (device.vid.length > 0) {
+        [paramDic setObject:device.vid forKey:@"visitor_id"];
+    }
+    [paramDic setObject:@(device.push_status) forKey:@"pushstatus"];
     executeRequest(@"/v1/setting/update_push_status",paramDic,YES,kApiTypePost,nil,nil,completion);
 }
 

@@ -24,9 +24,9 @@
 @property (nonatomic, assign) int statusCode;//接口返回状态:0-请求中，1-正常返回，-1-网络异常
 @property (nonatomic, assign) int pagecount;//每页数
 @property (nonatomic, assign) int loadingOld;//加载状态
-@property (nonatomic, strong) MessageDetail *msg;
+@property (nonatomic, strong) MessageModel *msg;
 @property (nonatomic, weak)   IBOutlet ChatTableView *resultTable;
-//@property (nonatomic, strong) NSMutableArray *searchList;//搜索结果:[MessageDetail]
+//@property (nonatomic, strong) NSMutableArray *searchList;//搜索结果:[MessageModel]
 @property (nonatomic, strong) NSMutableDictionary *mlEmojLabels;//{key,MLEmojiLabel}
 @property (nonatomic, strong) UIImage* editImage;
 @property (nonatomic, strong) NSMutableArray *uploadPics;//[{pic_url,width,height}]
@@ -130,7 +130,7 @@
     return self;
 }
 
-- (id)initWithMsg:(MessageDetail *)msg{
+- (id)initWithMsg:(MessageModel *)msg{
     if (self = [super initWithNibName:@"FriendTalkViewController" bundle:nil]) {
         self.msg = msg;
         
@@ -151,7 +151,7 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    UserInfo *user = [UserInfo loadCurRecord];
+    UserModel *user = [UserModel loadCurRecord];
     NSString *fromname=(user.user_id==_msg.fromuid)?_msg.touname:_msg.fromuname;
     self.title=fromname;
     //right bar
@@ -783,7 +783,7 @@
     }
 }
 
-- (BOOL)shouldShowTime:(MessageDetail *)msg messages:(NSMutableArray *)messages{
+- (BOOL)shouldShowTime:(MessageModel *)msg messages:(NSMutableArray *)messages{
     NSInteger index = [messages indexOfObject:msg];
     if ([messages count] == 0 || index == -1 || index > [messages count] - 1) {
         return NO;
@@ -791,7 +791,7 @@
     if (index == 0) {
         return YES;
     }
-    MessageDetail *item = [messages objectAtIndex:index - 1];
+    MessageModel *item = [messages objectAtIndex:index - 1];
     NSTimeInterval time0 = [[NSDate dateWithDateTimeString:item.time] timeIntervalSince1970];
     NSTimeInterval time1 = [[NSDate dateWithDateTimeString:msg.time] timeIntervalSince1970];
     int distance = time1 - time0;
@@ -871,7 +871,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if ([self.searchList count]>0 ){
-        MessageDetail *msg = [self.searchList objectAtIndex:indexPath.row];
+        MessageModel *msg = [self.searchList objectAtIndex:indexPath.row];
         
         NSString *identifier=[NSString stringWithFormat:@"ChatCell%@",@(msg.msgid)];
         ChatCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
@@ -880,7 +880,7 @@
             cell = (ChatCell *)[views objectAtIndex:0];
             
             cell.tag=indexPath.row;
-            UserInfo *user = [UserInfo loadCurRecord];
+            UserModel *user = [UserModel loadCurRecord];
             Boolean isRight=msg.fromuid==user.user_id;
             MLEmojiLabel *contentEmojiLbl=[self getTalkContentEmojiLabelInKey:[NSString stringWithFormat:@"MessageDetail%@",@(msg.msgid)] text:msg.content isRight:isRight];
             [cell showMessage:msg contentEmojiLbl:contentEmojiLbl isRight:isRight shouldShowTime:[self shouldShowTime:msg messages:self.searchList]];
@@ -959,8 +959,8 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    MessageDetail *msg = [self.searchList objectAtIndex:indexPath.row];
-    UserInfo *user = [UserInfo loadCurRecord];
+    MessageModel *msg = [self.searchList objectAtIndex:indexPath.row];
+    UserModel *user = [UserModel loadCurRecord];
     Boolean isRight=msg.fromuid==user.user_id;
     MLEmojiLabel *contentEmojiLbl=[self getTalkContentEmojiLabelInKey:[NSString stringWithFormat:@"MessageDetail%@",@(msg.msgid)] text:msg.content isRight:isRight];
     return [ChatCell calcCellHeight:msg contentEmojiLbl:contentEmojiLbl shouldShowTime:[self shouldShowTime:msg messages:self.searchList]];
@@ -1038,8 +1038,8 @@
         delayOffset = weakSelf.resultTable.contentOffset;
         NSMutableArray *indexPaths = [NSMutableArray arrayWithCapacity:moreList.count];
         [moreList enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-            MessageDetail *msg = (MessageDetail *)obj;
-            UserInfo *user = [UserInfo loadCurRecord];
+            MessageModel *msg = (MessageModel *)obj;
+            UserModel *user = [UserModel loadCurRecord];
             Boolean isRight=msg.fromuid==user.user_id;
             MLEmojiLabel *contentEmojiLbl=[weakSelf getTalkContentEmojiLabelInKey:[NSString stringWithFormat:@"MessageDetail%@",@(msg.msgid)] text:msg.content isRight:isRight];
             
@@ -1226,7 +1226,7 @@
     //取消轮循
     [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(getMessage:) object:@"news"];
     
-    UserInfo *user = [UserInfo loadCurRecord];
+    UserModel *user = [UserModel loadCurRecord];
     NSInteger friend_uid=(user.user_id==_msg.fromuid)?_msg.touid:_msg.fromuid;
     NSInteger fetch_new;
     NSInteger startid;
@@ -1236,7 +1236,7 @@
             startid=0;
         }
         else{
-            MessageDetail *msg = [self.searchList objectAtIndex:[self.searchList count]-1];
+            MessageModel *msg = [self.searchList objectAtIndex:[self.searchList count]-1];
             startid=msg.msgid;
         }
     }else{//历史消息
@@ -1245,7 +1245,7 @@
             startid=0;
         }
         else{
-            MessageDetail *msg = [self.searchList objectAtIndex:0];
+            MessageModel *msg = [self.searchList objectAtIndex:0];
             startid=msg.msgid;
         }
     }
@@ -1266,7 +1266,7 @@
                           NSArray *msgs = response[@"message_list"];
                           if (msgs && msgs.count>0) {
                               for (NSDictionary *msgDic in msgs) {
-                                  MessageDetail *msg = [[MessageDetail alloc] initWithDic:msgDic];
+                                  MessageModel *msg = [[MessageModel alloc] initWithDic:msgDic];
                                   [moreList addObject:msg];
                               }
                               //[moreList sortUsingFunction:newsPositionSort context:nil];
@@ -1358,14 +1358,14 @@
     //取消轮循
     [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(getMessage:) object:@"news"];
     
-    UserInfo *user = [UserInfo loadCurRecord];
+    UserModel *user = [UserModel loadCurRecord];
     NSInteger friend_uid=(user.user_id==_msg.fromuid)?_msg.touid:_msg.fromuid;
     NSInteger startid;
     if([self.searchList count]==0){
         startid=0;
     }
     else{
-        MessageDetail *msg = [self.searchList objectAtIndex:[self.searchList count]-1];
+        MessageModel *msg = [self.searchList objectAtIndex:[self.searchList count]-1];
         startid=msg.msgid;
     }
     NSInteger msg_type=[msgDic[@"msg_type"] integerValue];
@@ -1409,7 +1409,7 @@
                            NSArray *msgs = response[@"message_list"];
                            if (msgs && msgs.count>0) {
                                for (NSDictionary *msgDic in msgs) {
-                                   MessageDetail *msg = [[MessageDetail alloc] initWithDic:msgDic];
+                                   MessageModel *msg = [[MessageModel alloc] initWithDic:msgDic];
                                    [moreList addObject:msg];
                                }
                                //[moreList sortUsingFunction:newsPositionSort context:nil];

@@ -170,7 +170,7 @@
     };
     WEAKSELF
     _jsContext[@"HJM_userInfo"] = ^{
-        UserInfo *user = [UserInfo loadCurRecord];
+        UserModel *user = [UserModel loadCurRecord];
         if (user && user.user_id) {
             NSString *authString = [NSString stringWithFormat:@"%@:%@", user.username, user.password];
             user.basicAuth = [NSString base64encode:authString];

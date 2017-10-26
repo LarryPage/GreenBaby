@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "UserInfo.h"
+#import "UserModel.h"
 
 typedef void (^BaseCompletion)(void);
 

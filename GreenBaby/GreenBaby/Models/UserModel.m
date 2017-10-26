@@ -1,14 +1,14 @@
 //
-//  UserInfo.m
+//  UserModel.m
 //  EHome
 //
 //  Created by LiXiangCheng on 15/7/28.
 //  Copyright (c) 2015年 LiXiangCheng. All rights reserved.
 //
 
-#import "UserInfo.h"
+#import "UserModel.h"
 
-@JSONImplementation(UserInfo)
+@JSONImplementation(UserModel)
 
 #pragma mark override
 

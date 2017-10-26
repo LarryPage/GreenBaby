@@ -1,5 +1,5 @@
 //
-//  City.h
+//  CityModel.h
 //  GreenBaby
 //
 //  Created by LiXiangCheng on 15/7/29.
@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 
 //城市
-@JSONInterface(City) : NSObject
+@JSONInterface(CityModel) : NSObject
 
 @property (nonatomic, assign) NSInteger cityid;
 @property (nonatomic, strong) NSString *cityname;
@@ -21,6 +21,6 @@
 @property (nonatomic, strong) NSString *record_id;//PK,用于数据存储
 
 // 查找指定cityname的城市记录//用于gprs定位城市
-+ (City *)findRecordbyGprs:(NSString *)_cityname;
++ (CityModel *)findRecordbyGprs:(NSString *)_cityname;
 
 @end

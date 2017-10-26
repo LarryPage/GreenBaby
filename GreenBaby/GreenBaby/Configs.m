@@ -128,21 +128,21 @@ NSString *QiniuBucketNameImg = @"adhoc";
 
 #pragma mark - memoryDB and files
 
-+ (NSString*)SystemInfoCurRecordPlistPath{
-    return [[Configs documentPath] stringByAppendingPathComponent:@"SystemInfoCurRecord1.plist"];
++ (NSString*)DeviceModelCurRecordPlistPath{
+    return [[Configs documentPath] stringByAppendingPathComponent:@"DeviceModelCurRecord1.plist"];
 }
-+ (NSString*)UserInfoCurRecordPlistPath{
-    return [[Configs documentPath] stringByAppendingPathComponent:@"UserInfoCurRecord1.plist"];
++ (NSString*)UserModelCurRecordPlistPath{
+    return [[Configs documentPath] stringByAppendingPathComponent:@"UserModelCurRecord1.plist"];
 }
-+ (NSString*)CityRecordPlistPath{
-    return [[Configs documentPath] stringByAppendingPathComponent:@"CityRecord1.plist"];
-    //return [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"CityRecord1.plist"];//Mock
++ (NSString*)CityModelRecordPlistPath{
+    return [[Configs documentPath] stringByAppendingPathComponent:@"CityModelRecord1.plist"];
+    //return [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"CityModelRecord1.plist"];//Mock
 }
-+ (NSString*)RegionRecordPlistPath{
-    return [[Configs documentPath] stringByAppendingPathComponent:@"RegionRecord1.plist"];
++ (NSString*)RegionModelRecordPlistPath{
+    return [[Configs documentPath] stringByAppendingPathComponent:@"RegionModelRecord1.plist"];
 }
-+ (NSString*)MessageDetailRecordPlistPath{
-    return [[Configs documentPath] stringByAppendingPathComponent:@"MessageDetailRecord1.plist"];
++ (NSString*)MessageModelRecordPlistPath{
+    return [[Configs documentPath] stringByAppendingPathComponent:@"MessageModelRecord1.plist"];
 }
 
 #pragma mark - memoryDB and sqlite3
@@ -151,20 +151,20 @@ NSString *QiniuBucketNameImg = @"adhoc";
     return [[Configs documentPath] stringByAppendingPathComponent:@"db.db"];
 }
 
-+ (NSString*)SystemInfoCurRecordTableName{
-    return @"SystemInfoCurRecord1";
++ (NSString*)DeviceModelCurRecordTableName{
+    return @"DeviceModelCurRecord1";
 }
-+ (NSString*)UserInfoCurRecordTableName{
-    return @"UserInfoCurRecord1";
++ (NSString*)UserModelCurRecordTableName{
+    return @"UserModelCurRecord1";
 }
-+ (NSString*)CityRecordTableName{
-    return @"CityRecord1";
++ (NSString*)CityModelRecordTableName{
+    return @"CityModelRecord1";
 }
-+ (NSString*)RegionRecordTableName{
-    return @"RegionRecord1";
++ (NSString*)RegionModelRecordTableName{
+    return @"RegionModelRecord1";
 }
-+ (NSString*)MessageDetailRecordTableName{
-    return @"MessageDetailRecord1";
++ (NSString*)MessageModelRecordTableName{
+    return @"MessageModelRecord1";
 }
 
 @end

@@ -7,11 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "MessageDetail.h"
+#import "MessageModel.h"
 
 @interface FriendTalkViewController : BaseViewController
 
-@property (nonatomic, strong) NSMutableArray *searchList;//搜索结果:[MessageDetail]
+@property (nonatomic, strong) NSMutableArray *searchList;//搜索结果:[MessageModel]
 
-- (id)initWithMsg:(MessageDetail *)msg;
+- (id)initWithMsg:(MessageModel *)msg;
 @end

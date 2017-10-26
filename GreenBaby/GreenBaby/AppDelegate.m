@@ -36,11 +36,13 @@
         [[LNNotificationCenter defaultCenter] registerApplicationWithIdentifier:kBundleIdentifier name:kProductName icon:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notificationWasTapped:) name:LNNotificationWasTappedNotification object:nil];
         //系统信息初始化
-        SystemInfo *systemInfo = [SystemInfo loadCurRecord];
-        if (!systemInfo) {
-            systemInfo = [[SystemInfo alloc] init];
-            systemInfo.pushToken = @"";
-            [SystemInfo saveCurRecord:systemInfo];
+        DeviceModel *device = [DeviceModel loadCurRecord];
+        if (!device) {
+            device = [[DeviceModel alloc] init];
+            device.pushToken = @"";
+            device.vid = [UIDevice imei];
+            device.imei = [UIDevice imei];
+            [DeviceModel saveCurRecord:device];
         }
         [self registerAPNS];
         //[self setupShortcutItems];
@@ -104,7 +106,7 @@ void UncaughtExceptionHandler(NSException *exception){
 #pragma mark Application lifecycle
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    UserInfo *user = [UserInfo loadCurRecord];
+    UserModel *user = [UserModel loadCurRecord];
     
     BaiduMobStat* statTracker = [BaiduMobStat defaultStat];
     statTracker.enableExceptionLog = NO; // 是否允许截获并发送崩溃信息，请设置YES或者NO
@@ -371,8 +373,8 @@ void UncaughtExceptionHandler(NSException *exception){
         [curVC pageviewStart];
     }
     //如还没有注册APN获取通知DeviceToken，进行注册
-    SystemInfo *systemInfo = [SystemInfo loadCurRecord];
-    if (systemInfo.pushToken.length <= 1) {
+    DeviceModel *device = [DeviceModel loadCurRecord];
+    if (device.pushToken.length <= 1) {
         [self registerAPNS];
     }
 }
@@ -602,18 +604,18 @@ forLocalNotification:(UILocalNotification *)notification
     NSString *str = [[[pToken description] stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"<> "]] stringByReplacingOccurrencesOfString:@" " withString:@""];
     CLog(@"regisger push:%@", str);
     
-    SystemInfo *systemInfo = [SystemInfo loadCurRecord];
-    systemInfo.pushToken = str;
-    [SystemInfo saveCurRecord:systemInfo];
+    DeviceModel *device = [DeviceModel loadCurRecord];
+    device.pushToken = str;
+    [DeviceModel saveCurRecord:device];
     [[NSNotificationCenter defaultCenter] postNotificationName:PushRegistNotification object:nil];
 }
 
 - (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
     CLog(@"fail to register push: %@", error);
     
-    SystemInfo *systemInfo = [SystemInfo loadCurRecord];
-    systemInfo.pushToken = @"";
-    [SystemInfo saveCurRecord:systemInfo];
+    DeviceModel *device = [DeviceModel loadCurRecord];
+    device.pushToken = @"";
+    [DeviceModel saveCurRecord:device];
     [[NSNotificationCenter defaultCenter] postNotificationName:PushRegistNotification object:nil];
 }
 
@@ -673,7 +675,7 @@ forLocalNotification:(UILocalNotification *)notification
         NSString *m=_pushPayload[@"m"];//消息 id
         NSString *u=_pushPayload[@"u"];//route url
         
-        UserInfo *user = [UserInfo loadCurRecord];
+        UserModel *user = [UserModel loadCurRecord];
         if (user && user.user_id) {//已登录
             if (u && u.length>0) {
                 NSString *mode=[_pushPayload valueForKey:@"mode"];

@@ -1,5 +1,5 @@
 //
-//  OrderInfo.h
+//  OrderModel.h
 //  EHome
 //
 //  Created by LiXiangCheng on 15/7/28.
@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@JSONInterface(OrderInfo) : NSObject
+@JSONInterface(OrderModel) : NSObject
 
 @property (nonatomic, strong) NSString *contact_name;
 @property (nonatomic, strong) NSString *contact_mobile;

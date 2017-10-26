@@ -48,7 +48,7 @@
 
 #pragma mark - Actions
 
-- (void)showMessage:(MessageDetail *)msg contentEmojiLbl:(MLEmojiLabel *)contentEmojiLbl isRight:(Boolean)isRight shouldShowTime:(Boolean)shouldShowTime{
+- (void)showMessage:(MessageModel *)msg contentEmojiLbl:(MLEmojiLabel *)contentEmojiLbl isRight:(Boolean)isRight shouldShowTime:(Boolean)shouldShowTime{
     self.message = msg;
     
     if (msg.msg_type==3) {//WebPage
@@ -218,7 +218,7 @@
     
     _leftView.hidden = isRight;
     _rightView.hidden = !isRight;
-    UserInfo *user = [UserInfo loadCurRecord];
+    UserModel *user = [UserModel loadCurRecord];
     if (!isRight) {//左边
         NSInteger uid=msg.fromuid!=user.user_id?msg.fromuid:msg.touid;
         NSString *name=msg.fromuid!=user.user_id?msg.fromuname:msg.touname;
@@ -246,7 +246,7 @@
     }
 }
 
-+ (NSInteger)calcCellHeight:(MessageDetail *)msg contentEmojiLbl:(MLEmojiLabel *)contentEmojiLbl shouldShowTime:(Boolean)shouldShowTime{
++ (NSInteger)calcCellHeight:(MessageModel *)msg contentEmojiLbl:(MLEmojiLabel *)contentEmojiLbl shouldShowTime:(Boolean)shouldShowTime{
     if (msg.msg_type==3) {//WebPage
         float offset;
         if (shouldShowTime) {
@@ -355,11 +355,11 @@
     return self;
 }
 
-- (void)showMessage:(MessageDetail *)msg contentEmojiLbl:(MLEmojiLabel *)contentEmojiLbl{
+- (void)showMessage:(MessageModel *)msg contentEmojiLbl:(MLEmojiLabel *)contentEmojiLbl{
     self.message = msg;
 }
 
-+ (CGSize)sizeOfChatMessageView:(MessageDetail *)msg contentEmojiLbl:(MLEmojiLabel *)contentEmojiLbl{
++ (CGSize)sizeOfChatMessageView:(MessageModel *)msg contentEmojiLbl:(MLEmojiLabel *)contentEmojiLbl{
     return CGSizeZero;
 }
 
@@ -382,7 +382,7 @@
     return self;
 }
 
-+ (CGSize)sizeOfChatMessageView:(MessageDetail *)msg contentEmojiLbl:(MLEmojiLabel *)contentEmojiLbl{
++ (CGSize)sizeOfChatMessageView:(MessageModel *)msg contentEmojiLbl:(MLEmojiLabel *)contentEmojiLbl{
     //return contentEmojiLbl.frame.size;
     return CGSizeMake(contentEmojiLbl.frame.size.width, contentEmojiLbl.frame.size.height);
 }
@@ -420,7 +420,7 @@
 }
 //自定义copoy --end
 
-- (void)showMessage:(MessageDetail *)msg contentEmojiLbl:(MLEmojiLabel *)contentEmojiLbl{
+- (void)showMessage:(MessageModel *)msg contentEmojiLbl:(MLEmojiLabel *)contentEmojiLbl{
     [super showMessage:msg contentEmojiLbl:(MLEmojiLabel *)contentEmojiLbl];
     
     CGRect frame = self.bounds;
@@ -619,7 +619,7 @@
     return self;
 }
 
-- (void)showMessage:(MessageDetail *)msg contentEmojiLbl:(MLEmojiLabel *)contentEmojiLbl{
+- (void)showMessage:(MessageModel *)msg contentEmojiLbl:(MLEmojiLabel *)contentEmojiLbl{
     [super showMessage:msg contentEmojiLbl:(MLEmojiLabel *)contentEmojiLbl];
     
     CGRect frame = self.bounds;
@@ -642,7 +642,7 @@
     self.frame = frame1;
 }
 
-+ (CGSize)sizeOfChatMessageView:(MessageDetail *)msg contentEmojiLbl:(MLEmojiLabel *)contentEmojiLbl{
++ (CGSize)sizeOfChatMessageView:(MessageModel *)msg contentEmojiLbl:(MLEmojiLabel *)contentEmojiLbl{
     NSString *pic_url=msg.image;//20141225164012_400_600.png
     
     CGFloat width=kImgMaxWidth;
@@ -679,7 +679,7 @@
     
     FriendTalkViewController *parentVC=(FriendTalkViewController *)[self getViewController];
     [parentVC.searchList enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        MessageDetail *msg = (MessageDetail *)obj;
+        MessageModel *msg = (MessageModel *)obj;
         
         if (msg.msg_type==2) {//图片
             MWPhoto *photo = [MWPhoto photoWithURL:[NSURL URLWithString:msg.image]];
@@ -752,7 +752,7 @@
     return self;
 }
 
-- (void)showMessage:(MessageDetail *)msg contentEmojiLbl:(MLEmojiLabel *)contentEmojiLbl{
+- (void)showMessage:(MessageModel *)msg contentEmojiLbl:(MLEmojiLabel *)contentEmojiLbl{
     [super showMessage:msg contentEmojiLbl:(MLEmojiLabel *)contentEmojiLbl];
     
     self.backgroundColor=[UIColor clearColor];
@@ -804,7 +804,7 @@
     self.frame = frame1;
 }
 
-+ (CGSize)sizeOfChatMessageView:(MessageDetail *)msg contentEmojiLbl:(MLEmojiLabel *)contentEmojiLbl{
++ (CGSize)sizeOfChatMessageView:(MessageModel *)msg contentEmojiLbl:(MLEmojiLabel *)contentEmojiLbl{
     CGFloat maxWidth=CHAT_MSG_WIDTH;
     CGFloat height=0;
     

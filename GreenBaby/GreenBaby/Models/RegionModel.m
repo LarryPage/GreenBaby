@@ -1,14 +1,14 @@
 //
-//  Region.m
+//  RegionModel.m
 //  GreenBaby
 //
 //  Created by LiXiangCheng on 15/7/29.
 //  Copyright (c) 2015年 LiXiangCheng. All rights reserved.
 //
 
-#import "Region.h"
+#import "RegionModel.h"
 
-@JSONImplementation(Region)
+@JSONImplementation(RegionModel)
 
 #pragma mark override
 

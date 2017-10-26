@@ -19,8 +19,8 @@
 #import "FriendTalkViewController.h"
 #import "TimeHeaderView.h"
 #import "MLEmojiLabel.h"
-#import "MessageDetail.h"
-#import "UserInfo.h"
+#import "MessageModel.h"
+#import "UserModel.h"
 //#import "UserDetailViewController.h"
 //#import "ActivityDetaiViewController.h"
 
@@ -34,17 +34,17 @@
 #define CHAT_MSG_HEIGHT 25//最小值
 
 @interface ChatCell : UITableViewCell
-@property (nonatomic, strong) MessageDetail *message;
-- (void)showMessage:(MessageDetail *)msg contentEmojiLbl:(MLEmojiLabel *)contentEmojiLbl isRight:(Boolean)isRight shouldShowTime:(Boolean)shouldShowTime;
-+ (NSInteger)calcCellHeight:(MessageDetail *)msg contentEmojiLbl:(MLEmojiLabel *)contentEmojiLbl shouldShowTime:(Boolean)shouldShowTime;
+@property (nonatomic, strong) MessageModel *message;
+- (void)showMessage:(MessageModel *)msg contentEmojiLbl:(MLEmojiLabel *)contentEmojiLbl isRight:(Boolean)isRight shouldShowTime:(Boolean)shouldShowTime;
++ (NSInteger)calcCellHeight:(MessageModel *)msg contentEmojiLbl:(MLEmojiLabel *)contentEmojiLbl shouldShowTime:(Boolean)shouldShowTime;
 - (IBAction)showDetail:(id)sender;
 @end
 
 @interface BaseChatMessageView : UIView {
 }
-@property (nonatomic, strong) MessageDetail *message;
-- (void)showMessage:(MessageDetail *)msg contentEmojiLbl:(MLEmojiLabel *)contentEmojiLbl;
-+ (CGSize)sizeOfChatMessageView:(MessageDetail *)msg contentEmojiLbl:(MLEmojiLabel *)contentEmojiLbl;
+@property (nonatomic, strong) MessageModel *message;
+- (void)showMessage:(MessageModel *)msg contentEmojiLbl:(MLEmojiLabel *)contentEmojiLbl;
++ (CGSize)sizeOfChatMessageView:(MessageModel *)msg contentEmojiLbl:(MLEmojiLabel *)contentEmojiLbl;
 - (void)showDetail;
 @end
 

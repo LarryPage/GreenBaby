@@ -259,7 +259,7 @@
 
 - (BOOL)authorityExecute:(BaseCompletion)completion
 {
-    UserInfo *user = [UserInfo loadCurRecord];
+    UserModel *user = [UserModel loadCurRecord];
     BOOL isAuth = user && user.user_id>0;
     if (isAuth) {
         if (completion) { completion(); }

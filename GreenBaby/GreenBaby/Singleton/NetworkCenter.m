@@ -44,16 +44,16 @@ SINGLETON_IMP(NetworkCenter)
 
 //注册设备信息
 - (void)pushRegist:(NSNotification *)n {
-    UserInfo *user = [UserInfo loadCurRecord];
+    UserModel *user = [UserModel loadCurRecord];
     if (user && user.user_id) {
-        SystemInfo *systemInfo = [SystemInfo loadCurRecord];
-        [API regPushToken:systemInfo.pushToken completion:^(NSError *error,id response){}];
+        DeviceModel *device = [DeviceModel loadCurRecord];
+        [API regPushToken:device.pushToken completion:^(NSError *error,id response){}];
     }
 }
 
 //消息接收
 - (void)messageReceiveCount:(NSNotification *)n {
-    UserInfo *user = [UserInfo loadCurRecord];
+    UserModel *user = [UserModel loadCurRecord];
     if (user && user.user_id) {
         [self performSelector:@selector(getMessageCount) withObject:nil afterDelay:0.0];
     }
@@ -140,7 +140,7 @@ SINGLETON_IMP(NetworkCenter)
         [self setSearchableIndex];
         [self getPublicData];//7天
         
-        UserInfo *user = [UserInfo loadCurRecord];
+        UserModel *user = [UserModel loadCurRecord];
         if (user && user.user_id) {
             [self getMessageCount];
         }
@@ -180,26 +180,26 @@ SINGLETON_IMP(NetworkCenter)
                 NSDictionary *dateDic = response;
                 if (dateDic && dateDic.count>0) {
                     //"0":订单&钱包
-                    SystemInfo *systemInfo = [SystemInfo loadCurRecord];
-                    systemInfo.my_order_url = dateDic[@"my_order_url"];
-                    systemInfo.my_wallet_url = dateDic[@"my_wallet_url"];
-                    [SystemInfo saveCurRecord:systemInfo];
+                    DeviceModel *device = [DeviceModel loadCurRecord];
+                    device.my_order_url = dateDic[@"my_order_url"];
+                    device.my_wallet_url = dateDic[@"my_wallet_url"];
+                    [DeviceModel saveCurRecord:device];
                     //"1":城市
-                    [City clearHistory];
+                    [CityModel clearHistory];
                     NSArray *citys = dateDic[@"city"];
                     if (citys && citys.count>0) {
                         for (NSDictionary *recordDic in citys) {
-                            City *record = [[City alloc] initWithDic:recordDic];
-                            [City addRecord:record];
+                            CityModel *record = [[CityModel alloc] initWithDic:recordDic];
+                            [CityModel addRecord:record];
                         }
                     }
                     //"2":省份
-                    [Region clearHistory];
+                    [RegionModel clearHistory];
                     NSArray *regions = dateDic[@"region"];
                     if (regions && regions.count>0) {
                         for (NSDictionary *recordDic in regions) {
-                            Region *record = [[Region alloc] initWithDic:recordDic];
-                            [Region addRecord:record];
+                            RegionModel *record = [[RegionModel alloc] initWithDic:recordDic];
+                            [RegionModel addRecord:record];
                         }
                     }
                 }
@@ -221,9 +221,9 @@ SINGLETON_IMP(NetworkCenter)
             NSDictionary *dateDic = response;
             
             if (dateDic && dateDic.count>0) {
-                UserInfo *user = [UserInfo loadCurRecord];
+                UserModel *user = [UserModel loadCurRecord];
                 user.news_total=[RKMapping(dateDic[@"news_total"]) integerValue];
-                [UserInfo saveCurRecord:user];
+                [UserModel saveCurRecord:user];
                 
                 if ([[AppDelegate sharedAppDelegate].window.rootViewController isKindOfClass:[CustomTabBarController class]]) {
                     CustomTabBarController *mtabBarController = (CustomTabBarController *)[AppDelegate sharedAppDelegate].window.rootViewController;
@@ -298,9 +298,9 @@ SINGLETON_IMP(NetworkCenter)
                                 completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
                                     if (image) {
                                         // do something with image
-                                        SystemInfo *systemInfo = [SystemInfo loadCurRecord];
-                                        systemInfo.welcome_img = welcome_img;
-                                        [SystemInfo saveCurRecord:systemInfo];
+                                        DeviceModel *device = [DeviceModel loadCurRecord];
+                                        device.welcome_img = welcome_img;
+                                        [DeviceModel saveCurRecord:device];
                                     }
                                 }];
         }

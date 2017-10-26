@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "MessageDetail.h"
+#import "MessageModel.h"
 
 @interface MsgCell : UITableViewCell
 
@@ -17,7 +17,7 @@
 @property (nonatomic, weak) IBOutlet UILabel *contentLbl;
 @property (nonatomic, weak) IBOutlet UILabel *unreadLabel;
 
-- (void)showMessage:(MessageDetail *)record;
-+ (NSInteger)calcCellHeight:(MessageDetail *)record;
+- (void)showMessage:(MessageModel *)record;
++ (NSInteger)calcCellHeight:(MessageModel *)record;
 
 @end
