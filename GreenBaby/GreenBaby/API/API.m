@@ -139,9 +139,11 @@ void executeRequest(NSString *path,NSDictionary *paramDic,BOOL auth,ApiType apiT
     //设置Content-Type
     //[manager.requestSerializer setValue:@"application/x-www-form-urlencoded; charset=utf-8" forHTTPHeaderField:@"Content-Type"];
     //[manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    [manager.requestSerializer setValue:[UIDevice getSystemName] forHTTPHeaderField:@"os"];
+    [manager.requestSerializer setValue:kVersion forHTTPHeaderField:@"version"];
     DeviceModel *device = [DeviceModel loadCurRecord];
     if (device.vid.length > 0) {
-        [manager.requestSerializer setValue:device.vid forHTTPHeaderField:@"Visitor-Id"];
+        [manager.requestSerializer setValue:device.vid forHTTPHeaderField:@"vid"];
     }
     //设置User-Agent
     [manager.requestSerializer setValue:[[NetworkCenter sharedInstance] getRequestUserAgent] forHTTPHeaderField:@"User-Agent"];
