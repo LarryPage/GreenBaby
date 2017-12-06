@@ -104,6 +104,44 @@ static char defaultParentHashKey;
 
 @end
 
+@implementation UIViewController (PushView)
+
+-(UIViewController*)pushViewController:(NSString *)ToView Param:(NSDictionary *)param
+{
+    Class cls=NSClassFromString(ToView);
+    id viewController=[[[cls class] alloc] init];
+    if(param!=nil)
+    {
+        for(NSString *key in param)
+        {
+            id obj=param[key];
+            [viewController setValue:obj forKey:key];
+        }
+    }
+    ((UIViewController*)viewController).hidesBottomBarWhenPushed=YES;
+    [self.navigationController pushViewController:viewController animated:YES];
+    return viewController;
+}
+
+-(UIViewController*)presentViewController:(NSString *)ToView Param:(NSDictionary*)param
+{
+    Class cls=NSClassFromString(ToView);
+    UIViewController* viewController=[[[cls class] alloc] init];
+    if(param!=nil)
+    {
+        for(NSString *key in param)
+        {
+            id obj=param[key];
+            [viewController setValue:obj forKey:key];
+        }
+    }
+    UINavigationController *nav=[[UINavigationController alloc] initWithRootViewController:viewController];
+    [self presentViewController:nav animated:YES completion:nil];
+    return viewController;
+}
+
+@end
+
 @implementation UIViewController (Transition)
 
 #pragma mark Transition

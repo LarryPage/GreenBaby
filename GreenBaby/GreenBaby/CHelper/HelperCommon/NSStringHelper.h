@@ -11,6 +11,7 @@
  * Determines if the string is empty or contains only whitespace.
  */
 - (BOOL)isEmptyOrWhitespace;
+- (BOOL)isMobileNumber;
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 // MD5值
 - (NSString*)md5Hash  ;

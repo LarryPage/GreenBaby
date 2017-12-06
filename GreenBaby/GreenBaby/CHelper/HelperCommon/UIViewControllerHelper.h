@@ -28,6 +28,11 @@
 
 @end
 
+@interface UIViewController(PushView)
+-(UIViewController*)pushViewController:(NSString *)ToView Param:(NSDictionary*)param;
+-(UIViewController*)presentViewController:(NSString *)ToView Param:(NSDictionary*)param;
+@end
+
 @interface UIViewController (Transition)<CAAnimationDelegate>
 
 -(void)removeAllView;
