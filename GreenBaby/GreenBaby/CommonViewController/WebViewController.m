@@ -12,6 +12,8 @@
 #import <JavaScriptCore/JavaScriptCore.h>
 #import "ShareSheet.h"
 
+static NSMutableDictionary *gSessionOfUIWebView = nil;//缓存HTML5相关Session变量
+
 @interface WebViewController ()<UIWebViewDelegate,NJKWebViewProgressDelegate>{
     NSString *_title;
     NSString *_content;
@@ -270,6 +272,7 @@
             }
         });
     };
+    //功能性接口
     _jsContext[@"HJM_setWebViewTag"] = ^(NSString *tag) {
         weakSelf.urlTag=tag;
     };
@@ -318,6 +321,44 @@
     _jsContext[@"HJM_removeAllCache"] = ^() {
         [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"UIWebViewCache"];
         [[NSUserDefaults standardUserDefaults] synchronize];
+    };
+    //Session相关
+    _jsContext[@"HJM_writeSession"] = ^(NSString *key,NSString *value) {
+        //memory缓存
+        if (!gSessionOfUIWebView) {
+            gSessionOfUIWebView = [[NSMutableDictionary alloc] init];
+        }
+        
+        [gSessionOfUIWebView setValue:value forKey:key];
+        
+    };
+    _jsContext[@"HJM_readSession"] = ^(NSString *key) {
+        //memory缓存
+        if (!gSessionOfUIWebView) {
+            gSessionOfUIWebView = [[NSMutableDictionary alloc] init];
+        }
+        
+        NSString *value=[gSessionOfUIWebView objectForKey:key];
+        if (!value) {
+            value=@"";
+        }
+        return value;
+    };
+    _jsContext[@"HJM_removeSession"] = ^(NSString *keyList) {
+        //memory缓存
+        if (!gSessionOfUIWebView) {
+            gSessionOfUIWebView = [[NSMutableDictionary alloc] init];
+        }
+        
+        NSArray *keys=[keyList componentsSeparatedByString:@","];
+        [keys enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+            NSString *key = obj;
+            [gSessionOfUIWebView removeObjectForKey:key];
+        }];
+    };
+    _jsContext[@"HJM_removeAllSession"] = ^() {
+        //memory缓存
+        gSessionOfUIWebView = [[NSMutableDictionary alloc] init];
     };
 }
 
