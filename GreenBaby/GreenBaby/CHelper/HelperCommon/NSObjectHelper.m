@@ -9,6 +9,10 @@
 #import "NSObjectHelper.h"
 
 /**
+ 1.nscache 是可以自动释放内存的。
+ 2.nscache是线程安全的，我们可以在不同的线程中添加，删除和查询缓存中的对象。
+ 3.一个缓存对象不会拷贝key对象
+ 
  缓存要解析的类的属性{"ClassName":propertiesDic}=Table scheme
  countLimit=500
  最大缓存500个Model定义,1个model按10个左右属性，大约0.1K，500个model点内存50K

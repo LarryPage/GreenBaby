@@ -291,6 +291,12 @@ static NSMutableDictionary *gSessionOfUIWebView = nil;//缓存HTML5相关Session
         
         return (idx!=-1)?1:0;
     };
+    // 登录成功后回调
+    _jsContext[@"HJM_loginResult"] = ^(NSString *token) {
+        // token 回调给app
+        JSValue *jsv_testCallback = weakSelf.jsContext[@"testCallback"];//js里的全局方法：testCallback
+        [jsv_testCallback callWithArguments:@[token]];
+    };
     //cache相关
     _jsContext[@"HJM_writeCache"] = ^(NSString *key,NSString *value) {
         NSMutableDictionary *dic=[NSMutableDictionary dictionaryWithDictionary:[[NSUserDefaults standardUserDefaults] dictionaryForKey:@"UIWebViewCache"]];
