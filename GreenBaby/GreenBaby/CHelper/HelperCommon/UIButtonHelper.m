@@ -7,6 +7,7 @@
 //
 
 #import "UIButtonHelper.h"
+#include <objc/message.h>
 
 @implementation UIButton (custom)
 
@@ -41,6 +42,43 @@
     }
     
     return insets;
+}
+
+@end
+
+@implementation UIButton (Tracking)
+
+- (void)enableEventTracking
+{
+    NSString *className = [NSString stringWithFormat:@"EventTracking_%@",self.class];
+    Class kClass        = objc_getClass([className UTF8String]);
+    
+    if (!kClass) {
+        kClass = objc_allocateClassPair([self class], [className UTF8String], 0);
+    }
+    SEL setterSelector  = NSSelectorFromString(@"sendAction:to:forEvent:");
+    Method setterMethod = class_getInstanceMethod([self class], setterSelector);
+    
+    object_setClass(self, kClass); // 转换当前类从UIButton到新建的EventTracking_UIButton类
+    
+    const char *types   = method_getTypeEncoding(setterMethod);
+    
+    class_addMethod(kClass, setterSelector, (IMP)eventTracking_SendAction, types);
+    
+    objc_registerClassPair(kClass);
+}
+
+static void eventTracking_SendAction(id self, SEL _cmd, SEL action ,id target , UIEvent *event) {
+    struct objc_super superclass = {
+        .receiver    = self,
+        .super_class = class_getSuperclass(object_getClass(self))
+    };
+    void (*objc_msgSendSuperCasted)(const void *, SEL, SEL, id, UIEvent *) = (void *)objc_msgSendSuper;
+    
+    // to do event tracking...
+    NSLog(@"Click event record: target = %@, action = %@, event = %ld", target, NSStringFromSelector(action), (long)event.type);
+    
+    objc_msgSendSuperCasted(&superclass, _cmd, action, target, event);
 }
 
 @end

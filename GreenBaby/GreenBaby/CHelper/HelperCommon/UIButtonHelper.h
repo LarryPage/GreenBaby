@@ -14,3 +14,9 @@
 @interface UIButton (custom)
 
 @end
+
+//https://mp.weixin.qq.com/s/iBELEyUfnShnLhS5xJh4mQ
+//[button enableEventTracking];//自动埋点
+@interface UIButton (Tracking)
+- (void)enableEventTracking;
+@end

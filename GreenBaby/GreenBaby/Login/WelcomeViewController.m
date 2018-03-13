@@ -118,6 +118,7 @@
                 [_enterButton setImage:[UIImage imageNamed:@"enter_pressed"] forState:UIControlStateHighlighted];
                 [_enterButton addTarget:self action:@selector(enterBtn:) forControlEvents:UIControlEventTouchUpInside];
                 [_scrollView addSubview:_enterButton];
+                //[_enterButton enableEventTracking];//自动埋点
             }
                 break;
             default:
