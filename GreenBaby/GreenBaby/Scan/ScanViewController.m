@@ -8,7 +8,7 @@
 
 #import "ScanViewController.h"
 
-@interface ScanViewController ()<UIActionSheetDelegate,UIPopoverControllerDelegate,ZBarReaderViewDelegate,ZBarReaderDelegate>{
+@interface ScanViewController ()<UIPopoverControllerDelegate,ZBarReaderViewDelegate,ZBarReaderDelegate>{
     ZBarCameraSimulator *_cameraSim;
     
     BOOL _bCrossMoveIng;
@@ -61,11 +61,11 @@
 	// Do any additional setup after loading the view, typically from a nib.
     self.title = @"扫描二维码";
     
-//    self.navigationItem.rightBarButtonItem=[[[UIBarButtonItem alloc]
+//    self.navigationItem.rightBarButtonItem=[[UIBarButtonItem alloc]
 //                                             initWithTitle:@"扫描"
 //                                             style:UIBarButtonItemStylePlain
 //                                             target:self
-//                                             action:@selector(scanBtn)] autorelease];
+//                                             action:@selector(scanBtn)]];
     
     [_mask_top_View setBackgroundColor:[[UIColor alloc] initWithCGColor:[[UIColor colorWithPatternImage:[UIImage imageNamed:@"scan-mask-bg"]] CGColor]]];
     //In iOS4.3, UIView's background color setting with UIImage could not be transparent
@@ -200,18 +200,28 @@
 #pragma mark Action
 
 - (void)scanBtn{
-    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@""
-                                                             delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil
-                                                    otherButtonTitles:@"拍照", @"从相册选取", nil];
-    actionSheet.actionSheetStyle = UIActionSheetStyleDefault;
-    actionSheet.tag=100;
-    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {//iphone
-        [actionSheet showInView:self.view];
-    }
-    else{//ipad
-        //self.navigationItem.rightBarButtonItem.enabled=FALSE;
-        [actionSheet showFromBarButtonItem:self.navigationItem.rightBarButtonItem animated:YES];
-    }
+    WEAKSELF
+    [UIAlertController showWithTitle:nil
+                             message:nil
+                   cancelButtonTitle:NSLocalizedString(@"取消",nil)
+                  defultButton1Title:NSLocalizedString(@"拍照",nil)
+                  defultButton2Title:NSLocalizedString(@"从相册选取",nil)
+              destructiveButtonTitle:nil
+                            onCancel:^(UIAlertAction *action) {
+                            }
+                           onDefult1:^(UIAlertAction *action) {
+                               if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]){
+                                   [weakSelf scan:TRUE];
+                               } else {
+                                   [weakSelf scan:FALSE];
+                               }
+                           }
+                           onDefult2:^(UIAlertAction *action) {
+                               [weakSelf scan:FALSE];
+                           }
+                       onDestructive:^(UIAlertAction *action) {
+                       }
+                          sourceView:(UIView *)self.navigationItem.rightBarButtonItem];
 }
 
 - (void)scan:(Boolean)IsSourceTypeCamera{
@@ -286,21 +296,6 @@
         }
     }
     
-}
-
-#pragma mark UIActionSheetDelegate
-
-- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
-	if (buttonIndex == actionSheet.cancelButtonIndex) {
-		return;
-	}
-    
-    if ((buttonIndex == 1)||(![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])){
-        [self scan:FALSE];
-        
-    } else {
-        [self scan:TRUE];
-    }
 }
 
 #pragma mark UIPopoverControllerDelegate
