@@ -31,8 +31,8 @@
     NSDate *date2 = [[NSDate alloc] initWithTimeInterval:timeInterval sinceDate:date1];
     
     unsigned int unitFlags =
-    NSSecondCalendarUnit | NSMinuteCalendarUnit | NSHourCalendarUnit |
-    NSDayCalendarUnit | NSMonthCalendarUnit | NSYearCalendarUnit;
+    NSCalendarUnitSecond | NSCalendarUnitMinute | NSCalendarUnitHour |
+    NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear;
     
     return [calendar components:unitFlags
                        fromDate:date1
@@ -385,8 +385,8 @@ static UIColor *titleColor;
 {
     _indexPathsForSelectedItems=[[NSMutableArray alloc] init];
     
-    if (UIInterfaceOrientationIsLandscape(self.interfaceOrientation))
-    {
+    UIInterfaceOrientation interfaceOrientation = [[UIApplication sharedApplication] statusBarOrientation];
+    if (UIInterfaceOrientationIsLandscape(interfaceOrientation)) {
         self.tableView.contentInset=UIEdgeInsetsMake(9.0, 2.0, 0, 2.0);
         
         minimumInteritemSpacing=3;
@@ -1038,6 +1038,8 @@ static UIColor *titleColor;
 #pragma mark - ZYQAssetPickerController
 
 @implementation ZYQAssetPickerController
+
+@dynamic delegate;
 
 - (id)init
 {
