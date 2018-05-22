@@ -117,6 +117,7 @@ void executeRequest(NSString *path,NSDictionary *paramDic,BOOL auth,ApiType apiT
     //0.设置安全策略
     [manager setSecurityPolicy:defaultSecurityPolicy()];//默认模式，HTTPS,客户端不自带证书
     //1.构造requestSerializer
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];//post下body中raw为json
     //设置cookie,默认YES，允许请求带cookies，响应设置cookies，风控针对一些接口如登录必须使用
     [manager.requestSerializer setHTTPShouldHandleCookies:YES];
     //设置超时
