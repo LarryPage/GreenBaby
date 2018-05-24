@@ -128,8 +128,8 @@ static NSMutableDictionary<NSString*, FFRoute *> *routeMap;
     
     BaseViewController *curVC=(BaseViewController *)[[AppDelegate sharedAppDelegate].window topViewController];
     
-    NSString *urlStr = [url absoluteString];
-    urlStr = [urlStr stringByReplacingOccurrencesOfString:url.scheme withString:@"https"];
+    NSString *urlStr = [URL absoluteString];
+    urlStr = [urlStr stringByReplacingOccurrencesOfString:URL.scheme withString:@"https"];
     
     WebViewController *vc = [[WebViewController alloc] initWithUrl:urlStr title:urlStr];
     vc.hidesBottomBarWhenPushed=YES;
