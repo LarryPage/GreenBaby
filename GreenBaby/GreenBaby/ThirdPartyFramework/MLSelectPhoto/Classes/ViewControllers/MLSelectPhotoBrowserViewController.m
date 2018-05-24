@@ -148,7 +148,7 @@ static NSString *_cellIdentifier = @"collectionViewCell";
 - (void)updateUI{
     [self reloadData];
     self.makeView.hidden = !(self.doneAssets.count && self.isEditing);
-    self.makeView.text = [NSString stringWithFormat:@"%ld",self.doneAssets.count];
+    self.makeView.text = [NSString stringWithFormat:@"%@",@(self.doneAssets.count)];
 }
 
 - (void)setSheet:(UIActionSheet *)sheet{
@@ -262,7 +262,7 @@ static NSString *_cellIdentifier = @"collectionViewCell";
     scaoleAnimation.values = @[[NSNumber numberWithFloat:1.0],[NSNumber numberWithFloat:1.2],[NSNumber numberWithFloat:1.0]];
     scaoleAnimation.fillMode = kCAFillModeForwards;
     
-    NSString *currentPage = [NSString stringWithFormat:@"%ld",self.currentPage];
+    NSString *currentPage = [NSString stringWithFormat:@"%@",@(self.currentPage)];
     if ([_deleteAssets valueForKeyPath:currentPage] == nil) {
         [self.deleteAssets setObject:@YES forKey:currentPage];
         [self.deleleBtn setImage:[UIImage imageNamed:MLSelectPhotoSrcName(@"AssetsPickerCheck")] forState:UIControlStateNormal];
@@ -272,7 +272,7 @@ static NSString *_cellIdentifier = @"collectionViewCell";
         }
     }else{
         if (self.doneAssets.count >= self.maxCount) {
-            NSString *format = [NSString stringWithFormat:@"最多只能选择%zd张图片",self.maxCount];
+            NSString *format = [NSString stringWithFormat:@"最多只能选择%@张图片",@(self.maxCount)];
             [UIAlertController alert:format title:@"提醒" bTitle:@"好的"];
             return ;
         }
@@ -290,7 +290,7 @@ static NSString *_cellIdentifier = @"collectionViewCell";
     }
     
     self.makeView.hidden = !(self.doneAssets.count && self.isEditing);
-    self.makeView.text = [NSString stringWithFormat:@"%ld",self.doneAssets.count];
+    self.makeView.text = [NSString stringWithFormat:@"%@",@(self.doneAssets.count)];
     [self.makeView.layer removeAllAnimations];
     [self.makeView.layer addAnimation:scaoleAnimation forKey:@"transform.rotate"];
 }
@@ -402,7 +402,7 @@ static NSString *_cellIdentifier = @"collectionViewCell";
         tempF.origin.x = -ZLPickerColletionViewPadding;
     }
     
-    if([[self.deleteAssets allValues] count] == 0 || [self.deleteAssets valueForKeyPath:[NSString stringWithFormat:@"%ld",(currentPage)]] == nil){
+    if([[self.deleteAssets allValues] count] == 0 || [self.deleteAssets valueForKeyPath:[NSString stringWithFormat:@"%@",@(currentPage)]] == nil){
         [self.deleleBtn setImage:[UIImage imageNamed:MLSelectPhotoSrcName(@"AssetsPickerChecked") ] forState:UIControlStateNormal];
     }else{
         [self.deleleBtn setImage:[UIImage imageNamed:MLSelectPhotoSrcName(@"AssetsPickerCheck") ] forState:UIControlStateNormal];
@@ -419,7 +419,7 @@ static NSString *_cellIdentifier = @"collectionViewCell";
 }
 
 - (void)setPageLabelPage:(NSInteger)page{
-    self.title = [NSString stringWithFormat:@"%ld / %ld",page + 1, self.photos.count];
+    self.title = [NSString stringWithFormat:@"%@ / %@",@(page + 1), @(self.photos.count)];
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{

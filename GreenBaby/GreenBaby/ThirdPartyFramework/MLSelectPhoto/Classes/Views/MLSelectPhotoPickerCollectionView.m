@@ -160,7 +160,7 @@
         NSUInteger maxCount = (self.maxCount < 0) ? KPhotoShowMaxCount :  self.maxCount;
         
         if (self.selectAsstes.count >= maxCount) {
-            NSString *format = [NSString stringWithFormat:@"最多只能选择%zd张图片",maxCount];
+            NSString *format = [NSString stringWithFormat:@"最多只能选择%@张图片",@(maxCount)];
             if (maxCount == 0) {
                 format = [NSString stringWithFormat:@"您已经选满了图片呦."];
             }
