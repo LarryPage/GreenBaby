@@ -41,5 +41,5 @@ typedef void (^BaseCompletion)(void);
 - (void)pageviewStart;
 - (void)pageviewEnd;
 
-- (BOOL)authorityExecute:(BaseCompletion)completion;
+- (BOOL)authorityLogin:(BaseCompletion)completion;
 @end

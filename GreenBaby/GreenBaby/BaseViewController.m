@@ -7,6 +7,7 @@
 //
 
 #import "BaseViewController.h"
+//#import "LoginViewController.h"
 
 @interface BaseViewController ()
 
@@ -257,19 +258,21 @@
     [navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
 }
 
-- (BOOL)authorityExecute:(BaseCompletion)completion
+- (BOOL)authorityLogin:(BaseCompletion)completion
 {
     UserModel *user = [UserModel loadCurRecord];
-    BOOL isAuth = user && user.user_id>0;
-    if (isAuth) {
+    BOOL isLogin = user && user.user_id>0;
+    if (isLogin) {
         if (completion) { completion(); }
-    } else {
-        BaseViewController *vc = [[BaseViewController alloc] init];
+    }
+    else {
+        //UIViewController *vc = [[LoginViewController alloc] init];
+        UIViewController *vc = [[BaseViewController alloc] init];
         NavRootViewController *nc = [[NavRootViewController alloc] initWithRootViewController:vc];
         nc.navigationBar.translucent = NO;
         [self presentViewController:nc animated:YES completion:nil];
     }
-    return isAuth;
+    return isLogin;
 }
 
 @end

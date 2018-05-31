@@ -357,6 +357,15 @@ void parseResponse(NSURLSessionDataTask *task,NSError *error,id response,NSStrin
                 if (code == 0){// API调用成功
                     completionBlock(nil, [NSDictionary safeDictionaryFromObject:response[@"data"]]);
                 }
+                else if (code == 401) {//token过期，请登录
+                    BaseViewController *curVC=(BaseViewController *)[[AppDelegate sharedAppDelegate].window topViewController];
+                    //UIViewController *vc = [[LoginViewController alloc] init];
+                    UIViewController *vc = [[BaseViewController alloc] init];
+                    UINavigationController *nc = [[NavRootViewController alloc] initWithRootViewController:vc];
+                    //UINavigationController *nc = [[UINavigationController alloc] initWithRootViewController:vc];
+                    nc.navigationBar.translucent = NO;
+                    [curVC presentViewController:nc animated:YES completion:nil];
+                }
                 else if (code == 1212) {  //此版本放弃使用，请升级到最新版本
                     [UIAlertController showWithTitle:@"提示"
                                              message:[NSString safeStringFromObject:response[@"message"]]

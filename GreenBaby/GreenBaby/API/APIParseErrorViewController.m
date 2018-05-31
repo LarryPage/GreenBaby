@@ -74,7 +74,12 @@
 #pragma mark - Action
 
 - (void)back{
-    [self dismissViewControllerAnimated:YES completion:nil];
+    if (self.presentingViewController){
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
+    else{
+        [self.navigationController popViewControllerAnimated:YES];
+    }
 }
 
 #pragma mark UIWebViewDelegate
