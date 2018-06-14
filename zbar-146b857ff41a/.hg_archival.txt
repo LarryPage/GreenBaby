@@ -1,4 +1,0 @@
-repo: fb7da321df908e162ea0d07220357b35c9689f2b
-node: 146b857ff41ae462cc52f8dddf46d867763433a1
-branch: default
-tag: iPhoneSDK-1.2.2

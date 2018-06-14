@@ -7,6 +7,7 @@
 //
 
 #import "ScanViewController.h"
+#import "ZBarSDK.h"
 
 @interface ScanViewController ()<UIPopoverControllerDelegate,ZBarReaderViewDelegate,ZBarReaderDelegate>{
     ZBarCameraSimulator *_cameraSim;
@@ -325,7 +326,7 @@
             [_readerView stop];
             _bCrossMoveIng=FALSE;
             
-            _scanCode=[[NSString alloc]initWithString:_scanCode];
+            _scanCode=[[NSString alloc]initWithString:scanCode];
             
             [UIAlertController showWithTitle:@"提示"
                                      message:@"你扫描的二维码为外部链接，是否继续访问？"

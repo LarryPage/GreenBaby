@@ -1,980 +1,0 @@
-Tlibzbar
-v5
-r1
-cCheck dependencies
-cProcessPCH /var/folders/n4/9lfzhctj2d92w7cf217xv8800000gn/C/com.apple.Xcode.501/SharedPrecompiledHeaders/prefix-dxzkxhojrhgiegawzextoryfkfkg/prefix.pch.pth include/prefix.pch normal i386 objective-c com.apple.compilers.llvm.clang.1_0.compiler
-cProcessPCH /var/folders/n4/9lfzhctj2d92w7cf217xv8800000gn/C/com.apple.Xcode.501/SharedPrecompiledHeaders/prefix-cowymyrxlkivgngfbijzxgpeajfo/prefix.pch.pth include/prefix.pch normal i386 c com.apple.compilers.llvm.clang.1_0.compiler
-cCompileC build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/config.o /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/config.c normal i386 c com.apple.compilers.llvm.clang.1_0.compiler
-cCompileC build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/decoder.o /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/decoder.c normal i386 c com.apple.compilers.llvm.clang.1_0.compiler
-cCompileC build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/code128.o /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/decoder/code128.c normal i386 c com.apple.compilers.llvm.clang.1_0.compiler
-cCompileC build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/code39.o /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/decoder/code39.c normal i386 c com.apple.compilers.llvm.clang.1_0.compiler
-cCompileC build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/ean.o /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/decoder/ean.c normal i386 c com.apple.compilers.llvm.clang.1_0.compiler
-cCompileC build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/i25.o /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/decoder/i25.c normal i386 c com.apple.compilers.llvm.clang.1_0.compiler
-cCompileC build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/qr_finder.o /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/decoder/qr_finder.c normal i386 c com.apple.compilers.llvm.clang.1_0.compiler
-cCompileC build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/error.o /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/error.c normal i386 c com.apple.compilers.llvm.clang.1_0.compiler
-cCompileC build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/image.o /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/image.c normal i386 c com.apple.compilers.llvm.clang.1_0.compiler
-cCompileC build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/img_scanner.o /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/img_scanner.c normal i386 c com.apple.compilers.llvm.clang.1_0.compiler
-cCompileC build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/bch15_5.o /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/qrcode/bch15_5.c normal i386 c com.apple.compilers.llvm.clang.1_0.compiler
-cCompileC build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/binarize.o /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/qrcode/binarize.c normal i386 c com.apple.compilers.llvm.clang.1_0.compiler
-cCompileC build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/isaac.o /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/qrcode/isaac.c normal i386 c com.apple.compilers.llvm.clang.1_0.compiler
-cCompileC build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/qrdec.o /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/qrcode/qrdec.c normal i386 c com.apple.compilers.llvm.clang.1_0.compiler
-cCompileC build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/qrdectxt.o /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/qrcode/qrdectxt.c normal i386 c com.apple.compilers.llvm.clang.1_0.compiler
-cCompileC build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/ZBarSymbol.o /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/ZBarSymbol.m normal i386 objective-c com.apple.compilers.llvm.clang.1_0.compiler
-cCompileC build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/ZBarImage.o /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/ZBarImage.m normal i386 objective-c com.apple.compilers.llvm.clang.1_0.compiler
-cCompileC build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/ZBarImageScanner.o /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/ZBarImageScanner.m normal i386 objective-c com.apple.compilers.llvm.clang.1_0.compiler
-cCompileC build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/ZBarCVImage.o /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/ZBarCVImage.m normal i386 objective-c com.apple.compilers.llvm.clang.1_0.compiler
-cCompileC build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/ZBarReaderView.o /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/ZBarReaderView.m normal i386 objective-c com.apple.compilers.llvm.clang.1_0.compiler
-cCompileC build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/ZBarReaderViewImpl_Simulator.o /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/ZBarReaderViewImpl_Simulator.m normal i386 objective-c com.apple.compilers.llvm.clang.1_0.compiler
-cCompileC build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/ZBarCameraSimulator.o /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/ZBarCameraSimulator.m normal i386 objective-c com.apple.compilers.llvm.clang.1_0.compiler
-cCompileC build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/ZBarHelpController.o /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/ZBarHelpController.m normal i386 objective-c com.apple.compilers.llvm.clang.1_0.compiler
-cCompileC build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/ZBarReaderViewController.o /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/ZBarReaderViewController.m normal i386 objective-c com.apple.compilers.llvm.clang.1_0.compiler
-cCompileC build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/ZBarReaderController.o /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/ZBarReaderController.m normal i386 objective-c com.apple.compilers.llvm.clang.1_0.compiler
-cCompileC build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/rs.o /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/qrcode/rs.c normal i386 c com.apple.compilers.llvm.clang.1_0.compiler
-cCompileC build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/util.o /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/qrcode/util.c normal i386 c com.apple.compilers.llvm.clang.1_0.compiler
-cCompileC build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/refcnt.o /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/refcnt.c normal i386 c com.apple.compilers.llvm.clang.1_0.compiler
-cCompileC build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/scanner.o /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/scanner.c normal i386 c com.apple.compilers.llvm.clang.1_0.compiler
-cCompileC build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/symbol.o /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/symbol.c normal i386 c com.apple.compilers.llvm.clang.1_0.compiler
-cCompileC build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/databar.o /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/decoder/databar.c normal i386 c com.apple.compilers.llvm.clang.1_0.compiler
-cCompileC build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/code93.o /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/decoder/code93.c normal i386 c com.apple.compilers.llvm.clang.1_0.compiler
-cLibtool /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/Release-iphonesimulator/libzbar.a normal i386
-
-N/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.1.sdk
-c000000005102E2D30000000000000110
-t1359143635
-s272
-
-N/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.1.sdk/System/Library/Frameworks/AVFoundation.framework/Headers/AVFoundation.h
-c0000000051088AE30000000000000944
-t1359514339
-s2372
-
-N/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.1.sdk/System/Library/Frameworks/CoreFoundation.framework/Headers/CoreFoundation.h
-c0000000051088AE30000000000000B8F
-t1359514339
-s2959
-
-N/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.1.sdk/System/Library/Frameworks/CoreGraphics.framework/Headers/CoreGraphics.h
-c0000000051088AE300000000000004FE
-t1359514339
-s1278
-
-N/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.1.sdk/System/Library/Frameworks/CoreMedia.framework/Headers/CoreMedia.h
-c0000000051088AE300000000000002CF
-t1359514339
-s719
-
-N/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.1.sdk/System/Library/Frameworks/CoreVideo.framework/Headers/CoreVideo.h
-c0000000051088AE4000000000000057A
-t1359514340
-s1402
-
-N/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.1.sdk/System/Library/Frameworks/Foundation.framework/Headers/Foundation.h
-c0000000051088AE400000000000015F7
-t1359514340
-s5623
-
-N/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.1.sdk/System/Library/Frameworks/QuartzCore.framework/Headers/QuartzCore.h
-c0000000051088AE600000000000000C4
-t1359514342
-s196
-
-N/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.1.sdk/System/Library/Frameworks/UIKit.framework/Headers/UIKit.h
-c0000000051088AE60000000000000E8D
-t1359514342
-s3725
-
-N/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/config.c
-c000000004E52716E00000000000014A1
-t1314025838
-s5281
-
-N/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/decoder.c
-c000000004E52716E00000000000034C9
-t1314025838
-s13513
-
-N/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/decoder/code128.c
-c000000004E52716E0000000000004FB7
-t1314025838
-s20407
-
-N/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/decoder/code39.c
-c000000004E52716E00000000000028AE
-t1314025838
-s10414
-
-N/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/decoder/code93.c
-c000000004E52716E0000000000002A8B
-t1314025838
-s10891
-
-N/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/decoder/databar.c
-c000000004E52716E00000000000087F4
-t1314025838
-s34804
-
-N/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/decoder/ean.c
-c000000004E52716E0000000000006460
-t1314025838
-s25696
-
-N/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/decoder/i25.c
-c000000004E52716E0000000000001E50
-t1314025838
-s7760
-
-N/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/decoder/qr_finder.c
-c000000004E52716E0000000000000CCB
-t1314025838
-s3275
-
-N/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/error.c
-c000000004E52716E00000000000016DA
-t1314025838
-s5850
-
-N/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/image.c
-c000000004E52716E000000000000232C
-t1314025838
-s9004
-
-N/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/img_scanner.c
-c000000004E52716E000000000000698D
-t1314025838
-s27021
-
-N/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/qrcode/bch15_5.c
-c000000004E52716E00000000000013BE
-t1314025838
-s5054
-
-N/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/qrcode/binarize.c
-c000000004E52716E0000000000004C7A
-t1314025838
-s19578
-
-N/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/qrcode/isaac.c
-c000000004E52716E0000000000000EDF
-t1314025838
-s3807
-
-N/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/qrcode/qrdec.c
-c000000004E52716E0000000000021A4B
-t1314025838
-s137803
-
-N/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/qrcode/qrdectxt.c
-c000000004E52716E0000000000003DF3
-t1314025838
-s15859
-
-N/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/qrcode/rs.c
-c000000004E52716E00000000000066E1
-t1314025838
-s26337
-
-N/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/qrcode/util.c
-c000000004E52716E0000000000000D5A
-t1314025838
-s3418
-
-N/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/refcnt.c
-c000000004E52716E00000000000005BC
-t1314025838
-s1468
-
-N/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/scanner.c
-c000000004E52716E000000000000278F
-t1314025838
-s10127
-
-N/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/symbol.c
-c000000004E52716E0000000000002C15
-t1314025838
-s11285
-
-N/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/ZBarCVImage.m
-c000000004E52716E0000000000001767
-t1314025838
-s5991
-
-N/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/ZBarCameraSimulator.m
-c000000004E52716E0000000000000E33
-t1314025838
-s3635
-
-N/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/ZBarHelpController.m
-c000000004E52716E0000000000001EF6
-t1314025838
-s7926
-
-N/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/ZBarImage.m
-c000000004E52716E0000000000001ED6
-t1314025838
-s7894
-
-N/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/ZBarImageScanner.m
-c000000004E52716E00000000000008F4
-t1314025838
-s2292
-
-N/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/ZBarReaderController.m
-c000000004E52716E00000000000055A8
-t1314025838
-s21928
-
-N/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/ZBarReaderView.m
-c000000004E52716E0000000000004459
-t1314025838
-s17497
-
-N/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/ZBarReaderViewController.m
-c000000004E52716E00000000000050EF
-t1314025838
-s20719
-
-N/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/ZBarReaderViewImpl_Simulator.m
-c000000004E52716E00000000000016D5
-t1314025838
-s5845
-
-N/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/ZBarSymbol.m
-c000000004E52716E00000000000011EB
-t1314025838
-s4587
-
-N/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/Release-iphonesimulator/libzbar.a
-t2
-s0
-
-N/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/ZBarCVImage.o
-t2
-s0
-
-N/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/ZBarCameraSimulator.o
-t2
-s0
-
-N/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/ZBarHelpController.o
-t2
-s0
-
-N/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/ZBarImage.o
-t2
-s0
-
-N/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/ZBarImageScanner.o
-t2
-s0
-
-N/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/ZBarReaderController.o
-t2
-s0
-
-N/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/ZBarReaderView.o
-t2
-s0
-
-N/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/ZBarReaderViewController.o
-t2
-s0
-
-N/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/ZBarReaderViewImpl_Simulator.o
-t2
-s0
-
-N/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/ZBarSymbol.o
-t2
-s0
-
-N/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/bch15_5.o
-t2
-s0
-
-N/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/binarize.o
-t2
-s0
-
-N/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/code128.o
-t2
-s0
-
-N/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/code39.o
-t2
-s0
-
-N/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/code93.o
-t2
-s0
-
-N/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/config.o
-t2
-s0
-
-N/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/databar.o
-t2
-s0
-
-N/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/decoder.o
-t2
-s0
-
-N/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/ean.o
-t2
-s0
-
-N/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/error.o
-t2
-s0
-
-N/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/i25.o
-t2
-s0
-
-N/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/image.o
-t2
-s0
-
-N/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/img_scanner.o
-t2
-s0
-
-N/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/isaac.o
-t2
-s0
-
-N/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/qr_finder.o
-t2
-s0
-
-N/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/qrdec.o
-t2
-s0
-
-N/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/qrdectxt.o
-t2
-s0
-
-N/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/refcnt.o
-t2
-s0
-
-N/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/rs.o
-t2
-s0
-
-N/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/scanner.o
-t2
-s0
-
-N/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/symbol.o
-t2
-s0
-
-N/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/util.o
-t2
-s0
-
-N/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/zbar.LinkFileList
-c00000000513EF85A00000000000011EE
-t1363081306
-s4590
-
-N/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/include/prefix.pch
-c000000004E52716E0000000000000131
-t1314025838
-s305
-i<Foundation/Foundation.h>
-i<CoreFoundation/CoreFoundation.h>
-i<CoreGraphics/CoreGraphics.h>
-i<UIKit/UIKit.h>
-i<QuartzCore/QuartzCore.h>
-i<AVFoundation/AVFoundation.h>
-i<CoreMedia/CoreMedia.h>
-i<CoreVideo/CoreVideo.h>
-
-N/var/folders/n4/9lfzhctj2d92w7cf217xv8800000gn/C/com.apple.Xcode.501/SharedPrecompiledHeaders/prefix-cowymyrxlkivgngfbijzxgpeajfo/prefix.pch.pth
-t2
-s0
-
-N/var/folders/n4/9lfzhctj2d92w7cf217xv8800000gn/C/com.apple.Xcode.501/SharedPrecompiledHeaders/prefix-dxzkxhojrhgiegawzextoryfkfkg/prefix.pch.pth
-t2
-s0
-
-CCheck dependencies
-r0
-lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection18"Check dependencies4f58fad92fefb641^408715da2fefb641^---0#1#0#--18"Check dependencies36"28D0A0B7-2217-47E6-97DF-3C4741213C0D-
-
-CCompileC build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/ZBarCVImage.o /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/ZBarCVImage.m normal i386 objective-c com.apple.compilers.llvm.clang.1_0.compiler
-s384774106.636975
-e384774106.719845
-r1
-xCompileC
-xbuild/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/ZBarCVImage.o
-x/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/ZBarCVImage.m
-xnormal
-xi386
-xobjective-c
-xcom.apple.compilers.llvm.clang.1_0.compiler
-lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection77"Compile /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/ZBarCVImage.m7a6ca3da2fefb641^70254fdb2fefb641^---0#0#0#-19%DVTDocumentLocation2@85"file://localhost/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/ZBarCVImage.m0000000000000000^2567"CompileC build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/ZBarCVImage.o ZBarCVImage.m normal i386 objective-c com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone    setenv LANG en_US.US-ASCII    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x objective-c -arch i386 -fmessage-length=0 -std=c99 -Wno-trigraphs -fpascal-strings -Os -Wno-missing-field-initializers -Wno-missing-prototypes -Wreturn-type -Wno-implicit-atomic-properties -Wno-receiver-is-weak -Wformat -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wunused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-enum-conversion -Wno-shorten-64-to-32 -Wpointer-sign -Wno-newline-eof -Wno-selector -Wno-strict-selector-match -Wno-undeclared-selector -Wno-deprecated-implementations -DNDEBUG=1 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.1.sdk -fexceptions -fasm-blocks -fstrict-aliasing -Wprotocol -Wdeprecated-declarations -g -Wno-sign-conversion -fobjc-abi-version=2 -fobjc-legacy-dispatch -mios-simulator-version-min=3.0 -I/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/Release-iphonesimulator/include -Iinclude -I../include -I../zbar -I/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/DerivedSources/i386 -I/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/DerivedSources -F/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/Release-iphonesimulator -include /var/folders/n4/9lfzhctj2d92w7cf217xv8800000gn/C/com.apple.Xcode.501/SharedPrecompiledHeaders/prefix-dxzkxhojrhgiegawzextoryfkfkg/prefix.pch -MMD -MT dependencies -MF /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/ZBarCVImage.d --serialize-diagnostics /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/ZBarCVImage.dia -c /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/ZBarCVImage.m -o /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/ZBarCVImage.o36"95E90B2F-3117-46C5-B0F8-9153D77271B7-
-
-CCompileC build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/ZBarCameraSimulator.o /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/ZBarCameraSimulator.m normal i386 objective-c com.apple.compilers.llvm.clang.1_0.compiler
-s384774106.721138
-e384774106.803683
-r1
-xCompileC
-xbuild/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/ZBarCameraSimulator.o
-x/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/ZBarCameraSimulator.m
-xnormal
-xi386
-xobjective-c
-xcom.apple.compilers.llvm.clang.1_0.compiler
-lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection85"Compile /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/ZBarCameraSimulator.m27fab8da2fefb641^bf2a4fdb2fefb641^---0#0#0#-19%DVTDocumentLocation2@93"file://localhost/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/ZBarCameraSimulator.m0000000000000000^2615"CompileC build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/ZBarCameraSimulator.o ZBarCameraSimulator.m normal i386 objective-c com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone    setenv LANG en_US.US-ASCII    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x objective-c -arch i386 -fmessage-length=0 -std=c99 -Wno-trigraphs -fpascal-strings -Os -Wno-missing-field-initializers -Wno-missing-prototypes -Wreturn-type -Wno-implicit-atomic-properties -Wno-receiver-is-weak -Wformat -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wunused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-enum-conversion -Wno-shorten-64-to-32 -Wpointer-sign -Wno-newline-eof -Wno-selector -Wno-strict-selector-match -Wno-undeclared-selector -Wno-deprecated-implementations -DNDEBUG=1 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.1.sdk -fexceptions -fasm-blocks -fstrict-aliasing -Wprotocol -Wdeprecated-declarations -g -Wno-sign-conversion -fobjc-abi-version=2 -fobjc-legacy-dispatch -mios-simulator-version-min=3.0 -I/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/Release-iphonesimulator/include -Iinclude -I../include -I../zbar -I/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/DerivedSources/i386 -I/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/DerivedSources -F/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/Release-iphonesimulator -include /var/folders/n4/9lfzhctj2d92w7cf217xv8800000gn/C/com.apple.Xcode.501/SharedPrecompiledHeaders/prefix-dxzkxhojrhgiegawzextoryfkfkg/prefix.pch -MMD -MT dependencies -MF /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/ZBarCameraSimulator.d --serialize-diagnostics /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/ZBarCameraSimulator.dia -c /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/ZBarCameraSimulator.m -o /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/ZBarCameraSimulator.o36"90A840C8-0D21-4363-8CE0-F5CF05F108A2-
-
-CCompileC build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/ZBarHelpController.o /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/ZBarHelpController.m normal i386 objective-c com.apple.compilers.llvm.clang.1_0.compiler
-s384774106.784969
-e384774106.896159
-r1
-xCompileC
-xbuild/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/ZBarHelpController.o
-x/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/ZBarHelpController.m
-xnormal
-xi386
-xobjective-c
-xcom.apple.compilers.llvm.clang.1_0.compiler
-lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection84"Compile /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/ZBarHelpController.m2653c9da2fefb641^50344fdb2fefb641^---0#0#0#-19%DVTDocumentLocation2@92"file://localhost/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/ZBarHelpController.m0000000000000000^2609"CompileC build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/ZBarHelpController.o ZBarHelpController.m normal i386 objective-c com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone    setenv LANG en_US.US-ASCII    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x objective-c -arch i386 -fmessage-length=0 -std=c99 -Wno-trigraphs -fpascal-strings -Os -Wno-missing-field-initializers -Wno-missing-prototypes -Wreturn-type -Wno-implicit-atomic-properties -Wno-receiver-is-weak -Wformat -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wunused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-enum-conversion -Wno-shorten-64-to-32 -Wpointer-sign -Wno-newline-eof -Wno-selector -Wno-strict-selector-match -Wno-undeclared-selector -Wno-deprecated-implementations -DNDEBUG=1 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.1.sdk -fexceptions -fasm-blocks -fstrict-aliasing -Wprotocol -Wdeprecated-declarations -g -Wno-sign-conversion -fobjc-abi-version=2 -fobjc-legacy-dispatch -mios-simulator-version-min=3.0 -I/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/Release-iphonesimulator/include -Iinclude -I../include -I../zbar -I/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/DerivedSources/i386 -I/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/DerivedSources -F/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/Release-iphonesimulator -include /var/folders/n4/9lfzhctj2d92w7cf217xv8800000gn/C/com.apple.Xcode.501/SharedPrecompiledHeaders/prefix-dxzkxhojrhgiegawzextoryfkfkg/prefix.pch -MMD -MT dependencies -MF /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/ZBarHelpController.d --serialize-diagnostics /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/ZBarHelpController.dia -c /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/ZBarHelpController.m -o /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/ZBarHelpController.o36"65506F0C-22E3-4342-B5F5-C0B01E21C4D0-
-
-CCompileC build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/ZBarImage.o /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/ZBarImage.m normal i386 objective-c com.apple.compilers.llvm.clang.1_0.compiler
-s384774106.558826
-e384774106.660245
-r1
-xCompileC
-xbuild/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/ZBarImage.o
-x/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/ZBarImage.m
-xnormal
-xi386
-xobjective-c
-xcom.apple.compilers.llvm.clang.1_0.compiler
-lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection75"Compile /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/ZBarImage.m4f0495da2fefb641^cd1f4fdb2fefb641^---0#0#0#-19%DVTDocumentLocation2@83"file://localhost/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/ZBarImage.m0000000000000000^2555"CompileC build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/ZBarImage.o ZBarImage.m normal i386 objective-c com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone    setenv LANG en_US.US-ASCII    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x objective-c -arch i386 -fmessage-length=0 -std=c99 -Wno-trigraphs -fpascal-strings -Os -Wno-missing-field-initializers -Wno-missing-prototypes -Wreturn-type -Wno-implicit-atomic-properties -Wno-receiver-is-weak -Wformat -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wunused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-enum-conversion -Wno-shorten-64-to-32 -Wpointer-sign -Wno-newline-eof -Wno-selector -Wno-strict-selector-match -Wno-undeclared-selector -Wno-deprecated-implementations -DNDEBUG=1 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.1.sdk -fexceptions -fasm-blocks -fstrict-aliasing -Wprotocol -Wdeprecated-declarations -g -Wno-sign-conversion -fobjc-abi-version=2 -fobjc-legacy-dispatch -mios-simulator-version-min=3.0 -I/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/Release-iphonesimulator/include -Iinclude -I../include -I../zbar -I/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/DerivedSources/i386 -I/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/DerivedSources -F/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/Release-iphonesimulator -include /var/folders/n4/9lfzhctj2d92w7cf217xv8800000gn/C/com.apple.Xcode.501/SharedPrecompiledHeaders/prefix-dxzkxhojrhgiegawzextoryfkfkg/prefix.pch -MMD -MT dependencies -MF /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/ZBarImage.d --serialize-diagnostics /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/ZBarImage.dia -c /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/ZBarImage.m -o /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/ZBarImage.o36"85CDA5E1-362E-46BD-BF26-B34AC693419E-
-
-CCompileC build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/ZBarImageScanner.o /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/ZBarImageScanner.m normal i386 objective-c com.apple.compilers.llvm.clang.1_0.compiler
-s384774106.586381
-e384774106.635678
-r1
-xCompileC
-xbuild/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/ZBarImageScanner.o
-x/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/ZBarImageScanner.m
-xnormal
-xi386
-xobjective-c
-xcom.apple.compilers.llvm.clang.1_0.compiler
-lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection82"Compile /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/ZBarImageScanner.m5ad596da2fefb641^eb1c4fdb2fefb641^---0#0#0#-19%DVTDocumentLocation2@90"file://localhost/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/ZBarImageScanner.m0000000000000000^2597"CompileC build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/ZBarImageScanner.o ZBarImageScanner.m normal i386 objective-c com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone    setenv LANG en_US.US-ASCII    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x objective-c -arch i386 -fmessage-length=0 -std=c99 -Wno-trigraphs -fpascal-strings -Os -Wno-missing-field-initializers -Wno-missing-prototypes -Wreturn-type -Wno-implicit-atomic-properties -Wno-receiver-is-weak -Wformat -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wunused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-enum-conversion -Wno-shorten-64-to-32 -Wpointer-sign -Wno-newline-eof -Wno-selector -Wno-strict-selector-match -Wno-undeclared-selector -Wno-deprecated-implementations -DNDEBUG=1 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.1.sdk -fexceptions -fasm-blocks -fstrict-aliasing -Wprotocol -Wdeprecated-declarations -g -Wno-sign-conversion -fobjc-abi-version=2 -fobjc-legacy-dispatch -mios-simulator-version-min=3.0 -I/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/Release-iphonesimulator/include -Iinclude -I../include -I../zbar -I/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/DerivedSources/i386 -I/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/DerivedSources -F/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/Release-iphonesimulator -include /var/folders/n4/9lfzhctj2d92w7cf217xv8800000gn/C/com.apple.Xcode.501/SharedPrecompiledHeaders/prefix-dxzkxhojrhgiegawzextoryfkfkg/prefix.pch -MMD -MT dependencies -MF /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/ZBarImageScanner.d --serialize-diagnostics /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/ZBarImageScanner.dia -c /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/ZBarImageScanner.m -o /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/ZBarImageScanner.o36"DBFF3FF0-3A31-4109-BB0A-6708EDF038D0-
-
-CCompileC build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/ZBarReaderController.o /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/ZBarReaderController.m normal i386 objective-c com.apple.compilers.llvm.clang.1_0.compiler
-s384774106.880547
-e384774107.130015
-r1
-xCompileC
-xbuild/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/ZBarReaderController.o
-x/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/ZBarReaderController.m
-xnormal
-xi386
-xobjective-c
-xcom.apple.compilers.llvm.clang.1_0.compiler
-lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection86"Compile /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/ZBarReaderController.m00c8e1da2fefb641^52434fdb2fefb641^---0#0#0#-19%DVTDocumentLocation2@94"file://localhost/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/ZBarReaderController.m0000000000000000^2621"CompileC build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/ZBarReaderController.o ZBarReaderController.m normal i386 objective-c com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone    setenv LANG en_US.US-ASCII    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x objective-c -arch i386 -fmessage-length=0 -std=c99 -Wno-trigraphs -fpascal-strings -Os -Wno-missing-field-initializers -Wno-missing-prototypes -Wreturn-type -Wno-implicit-atomic-properties -Wno-receiver-is-weak -Wformat -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wunused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-enum-conversion -Wno-shorten-64-to-32 -Wpointer-sign -Wno-newline-eof -Wno-selector -Wno-strict-selector-match -Wno-undeclared-selector -Wno-deprecated-implementations -DNDEBUG=1 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.1.sdk -fexceptions -fasm-blocks -fstrict-aliasing -Wprotocol -Wdeprecated-declarations -g -Wno-sign-conversion -fobjc-abi-version=2 -fobjc-legacy-dispatch -mios-simulator-version-min=3.0 -I/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/Release-iphonesimulator/include -Iinclude -I../include -I../zbar -I/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/DerivedSources/i386 -I/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/DerivedSources -F/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/Release-iphonesimulator -include /var/folders/n4/9lfzhctj2d92w7cf217xv8800000gn/C/com.apple.Xcode.501/SharedPrecompiledHeaders/prefix-dxzkxhojrhgiegawzextoryfkfkg/prefix.pch -MMD -MT dependencies -MF /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/ZBarReaderController.d --serialize-diagnostics /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/ZBarReaderController.dia -c /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/ZBarReaderController.m -o /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/ZBarReaderController.o36"2FEAB4F1-A995-4BB5-AE51-9067F365F858-
-
-CCompileC build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/ZBarReaderView.o /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/ZBarReaderView.m normal i386 objective-c com.apple.compilers.llvm.clang.1_0.compiler
-s384774106.661523
-e384774106.879255
-r1
-xCompileC
-xbuild/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/ZBarReaderView.o
-x/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/ZBarReaderView.m
-xnormal
-xi386
-xobjective-c
-xcom.apple.compilers.llvm.clang.1_0.compiler
-o/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/ZBarReaderView.m:44:15: warning: incompatible pointer types casting 'ZBarReaderViewImpl *' to type 'ZBarReaderView *' [-Wincompatible-pointer-types]
-o        return([ZBarReaderViewImpl alloc]);
-o              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
-o/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.1.sdk/System/Library/Frameworks/Foundation.framework/Headers/NSObject.h:87:1: note: class method 'alloc' is assumed to return an instance of its receiver type ('ZBarReaderViewImpl *')
-o+ (id)alloc;
-o^
-o1 warning generated.
-lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection80"Compile /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/ZBarReaderView.m91b6a9da2fefb641^3c314fdb2fefb641^-622"/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/ZBarReaderView.m:44:15: warning: incompatible pointer types casting 'ZBarReaderViewImpl *' to type 'ZBarReaderView *' [-Wincompatible-pointer-types]        return([ZBarReaderViewImpl alloc]);              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.1.sdk/System/Library/Frameworks/Foundation.framework/Headers/NSObject.h:87:1: note: class method 'alloc' is assumed to return an instance of its receiver type ('ZBarReaderViewImpl *')+ (id)alloc;^1 warning generated.1(36%IDEClangDiagnosticActivityLogMessage2@84"Incompatible pointer types casting 'ZBarReaderViewImpl *' to type 'ZBarReaderView *'-384774106#18446744073709551615#0#1(2@99"Class method 'alloc' is assumed to return an instance of its receiver type ('ZBarReaderViewImpl *')-384774106#18446744073709551615#0#-0#27"com.apple.dt.IDE.diagnostic23%DVTTextDocumentLocation3@197"file://localhost/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.1.sdk/System/Library/Frameworks/Foundation.framework/Headers/NSObject.h0000000000000000^86#0#86#0#2200#0#25"Related Result Type Issue--1#27"com.apple.dt.IDE.diagnostic3@88"file://localhost/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/ZBarReaderView.m0000000000000000^43#14#43#14#1669#0#14"Semantic Issue1(3@88"file://localhost/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/ZBarReaderView.m0000000000000000^43#14#43#42#1669#27#-0#0#0#-19%DVTDocumentLocation4@88"file://localhost/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/ZBarReaderView.m0000000000000000^2585"CompileC build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/ZBarReaderView.o ZBarReaderView.m normal i386 objective-c com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone    setenv LANG en_US.US-ASCII    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x objective-c -arch i386 -fmessage-length=0 -std=c99 -Wno-trigraphs -fpascal-strings -Os -Wno-missing-field-initializers -Wno-missing-prototypes -Wreturn-type -Wno-implicit-atomic-properties -Wno-receiver-is-weak -Wformat -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wunused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-enum-conversion -Wno-shorten-64-to-32 -Wpointer-sign -Wno-newline-eof -Wno-selector -Wno-strict-selector-match -Wno-undeclared-selector -Wno-deprecated-implementations -DNDEBUG=1 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.1.sdk -fexceptions -fasm-blocks -fstrict-aliasing -Wprotocol -Wdeprecated-declarations -g -Wno-sign-conversion -fobjc-abi-version=2 -fobjc-legacy-dispatch -mios-simulator-version-min=3.0 -I/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/Release-iphonesimulator/include -Iinclude -I../include -I../zbar -I/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/DerivedSources/i386 -I/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/DerivedSources -F/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/Release-iphonesimulator -include /var/folders/n4/9lfzhctj2d92w7cf217xv8800000gn/C/com.apple.Xcode.501/SharedPrecompiledHeaders/prefix-dxzkxhojrhgiegawzextoryfkfkg/prefix.pch -MMD -MT dependencies -MF /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/ZBarReaderView.d --serialize-diagnostics /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/ZBarReaderView.dia -c /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/ZBarReaderView.m -o /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/ZBarReaderView.o36"4D15F5DF-0D6F-4D16-9FDD-968484D1ACCC-
-
-CCompileC build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/ZBarReaderViewController.o /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/ZBarReaderViewController.m normal i386 objective-c com.apple.compilers.llvm.clang.1_0.compiler
-s384774106.804966
-e384774107.049144
-r1
-xCompileC
-xbuild/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/ZBarReaderViewController.o
-x/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/ZBarReaderViewController.m
-xnormal
-xi386
-xobjective-c
-xcom.apple.compilers.llvm.clang.1_0.compiler
-o/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/ZBarReaderViewController.m:79:12: warning: enumeration value 'UIImagePickerControllerCameraFlashModeOff' not handled in switch [-Wswitch]
-o    switch(mode)
-o           ^
-o/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/ZBarReaderViewController.m:187:15: warning: incompatible pointer types casting 'ZBarReaderController *' to type 'ZBarReaderViewController *' [-Wincompatible-pointer-types]
-o        return([ZBarReaderController new]);
-o              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
-o/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.1.sdk/System/Library/Frameworks/Foundation.framework/Headers/NSObject.h:85:1: note: class method 'new' is assumed to return an instance of its receiver type ('ZBarReaderController *')
-o+ (id)new;
-o^
-o2 warnings generated.
-lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection90"Compile /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/ZBarReaderViewController.mbc75ceda2fefb641^e2394fdb2fefb641^-868"/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/ZBarReaderViewController.m:79:12: warning: enumeration value 'UIImagePickerControllerCameraFlashModeOff' not handled in switch [-Wswitch]    switch(mode)           ^/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/ZBarReaderViewController.m:187:15: warning: incompatible pointer types casting 'ZBarReaderController *' to type 'ZBarReaderViewController *' [-Wincompatible-pointer-types]        return([ZBarReaderController new]);              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.1.sdk/System/Library/Frameworks/Foundation.framework/Headers/NSObject.h:85:1: note: class method 'new' is assumed to return an instance of its receiver type ('ZBarReaderController *')+ (id)new;^2 warnings generated.2(36%IDEClangDiagnosticActivityLogMessage2@83"Enumeration value 'UIImagePickerControllerCameraFlashModeOff' not handled in switch-384774107#18446744073709551615#0#-1#27"com.apple.dt.IDE.diagnostic23%DVTTextDocumentLocation3@98"file://localhost/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/ZBarReaderViewController.m0000000000000000^78#11#78#11#2707#0#14"Semantic Issue--2@96"Incompatible pointer types casting 'ZBarReaderController *' to type 'ZBarReaderViewController *'-384774107#18446744073709551615#0#1(2@99"Class method 'new' is assumed to return an instance of its receiver type ('ZBarReaderController *')-384774107#18446744073709551615#0#-0#27"com.apple.dt.IDE.diagnostic3@197"file://localhost/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.1.sdk/System/Library/Frameworks/Foundation.framework/Headers/NSObject.h0000000000000000^84#0#84#0#2153#0#25"Related Result Type Issue--1#27"com.apple.dt.IDE.diagnostic3@98"file://localhost/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/ZBarReaderViewController.m0000000000000000^186#14#186#14#6294#0#14"Semantic Issue1(3@98"file://localhost/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/ZBarReaderViewController.m0000000000000000^186#14#186#42#6294#27#-0#0#0#-19%DVTDocumentLocation4@98"file://localhost/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/ZBarReaderViewController.m0000000000000000^2645"CompileC build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/ZBarReaderViewController.o ZBarReaderViewController.m normal i386 objective-c com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone    setenv LANG en_US.US-ASCII    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x objective-c -arch i386 -fmessage-length=0 -std=c99 -Wno-trigraphs -fpascal-strings -Os -Wno-missing-field-initializers -Wno-missing-prototypes -Wreturn-type -Wno-implicit-atomic-properties -Wno-receiver-is-weak -Wformat -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wunused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-enum-conversion -Wno-shorten-64-to-32 -Wpointer-sign -Wno-newline-eof -Wno-selector -Wno-strict-selector-match -Wno-undeclared-selector -Wno-deprecated-implementations -DNDEBUG=1 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.1.sdk -fexceptions -fasm-blocks -fstrict-aliasing -Wprotocol -Wdeprecated-declarations -g -Wno-sign-conversion -fobjc-abi-version=2 -fobjc-legacy-dispatch -mios-simulator-version-min=3.0 -I/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/Release-iphonesimulator/include -Iinclude -I../include -I../zbar -I/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/DerivedSources/i386 -I/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/DerivedSources -F/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/Release-iphonesimulator -include /var/folders/n4/9lfzhctj2d92w7cf217xv8800000gn/C/com.apple.Xcode.501/SharedPrecompiledHeaders/prefix-dxzkxhojrhgiegawzextoryfkfkg/prefix.pch -MMD -MT dependencies -MF /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/ZBarReaderViewController.d --serialize-diagnostics /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/ZBarReaderViewController.dia -c /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/ZBarReaderViewController.m -o /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/ZBarReaderViewController.o36"533E5349-F6BF-4C98-BFB4-651358354EA7-
-
-CCompileC build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/ZBarReaderViewImpl_Simulator.o /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/ZBarReaderViewImpl_Simulator.m normal i386 objective-c com.apple.compilers.llvm.clang.1_0.compiler
-s384774106.682067
-e384774106.783662
-r1
-xCompileC
-xbuild/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/ZBarReaderViewImpl_Simulator.o
-x/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/ZBarReaderViewImpl_Simulator.m
-xnormal
-xi386
-xobjective-c
-xcom.apple.compilers.llvm.clang.1_0.compiler
-lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection94"Compile /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/ZBarReaderViewImpl_Simulator.m66f9aeda2fefb641^0f284fdb2fefb641^---0#0#0#-19%DVTDocumentLocation2@102"file://localhost/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/ZBarReaderViewImpl_Simulator.m0000000000000000^2669"CompileC build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/ZBarReaderViewImpl_Simulator.o ZBarReaderViewImpl_Simulator.m normal i386 objective-c com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone    setenv LANG en_US.US-ASCII    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x objective-c -arch i386 -fmessage-length=0 -std=c99 -Wno-trigraphs -fpascal-strings -Os -Wno-missing-field-initializers -Wno-missing-prototypes -Wreturn-type -Wno-implicit-atomic-properties -Wno-receiver-is-weak -Wformat -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wunused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-enum-conversion -Wno-shorten-64-to-32 -Wpointer-sign -Wno-newline-eof -Wno-selector -Wno-strict-selector-match -Wno-undeclared-selector -Wno-deprecated-implementations -DNDEBUG=1 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.1.sdk -fexceptions -fasm-blocks -fstrict-aliasing -Wprotocol -Wdeprecated-declarations -g -Wno-sign-conversion -fobjc-abi-version=2 -fobjc-legacy-dispatch -mios-simulator-version-min=3.0 -I/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/Release-iphonesimulator/include -Iinclude -I../include -I../zbar -I/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/DerivedSources/i386 -I/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/DerivedSources -F/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/Release-iphonesimulator -include /var/folders/n4/9lfzhctj2d92w7cf217xv8800000gn/C/com.apple.Xcode.501/SharedPrecompiledHeaders/prefix-dxzkxhojrhgiegawzextoryfkfkg/prefix.pch -MMD -MT dependencies -MF /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/ZBarReaderViewImpl_Simulator.d --serialize-diagnostics /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/ZBarReaderViewImpl_Simulator.dia -c /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/ZBarReaderViewImpl_Simulator.m -o /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/ZBarReaderViewImpl_Simulator.o36"64236BDA-865A-4866-B055-9BCE8C079942-
-
-CCompileC build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/ZBarSymbol.o /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/ZBarSymbol.m normal i386 objective-c com.apple.compilers.llvm.clang.1_0.compiler
-s384774106.510474
-e384774106.585112
-r1
-xCompileC
-xbuild/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/ZBarSymbol.o
-x/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/ZBarSymbol.m
-xnormal
-xi386
-xobjective-c
-xcom.apple.compilers.llvm.clang.1_0.compiler
-lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection76"Compile /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/ZBarSymbol.mb77d83da2fefb641^22184fdb2fefb641^---0#0#0#-19%DVTDocumentLocation2@84"file://localhost/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/ZBarSymbol.m0000000000000000^2561"CompileC build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/ZBarSymbol.o ZBarSymbol.m normal i386 objective-c com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone    setenv LANG en_US.US-ASCII    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x objective-c -arch i386 -fmessage-length=0 -std=c99 -Wno-trigraphs -fpascal-strings -Os -Wno-missing-field-initializers -Wno-missing-prototypes -Wreturn-type -Wno-implicit-atomic-properties -Wno-receiver-is-weak -Wformat -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wunused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-enum-conversion -Wno-shorten-64-to-32 -Wpointer-sign -Wno-newline-eof -Wno-selector -Wno-strict-selector-match -Wno-undeclared-selector -Wno-deprecated-implementations -DNDEBUG=1 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.1.sdk -fexceptions -fasm-blocks -fstrict-aliasing -Wprotocol -Wdeprecated-declarations -g -Wno-sign-conversion -fobjc-abi-version=2 -fobjc-legacy-dispatch -mios-simulator-version-min=3.0 -I/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/Release-iphonesimulator/include -Iinclude -I../include -I../zbar -I/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/DerivedSources/i386 -I/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/DerivedSources -F/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/Release-iphonesimulator -include /var/folders/n4/9lfzhctj2d92w7cf217xv8800000gn/C/com.apple.Xcode.501/SharedPrecompiledHeaders/prefix-dxzkxhojrhgiegawzextoryfkfkg/prefix.pch -MMD -MT dependencies -MF /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/ZBarSymbol.d --serialize-diagnostics /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/ZBarSymbol.dia -c /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/ZBarSymbol.m -o /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/ZBarSymbol.o36"7FC48611-F546-4D3E-93CE-7058A8BC9758-
-
-CCompileC build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/bch15_5.o /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/qrcode/bch15_5.c normal i386 c com.apple.compilers.llvm.clang.1_0.compiler
-s384774106.401081
-e384774106.450750
-r1
-xCompileC
-xbuild/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/bch15_5.o
-x/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/qrcode/bch15_5.c
-xnormal
-xi386
-xc
-xcom.apple.compilers.llvm.clang.1_0.compiler
-lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection88"Compile /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/qrcode/bch15_5.c341067da2fefb641^496473da2fefb641^---0#0#0#-19%DVTDocumentLocation2@96"file://localhost/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/qrcode/bch15_5.c0000000000000000^2346"CompileC build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/bch15_5.o ../zbar/qrcode/bch15_5.c normal i386 c com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone    setenv LANG en_US.US-ASCII    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c -arch i386 -fmessage-length=0 -std=c99 -Wno-trigraphs -fpascal-strings -Os -Wno-missing-field-initializers -Wno-missing-prototypes -Wreturn-type -Wformat -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wunused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-enum-conversion -Wno-shorten-64-to-32 -Wpointer-sign -Wno-newline-eof -DNDEBUG=1 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.1.sdk -fexceptions -fasm-blocks -fstrict-aliasing -Wdeprecated-declarations -g -Wno-sign-conversion -mios-simulator-version-min=3.0 -I/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/Release-iphonesimulator/include -Iinclude -I../include -I../zbar -I/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/DerivedSources/i386 -I/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/DerivedSources -F/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/Release-iphonesimulator -include /var/folders/n4/9lfzhctj2d92w7cf217xv8800000gn/C/com.apple.Xcode.501/SharedPrecompiledHeaders/prefix-cowymyrxlkivgngfbijzxgpeajfo/prefix.pch -MMD -MT dependencies -MF /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/bch15_5.d --serialize-diagnostics /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/bch15_5.dia -c /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/qrcode/bch15_5.c -o /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/bch15_5.o36"1295023E-B97D-4BBD-979F-63D80C23665B-
-
-CCompileC build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/binarize.o /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/qrcode/binarize.c normal i386 c com.apple.compilers.llvm.clang.1_0.compiler
-s384774106.439907
-e384774106.500759
-r1
-xCompileC
-xbuild/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/binarize.o
-x/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/qrcode/binarize.c
-xnormal
-xi386
-xc
-xcom.apple.compilers.llvm.clang.1_0.compiler
-lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection89"Compile /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/qrcode/binarize.cf8fc70da2fefb641^675fe1da2fefb641^---0#0#0#-19%DVTDocumentLocation2@97"file://localhost/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/qrcode/binarize.c0000000000000000^2352"CompileC build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/binarize.o ../zbar/qrcode/binarize.c normal i386 c com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone    setenv LANG en_US.US-ASCII    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c -arch i386 -fmessage-length=0 -std=c99 -Wno-trigraphs -fpascal-strings -Os -Wno-missing-field-initializers -Wno-missing-prototypes -Wreturn-type -Wformat -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wunused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-enum-conversion -Wno-shorten-64-to-32 -Wpointer-sign -Wno-newline-eof -DNDEBUG=1 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.1.sdk -fexceptions -fasm-blocks -fstrict-aliasing -Wdeprecated-declarations -g -Wno-sign-conversion -mios-simulator-version-min=3.0 -I/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/Release-iphonesimulator/include -Iinclude -I../include -I../zbar -I/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/DerivedSources/i386 -I/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/DerivedSources -F/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/Release-iphonesimulator -include /var/folders/n4/9lfzhctj2d92w7cf217xv8800000gn/C/com.apple.Xcode.501/SharedPrecompiledHeaders/prefix-cowymyrxlkivgngfbijzxgpeajfo/prefix.pch -MMD -MT dependencies -MF /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/binarize.d --serialize-diagnostics /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/binarize.dia -c /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/qrcode/binarize.c -o /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/binarize.o36"8437C264-8DF8-4EBB-B2D8-47F33E22549B-
-
-CCompileC build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/code128.o /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/decoder/code128.c normal i386 c com.apple.compilers.llvm.clang.1_0.compiler
-s384774106.118251
-e384774106.261250
-r1
-xCompileC
-xbuild/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/code128.o
-x/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/decoder/code128.c
-xnormal
-xi386
-xc
-xcom.apple.compilers.llvm.clang.1_0.compiler
-lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection89"Compile /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/decoder/code128.c0f9d1eda2fefb641^89ed42da2fefb641^---0#0#0#-19%DVTDocumentLocation2@97"file://localhost/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/decoder/code128.c0000000000000000^2348"CompileC build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/code128.o ../zbar/decoder/code128.c normal i386 c com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone    setenv LANG en_US.US-ASCII    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c -arch i386 -fmessage-length=0 -std=c99 -Wno-trigraphs -fpascal-strings -Os -Wno-missing-field-initializers -Wno-missing-prototypes -Wreturn-type -Wformat -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wunused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-enum-conversion -Wno-shorten-64-to-32 -Wpointer-sign -Wno-newline-eof -DNDEBUG=1 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.1.sdk -fexceptions -fasm-blocks -fstrict-aliasing -Wdeprecated-declarations -g -Wno-sign-conversion -mios-simulator-version-min=3.0 -I/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/Release-iphonesimulator/include -Iinclude -I../include -I../zbar -I/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/DerivedSources/i386 -I/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/DerivedSources -F/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/Release-iphonesimulator -include /var/folders/n4/9lfzhctj2d92w7cf217xv8800000gn/C/com.apple.Xcode.501/SharedPrecompiledHeaders/prefix-cowymyrxlkivgngfbijzxgpeajfo/prefix.pch -MMD -MT dependencies -MF /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/code128.d --serialize-diagnostics /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/code128.dia -c /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/decoder/code128.c -o /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/code128.o36"F4ED0F68-9EA5-469F-8511-2BBFC2E57C52-
-
-CCompileC build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/code39.o /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/decoder/code39.c normal i386 c com.apple.compilers.llvm.clang.1_0.compiler
-s384774106.173587
-e384774106.245569
-r1
-xCompileC
-xbuild/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/code39.o
-x/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/decoder/code39.c
-xnormal
-xi386
-xc
-xcom.apple.compilers.llvm.clang.1_0.compiler
-lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection88"Compile /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/decoder/code39.c89eb2cda2fefb641^8ae93eda2fefb641^---0#0#0#-19%DVTDocumentLocation2@96"file://localhost/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/decoder/code39.c0000000000000000^2342"CompileC build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/code39.o ../zbar/decoder/code39.c normal i386 c com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone    setenv LANG en_US.US-ASCII    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c -arch i386 -fmessage-length=0 -std=c99 -Wno-trigraphs -fpascal-strings -Os -Wno-missing-field-initializers -Wno-missing-prototypes -Wreturn-type -Wformat -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wunused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-enum-conversion -Wno-shorten-64-to-32 -Wpointer-sign -Wno-newline-eof -DNDEBUG=1 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.1.sdk -fexceptions -fasm-blocks -fstrict-aliasing -Wdeprecated-declarations -g -Wno-sign-conversion -mios-simulator-version-min=3.0 -I/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/Release-iphonesimulator/include -Iinclude -I../include -I../zbar -I/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/DerivedSources/i386 -I/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/DerivedSources -F/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/Release-iphonesimulator -include /var/folders/n4/9lfzhctj2d92w7cf217xv8800000gn/C/com.apple.Xcode.501/SharedPrecompiledHeaders/prefix-cowymyrxlkivgngfbijzxgpeajfo/prefix.pch -MMD -MT dependencies -MF /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/code39.d --serialize-diagnostics /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/code39.dia -c /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/decoder/code39.c -o /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/code39.o36"C3CC1F78-A196-4C78-A2B8-2724F1768F7B-
-
-CCompileC build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/code93.o /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/decoder/code93.c normal i386 c com.apple.compilers.llvm.clang.1_0.compiler
-s384774107.188681
-e384774107.289549
-r1
-xCompileC
-xbuild/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/code93.o
-x/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/decoder/code93.c
-xnormal
-xi386
-xc
-xcom.apple.compilers.llvm.clang.1_0.compiler
-lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection88"Compile /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/decoder/code93.cc5ab30db2fefb641^884a4fdb2fefb641^---0#0#0#-19%DVTDocumentLocation2@96"file://localhost/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/decoder/code93.c0000000000000000^2342"CompileC build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/code93.o ../zbar/decoder/code93.c normal i386 c com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone    setenv LANG en_US.US-ASCII    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c -arch i386 -fmessage-length=0 -std=c99 -Wno-trigraphs -fpascal-strings -Os -Wno-missing-field-initializers -Wno-missing-prototypes -Wreturn-type -Wformat -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wunused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-enum-conversion -Wno-shorten-64-to-32 -Wpointer-sign -Wno-newline-eof -DNDEBUG=1 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.1.sdk -fexceptions -fasm-blocks -fstrict-aliasing -Wdeprecated-declarations -g -Wno-sign-conversion -mios-simulator-version-min=3.0 -I/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/Release-iphonesimulator/include -Iinclude -I../include -I../zbar -I/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/DerivedSources/i386 -I/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/DerivedSources -F/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/Release-iphonesimulator -include /var/folders/n4/9lfzhctj2d92w7cf217xv8800000gn/C/com.apple.Xcode.501/SharedPrecompiledHeaders/prefix-cowymyrxlkivgngfbijzxgpeajfo/prefix.pch -MMD -MT dependencies -MF /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/code93.d --serialize-diagnostics /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/code93.dia -c /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/decoder/code93.c -o /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/code93.o36"041DE082-7C29-44F6-8E68-9F6570BB56AB-
-
-CCompileC build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/config.o /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/config.c normal i386 c com.apple.compilers.llvm.clang.1_0.compiler
-s384774106.116617
-e384774106.172296
-r1
-xCompileC
-xbuild/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/config.o
-x/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/config.c
-xnormal
-xi386
-xc
-xcom.apple.compilers.llvm.clang.1_0.compiler
-lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection80"Compile /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/config.ca4391eda2fefb641^39472dda2fefb641^---0#0#0#-19%DVTDocumentLocation2@88"file://localhost/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/config.c0000000000000000^2326"CompileC build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/config.o ../zbar/config.c normal i386 c com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone    setenv LANG en_US.US-ASCII    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c -arch i386 -fmessage-length=0 -std=c99 -Wno-trigraphs -fpascal-strings -Os -Wno-missing-field-initializers -Wno-missing-prototypes -Wreturn-type -Wformat -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wunused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-enum-conversion -Wno-shorten-64-to-32 -Wpointer-sign -Wno-newline-eof -DNDEBUG=1 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.1.sdk -fexceptions -fasm-blocks -fstrict-aliasing -Wdeprecated-declarations -g -Wno-sign-conversion -mios-simulator-version-min=3.0 -I/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/Release-iphonesimulator/include -Iinclude -I../include -I../zbar -I/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/DerivedSources/i386 -I/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/DerivedSources -F/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/Release-iphonesimulator -include /var/folders/n4/9lfzhctj2d92w7cf217xv8800000gn/C/com.apple.Xcode.501/SharedPrecompiledHeaders/prefix-cowymyrxlkivgngfbijzxgpeajfo/prefix.pch -MMD -MT dependencies -MF /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/config.d --serialize-diagnostics /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/config.dia -c /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/config.c -o /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/config.o36"BA787BCE-24C2-4562-BCC3-AB00D94C1264-
-
-CCompileC build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/databar.o /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/decoder/databar.c normal i386 c com.apple.compilers.llvm.clang.1_0.compiler
-s384774107.136176
-e384774107.498885
-r1
-xCompileC
-xbuild/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/databar.o
-x/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/decoder/databar.c
-xnormal
-xi386
-xc
-xcom.apple.compilers.llvm.clang.1_0.compiler
-lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection89"Compile /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/decoder/databar.cf03623db2fefb641^2cb87fdb2fefb641^---0#0#0#-19%DVTDocumentLocation2@97"file://localhost/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/decoder/databar.c0000000000000000^2348"CompileC build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/databar.o ../zbar/decoder/databar.c normal i386 c com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone    setenv LANG en_US.US-ASCII    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c -arch i386 -fmessage-length=0 -std=c99 -Wno-trigraphs -fpascal-strings -Os -Wno-missing-field-initializers -Wno-missing-prototypes -Wreturn-type -Wformat -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wunused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-enum-conversion -Wno-shorten-64-to-32 -Wpointer-sign -Wno-newline-eof -DNDEBUG=1 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.1.sdk -fexceptions -fasm-blocks -fstrict-aliasing -Wdeprecated-declarations -g -Wno-sign-conversion -mios-simulator-version-min=3.0 -I/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/Release-iphonesimulator/include -Iinclude -I../include -I../zbar -I/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/DerivedSources/i386 -I/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/DerivedSources -F/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/Release-iphonesimulator -include /var/folders/n4/9lfzhctj2d92w7cf217xv8800000gn/C/com.apple.Xcode.501/SharedPrecompiledHeaders/prefix-cowymyrxlkivgngfbijzxgpeajfo/prefix.pch -MMD -MT dependencies -MF /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/databar.d --serialize-diagnostics /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/databar.dia -c /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/decoder/databar.c -o /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/databar.o36"CBA62D55-2EE8-4CC4-9AA0-400C82FEC732-
-
-CCompileC build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/decoder.o /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/decoder.c normal i386 c com.apple.compilers.llvm.clang.1_0.compiler
-s384774106.117207
-e384774106.215497
-r1
-xCompileC
-xbuild/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/decoder.o
-x/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/decoder.c
-xnormal
-xi386
-xc
-xcom.apple.compilers.llvm.clang.1_0.compiler
-o/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/decoder.c:474:12: warning: comparison of unsigned enum expression >= 0 is always true [-Wtautological-compare]
-o    if(cfg >= 0 && cfg < ZBAR_CFG_NUM)
-o       ~~~ ^  ~
-o1 warning generated.
-lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection81"Compile /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/decoder.c685e1eda2fefb641^2d4037da2fefb641^-251"/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/decoder.c:474:12: warning: comparison of unsigned enum expression >= 0 is always true [-Wtautological-compare]    if(cfg >= 0 && cfg < ZBAR_CFG_NUM)       ~~~ ^  ~1 warning generated.1(36%IDEClangDiagnosticActivityLogMessage2@58"Comparison of unsigned enum expression >= 0 is always true-384774106#18446744073709551615#0#-1#27"com.apple.dt.IDE.diagnostic23%DVTTextDocumentLocation3@79"file://localhost/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/zbar/decoder.c0000000000000000^473#11#473#11#12573#0#14"Semantic Issue2(3@79"file://localhost/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/zbar/decoder.c0000000000000000^473#7#473#10#12569#0#3@79"file://localhost/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/zbar/decoder.c0000000000000000^473#14#473#15#12576#0#-0#0#0#-19%DVTDocumentLocation4@89"file://localhost/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/decoder.c0000000000000000^2332"CompileC build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/decoder.o ../zbar/decoder.c normal i386 c com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone    setenv LANG en_US.US-ASCII    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c -arch i386 -fmessage-length=0 -std=c99 -Wno-trigraphs -fpascal-strings -Os -Wno-missing-field-initializers -Wno-missing-prototypes -Wreturn-type -Wformat -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wunused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-enum-conversion -Wno-shorten-64-to-32 -Wpointer-sign -Wno-newline-eof -DNDEBUG=1 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.1.sdk -fexceptions -fasm-blocks -fstrict-aliasing -Wdeprecated-declarations -g -Wno-sign-conversion -mios-simulator-version-min=3.0 -I/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/Release-iphonesimulator/include -Iinclude -I../include -I../zbar -I/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/DerivedSources/i386 -I/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/DerivedSources -F/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/Release-iphonesimulator -include /var/folders/n4/9lfzhctj2d92w7cf217xv8800000gn/C/com.apple.Xcode.501/SharedPrecompiledHeaders/prefix-cowymyrxlkivgngfbijzxgpeajfo/prefix.pch -MMD -MT dependencies -MF /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/decoder.d --serialize-diagnostics /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/decoder.dia -c /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/decoder.c -o /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/decoder.o36"08396B2C-E251-48C9-BA3B-F6A418106A7F-
-
-CCompileC build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/ean.o /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/decoder/ean.c normal i386 c com.apple.compilers.llvm.clang.1_0.compiler
-s384774106.217061
-e384774106.438573
-r1
-xCompileC
-xbuild/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/ean.o
-x/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/decoder/ean.c
-xnormal
-xi386
-xc
-xcom.apple.compilers.llvm.clang.1_0.compiler
-lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection85"Compile /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/decoder/ean.c5af337da2fefb641^414670da2fefb641^---0#0#0#-19%DVTDocumentLocation2@93"file://localhost/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/decoder/ean.c0000000000000000^2324"CompileC build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/ean.o ../zbar/decoder/ean.c normal i386 c com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone    setenv LANG en_US.US-ASCII    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c -arch i386 -fmessage-length=0 -std=c99 -Wno-trigraphs -fpascal-strings -Os -Wno-missing-field-initializers -Wno-missing-prototypes -Wreturn-type -Wformat -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wunused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-enum-conversion -Wno-shorten-64-to-32 -Wpointer-sign -Wno-newline-eof -DNDEBUG=1 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.1.sdk -fexceptions -fasm-blocks -fstrict-aliasing -Wdeprecated-declarations -g -Wno-sign-conversion -mios-simulator-version-min=3.0 -I/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/Release-iphonesimulator/include -Iinclude -I../include -I../zbar -I/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/DerivedSources/i386 -I/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/DerivedSources -F/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/Release-iphonesimulator -include /var/folders/n4/9lfzhctj2d92w7cf217xv8800000gn/C/com.apple.Xcode.501/SharedPrecompiledHeaders/prefix-cowymyrxlkivgngfbijzxgpeajfo/prefix.pch -MMD -MT dependencies -MF /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/ean.d --serialize-diagnostics /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/ean.dia -c /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/decoder/ean.c -o /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/ean.o36"EC3CC278-370F-4AB0-9E5A-9110744B5268-
-
-CCompileC build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/error.o /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/error.c normal i386 c com.apple.compilers.llvm.clang.1_0.compiler
-s384774106.315173
-e384774106.361831
-r1
-xCompileC
-xbuild/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/error.o
-x/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/error.c
-xnormal
-xi386
-xc
-xcom.apple.compilers.llvm.clang.1_0.compiler
-o/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/error.c:122:18: warning: comparison of unsigned enum expression >= 0 is always true [-Wtautological-compare]
-o    if(err->type >= 0 && err->type < ZBAR_ERR_NUM)
-o       ~~~~~~~~~ ^  ~
-o1 warning generated.
-lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection79"Compile /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/error.c9a0a51da2fefb641^18b45cda2fefb641^-267"/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/error.c:122:18: warning: comparison of unsigned enum expression >= 0 is always true [-Wtautological-compare]    if(err->type >= 0 && err->type < ZBAR_ERR_NUM)       ~~~~~~~~~ ^  ~1 warning generated.1(36%IDEClangDiagnosticActivityLogMessage2@58"Comparison of unsigned enum expression >= 0 is always true-384774106#18446744073709551615#0#-1#27"com.apple.dt.IDE.diagnostic23%DVTTextDocumentLocation3@77"file://localhost/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/zbar/error.c0000000000000000^121#17#121#17#3703#0#14"Semantic Issue2(3@77"file://localhost/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/zbar/error.c0000000000000000^121#7#121#16#3693#5#3@77"file://localhost/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/zbar/error.c0000000000000000^121#20#121#21#3706#0#-0#0#0#-19%DVTDocumentLocation4@87"file://localhost/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/error.c0000000000000000^2320"CompileC build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/error.o ../zbar/error.c normal i386 c com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone    setenv LANG en_US.US-ASCII    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c -arch i386 -fmessage-length=0 -std=c99 -Wno-trigraphs -fpascal-strings -Os -Wno-missing-field-initializers -Wno-missing-prototypes -Wreturn-type -Wformat -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wunused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-enum-conversion -Wno-shorten-64-to-32 -Wpointer-sign -Wno-newline-eof -DNDEBUG=1 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.1.sdk -fexceptions -fasm-blocks -fstrict-aliasing -Wdeprecated-declarations -g -Wno-sign-conversion -mios-simulator-version-min=3.0 -I/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/Release-iphonesimulator/include -Iinclude -I../include -I../zbar -I/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/DerivedSources/i386 -I/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/DerivedSources -F/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/Release-iphonesimulator -include /var/folders/n4/9lfzhctj2d92w7cf217xv8800000gn/C/com.apple.Xcode.501/SharedPrecompiledHeaders/prefix-cowymyrxlkivgngfbijzxgpeajfo/prefix.pch -MMD -MT dependencies -MF /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/error.d --serialize-diagnostics /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/error.dia -c /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/error.c -o /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/error.o36"6334DE3E-49B7-402D-AC0B-F5E31C21858C-
-
-CCompileC build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/i25.o /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/decoder/i25.c normal i386 c com.apple.compilers.llvm.clang.1_0.compiler
-s384774106.246876
-e384774106.330865
-r1
-xCompileC
-xbuild/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/i25.o
-x/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/decoder/i25.c
-xnormal
-xi386
-xc
-xcom.apple.compilers.llvm.clang.1_0.compiler
-lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection85"Compile /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/decoder/i25.c89973fda2fefb641^dfc054da2fefb641^---0#0#0#-19%DVTDocumentLocation2@93"file://localhost/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/decoder/i25.c0000000000000000^2324"CompileC build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/i25.o ../zbar/decoder/i25.c normal i386 c com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone    setenv LANG en_US.US-ASCII    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c -arch i386 -fmessage-length=0 -std=c99 -Wno-trigraphs -fpascal-strings -Os -Wno-missing-field-initializers -Wno-missing-prototypes -Wreturn-type -Wformat -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wunused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-enum-conversion -Wno-shorten-64-to-32 -Wpointer-sign -Wno-newline-eof -DNDEBUG=1 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.1.sdk -fexceptions -fasm-blocks -fstrict-aliasing -Wdeprecated-declarations -g -Wno-sign-conversion -mios-simulator-version-min=3.0 -I/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/Release-iphonesimulator/include -Iinclude -I../include -I../zbar -I/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/DerivedSources/i386 -I/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/DerivedSources -F/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/Release-iphonesimulator -include /var/folders/n4/9lfzhctj2d92w7cf217xv8800000gn/C/com.apple.Xcode.501/SharedPrecompiledHeaders/prefix-cowymyrxlkivgngfbijzxgpeajfo/prefix.pch -MMD -MT dependencies -MF /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/i25.d --serialize-diagnostics /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/i25.dia -c /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/decoder/i25.c -o /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/i25.o36"224DC6DE-D565-4D6F-8D74-20F6C0761782-
-
-CCompileC build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/image.o /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/image.c normal i386 c com.apple.compilers.llvm.clang.1_0.compiler
-s384774106.332160
-e384774106.399782
-r1
-xCompileC
-xbuild/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/image.o
-x/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/image.c
-xnormal
-xi386
-xc
-xcom.apple.compilers.llvm.clang.1_0.compiler
-lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection79"Compile /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/image.ca16555da2fefb641^eb5766da2fefb641^---0#0#0#-19%DVTDocumentLocation2@87"file://localhost/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/image.c0000000000000000^2320"CompileC build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/image.o ../zbar/image.c normal i386 c com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone    setenv LANG en_US.US-ASCII    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c -arch i386 -fmessage-length=0 -std=c99 -Wno-trigraphs -fpascal-strings -Os -Wno-missing-field-initializers -Wno-missing-prototypes -Wreturn-type -Wformat -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wunused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-enum-conversion -Wno-shorten-64-to-32 -Wpointer-sign -Wno-newline-eof -DNDEBUG=1 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.1.sdk -fexceptions -fasm-blocks -fstrict-aliasing -Wdeprecated-declarations -g -Wno-sign-conversion -mios-simulator-version-min=3.0 -I/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/Release-iphonesimulator/include -Iinclude -I../include -I../zbar -I/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/DerivedSources/i386 -I/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/DerivedSources -F/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/Release-iphonesimulator -include /var/folders/n4/9lfzhctj2d92w7cf217xv8800000gn/C/com.apple.Xcode.501/SharedPrecompiledHeaders/prefix-cowymyrxlkivgngfbijzxgpeajfo/prefix.pch -MMD -MT dependencies -MF /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/image.d --serialize-diagnostics /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/image.dia -c /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/image.c -o /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/image.o36"3D259046-8DCD-4724-9E66-DB8C6BDF37E6-
-
-CCompileC build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/img_scanner.o /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/img_scanner.c normal i386 c com.apple.compilers.llvm.clang.1_0.compiler
-s384774106.363123
-e384774106.536900
-r1
-xCompileC
-xbuild/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/img_scanner.o
-x/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/img_scanner.c
-xnormal
-xi386
-xc
-xcom.apple.compilers.llvm.clang.1_0.compiler
-o/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/img_scanner.c:818:38: warning: '&&' within '||' [-Wlogical-op-parentheses]
-o            if(sym->cache_count <= 0 &&
-o               ~~~~~~~~~~~~~~~~~~~~~~^~
-o/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/img_scanner.c:818:38: note: place parentheses around the '&&' expression to silence this warning
-o            if(sym->cache_count <= 0 &&
-o                                     ^
-o1 warning generated.
-lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection85"Compile /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/img_scanner.c3f555dda2fefb641^16c2e2da2fefb641^-480"/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/img_scanner.c:818:38: warning: '&&' within '||' [-Wlogical-op-parentheses]            if(sym->cache_count <= 0 &&               ~~~~~~~~~~~~~~~~~~~~~~^~/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/img_scanner.c:818:38: note: place parentheses around the '&&' expression to silence this warning            if(sym->cache_count <= 0 &&                                     ^1 warning generated.1(36%IDEClangDiagnosticActivityLogMessage2@16"'&&' within '||'-384774106#18446744073709551615#0#1(2@68"Place parentheses around the '&&' expression to silence this warning-384774106#18446744073709551615#0#-0#27"com.apple.dt.IDE.diagnostic23%DVTTextDocumentLocation3@83"file://localhost/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/zbar/img_scanner.c0000000000000000^817#37#817#37#24301#0#14"Semantic Issue2(3@83"file://localhost/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/zbar/img_scanner.c0000000000000000^817#15#817#15#24279#0#3@83"file://localhost/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/zbar/img_scanner.c0000000000000000^818#71#818#71#24375#0#-1#27"com.apple.dt.IDE.diagnostic3@83"file://localhost/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/zbar/img_scanner.c0000000000000000^817#37#817#37#24301#0#14"Semantic Issue2(3@83"file://localhost/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/zbar/img_scanner.c0000000000000000^817#15#818#71#24279#95#3@83"file://localhost/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/zbar/img_scanner.c0000000000000000^818#72#818#74#24376#0#-0#0#0#-19%DVTDocumentLocation4@93"file://localhost/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/img_scanner.c0000000000000000^2356"CompileC build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/img_scanner.o ../zbar/img_scanner.c normal i386 c com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone    setenv LANG en_US.US-ASCII    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c -arch i386 -fmessage-length=0 -std=c99 -Wno-trigraphs -fpascal-strings -Os -Wno-missing-field-initializers -Wno-missing-prototypes -Wreturn-type -Wformat -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wunused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-enum-conversion -Wno-shorten-64-to-32 -Wpointer-sign -Wno-newline-eof -DNDEBUG=1 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.1.sdk -fexceptions -fasm-blocks -fstrict-aliasing -Wdeprecated-declarations -g -Wno-sign-conversion -mios-simulator-version-min=3.0 -I/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/Release-iphonesimulator/include -Iinclude -I../include -I../zbar -I/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/DerivedSources/i386 -I/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/DerivedSources -F/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/Release-iphonesimulator -include /var/folders/n4/9lfzhctj2d92w7cf217xv8800000gn/C/com.apple.Xcode.501/SharedPrecompiledHeaders/prefix-cowymyrxlkivgngfbijzxgpeajfo/prefix.pch -MMD -MT dependencies -MF /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/img_scanner.d --serialize-diagnostics /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/img_scanner.dia -c /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/img_scanner.c -o /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/img_scanner.o36"65683777-AB87-47C8-AFF7-EFD2BD0CDF8A-
-
-CCompileC build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/isaac.o /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/qrcode/isaac.c normal i386 c com.apple.compilers.llvm.clang.1_0.compiler
-s384774106.452534
-e384774106.508176
-r1
-xCompileC
-xbuild/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/isaac.o
-x/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/qrcode/isaac.c
-xnormal
-xi386
-xc
-xcom.apple.compilers.llvm.clang.1_0.compiler
-lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection86"Compile /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/qrcode/isaac.c693974da2fefb641^4563e1da2fefb641^---0#0#0#-19%DVTDocumentLocation2@94"file://localhost/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/qrcode/isaac.c0000000000000000^2334"CompileC build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/isaac.o ../zbar/qrcode/isaac.c normal i386 c com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone    setenv LANG en_US.US-ASCII    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c -arch i386 -fmessage-length=0 -std=c99 -Wno-trigraphs -fpascal-strings -Os -Wno-missing-field-initializers -Wno-missing-prototypes -Wreturn-type -Wformat -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wunused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-enum-conversion -Wno-shorten-64-to-32 -Wpointer-sign -Wno-newline-eof -DNDEBUG=1 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.1.sdk -fexceptions -fasm-blocks -fstrict-aliasing -Wdeprecated-declarations -g -Wno-sign-conversion -mios-simulator-version-min=3.0 -I/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/Release-iphonesimulator/include -Iinclude -I../include -I../zbar -I/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/DerivedSources/i386 -I/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/DerivedSources -F/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/Release-iphonesimulator -include /var/folders/n4/9lfzhctj2d92w7cf217xv8800000gn/C/com.apple.Xcode.501/SharedPrecompiledHeaders/prefix-cowymyrxlkivgngfbijzxgpeajfo/prefix.pch -MMD -MT dependencies -MF /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/isaac.d --serialize-diagnostics /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/isaac.dia -c /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/qrcode/isaac.c -o /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/isaac.o36"021F216E-B993-4CBE-8D7E-81C1382238F3-
-
-CCompileC build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/qr_finder.o /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/decoder/qr_finder.c normal i386 c com.apple.compilers.llvm.clang.1_0.compiler
-s384774106.262522
-e384774106.312141
-r1
-xCompileC
-xbuild/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/qr_finder.o
-x/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/decoder/qr_finder.c
-xnormal
-xi386
-xc
-xcom.apple.compilers.llvm.clang.1_0.compiler
-lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection91"Compile /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/decoder/qr_finder.c319443da2fefb641^6e1451da2fefb641^---0#0#0#-19%DVTDocumentLocation2@99"file://localhost/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/decoder/qr_finder.c0000000000000000^2360"CompileC build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/qr_finder.o ../zbar/decoder/qr_finder.c normal i386 c com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone    setenv LANG en_US.US-ASCII    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c -arch i386 -fmessage-length=0 -std=c99 -Wno-trigraphs -fpascal-strings -Os -Wno-missing-field-initializers -Wno-missing-prototypes -Wreturn-type -Wformat -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wunused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-enum-conversion -Wno-shorten-64-to-32 -Wpointer-sign -Wno-newline-eof -DNDEBUG=1 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.1.sdk -fexceptions -fasm-blocks -fstrict-aliasing -Wdeprecated-declarations -g -Wno-sign-conversion -mios-simulator-version-min=3.0 -I/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/Release-iphonesimulator/include -Iinclude -I../include -I../zbar -I/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/DerivedSources/i386 -I/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/DerivedSources -F/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/Release-iphonesimulator -include /var/folders/n4/9lfzhctj2d92w7cf217xv8800000gn/C/com.apple.Xcode.501/SharedPrecompiledHeaders/prefix-cowymyrxlkivgngfbijzxgpeajfo/prefix.pch -MMD -MT dependencies -MF /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/qr_finder.d --serialize-diagnostics /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/qr_finder.dia -c /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/decoder/qr_finder.c -o /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/qr_finder.o36"D2C40B4B-D181-45DA-8487-1DCA488BBE58-
-
-CCompileC build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/qrdec.o /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/qrcode/qrdec.c normal i386 c com.apple.compilers.llvm.clang.1_0.compiler
-s384774106.501418
-e384774107.670120
-r1
-xCompileC
-xbuild/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/qrdec.o
-x/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/qrcode/qrdec.c
-xnormal
-xi386
-xc
-xcom.apple.compilers.llvm.clang.1_0.compiler
-o/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/qrcode/qrdec.c:2521:22: warning: '&&' within '||' [-Wlogical-op-parentheses]
-o    if(nerrs[besti]>3&&nerrs[i]<=3||
-o       ~~~~~~~~~~~~~~^~~~~~~~~~~~~~~
-o/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/qrcode/qrdec.c:2521:22: note: place parentheses around the '&&' expression to silence this warning
-o    if(nerrs[besti]>3&&nerrs[i]<=3||
-o                     ^
-o       (                          )
-o/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/qrcode/qrdec.c:2522:51: warning: '&&' within '||' [-Wlogical-op-parentheses]
-o     count[i]>count[besti]||count[i]==count[besti]&&nerrs[i]<nerrs[besti]){
-o                          ~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~
-o/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/qrcode/qrdec.c:2522:51: note: place parentheses around the '&&' expression to silence this warning
-o     count[i]>count[besti]||count[i]==count[besti]&&nerrs[i]<nerrs[besti]){
-o                                                  ^
-o                            (                                            )
-o/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/qrcode/qrdec.c:3058:36: warning: '&' within '|' [-Wbitwise-op-parentheses]
-o          bits=bits<<1|data1>>nbits&1;
-o                      ~~~~~~~~~~~~~^~
-o/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/qrcode/qrdec.c:3058:36: note: place parentheses around the '&' expression to silence this warning
-o          bits=bits<<1|data1>>nbits&1;
-o                                   ^
-o                       (             )
-o/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/qrcode/qrdec.c:3063:36: warning: '&' within '|' [-Wbitwise-op-parentheses]
-o          bits=bits<<1|data2>>nbits&1;
-o                      ~~~~~~~~~~~~~^~
-o/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/qrcode/qrdec.c:3063:36: note: place parentheses around the '&' expression to silence this warning
-o          bits=bits<<1|data2>>nbits&1;
-o                                   ^
-o                       (             )
-o/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/qrcode/qrdec.c:3098:29: warning: '&' within '|' [-Wbitwise-op-parentheses]
-o          bits=bits<<1|data1&1;
-o                      ~~~~~~^~
-o/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/qrcode/qrdec.c:3098:29: note: place parentheses around the '&' expression to silence this warning
-o          bits=bits<<1|data1&1;
-o                            ^
-o                       (      )
-o/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/qrcode/qrdec.c:3105:29: warning: '&' within '|' [-Wbitwise-op-parentheses]
-o          bits=bits<<1|data2&1;
-o                      ~~~~~~^~
-o/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/qrcode/qrdec.c:3105:29: note: place parentheses around the '&' expression to silence this warning
-o          bits=bits<<1|data2&1;
-o                            ^
-o                       (      )
-o/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/qrcode/qrdec.c:3416:21: warning: '&&' within '||' [-Wlogical-op-parentheses]
-o        if(!(bits>=0&&bits<100||bits>=165&&bits<191||bits>=197&&bits<223)){
-o             ~~~~~~~^~~~~~~~~~~~
-o/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/qrcode/qrdec.c:3416:21: note: place parentheses around the '&&' expression to silence this warning
-o        if(!(bits>=0&&bits<100||bits>=165&&bits<191||bits>=197&&bits<223)){
-o                    ^
-o             (                )
-o/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/qrcode/qrdec.c:3416:42: warning: '&&' within '||' [-Wlogical-op-parentheses]
-o        if(!(bits>=0&&bits<100||bits>=165&&bits<191||bits>=197&&bits<223)){
-o                              ~~~~~~~~~~~^~~~~~~~~~
-o/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/qrcode/qrdec.c:3416:42: note: place parentheses around the '&&' expression to silence this warning
-o        if(!(bits>=0&&bits<100||bits>=165&&bits<191||bits>=197&&bits<223)){
-o                                         ^
-o                                (                  )
-o/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/qrcode/qrdec.c:3416:63: warning: '&&' within '||' [-Wlogical-op-parentheses]
-o        if(!(bits>=0&&bits<100||bits>=165&&bits<191||bits>=197&&bits<223)){
-o                                                   ~~~~~~~~~~~^~~~~~~~~~
-o/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/qrcode/qrdec.c:3416:63: note: place parentheses around the '&&' expression to silence this warning
-o        if(!(bits>=0&&bits<100||bits>=165&&bits<191||bits>=197&&bits<223)){
-o                                                              ^
-o                                                     (                  )
-o/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/qrcode/qrdec.c:3620:26: warning: '&&' within '||' [-Wlogical-op-parentheses]
-o    if(ret<0||_version==1&&ret>ecc_level+1<<1||
-o            ~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~
-o/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/qrcode/qrdec.c:3620:26: note: place parentheses around the '&&' expression to silence this warning
-o    if(ret<0||_version==1&&ret>ecc_level+1<<1||
-o                         ^
-o              (                              )
-o/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/qrcode/qrdec.c:3621:31: warning: '&&' within '||' [-Wlogical-op-parentheses]
-o     _version==2&&ecc_level==0&&ret>4){
-o     ~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~
-o/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/qrcode/qrdec.c:3621:31: note: place parentheses around the '&&' expression to silence this warning
-o     _version==2&&ecc_level==0&&ret>4){
-o                              ^
-o     (                               )
-o11 warnings generated.
-lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection86"Compile /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/qrcode/qrdec.cd4b780da2fefb641^878cabdb2fefb641^-5883"/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/qrcode/qrdec.c:2521:22: warning: '&&' within '||' [-Wlogical-op-parentheses]    if(nerrs[besti]>3&&nerrs[i]<=3||       ~~~~~~~~~~~~~~^~~~~~~~~~~~~~~/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/qrcode/qrdec.c:2521:22: note: place parentheses around the '&&' expression to silence this warning    if(nerrs[besti]>3&&nerrs[i]<=3||                     ^       (                          )/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/qrcode/qrdec.c:2522:51: warning: '&&' within '||' [-Wlogical-op-parentheses]     count[i]>count[besti]||count[i]==count[besti]&&nerrs[i]<nerrs[besti]){                          ~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/qrcode/qrdec.c:2522:51: note: place parentheses around the '&&' expression to silence this warning     count[i]>count[besti]||count[i]==count[besti]&&nerrs[i]<nerrs[besti]){                                                  ^                            (                                            )/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/qrcode/qrdec.c:3058:36: warning: '&' within '|' [-Wbitwise-op-parentheses]          bits=bits<<1|data1>>nbits&1;                      ~~~~~~~~~~~~~^~/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/qrcode/qrdec.c:3058:36: note: place parentheses around the '&' expression to silence this warning          bits=bits<<1|data1>>nbits&1;                                   ^                       (             )/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/qrcode/qrdec.c:3063:36: warning: '&' within '|' [-Wbitwise-op-parentheses]          bits=bits<<1|data2>>nbits&1;                      ~~~~~~~~~~~~~^~/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/qrcode/qrdec.c:3063:36: note: place parentheses around the '&' expression to silence this warning          bits=bits<<1|data2>>nbits&1;                                   ^                       (             )/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/qrcode/qrdec.c:3098:29: warning: '&' within '|' [-Wbitwise-op-parentheses]          bits=bits<<1|data1&1;                      ~~~~~~^~/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/qrcode/qrdec.c:3098:29: note: place parentheses around the '&' expression to silence this warning          bits=bits<<1|data1&1;                            ^                       (      )/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/qrcode/qrdec.c:3105:29: warning: '&' within '|' [-Wbitwise-op-parentheses]          bits=bits<<1|data2&1;                      ~~~~~~^~/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/qrcode/qrdec.c:3105:29: note: place parentheses around the '&' expression to silence this warning          bits=bits<<1|data2&1;                            ^                       (      )/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/qrcode/qrdec.c:3416:21: warning: '&&' within '||' [-Wlogical-op-parentheses]        if(!(bits>=0&&bits<100||bits>=165&&bits<191||bits>=197&&bits<223)){             ~~~~~~~^~~~~~~~~~~~/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/qrcode/qrdec.c:3416:21: note: place parentheses around the '&&' expression to silence this warning        if(!(bits>=0&&bits<100||bits>=165&&bits<191||bits>=197&&bits<223)){                    ^             (                )/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/qrcode/qrdec.c:3416:42: warning: '&&' within '||' [-Wlogical-op-parentheses]        if(!(bits>=0&&bits<100||bits>=165&&bits<191||bits>=197&&bits<223)){                              ~~~~~~~~~~~^~~~~~~~~~/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/qrcode/qrdec.c:3416:42: note: place parentheses around the '&&' expression to silence this warning        if(!(bits>=0&&bits<100||bits>=165&&bits<191||bits>=197&&bits<223)){                                         ^                                (                  )/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/qrcode/qrdec.c:3416:63: warning: '&&' within '||' [-Wlogical-op-parentheses]        if(!(bits>=0&&bits<100||bits>=165&&bits<191||bits>=197&&bits<223)){                                                   ~~~~~~~~~~~^~~~~~~~~~/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/qrcode/qrdec.c:3416:63: note: place parentheses around the '&&' expression to silence this warning        if(!(bits>=0&&bits<100||bits>=165&&bits<191||bits>=197&&bits<223)){                                                              ^                                                     (                  )/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/qrcode/qrdec.c:3620:26: warning: '&&' within '||' [-Wlogical-op-parentheses]    if(ret<0||_version==1&&ret>ecc_level+1<<1||            ~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/qrcode/qrdec.c:3620:26: note: place parentheses around the '&&' expression to silence this warning    if(ret<0||_version==1&&ret>ecc_level+1<<1||                         ^              (                              )/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/qrcode/qrdec.c:3621:31: warning: '&&' within '||' [-Wlogical-op-parentheses]     _version==2&&ecc_level==0&&ret>4){     ~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/qrcode/qrdec.c:3621:31: note: place parentheses around the '&&' expression to silence this warning     _version==2&&ecc_level==0&&ret>4){                              ^     (                               )11 warnings generated.11(36%IDEClangDiagnosticActivityLogMessage2@16"'&&' within '||'-384774107#18446744073709551615#0#1(2@68"Place parentheses around the '&&' expression to silence this warning-384774107#18446744073709551615#0#-0#27"com.apple.dt.IDE.diagnostic23%DVTTextDocumentLocation3@84"file://localhost/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/zbar/qrcode/qrdec.c0000000000000000^2520#21#2520#21#83588#0#14"Semantic Issue2(3@84"file://localhost/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/zbar/qrcode/qrdec.c0000000000000000^2520#7#2520#7#83574#0#3@84"file://localhost/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/zbar/qrcode/qrdec.c0000000000000000^2520#34#2520#34#83601#0#-1#27"com.apple.dt.IDE.diagnostic3@84"file://localhost/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/zbar/qrcode/qrdec.c0000000000000000^2520#21#2520#21#83588#0#14"Semantic Issue2(3@84"file://localhost/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/zbar/qrcode/qrdec.c0000000000000000^2520#7#2520#34#83574#26#3@84"file://localhost/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/zbar/qrcode/qrdec.c0000000000000000^2520#34#2520#36#83601#0#-2@16"'&&' within '||'-384774107#18446744073709551615#0#1(2@68"Place parentheses around the '&&' expression to silence this warning-384774107#18446744073709551615#0#-0#27"com.apple.dt.IDE.diagnostic3@84"file://localhost/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/zbar/qrcode/qrdec.c0000000000000000^2521#50#2521#50#83654#0#14"Semantic Issue2(3@84"file://localhost/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/zbar/qrcode/qrdec.c0000000000000000^2521#28#2521#28#83632#0#3@84"file://localhost/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/zbar/qrcode/qrdec.c0000000000000000^2521#73#2521#73#83677#0#-1#27"com.apple.dt.IDE.diagnostic3@84"file://localhost/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/zbar/qrcode/qrdec.c0000000000000000^2521#50#2521#50#83654#0#14"Semantic Issue2(3@84"file://localhost/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/zbar/qrcode/qrdec.c0000000000000000^2521#28#2521#73#83632#44#3@84"file://localhost/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/zbar/qrcode/qrdec.c0000000000000000^2521#26#2521#28#83630#0#-2@14"'&' within '|'-384774107#18446744073709551615#0#1(2@67"Place parentheses around the '&' expression to silence this warning-384774107#18446744073709551615#0#-0#27"com.apple.dt.IDE.diagnostic3@84"file://localhost/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/zbar/qrcode/qrdec.c0000000000000000^3057#35#3057#35#101598#0#14"Semantic Issue2(3@84"file://localhost/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/zbar/qrcode/qrdec.c0000000000000000^3057#23#3057#23#101586#0#3@84"file://localhost/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/zbar/qrcode/qrdec.c0000000000000000^3057#37#3057#37#101600#0#-1#27"com.apple.dt.IDE.diagnostic3@84"file://localhost/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/zbar/qrcode/qrdec.c0000000000000000^3057#35#3057#35#101598#0#14"Semantic Issue2(3@84"file://localhost/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/zbar/qrcode/qrdec.c0000000000000000^3057#23#3057#37#101586#13#3@84"file://localhost/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/zbar/qrcode/qrdec.c0000000000000000^3057#22#3057#23#101585#0#-2@14"'&' within '|'-384774107#18446744073709551615#0#1(2@67"Place parentheses around the '&' expression to silence this warning-384774107#18446744073709551615#0#-0#27"com.apple.dt.IDE.diagnostic3@84"file://localhost/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/zbar/qrcode/qrdec.c0000000000000000^3062#35#3062#35#101744#0#14"Semantic Issue2(3@84"file://localhost/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/zbar/qrcode/qrdec.c0000000000000000^3062#23#3062#23#101732#0#3@84"file://localhost/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/zbar/qrcode/qrdec.c0000000000000000^3062#37#3062#37#101746#0#-1#27"com.apple.dt.IDE.diagnostic3@84"file://localhost/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/zbar/qrcode/qrdec.c0000000000000000^3062#35#3062#35#101744#0#14"Semantic Issue2(3@84"file://localhost/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/zbar/qrcode/qrdec.c0000000000000000^3062#23#3062#37#101732#13#3@84"file://localhost/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/zbar/qrcode/qrdec.c0000000000000000^3062#22#3062#23#101731#0#-2@14"'&' within '|'-384774107#18446744073709551615#0#1(2@67"Place parentheses around the '&' expression to silence this warning-384774107#18446744073709551615#0#-0#27"com.apple.dt.IDE.diagnostic3@84"file://localhost/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/zbar/qrcode/qrdec.c0000000000000000^3097#28#3097#28#103145#0#14"Semantic Issue2(3@84"file://localhost/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/zbar/qrcode/qrdec.c0000000000000000^3097#23#3097#23#103140#0#3@84"file://localhost/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/zbar/qrcode/qrdec.c0000000000000000^3097#30#3097#30#103147#0#-1#27"com.apple.dt.IDE.diagnostic3@84"file://localhost/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/zbar/qrcode/qrdec.c0000000000000000^3097#28#3097#28#103145#0#14"Semantic Issue2(3@84"file://localhost/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/zbar/qrcode/qrdec.c0000000000000000^3097#23#3097#30#103140#6#3@84"file://localhost/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/zbar/qrcode/qrdec.c0000000000000000^3097#22#3097#23#103139#0#-2@14"'&' within '|'-384774107#18446744073709551615#0#1(2@67"Place parentheses around the '&' expression to silence this warning-384774107#18446744073709551615#0#-0#27"com.apple.dt.IDE.diagnostic3@84"file://localhost/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/zbar/qrcode/qrdec.c0000000000000000^3104#28#3104#28#103318#0#14"Semantic Issue2(3@84"file://localhost/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/zbar/qrcode/qrdec.c0000000000000000^3104#23#3104#23#103313#0#3@84"file://localhost/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/zbar/qrcode/qrdec.c0000000000000000^3104#30#3104#30#103320#0#-1#27"com.apple.dt.IDE.diagnostic3@84"file://localhost/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/zbar/qrcode/qrdec.c0000000000000000^3104#28#3104#28#103318#0#14"Semantic Issue2(3@84"file://localhost/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/zbar/qrcode/qrdec.c0000000000000000^3104#23#3104#30#103313#6#3@84"file://localhost/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/zbar/qrcode/qrdec.c0000000000000000^3104#22#3104#23#103312#0#-2@16"'&&' within '||'-384774107#18446744073709551615#0#1(2@68"Place parentheses around the '&&' expression to silence this warning-384774107#18446744073709551615#0#-0#27"com.apple.dt.IDE.diagnostic3@84"file://localhost/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/zbar/qrcode/qrdec.c0000000000000000^3415#20#3415#20#113720#0#14"Semantic Issue2(3@84"file://localhost/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/zbar/qrcode/qrdec.c0000000000000000^3415#13#3415#13#113713#0#3@84"file://localhost/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/zbar/qrcode/qrdec.c0000000000000000^3415#30#3415#30#113730#0#-1#27"com.apple.dt.IDE.diagnostic3@84"file://localhost/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/zbar/qrcode/qrdec.c0000000000000000^3415#20#3415#20#113720#0#14"Semantic Issue2(3@84"file://localhost/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/zbar/qrcode/qrdec.c0000000000000000^3415#13#3415#30#113713#14#3@84"file://localhost/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/zbar/qrcode/qrdec.c0000000000000000^3415#30#3415#32#113730#0#-2@16"'&&' within '||'-384774107#18446744073709551615#0#1(2@68"Place parentheses around the '&&' expression to silence this warning-384774107#18446744073709551615#0#-0#27"com.apple.dt.IDE.diagnostic3@84"file://localhost/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/zbar/qrcode/qrdec.c0000000000000000^3415#41#3415#41#113741#0#14"Semantic Issue2(3@84"file://localhost/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/zbar/qrcode/qrdec.c0000000000000000^3415#32#3415#32#113732#0#3@84"file://localhost/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/zbar/qrcode/qrdec.c0000000000000000^3415#51#3415#51#113751#0#-1#27"com.apple.dt.IDE.diagnostic3@84"file://localhost/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/zbar/qrcode/qrdec.c0000000000000000^3415#41#3415#41#113741#0#14"Semantic Issue2(3@84"file://localhost/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/zbar/qrcode/qrdec.c0000000000000000^3415#32#3415#51#113732#16#3@84"file://localhost/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/zbar/qrcode/qrdec.c0000000000000000^3415#30#3415#32#113730#0#-2@16"'&&' within '||'-384774107#18446744073709551615#0#1(2@68"Place parentheses around the '&&' expression to silence this warning-384774107#18446744073709551615#0#-0#27"com.apple.dt.IDE.diagnostic3@84"file://localhost/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/zbar/qrcode/qrdec.c0000000000000000^3415#62#3415#62#113762#0#14"Semantic Issue2(3@84"file://localhost/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/zbar/qrcode/qrdec.c0000000000000000^3415#53#3415#53#113753#0#3@84"file://localhost/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/zbar/qrcode/qrdec.c0000000000000000^3415#72#3415#72#113772#0#-1#27"com.apple.dt.IDE.diagnostic3@84"file://localhost/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/zbar/qrcode/qrdec.c0000000000000000^3415#62#3415#62#113762#0#14"Semantic Issue2(3@84"file://localhost/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/zbar/qrcode/qrdec.c0000000000000000^3415#53#3415#72#113753#16#3@84"file://localhost/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/zbar/qrcode/qrdec.c0000000000000000^3415#51#3415#53#113751#0#-2@16"'&&' within '||'-384774107#18446744073709551615#0#1(2@68"Place parentheses around the '&&' expression to silence this warning-384774107#18446744073709551615#0#-0#27"com.apple.dt.IDE.diagnostic3@84"file://localhost/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/zbar/qrcode/qrdec.c0000000000000000^3619#25#3619#25#121614#0#14"Semantic Issue2(3@84"file://localhost/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/zbar/qrcode/qrdec.c0000000000000000^3619#14#3619#14#121603#0#3@84"file://localhost/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/zbar/qrcode/qrdec.c0000000000000000^3619#45#3619#45#121634#0#-1#27"com.apple.dt.IDE.diagnostic3@84"file://localhost/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/zbar/qrcode/qrdec.c0000000000000000^3619#25#3619#25#121614#0#14"Semantic Issue2(3@84"file://localhost/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/zbar/qrcode/qrdec.c0000000000000000^3619#14#3619#45#121603#30#3@84"file://localhost/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/zbar/qrcode/qrdec.c0000000000000000^3619#12#3619#14#121601#0#-2@16"'&&' within '||'-384774107#18446744073709551615#0#1(2@68"Place parentheses around the '&&' expression to silence this warning-384774107#18446744073709551615#0#-0#27"com.apple.dt.IDE.diagnostic3@84"file://localhost/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/zbar/qrcode/qrdec.c0000000000000000^3620#30#3620#30#121667#0#14"Semantic Issue2(3@84"file://localhost/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/zbar/qrcode/qrdec.c0000000000000000^3620#5#3620#5#121642#0#3@84"file://localhost/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/zbar/qrcode/qrdec.c0000000000000000^3620#37#3620#37#121674#0#-1#27"com.apple.dt.IDE.diagnostic3@84"file://localhost/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/zbar/qrcode/qrdec.c0000000000000000^3620#30#3620#30#121667#0#14"Semantic Issue2(3@84"file://localhost/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/zbar/qrcode/qrdec.c0000000000000000^3620#5#3620#37#121642#31#3@84"file://localhost/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/zbar/qrcode/qrdec.c0000000000000000^3619#45#3619#47#121634#0#-0#0#0#-19%DVTDocumentLocation4@94"file://localhost/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/qrcode/qrdec.c0000000000000000^2334"CompileC build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/qrdec.o ../zbar/qrcode/qrdec.c normal i386 c com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone    setenv LANG en_US.US-ASCII    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c -arch i386 -fmessage-length=0 -std=c99 -Wno-trigraphs -fpascal-strings -Os -Wno-missing-field-initializers -Wno-missing-prototypes -Wreturn-type -Wformat -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wunused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-enum-conversion -Wno-shorten-64-to-32 -Wpointer-sign -Wno-newline-eof -DNDEBUG=1 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.1.sdk -fexceptions -fasm-blocks -fstrict-aliasing -Wdeprecated-declarations -g -Wno-sign-conversion -mios-simulator-version-min=3.0 -I/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/Release-iphonesimulator/include -Iinclude -I../include -I../zbar -I/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/DerivedSources/i386 -I/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/DerivedSources -F/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/Release-iphonesimulator -include /var/folders/n4/9lfzhctj2d92w7cf217xv8800000gn/C/com.apple.Xcode.501/SharedPrecompiledHeaders/prefix-cowymyrxlkivgngfbijzxgpeajfo/prefix.pch -MMD -MT dependencies -MF /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/qrdec.d --serialize-diagnostics /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/qrdec.dia -c /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/qrcode/qrdec.c -o /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/qrdec.o36"4AEF4298-783D-4EAD-8EA4-56896170C93A-
-
-CCompileC build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/qrdectxt.o /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/qrcode/qrdectxt.c normal i386 c com.apple.compilers.llvm.clang.1_0.compiler
-s384774106.503064
-e384774106.680779
-r1
-xCompileC
-xbuild/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/qrdectxt.o
-x/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/qrcode/qrdectxt.c
-xnormal
-xi386
-xc
-xcom.apple.compilers.llvm.clang.1_0.compiler
-lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection89"Compile /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/qrcode/qrdectxt.ce12481da2fefb641^9f224fdb2fefb641^---0#0#0#-19%DVTDocumentLocation2@97"file://localhost/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/qrcode/qrdectxt.c0000000000000000^2352"CompileC build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/qrdectxt.o ../zbar/qrcode/qrdectxt.c normal i386 c com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone    setenv LANG en_US.US-ASCII    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c -arch i386 -fmessage-length=0 -std=c99 -Wno-trigraphs -fpascal-strings -Os -Wno-missing-field-initializers -Wno-missing-prototypes -Wreturn-type -Wformat -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wunused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-enum-conversion -Wno-shorten-64-to-32 -Wpointer-sign -Wno-newline-eof -DNDEBUG=1 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.1.sdk -fexceptions -fasm-blocks -fstrict-aliasing -Wdeprecated-declarations -g -Wno-sign-conversion -mios-simulator-version-min=3.0 -I/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/Release-iphonesimulator/include -Iinclude -I../include -I../zbar -I/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/DerivedSources/i386 -I/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/DerivedSources -F/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/Release-iphonesimulator -include /var/folders/n4/9lfzhctj2d92w7cf217xv8800000gn/C/com.apple.Xcode.501/SharedPrecompiledHeaders/prefix-cowymyrxlkivgngfbijzxgpeajfo/prefix.pch -MMD -MT dependencies -MF /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/qrdectxt.d --serialize-diagnostics /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/qrdectxt.dia -c /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/qrcode/qrdectxt.c -o /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/qrdectxt.o36"018BDE0F-0171-4A29-AEBE-697D1CDFC38F-
-
-CCompileC build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/refcnt.o /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/refcnt.c normal i386 c com.apple.compilers.llvm.clang.1_0.compiler
-s384774107.065164
-e384774107.089528
-r1
-xCompileC
-xbuild/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/refcnt.o
-x/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/refcnt.c
-xnormal
-xi386
-xc
-xcom.apple.compilers.llvm.clang.1_0.compiler
-lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection80"Compile /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/refcnt.cd00d11db2fefb641^c4404fdb2fefb641^---0#0#0#-19%DVTDocumentLocation2@88"file://localhost/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/refcnt.c0000000000000000^2326"CompileC build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/refcnt.o ../zbar/refcnt.c normal i386 c com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone    setenv LANG en_US.US-ASCII    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c -arch i386 -fmessage-length=0 -std=c99 -Wno-trigraphs -fpascal-strings -Os -Wno-missing-field-initializers -Wno-missing-prototypes -Wreturn-type -Wformat -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wunused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-enum-conversion -Wno-shorten-64-to-32 -Wpointer-sign -Wno-newline-eof -DNDEBUG=1 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.1.sdk -fexceptions -fasm-blocks -fstrict-aliasing -Wdeprecated-declarations -g -Wno-sign-conversion -mios-simulator-version-min=3.0 -I/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/Release-iphonesimulator/include -Iinclude -I../include -I../zbar -I/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/DerivedSources/i386 -I/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/DerivedSources -F/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/Release-iphonesimulator -include /var/folders/n4/9lfzhctj2d92w7cf217xv8800000gn/C/com.apple.Xcode.501/SharedPrecompiledHeaders/prefix-cowymyrxlkivgngfbijzxgpeajfo/prefix.pch -MMD -MT dependencies -MF /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/refcnt.d --serialize-diagnostics /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/refcnt.dia -c /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/refcnt.c -o /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/refcnt.o36"EDD8E57F-B649-4783-9247-44EDAC21E263-
-
-CCompileC build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/rs.o /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/qrcode/rs.c normal i386 c com.apple.compilers.llvm.clang.1_0.compiler
-s384774106.897443
-e384774107.063888
-r1
-xCompileC
-xbuild/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/rs.o
-x/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/qrcode/rs.c
-xnormal
-xi386
-xc
-xcom.apple.compilers.llvm.clang.1_0.compiler
-o/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/qrcode/rs.c:297:29: warning: '&&' within '||' [-Wlogical-op-parentheses]
-o      if(nroots!=2||_x[0]!=s&&_x[1]!=s)_x[nroots++]=s;
-o                  ~~~~~~~~~~^~~~~~~~~~
-o/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/qrcode/rs.c:297:29: note: place parentheses around the '&&' expression to silence this warning
-o      if(nroots!=2||_x[0]!=s&&_x[1]!=s)_x[nroots++]=s;
-o                            ^
-o                    (                 )
-o1 warning generated.
-lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection83"Compile /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/qrcode/rs.c041ce6da2fefb641^b03d4fdb2fefb641^-536"/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/qrcode/rs.c:297:29: warning: '&&' within '||' [-Wlogical-op-parentheses]      if(nroots!=2||_x[0]!=s&&_x[1]!=s)_x[nroots++]=s;                  ~~~~~~~~~~^~~~~~~~~~/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/qrcode/rs.c:297:29: note: place parentheses around the '&&' expression to silence this warning      if(nroots!=2||_x[0]!=s&&_x[1]!=s)_x[nroots++]=s;                            ^                    (                 )1 warning generated.1(36%IDEClangDiagnosticActivityLogMessage2@16"'&&' within '||'-384774107#18446744073709551615#0#1(2@68"Place parentheses around the '&&' expression to silence this warning-384774107#18446744073709551615#0#-0#27"com.apple.dt.IDE.diagnostic23%DVTTextDocumentLocation3@81"file://localhost/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/zbar/qrcode/rs.c0000000000000000^296#28#296#28#9868#0#14"Semantic Issue2(3@81"file://localhost/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/zbar/qrcode/rs.c0000000000000000^296#20#296#20#9860#0#3@81"file://localhost/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/zbar/qrcode/rs.c0000000000000000^296#38#296#38#9878#0#-1#27"com.apple.dt.IDE.diagnostic3@81"file://localhost/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/zbar/qrcode/rs.c0000000000000000^296#28#296#28#9868#0#14"Semantic Issue2(3@81"file://localhost/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/zbar/qrcode/rs.c0000000000000000^296#20#296#38#9860#17#3@81"file://localhost/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/zbar/qrcode/rs.c0000000000000000^296#18#296#20#9858#0#-0#0#0#-19%DVTDocumentLocation4@91"file://localhost/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/qrcode/rs.c0000000000000000^2316"CompileC build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/rs.o ../zbar/qrcode/rs.c normal i386 c com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone    setenv LANG en_US.US-ASCII    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c -arch i386 -fmessage-length=0 -std=c99 -Wno-trigraphs -fpascal-strings -Os -Wno-missing-field-initializers -Wno-missing-prototypes -Wreturn-type -Wformat -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wunused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-enum-conversion -Wno-shorten-64-to-32 -Wpointer-sign -Wno-newline-eof -DNDEBUG=1 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.1.sdk -fexceptions -fasm-blocks -fstrict-aliasing -Wdeprecated-declarations -g -Wno-sign-conversion -mios-simulator-version-min=3.0 -I/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/Release-iphonesimulator/include -Iinclude -I../include -I../zbar -I/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/DerivedSources/i386 -I/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/DerivedSources -F/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/Release-iphonesimulator -include /var/folders/n4/9lfzhctj2d92w7cf217xv8800000gn/C/com.apple.Xcode.501/SharedPrecompiledHeaders/prefix-cowymyrxlkivgngfbijzxgpeajfo/prefix.pch -MMD -MT dependencies -MF /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/rs.d --serialize-diagnostics /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/rs.dia -c /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/qrcode/rs.c -o /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/rs.o36"4D62411C-BE5E-4A8E-A8D0-FF71C4844CE6-
-
-CCompileC build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/scanner.o /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/scanner.c normal i386 c com.apple.compilers.llvm.clang.1_0.compiler
-s384774107.090710
-e384774107.187390
-r1
-xCompileC
-xbuild/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/scanner.o
-x/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/scanner.c
-xnormal
-xi386
-xc
-xcom.apple.compilers.llvm.clang.1_0.compiler
-o/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/scanner.c:204:16: warning: comparison of unsigned enum expression < 0 is always false [-Wtautological-compare]
-o        if(tmp < 0 || tmp > edge)
-o           ~~~ ^ ~
-o1 warning generated.
-lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection81"Compile /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/scanner.c649417db2fefb641^84474fdb2fefb641^-249"/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/scanner.c:204:16: warning: comparison of unsigned enum expression < 0 is always false [-Wtautological-compare]        if(tmp < 0 || tmp > edge)           ~~~ ^ ~1 warning generated.1(36%IDEClangDiagnosticActivityLogMessage2@58"Comparison of unsigned enum expression < 0 is always false-384774107#18446744073709551615#0#-1#27"com.apple.dt.IDE.diagnostic23%DVTTextDocumentLocation3@79"file://localhost/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/zbar/scanner.c0000000000000000^203#15#203#15#6345#0#14"Semantic Issue2(3@79"file://localhost/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/zbar/scanner.c0000000000000000^203#11#203#14#6341#0#3@79"file://localhost/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/zbar/scanner.c0000000000000000^203#17#203#18#6347#0#-0#0#0#-19%DVTDocumentLocation4@89"file://localhost/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/scanner.c0000000000000000^2332"CompileC build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/scanner.o ../zbar/scanner.c normal i386 c com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone    setenv LANG en_US.US-ASCII    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c -arch i386 -fmessage-length=0 -std=c99 -Wno-trigraphs -fpascal-strings -Os -Wno-missing-field-initializers -Wno-missing-prototypes -Wreturn-type -Wformat -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wunused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-enum-conversion -Wno-shorten-64-to-32 -Wpointer-sign -Wno-newline-eof -DNDEBUG=1 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.1.sdk -fexceptions -fasm-blocks -fstrict-aliasing -Wdeprecated-declarations -g -Wno-sign-conversion -mios-simulator-version-min=3.0 -I/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/Release-iphonesimulator/include -Iinclude -I../include -I../zbar -I/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/DerivedSources/i386 -I/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/DerivedSources -F/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/Release-iphonesimulator -include /var/folders/n4/9lfzhctj2d92w7cf217xv8800000gn/C/com.apple.Xcode.501/SharedPrecompiledHeaders/prefix-cowymyrxlkivgngfbijzxgpeajfo/prefix.pch -MMD -MT dependencies -MF /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/scanner.d --serialize-diagnostics /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/scanner.dia -c /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/scanner.c -o /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/scanner.o36"97159ADD-34D9-434A-BF41-71FBE154CCFB-
-
-CCompileC build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/symbol.o /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/symbol.c normal i386 c com.apple.compilers.llvm.clang.1_0.compiler
-s384774107.092265
-e384774107.207551
-r1
-xCompileC
-xbuild/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/symbol.o
-x/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/symbol.c
-xnormal
-xi386
-xc
-xcom.apple.compilers.llvm.clang.1_0.compiler
-lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection80"Compile /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/symbol.c9df317db2fefb641^b2484fdb2fefb641^---0#0#0#-19%DVTDocumentLocation2@88"file://localhost/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/symbol.c0000000000000000^2326"CompileC build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/symbol.o ../zbar/symbol.c normal i386 c com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone    setenv LANG en_US.US-ASCII    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c -arch i386 -fmessage-length=0 -std=c99 -Wno-trigraphs -fpascal-strings -Os -Wno-missing-field-initializers -Wno-missing-prototypes -Wreturn-type -Wformat -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wunused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-enum-conversion -Wno-shorten-64-to-32 -Wpointer-sign -Wno-newline-eof -DNDEBUG=1 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.1.sdk -fexceptions -fasm-blocks -fstrict-aliasing -Wdeprecated-declarations -g -Wno-sign-conversion -mios-simulator-version-min=3.0 -I/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/Release-iphonesimulator/include -Iinclude -I../include -I../zbar -I/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/DerivedSources/i386 -I/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/DerivedSources -F/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/Release-iphonesimulator -include /var/folders/n4/9lfzhctj2d92w7cf217xv8800000gn/C/com.apple.Xcode.501/SharedPrecompiledHeaders/prefix-cowymyrxlkivgngfbijzxgpeajfo/prefix.pch -MMD -MT dependencies -MF /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/symbol.d --serialize-diagnostics /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/symbol.dia -c /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/symbol.c -o /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/symbol.o36"C4DAC630-F03E-4A4B-B9D1-24D8830A3513-
-
-CCompileC build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/util.o /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/qrcode/util.c normal i386 c com.apple.compilers.llvm.clang.1_0.compiler
-s384774107.050522
-e384774107.089410
-r1
-xCompileC
-xbuild/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/util.o
-x/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/qrcode/util.c
-xnormal
-xi386
-xc
-xcom.apple.compilers.llvm.clang.1_0.compiler
-lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection85"Compile /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/qrcode/util.c0a4a0ddb2fefb641^de3e4fdb2fefb641^---0#0#0#-19%DVTDocumentLocation2@93"file://localhost/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/qrcode/util.c0000000000000000^2328"CompileC build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/util.o ../zbar/qrcode/util.c normal i386 c com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone    setenv LANG en_US.US-ASCII    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c -arch i386 -fmessage-length=0 -std=c99 -Wno-trigraphs -fpascal-strings -Os -Wno-missing-field-initializers -Wno-missing-prototypes -Wreturn-type -Wformat -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wunused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-enum-conversion -Wno-shorten-64-to-32 -Wpointer-sign -Wno-newline-eof -DNDEBUG=1 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.1.sdk -fexceptions -fasm-blocks -fstrict-aliasing -Wdeprecated-declarations -g -Wno-sign-conversion -mios-simulator-version-min=3.0 -I/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/Release-iphonesimulator/include -Iinclude -I../include -I../zbar -I/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/DerivedSources/i386 -I/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/DerivedSources -F/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/Release-iphonesimulator -include /var/folders/n4/9lfzhctj2d92w7cf217xv8800000gn/C/com.apple.Xcode.501/SharedPrecompiledHeaders/prefix-cowymyrxlkivgngfbijzxgpeajfo/prefix.pch -MMD -MT dependencies -MF /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/util.d --serialize-diagnostics /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/util.dia -c /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/../zbar/qrcode/util.c -o /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/Objects-normal/i386/util.o36"822495B0-0DCC-4821-B592-765D1DEAC863-
-
-CLibtool /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/Release-iphonesimulator/libzbar.a normal i386
-s384774107.677710
-e384774107.698165
-r1
-xLibtool
-x/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/Release-iphonesimulator/libzbar.a
-xnormal
-xi386
-
-CProcessPCH /var/folders/n4/9lfzhctj2d92w7cf217xv8800000gn/C/com.apple.Xcode.501/SharedPrecompiledHeaders/prefix-cowymyrxlkivgngfbijzxgpeajfo/prefix.pch.pth include/prefix.pch normal i386 c com.apple.compilers.llvm.clang.1_0.compiler
-s384774106.094364
-e384774106.110051
-r1
-xProcessPCH
-x/var/folders/n4/9lfzhctj2d92w7cf217xv8800000gn/C/com.apple.Xcode.501/SharedPrecompiledHeaders/prefix-cowymyrxlkivgngfbijzxgpeajfo/prefix.pch.pth
-xinclude/prefix.pch
-xnormal
-xi386
-xc
-xcom.apple.compilers.llvm.clang.1_0.compiler
-lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection29"Precompile include/prefix.pch2d9418da2fefb641^0a2c1cda2fefb641^---0#0#0#-19%DVTDocumentLocation2@90"file://localhost/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/include/prefix.pch0000000000000000^2261"ProcessPCH /var/folders/n4/9lfzhctj2d92w7cf217xv8800000gn/C/com.apple.Xcode.501/SharedPrecompiledHeaders/prefix-cowymyrxlkivgngfbijzxgpeajfo/prefix.pch.pth include/prefix.pch normal i386 c com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone    setenv LANG en_US.US-ASCII    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c-header -arch i386 -fmessage-length=0 -std=c99 -Wno-trigraphs -fpascal-strings -Os -Wno-missing-field-initializers -Wno-missing-prototypes -Wreturn-type -Wformat -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wunused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-enum-conversion -Wno-shorten-64-to-32 -Wpointer-sign -Wno-newline-eof -DNDEBUG=1 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.1.sdk -fexceptions -fasm-blocks -fstrict-aliasing -Wdeprecated-declarations -g -Wno-sign-conversion -mios-simulator-version-min=3.0 -I/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/Release-iphonesimulator/include -Iinclude -I../include -I../zbar -I/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/DerivedSources/i386 -I/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/DerivedSources -F/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/Release-iphonesimulator --serialize-diagnostics /var/folders/n4/9lfzhctj2d92w7cf217xv8800000gn/C/com.apple.Xcode.501/SharedPrecompiledHeaders/prefix-cowymyrxlkivgngfbijzxgpeajfo/prefix.pch.dia -c /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/include/prefix.pch -o /var/folders/n4/9lfzhctj2d92w7cf217xv8800000gn/C/com.apple.Xcode.501/SharedPrecompiledHeaders/prefix-cowymyrxlkivgngfbijzxgpeajfo/prefix.pch.pth -MMD -MT dependencies -MF /var/folders/n4/9lfzhctj2d92w7cf217xv8800000gn/C/com.apple.Xcode.501/SharedPrecompiledHeaders/prefix-cowymyrxlkivgngfbijzxgpeajfo/prefix.pch.d36"8ED0384C-BF6D-4CA1-9744-7B602677D913-
-
-CProcessPCH /var/folders/n4/9lfzhctj2d92w7cf217xv8800000gn/C/com.apple.Xcode.501/SharedPrecompiledHeaders/prefix-dxzkxhojrhgiegawzextoryfkfkg/prefix.pch.pth include/prefix.pch normal i386 objective-c com.apple.compilers.llvm.clang.1_0.compiler
-s384774106.094356
-e384774106.500127
-r1
-xProcessPCH
-x/var/folders/n4/9lfzhctj2d92w7cf217xv8800000gn/C/com.apple.Xcode.501/SharedPrecompiledHeaders/prefix-dxzkxhojrhgiegawzextoryfkfkg/prefix.pch.pth
-xinclude/prefix.pch
-xnormal
-xi386
-xobjective-c
-xcom.apple.compilers.llvm.clang.1_0.compiler
-lSLF05#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection29"Precompile include/prefix.pchfb9318da2fefb641^420880da2fefb641^---0#0#0#-19%DVTDocumentLocation2@90"file://localhost/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/include/prefix.pch0000000000000000^2488"ProcessPCH /var/folders/n4/9lfzhctj2d92w7cf217xv8800000gn/C/com.apple.Xcode.501/SharedPrecompiledHeaders/prefix-dxzkxhojrhgiegawzextoryfkfkg/prefix.pch.pth include/prefix.pch normal i386 objective-c com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone    setenv LANG en_US.US-ASCII    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x objective-c-header -arch i386 -fmessage-length=0 -std=c99 -Wno-trigraphs -fpascal-strings -Os -Wno-missing-field-initializers -Wno-missing-prototypes -Wreturn-type -Wno-implicit-atomic-properties -Wno-receiver-is-weak -Wformat -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wunused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-enum-conversion -Wno-shorten-64-to-32 -Wpointer-sign -Wno-newline-eof -Wno-selector -Wno-strict-selector-match -Wno-undeclared-selector -Wno-deprecated-implementations -DNDEBUG=1 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.1.sdk -fexceptions -fasm-blocks -fstrict-aliasing -Wprotocol -Wdeprecated-declarations -g -Wno-sign-conversion -fobjc-abi-version=2 -fobjc-legacy-dispatch -mios-simulator-version-min=3.0 -I/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/Release-iphonesimulator/include -Iinclude -I../include -I../zbar -I/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/DerivedSources/i386 -I/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/zbar.build/Release-iphonesimulator/libzbar.build/DerivedSources -F/Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/build/Release-iphonesimulator --serialize-diagnostics /var/folders/n4/9lfzhctj2d92w7cf217xv8800000gn/C/com.apple.Xcode.501/SharedPrecompiledHeaders/prefix-dxzkxhojrhgiegawzextoryfkfkg/prefix.pch.dia -c /Users/sbtjfdn/Desktop/Hunt2.2/zbar-146b857ff41a/iphone/include/prefix.pch -o /var/folders/n4/9lfzhctj2d92w7cf217xv8800000gn/C/com.apple.Xcode.501/SharedPrecompiledHeaders/prefix-dxzkxhojrhgiegawzextoryfkfkg/prefix.pch.pth -MMD -MT dependencies -MF /var/folders/n4/9lfzhctj2d92w7cf217xv8800000gn/C/com.apple.Xcode.501/SharedPrecompiledHeaders/prefix-dxzkxhojrhgiegawzextoryfkfkg/prefix.pch.d36"B81357B4-5AD1-4DBD-9AFB-63FAB89F7B30-
-

@@ -67,7 +67,7 @@
     //#import "ECSlidingViewController.h"
     //#import "CNimbus.h"
     //#import "MobClick.h"
-    #import "ZBarSDK.h"//扫描
+//    #import "ZBarSDK.h"//扫描，pod后不能在这引(会报file not find)，在ScanViewController.m引
     #import "SoundManager.h"//音效管理
     //#import "ZYQAssetPickerController.h"
     #import "MLSelectPhoto.h"//选照片

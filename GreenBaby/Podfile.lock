@@ -1,0 +1,61 @@
+PODS:
+  - AFNetworking (3.2.1):
+    - AFNetworking/NSURLSession (= 3.2.1)
+    - AFNetworking/Reachability (= 3.2.1)
+    - AFNetworking/Security (= 3.2.1)
+    - AFNetworking/Serialization (= 3.2.1)
+    - AFNetworking/UIKit (= 3.2.1)
+  - AFNetworking/NSURLSession (3.2.1):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/Reachability (3.2.1)
+  - AFNetworking/Security (3.2.1)
+  - AFNetworking/Serialization (3.2.1)
+  - AFNetworking/UIKit (3.2.1):
+    - AFNetworking/NSURLSession
+  - Bugly (2.5.0)
+  - FMDB (2.7.2):
+    - FMDB/standard (= 2.7.2)
+  - FMDB/standard (2.7.2)
+  - iCarousel (1.8.3)
+  - libqrencode (3.4.2)
+  - Masonry (1.1.0)
+  - MBProgressHUD (1.1.0)
+  - Reachability (3.2)
+  - VendorSDK (1.0)
+  - ZBarSDK-hicool (0.0.1):
+    - ZBarSDK-hicool/zbar (= 0.0.1)
+  - ZBarSDK-hicool/zbar (0.0.1)
+
+DEPENDENCIES:
+  - AFNetworking
+  - Bugly
+  - FMDB
+  - iCarousel
+  - libqrencode
+  - Masonry
+  - MBProgressHUD
+  - Reachability
+  - VendorSDK (from `../VendorSDK`)
+  - ZBarSDK-hicool
+
+EXTERNAL SOURCES:
+  VendorSDK:
+    :path: "../VendorSDK"
+
+SPEC CHECKSUMS:
+  AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
+  Bugly: 3ca9f255c01025582df26f9222893b383c7e4b4e
+  FMDB: 6198a90e7b6900cfc046e6bc0ef6ebb7be9236aa
+  iCarousel: d782f635afac190c49bb8ee455882284cff8b85f
+  libqrencode: 43dc34b89af83ea4b07c409cd8e09c87aa3a1c9f
+  Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
+  MBProgressHUD: e7baa36a220447d8aeb12769bf0585582f3866d9
+  Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
+  VendorSDK: fe1b984144d41df3772dceaa7c1989f6e70096e4
+  ZBarSDK-hicool: ee679a29fde9431ab705b230a1bc64d5727c043b
+
+PODFILE CHECKSUM: 101efc61a3256e3340ee982f54a9ebcdbd1e2ce9
+
+COCOAPODS: 1.1.1
