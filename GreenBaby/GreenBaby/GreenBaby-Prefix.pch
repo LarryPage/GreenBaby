@@ -42,9 +42,13 @@
     //ARC -fobjc-arc
     #import "AFHTTPSessionManager.h"//AFN 网络请求解析
     #import "Reachability.h"//网络状况监听
-    #import "BaiduMobStat.h"//百度统计
+    #import "iCarousel.h"
+    #import "Masonry.h"//AL布局
     #import "FMDB.h"//SQLite库管理
     #import "MBProgressHUD.h"//菊花
+//    #import "ZBarSDK.h"//扫描，pod后不能在这引(会报file not find)，在ScanViewController.m引
+    #import "QRCodeGenerator.h"//二维码生成
+    #import "BaiduMobStat.h"//百度统计
     #import "UIImageView+WebCache.h"//图片异步加载显示
     #import "UIButton+WebCache.h"
     #import "MWPhotoBrowser.h"//图片集浏览
@@ -67,7 +71,6 @@
     //#import "ECSlidingViewController.h"
     //#import "CNimbus.h"
     //#import "MobClick.h"
-//    #import "ZBarSDK.h"//扫描，pod后不能在这引(会报file not find)，在ScanViewController.m引
     #import "SoundManager.h"//音效管理
     //#import "ZYQAssetPickerController.h"
     #import "MLSelectPhoto.h"//选照片
@@ -76,7 +79,6 @@
     #import "NJKWebViewProgress.h"//网页加载进度条
     #import "NJKWebViewProgressView.h"
     #import "FFRouteManager.h"//route管理
-    #import "Masonry.h"//AL布局
     #import "WBUIWebView.h"//网页浏览器+调试器
     #import "WBWebViewConsole.h"
     #import "WBWebDebugConsoleViewController.h"
