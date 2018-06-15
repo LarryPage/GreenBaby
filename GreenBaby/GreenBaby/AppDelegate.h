@@ -10,7 +10,6 @@
 #import <AudioToolbox/AudioToolbox.h>
 
 //Share SDK V3.1.4
-//lxc 修改/zbar-146b857ff41a/zbar/symbol.c，注解，原因，ShareSDK 分享到手机QQ的framework也有些方法
 //＝＝＝＝＝＝＝＝＝＝ShareSDK＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
 #import <ShareSDK/ShareSDK.h>
 #import <ShareSDKConnector/ShareSDKConnector.h>
