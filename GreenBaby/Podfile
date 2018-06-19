@@ -16,6 +16,9 @@ target 'GreenBaby' do
 #    pod 'ZBarSDK', '~> 1.3.1'#二维码扫瞄
     pod 'ZBarSDK-hicool'#二维码扫瞄
     pod 'libqrencode'#二维码生成
+#    pod 'SDWebImage'
+    pod 'SDWebImage/WebP'
+    pod 'libwebp'
     pod 'Bugly'#app异常统计
     pod 'BaiduMobStat'#app异常统计
 
@@ -40,5 +43,20 @@ post_install do |installer|
         # Disable Document Comments
         configuration.build_settings['CLANG_WARN_DOCUMENTATION_COMMENTS'] = 'NO'
         configuration.build_settings['OTHER_CFLAGS'] ||= ['$(inherited)', '-Wno-unknown-warning-option']
+    end
+    
+    project.targets.each do |target|
+        # .a 文件不需要 copy header
+        target.headers_build_phase.clear
+        
+        target.build_configurations.each do |config|
+            config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '8.0'
+            
+            if target.name == 'SDWebImage'
+                # Fix SDWebImage can not find the libwebp.framework's header files.
+                config.build_settings['USER_HEADER_SEARCH_PATHS'] ||= ['$(inherited)']
+                config.build_settings['USER_HEADER_SEARCH_PATHS'] << '"$(SRCROOT)/Headers/Public/libwebp/libwebp"'
+            end
+        end
     end
 end

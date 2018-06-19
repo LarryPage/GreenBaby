@@ -469,15 +469,15 @@ static NSMutableDictionary *gSessionOfUIWebView = nil;//缓存HTML5相关Session
     _url = [param objectForKey:@"pageUrl"];
     NSURL *url=[NSURL URLWithString:[param objectForKey:@"imageUrl"]];
     SDWebImageManager *manager = [SDWebImageManager sharedManager];
-    [manager downloadImageWithURL:url
-                          options:SDWebImageRetryFailed
-                         progress:nil
-                        completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
-                            if (image) {
-                                // do something with image
-                                _thumbImage=image;
-                            }
-                        }];
+    [manager loadImageWithURL:url
+                      options:SDWebImageRetryFailed
+                     progress:nil
+                    completed:^(UIImage *image, NSData * data,NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
+                        if (image) {
+                            // do something with image
+                            _thumbImage=image;
+                        }
+                    }];
 }
 
 #pragma mark UIWebViewDelegate

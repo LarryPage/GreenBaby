@@ -48,9 +48,9 @@
     #import "MBProgressHUD.h"//菊花
 //    #import "ZBarSDK.h"//扫描，pod后不能在这引(会报file not find)，在ScanViewController.m引
     #import "QRCodeGenerator.h"//二维码生成
-    #import "BaiduMobStat.h"//百度统计
     #import "UIImageView+WebCache.h"//图片异步加载显示
     #import "UIButton+WebCache.h"
+    #import "BaiduMobStat.h"//百度统计
     #import "MWPhotoBrowser.h"//图片集浏览
     #import "SVWebViewController.h"//标配网页浏览器
     #import <ShareSDK/ShareSDK.h>//集成分享

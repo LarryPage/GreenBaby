@@ -292,17 +292,17 @@ SINGLETON_IMP(NetworkCenter)
             NSString *welcome_img=response[@"welcome_img"];
             NSURL *url=[NSURL URLWithString:welcome_img];
             SDWebImageManager *manager = [SDWebImageManager sharedManager];
-            [manager downloadImageWithURL:url
-                                  options:SDWebImageRetryFailed
-                                 progress:nil
-                                completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
-                                    if (image) {
-                                        // do something with image
-                                        DeviceModel *device = [DeviceModel loadCurRecord];
-                                        device.welcome_img = welcome_img;
-                                        [DeviceModel saveCurRecord:device];
-                                    }
-                                }];
+            [manager loadImageWithURL:url
+                              options:SDWebImageRetryFailed
+                             progress:nil
+                            completed:^(UIImage *image, NSData * data,NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
+                                if (image) {
+                                    // do something with image
+                                    DeviceModel *device = [DeviceModel loadCurRecord];
+                                    device.welcome_img = welcome_img;
+                                    [DeviceModel saveCurRecord:device];
+                                }
+                            }];
         }
     }];
 }
