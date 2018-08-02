@@ -106,6 +106,11 @@ typedef enum  {
 //!@brief 建议颜色设置为2个相近色为佳，设置3个相近色能形成拟物化的凸起感
 + (UIImage*)imageFromColors:(NSArray *)colors ByGradientType:(GradientType)gradientType ToSize:(CGSize)size;
 
+// 获取高清二维码图片
++ (UIImage *)getErWeiMaImageFormCIImage:(CIImage *)image withSize:(CGFloat)size;
+//（二维码）是黑白图转为彩色图
+- (UIImage*)imageBlackToWithRed:(CGFloat)red andGreen:(CGFloat)green andBlue:(CGFloat)blue;
+
 @end
 
 @interface UIImage (ColorImage)
