@@ -17,7 +17,7 @@ target 'GreenBaby' do
     pod 'ZBarSDK-hicool'#二维码扫瞄
     pod 'libqrencode'#二维码生成
 #    pod 'SDWebImage'
-    pod 'SDWebImage/WebP'
+    pod 'SDWebImage/WebP'#需要VPN
     pod 'libwebp'
     pod 'Bugly'#app异常统计
     pod 'BaiduMobStat'#app异常统计
