@@ -225,12 +225,12 @@
     [_navBarView addSubview:_navBarRightBtn];
     [_navBarView addConstraint:[NSLayoutConstraint constraintWithItem:_navBarRightBtn attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:_navBarView attribute:NSLayoutAttributeBottom multiplier:1.0 constant:0.0]];
     
-    [_navBarView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(-5)-[_navBarLeftBtn]-6-[_navBarTitleLbl]-6-[_navBarRightBtn]-0-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_navBarLeftBtn,_navBarTitleLbl,_navBarRightBtn)]];
+    [_navBarView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(-5)-[_navBarLeftBtn]-6-[_navBarTitleLbl]-6-[_navBarRightBtn]-16-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_navBarLeftBtn,_navBarTitleLbl,_navBarRightBtn)]];
     
     [self.view addSubview:_navBarView];
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_navBarView]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_navBarView)]];
     [self.view addConstraint:[NSLayoutConstraint constraintWithItem:_navBarView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeTop multiplier:1.0 constant:0.0]];
-    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:_navBarView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeHeight multiplier:1.0 constant:64.0]];
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:_navBarView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeHeight multiplier:1.0 constant:IS_IPHONE_X?88.0:64.0]];
     
     //初始值
     _navBarBgIV.image=[UIImage createImageWithColor:DefaultNavbarTintColor];
