@@ -7,31 +7,31 @@
 //
 
 #import "API.h"
-#import "APIParseErrorViewController.h"
 
 #import "DeviceModel.h"
 #import "UserModel.h"
 
-typedef enum ApiType {
-    kApiTypeGet,                      // Get方式
-    kApiTypeGetImage,                 // Get方式,DownImage下载图片
-    kApiTypeGetFile,                  // Get方式,DownFile下载文件
-    kApiTypeDelete,                   // Delete方式
-    kApiTypePut,                      // Put方式
-    kApiTypePost,                     // Post方式
-    kApiTypePostMultipartFormData,    // Post方式,Multipart上传文件
-}ApiType;
-
 
 @implementation API
+
+#pragma mark - base
+
+/**
+ *  获取API的URLStr
+ *
+ *  @return 基础URLStr http://api.abc.com
+ */
++ (NSString *)apiUrl{
+    return APIServer;
+}
 
 /**
  *  获取API的基础URL
  *
  *  @return 基础URL http://api.abc.com
  */
-NSURL *baseURL(){
-    return [NSURL URLWithString:APIServer];
++ (NSURL *)baseUR{
+    return [NSURL URLWithString:[self apiUrl]];
 }
 
 /**
@@ -41,8 +41,8 @@ NSURL *baseURL(){
  *
  *  @return 完整的NSURL http://api.abc.com/index.php
  */
-NSURL *fullURLWithPath(NSString *path) {
-    return [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", APIServer,path]];
++ (NSURL *)fullURLWithPath:(NSString *)path{
+    return [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", [self apiUrl],path]];
 }
 
 /**
@@ -52,8 +52,7 @@ NSURL *fullURLWithPath(NSString *path) {
  *
  *  @return
  */
-void encryptRequest(AFHTTPSessionManager *manager,NSString *pathParam)
-{
++ (void)encryptRequestWithManager:(AFHTTPSessionManager *)manager pathParam:(NSString *)pathParam{
     NSString *base64AuthCredentials = @"";
     //Basic认证字符串，不需要'Basic '
     NSString *basicAuth = [manager.requestSerializer valueForHTTPHeaderField:@"Authorization"];
@@ -71,8 +70,7 @@ void encryptRequest(AFHTTPSessionManager *manager,NSString *pathParam)
 }
 
 //HTTPS,客户端自带证书
-AFSecurityPolicy *customSecurityPolicyWithCerName(NSString *cerName)
-{
++ (AFSecurityPolicy *)customSecurityPolicyWithCerName:(NSString *)cerName{
     //先导入证书
     AFSecurityPolicy *securityPolicy;
     
@@ -88,8 +86,7 @@ AFSecurityPolicy *customSecurityPolicyWithCerName(NSString *cerName)
 }
 
 //默认模式，HTTPS,客户端不自带证书
-AFSecurityPolicy *defaultSecurityPolicy()
-{
++ (AFSecurityPolicy *)defaultSecurityPolicy{
     AFSecurityPolicy *securityPolicy;
     securityPolicy = [AFSecurityPolicy policyWithPinningMode:AFSSLPinningModeNone];
     
@@ -112,10 +109,10 @@ AFSecurityPolicy *defaultSecurityPolicy()
  *
  *  @return
  */
-void executeRequest(NSString *path,NSDictionary *paramDic,BOOL auth,ApiType apiType,APIFormData formdataBlock,APIProgress progressBlock,APICompletion completionBlock){
-    AFHTTPSessionManager* manager = [[AFHTTPSessionManager alloc] initWithBaseURL:baseURL()];
++ (void)executeRequestWithPath:(NSString *)path paramDic:(NSDictionary *)paramDic auth:(BOOL)auth apiType:(ApiType)apiType formdataBlock:(APIFormData)formdataBlock progressBlock:(APIProgress)progressBlock completionBlock:(APICompletion)completionBlock{
+    AFHTTPSessionManager* manager = [[AFHTTPSessionManager alloc] initWithBaseURL:[self baseUR]];
     //0.设置安全策略
-    [manager setSecurityPolicy:defaultSecurityPolicy()];//默认模式，HTTPS,客户端不自带证书
+    [manager setSecurityPolicy:[self defaultSecurityPolicy]];//默认模式，HTTPS,客户端不自带证书
     //1.构造requestSerializer
     manager.requestSerializer = [AFJSONRequestSerializer serializer];//post下body中raw为json
     //设置cookie,默认YES，允许请求带cookies，响应设置cookies，风控针对一些接口如登录必须使用
@@ -164,7 +161,7 @@ void executeRequest(NSString *path,NSDictionary *paramDic,BOOL auth,ApiType apiT
             pathParam= [pathParam stringByAppendingFormat:@"%@%@=%@",[pathParam rangeOfString:@"?"].length > 0 ? @"&" : @"?",key,value];
         }];
     }
-    encryptRequest(manager,pathParam);
+    [self encryptRequestWithManager:manager pathParam:pathParam];
     //2.构造responseSerializer
     switch (apiType) {
         case kApiTypeGetImage:
@@ -184,7 +181,7 @@ void executeRequest(NSString *path,NSDictionary *paramDic,BOOL auth,ApiType apiT
     manager.responseSerializer.acceptableContentTypes = nil;
     //manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"text/html",@"application/json; charset=utf-8",@"text/json", @"text/plain", nil];
     
-    CLog(@"开始调用 %@", fullURLWithPath(path));
+    CLog(@"开始调用 %@", [self fullURLWithPath:path]);
     switch (apiType) {
         case kApiTypeGet:
         {
@@ -197,11 +194,11 @@ void executeRequest(NSString *path,NSDictionary *paramDic,BOOL auth,ApiType apiT
              }
                  success:^void(NSURLSessionDataTask *task,id response)
              {
-                 parseResponse(task,nil,response,path,paramDic,apiType,completionBlock);
+                 [self parseResponseWithTask:task error:nil response:response path:path paramDic:paramDic apiType:apiType completionBlock:completionBlock];
              }
                  failure:^void(NSURLSessionDataTask * task, NSError * error)
              {
-                 parseResponse(task,error,nil,path,paramDic,apiType,completionBlock);
+                 [self parseResponseWithTask:task error:error response:nil path:path paramDic:paramDic apiType:apiType completionBlock:completionBlock];
              }];
         }
             break;
@@ -211,12 +208,12 @@ void executeRequest(NSString *path,NSDictionary *paramDic,BOOL auth,ApiType apiT
                  parameters:paramDic
                     success:^(NSURLSessionDataTask *task, id response)
              {
-                 parseResponse(task,nil,response,path,paramDic,apiType,completionBlock);
+                 [self parseResponseWithTask:task error:nil response:response path:path paramDic:paramDic apiType:apiType completionBlock:completionBlock];
                  
              }
                     failure:^(NSURLSessionDataTask *task, NSError *error)
              {
-                 parseResponse(task,error,nil,path,paramDic,apiType,completionBlock);
+                 [self parseResponseWithTask:task error:error response:nil path:path paramDic:paramDic apiType:apiType completionBlock:completionBlock];
              }];
         }
             break;
@@ -226,11 +223,11 @@ void executeRequest(NSString *path,NSDictionary *paramDic,BOOL auth,ApiType apiT
               parameters:paramDic
                  success:^(NSURLSessionDataTask *task, id response)
              {
-                 parseResponse(task,nil,response,path,paramDic,apiType,completionBlock);
+                 [self parseResponseWithTask:task error:nil response:response path:path paramDic:paramDic apiType:apiType completionBlock:completionBlock];
              }
                  failure:^(NSURLSessionDataTask *task, NSError *error)
              {
-                 parseResponse(task,error,nil,path,paramDic,apiType,completionBlock);
+                 [self parseResponseWithTask:task error:error response:nil path:path paramDic:paramDic apiType:apiType completionBlock:completionBlock];
              }];
         }
             break;
@@ -246,11 +243,11 @@ void executeRequest(NSString *path,NSDictionary *paramDic,BOOL auth,ApiType apiT
              }
                   success:^void(NSURLSessionDataTask *task,id response)
              {
-                 parseResponse(task,nil,response,path,paramDic,apiType,completionBlock);
+                 [self parseResponseWithTask:task error:nil response:response path:path paramDic:paramDic apiType:apiType completionBlock:completionBlock];
              }
                   failure:^void(NSURLSessionDataTask * task, NSError * error)
              {
-                 parseResponse(task,error,nil,path,paramDic,apiType,completionBlock);
+                 [self parseResponseWithTask:task error:error response:nil path:path paramDic:paramDic apiType:apiType completionBlock:completionBlock];
              }];
         }
             break;
@@ -266,19 +263,18 @@ constructingBodyWithBlock:formdataBlock
              }
                   success:^void(NSURLSessionDataTask * task, id response)
              {
-                 parseResponse(task,nil,response,path,paramDic,apiType,completionBlock);
+                 [self parseResponseWithTask:task error:nil response:response path:path paramDic:paramDic apiType:apiType completionBlock:completionBlock];
              }
                   failure:^ void(NSURLSessionDataTask * task, NSError * error)
              {
-                 parseResponse(task,error,nil,path,paramDic,apiType,completionBlock);
+                 [self parseResponseWithTask:task error:error response:nil path:path paramDic:paramDic apiType:apiType completionBlock:completionBlock];
              }];
         }
             break;
     }
 }
 
-void parseResponse(NSURLSessionDataTask *task,NSError *error,id response,NSString *path,NSDictionary *paramDic,ApiType apiType,APICompletion completionBlock)
-{
++ (void)parseResponseWithTask:(NSURLSessionDataTask *)task error:(NSError *)error response:(id)response path:(NSString *)path paramDic:(NSDictionary *)paramDic apiType:(ApiType)apiType completionBlock:(APICompletion)completionBlock{
     if (error){
         NSString *domain=@"";
         NSData *responseData=nil;
@@ -395,7 +391,7 @@ void parseResponse(NSURLSessionDataTask *task,NSError *error,id response,NSStrin
     NSMutableDictionary *paramDic=[NSMutableDictionary dictionary];
     [paramDic setObject:[UIDevice getSystemName] forKey:@"platform"];
     [paramDic setObject:kBuildVersion forKey:@"build_version"];
-    executeRequest(@"/v1/setting/check_update",paramDic,NO,kApiTypePost,nil,nil,completion);
+    [self executeRequestWithPath:@"/v1/setting/check_update" paramDic:paramDic auth:NO apiType:kApiTypePost formdataBlock:nil progressBlock:nil completionBlock:completion];
 }
 
 + (void)regPushToken:(NSString *)pushToken completion:(APICompletion)completion{
@@ -411,24 +407,24 @@ void parseResponse(NSURLSessionDataTask *task,NSError *error,id response,NSStrin
     [paramDic setObject:kVersion forKey:@"version"];
     [paramDic setObject:[UIDevice imei] forKey:@"imei"];//imei编号
     [paramDic setObject:[[UIDevice getDevice] stringByReplacingOccurrencesOfString:@" " withString:@"_"] forKey:@"device"];//device
-    executeRequest(@"/v1/user/register_device",paramDic,YES,kApiTypePost,nil,nil,completion);
+    [self executeRequestWithPath:@"/v1/user/register_device" paramDic:paramDic auth:YES apiType:kApiTypePost formdataBlock:nil progressBlock:nil completionBlock:completion];
 }
 
 + (void)postContacts:(NSString *)contacts completion:(APICompletion)completion{
     NSMutableDictionary *paramDic=[NSMutableDictionary dictionary];
     [paramDic setObject:contacts forKey:@"contacts"];//contacts
     [paramDic setObject:[UIDevice getSystemName] forKey:@"platform"];
-    executeRequest(@"/v1/contact/sync",paramDic,YES,kApiTypePost,nil,nil,completion);
+    [self executeRequestWithPath:@"/v1/contact/sync" paramDic:paramDic auth:YES apiType:kApiTypePost formdataBlock:nil progressBlock:nil completionBlock:completion];
 }
 
 + (void)getPublicDataOnCompletion:(APICompletion)completion{
-    executeRequest(@"/v1/public/data",nil,NO,kApiTypeGet,nil,nil,completion);
+    [self executeRequestWithPath:@"/v1/public/data" paramDic:nil auth:NO apiType:kApiTypeGet formdataBlock:nil progressBlock:nil completionBlock:completion];
 }
 
 + (void)getMessageCountOnCompletion:(APICompletion)completion{
     NSMutableDictionary *paramDic=[NSMutableDictionary dictionary];
     [paramDic setObject:@"request_count,message_count,tucao_new,feed_new,hposition_new,reward_position_new" forKey:@"type"];//type:消息类型（可选，apply_count,view_count,active_count,message_count）
-    executeRequest(@"/v1/notification/has_new",paramDic,YES,kApiTypePost,nil,nil,completion);
+    [self executeRequestWithPath:@"/v1/notification/has_new" paramDic:paramDic auth:YES apiType:kApiTypePost formdataBlock:nil progressBlock:nil completionBlock:completion];
 }
 
 + (void)getWelcomeImgOnCompletion:(APICompletion)completion{
@@ -436,7 +432,7 @@ void parseResponse(NSURLSessionDataTask *task,NSError *error,id response,NSStrin
     [paramDic setObject:[UIDevice getSystemName] forKey:@"os"];
     [paramDic setObject:@((int)[[UIScreen mainScreen] bounds].size.width*[[UIScreen mainScreen] scale]) forKey:@"width"];
     [paramDic setObject:@((int)[[UIScreen mainScreen] bounds].size.height*[[UIScreen mainScreen] scale]) forKey:@"height"];
-    executeRequest(@"/v1/public/welcome_image",paramDic,NO,kApiTypePost,nil,nil,completion);
+    [self executeRequestWithPath:@"/v1/public/welcome_image" paramDic:paramDic auth:NO apiType:kApiTypePost formdataBlock:nil progressBlock:nil completionBlock:completion];
 }
 
 + (void)updatePushStatusOnCompletion:(APICompletion)completion{
@@ -447,17 +443,17 @@ void parseResponse(NSURLSessionDataTask *task,NSError *error,id response,NSStrin
         [paramDic setObject:device.vid forKey:@"visitor_id"];
     }
     [paramDic setObject:@(device.push_status) forKey:@"pushstatus"];
-    executeRequest(@"/v1/setting/update_push_status",paramDic,YES,kApiTypePost,nil,nil,completion);
+    [self executeRequestWithPath:@"/v1/setting/update_push_status" paramDic:paramDic auth:YES apiType:kApiTypePost formdataBlock:nil progressBlock:nil completionBlock:completion];
 }
 
 + (void)downloadAvatarWithProgress:(APIProgress)progress
                         completion:(APICompletion)completion{
-    executeRequest(@"/v1/user/avatar",nil,YES,kApiTypeGetImage,nil,progress,completion);
+    [self executeRequestWithPath:@"/v1/user/avatar" paramDic:nil auth:YES apiType:kApiTypeGetImage formdataBlock:nil progressBlock:progress completionBlock:completion];
 }
 
 + (void)downloadAvatarFileWithProgress:(APIProgress)progress
                             completion:(APICompletion)completion{
-    executeRequest(@"/v1/user/avatar",nil,YES,kApiTypeGetFile,nil,progress,completion);
+    [self executeRequestWithPath:@"/v1/user/avatar" paramDic:nil auth:YES apiType:kApiTypeGetFile formdataBlock:nil progressBlock:progress completionBlock:completion];
 }
 
 + (void)uploadAvatar:(NSData *)fileData
@@ -466,7 +462,7 @@ void parseResponse(NSURLSessionDataTask *task,NSError *error,id response,NSStrin
     APIFormData formdata = ^(id <AFMultipartFormData> formData){
         [formData appendPartWithFileData:fileData name:@"userfile" fileName:@"userfile.jpg" mimeType:@"image/jpeg"];
     };
-    executeRequest(@"/v1/user/update_avatar",nil,YES,kApiTypePostMultipartFormData,formdata,progress,completion);
+    [self executeRequestWithPath:@"/v1/user/update_avatar" paramDic:nil auth:YES apiType:kApiTypePostMultipartFormData formdataBlock:formdata progressBlock:progress completionBlock:completion];
 }
 
 + (void)loginWithUsername:(NSString *)username
@@ -475,7 +471,7 @@ void parseResponse(NSURLSessionDataTask *task,NSError *error,id response,NSStrin
     NSMutableDictionary *paramDic=[NSMutableDictionary dictionary];
     [paramDic setObject:username forKey:@"username"];
     [paramDic setObject:password forKey:@"password"];
-    executeRequest(@"/v1/user/login",paramDic,NO,kApiTypePost,nil,nil,completion);
+    [self executeRequestWithPath:@"/v1/user/login" paramDic:paramDic auth:NO apiType:kApiTypePost formdataBlock:nil progressBlock:nil completionBlock:completion];
 }
 
 + (void)regWithUsername:(NSString *)username
@@ -486,14 +482,14 @@ void parseResponse(NSURLSessionDataTask *task,NSError *error,id response,NSStrin
     [paramDic setObject:username forKey:@"username"];
     [paramDic setObject:password forKey:@"password"];
     [paramDic setObject:code forKey:@"code"];
-    executeRequest(@"/v1/user/reg",paramDic,NO,kApiTypePost,nil,nil,completion);
+    [self executeRequestWithPath:@"/v1/user/reg" paramDic:paramDic auth:NO apiType:kApiTypePost formdataBlock:nil progressBlock:nil completionBlock:completion];
 }
 
 + (void)sendCodeWithMobile:(NSString *)mobile
                 completion:(APICompletion)completion{
     NSMutableDictionary *paramDic=[NSMutableDictionary dictionary];
     [paramDic setObject:mobile forKey:@"mobile"];
-    executeRequest(@"/v1/user/SendPswCode",paramDic,NO,kApiTypePost,nil,nil,completion);
+    [self executeRequestWithPath:@"/v1/user/SendPswCode" paramDic:paramDic auth:NO apiType:kApiTypePost formdataBlock:nil progressBlock:nil completionBlock:completion];
 }
 
 + (void)validateCodeWithMobile:(NSString *)mobile
@@ -502,7 +498,7 @@ void parseResponse(NSURLSessionDataTask *task,NSError *error,id response,NSStrin
     NSMutableDictionary *paramDic=[NSMutableDictionary dictionary];
     [paramDic setObject:mobile forKey:@"mobile"];
     [paramDic setObject:code forKey:@"code"];
-    executeRequest(@"/v1/user/ValidateCode",paramDic,NO,kApiTypePost,nil,nil,completion);
+    [self executeRequestWithPath:@"/v1/user/ValidateCode" paramDic:paramDic auth:NO apiType:kApiTypePost formdataBlock:nil progressBlock:nil completionBlock:completion];
 }
 
 #pragma mark - Talk
@@ -520,7 +516,7 @@ void parseResponse(NSURLSessionDataTask *task,NSError *error,id response,NSStrin
     if (startid > 0) {
         [paramDic setObject:@(startid) forKey:@"startid"];
     }
-    executeRequest(@"/v1/msg/list",paramDic,YES,kApiTypePost,nil,nil,completion);
+    [self executeRequestWithPath:@"/v1/msg/list" paramDic:paramDic auth:YES apiType:kApiTypePost formdataBlock:nil progressBlock:nil completionBlock:completion];
 }
 
 + (void)getMessageWithTouid:(NSInteger)touid//对方用户编号（必选）
@@ -537,7 +533,7 @@ void parseResponse(NSURLSessionDataTask *task,NSError *error,id response,NSStrin
     if (count > 0) {
         [paramDic setObject:@(count) forKey:@"count"];
     }
-    executeRequest(@"/v1/msg/view",paramDic,YES,kApiTypePost,nil,nil,completion);
+    [self executeRequestWithPath:@"/v1/msg/view" paramDic:paramDic auth:YES apiType:kApiTypePost formdataBlock:nil progressBlock:nil completionBlock:completion];
 }
 
 + (void)sendMessageWithTouid:(NSInteger)touid//对方用户编号（必选）
@@ -556,7 +552,7 @@ void parseResponse(NSURLSessionDataTask *task,NSError *error,id response,NSStrin
     if (image && image.length) {
         [paramDic setObject:image forKey:@"image"];
     }
-    executeRequest(@"/v1/msg/send",paramDic,YES,kApiTypePost,nil,nil,completion);
+    [self executeRequestWithPath:@"/v1/msg/send" paramDic:paramDic auth:YES apiType:kApiTypePost formdataBlock:nil progressBlock:nil completionBlock:completion];
 }
 
 #pragma mark - 订单&支付
@@ -564,53 +560,53 @@ void parseResponse(NSURLSessionDataTask *task,NSError *error,id response,NSStrin
 {
     NSMutableDictionary *paramDic=[NSMutableDictionary dictionary];
     [paramDic setObject:@(order_id) forKey:@"order_id"];
-    executeRequest(@"/v1/order/info",paramDic,YES,kApiTypePost,nil,nil,completion);
+    [self executeRequestWithPath:@"/v1/order/info" paramDic:paramDic auth:YES apiType:kApiTypePost formdataBlock:nil progressBlock:nil completionBlock:completion];
 }
 
 + (void)cancelOrderInfo:(NSUInteger)order_id completion:(APICompletion)completion
 {
     NSMutableDictionary *paramDic=[NSMutableDictionary dictionary];
     [paramDic setObject:@(order_id) forKey:@"order_id"];
-    executeRequest(@"/v1/order/cancel",paramDic,YES,kApiTypePost,nil,nil,completion);
+    [self executeRequestWithPath:@"/v1/order/cancel" paramDic:paramDic auth:YES apiType:kApiTypePost formdataBlock:nil progressBlock:nil completionBlock:completion];
 }
 
 + (void)getWeiXinPayWithOrderID:(NSString *)order_id completion:(APICompletion)completion
 {
     NSMutableDictionary *paramDic=[NSMutableDictionary dictionary];
     [paramDic setObject:order_id forKey:@"order_id"];
-    executeRequest(@"/v1/order/weixin_pay",paramDic,YES,kApiTypePost,nil,nil,completion);
+    [self executeRequestWithPath:@"/v1/order/weixin_pay" paramDic:paramDic auth:YES apiType:kApiTypePost formdataBlock:nil progressBlock:nil completionBlock:completion];
 }
 
 + (void)getAliPayWithOrderID:(NSString *)order_id completion:(APICompletion)completion
 {
     NSMutableDictionary *paramDic=[NSMutableDictionary dictionary];
     [paramDic setObject:order_id forKey:@"order_id"];
-    executeRequest(@"/v1/order/apipay_pay",paramDic,YES,kApiTypePost,nil,nil,completion);
+    [self executeRequestWithPath:@"/v1/order/apipay_pay" paramDic:paramDic auth:YES apiType:kApiTypePost formdataBlock:nil progressBlock:nil completionBlock:completion];
 }
 
 #pragma mark - 环信EaseMob
 + (void)getEasemobWelcomeMessageCompletion:(APICompletion)completion{
-    executeRequest(@"/v1/easemob/welcome_message",nil,YES,kApiTypePost,nil,nil,completion);
+    [self executeRequestWithPath:@"/v1/easemob/welcome_message" paramDic:nil auth:YES apiType:kApiTypePost formdataBlock:nil progressBlock:nil completionBlock:completion];
 }
 
 + (void)getEasemobChatterProfileWithChatter:(NSString *)chatter completion:(APICompletion)completion{
     NSMutableDictionary *paramDic=[NSMutableDictionary dictionary];
     [paramDic setObject:chatter forKey:@"chatter"];
-    executeRequest(@"/v1/easemob/account_profile",paramDic,YES,kApiTypePost,nil,nil,completion);
+    [self executeRequestWithPath:@"/v1/easemob/account_profile" paramDic:paramDic auth:YES apiType:kApiTypePost formdataBlock:nil progressBlock:nil completionBlock:completion];
 }
 
 + (void)getEasemobGroupMumber:(NSString *)groupId completion:(APICompletion)completion
 {
     NSMutableDictionary *paramDic=[NSMutableDictionary dictionary];
     [paramDic setObject:groupId forKey:@"groupId"];
-    executeRequest(@"/v1/easemob/member_list",paramDic,YES,kApiTypePost,nil,nil,completion);
+    [self executeRequestWithPath:@"/v1/easemob/member_list" paramDic:paramDic auth:YES apiType:kApiTypePost formdataBlock:nil progressBlock:nil completionBlock:completion];
 }
 
 + (void)sayHelloUserNo:(NSString *)user_no completion:(APICompletion)completion
 {
     NSMutableDictionary *paramDic=[NSMutableDictionary dictionary];
     [paramDic setObject:user_no forKey:@"user_no"];
-    executeRequest(@"/v1/easemob/hello",paramDic,YES,kApiTypePost,nil,nil,completion);
+    [self executeRequestWithPath:@"/v1/easemob/hello" paramDic:paramDic auth:YES apiType:kApiTypePost formdataBlock:nil progressBlock:nil completionBlock:completion];
 }
 
 @end

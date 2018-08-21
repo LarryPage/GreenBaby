@@ -7,6 +7,17 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "APIParseErrorViewController.h"
+
+typedef enum ApiType {
+    kApiTypeGet,                      // Get方式
+    kApiTypeGetImage,                 // Get方式,DownImage下载图片
+    kApiTypeGetFile,                  // Get方式,DownFile下载文件
+    kApiTypeDelete,                   // Delete方式
+    kApiTypePut,                      // Put方式
+    kApiTypePost,                     // Post方式
+    kApiTypePostMultipartFormData,    // Post方式,Multipart上传文件
+}ApiType;
 
 /**
  *  API PostMultipart请求要上传文件Block
@@ -32,6 +43,70 @@ typedef void (^APIProgress)(NSProgress *progress);
 typedef void (^APICompletion)(NSError *error, id response);
 
 @interface API : NSObject
+
+#pragma mark - base
+
+/**
+ *  获取API的URLStr
+ *
+ *  @return 基础URLStr http://api.abc.com
+ */
++ (NSString *)apiUrl;
+
+/**
+ *  获取API的基础URL
+ *
+ *  @return 基础URL http://api.abc.com
+ */
++ (NSURL *)baseUR;
+
+/**
+ *  根据API路径获取完整的URL
+ *
+ *  @param path API路径 /index.php
+ *
+ *  @return 完整的NSURL http://api.abc.com/index.php
+ */
++ (NSURL *)fullURLWithPath:(NSString *)path;
+
+/**
+ *  请求包加密
+ *
+ *  @param pathParam API路径+参数(GET|DELETE)  /index.php?key1=value1&key2=value2
+ *
+ *  @return
+ */
++ (void)encryptRequestWithManager:(AFHTTPSessionManager *)manager pathParam:(NSString *)pathParam;
+
+/*
+ *HTTPS,客户端自带证书
+ */
++ (AFSecurityPolicy *)customSecurityPolicyWithCerName:(NSString *)cerName;
+
+/*
+ *默认模式，HTTPS,客户端不自带证书
+ */
++ (AFSecurityPolicy *)defaultSecurityPolicy;
+
+/**
+ *  执行ANF Request，支持gzip，自动解压
+ *
+ *  @param path             API路径,/index.php
+ *  @param paramDic         API参数,key1=value1 key2=value2
+ *  @param auth             是否Base Auth
+ *  @param ApiType          请求方法：GET|DELETE|PUT|POST|PostMultipart
+ *  @param formdataBlock    API 仅在PostMultipart请求要上传文件Block,可为nil
+ *  @param progressBlock    API请求进度Block,只有GET(下载文件代表下载进度)|POST|PostMultipart（上传文件代表上传进度）,可为nil
+ *  @param completionBlock  API请求的回调Block
+ *
+ *  @return
+ */
++ (void)executeRequestWithPath:(NSString *)path paramDic:(NSDictionary *)paramDic auth:(BOOL)auth apiType:(ApiType)apiType formdataBlock:(APIFormData)formdataBlock progressBlock:(APIProgress)progressBlock completionBlock:(APICompletion)completionBlock;
+
+/*
+ *解析数据
+ */
++ (void)parseResponseWithTask:(NSURLSessionDataTask *)task error:(NSError *)error response:(id)response path:(NSString *)path paramDic:(NSDictionary *)paramDic apiType:(ApiType)apiType completionBlock:(APICompletion)completionBlock;
 
 #pragma mark - common
 /*
