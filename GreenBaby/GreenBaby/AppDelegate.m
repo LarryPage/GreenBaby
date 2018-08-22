@@ -654,6 +654,20 @@ forLocalNotification:(UILocalNotification *)notification
 //    _pushPayload=[NSMutableDictionary dictionaryWithDictionary:[pushStr JSONValue]];
 //    CLog(@"receive Test push:%@", _pushPayload);
     /*
+    {
+        aps =     {
+            alert =         {
+                body = "有人闯入";
+                title = "有人闯入";
+            };
+            sound = default;
+        };
+        i = 131083648;
+        m = "512045&&ALIYUN_24940193_512045&&ALIYUN_a6a6af6bd4f94153bb35ec1882bc844b&&00&&@apns";
+        mode = WakeApp;
+    }
+    */
+    /*
      aps =     {
      alert = "\U56de\U5bb6\U4e48";
      badge = 1;
@@ -667,10 +681,14 @@ forLocalNotification:(UILocalNotification *)notification
     if (_pushPayload) {
         NSDictionary *apsDic=_pushPayload[@"aps"];
         [[NSNotificationCenter defaultCenter] postNotificationName:MessageReceiveCount object:nil userInfo:nil];
-//        if (apsDic) {
-//            NSString *alertTitle=apsDic[@"alert"];
-//            CLog(@"push alertTitle[1]:%@", alertTitle);
-//        }
+        NSString *alertTitle=@"";
+        if (apsDic && [apsDic[@"alert"] isKindOfClass:[NSString class]]) {
+            alertTitle=apsDic[@"alert"];
+        }
+        else if (apsDic && [apsDic[@"alert"] isKindOfClass:[NSDictionary class]]){
+            alertTitle=apsDic[@"alert"][@"title"];
+        }
+        CLog(@"push alertTitle[1]:%@", alertTitle);
         
         NSString *m=_pushPayload[@"m"];//消息 id
         NSString *u=_pushPayload[@"u"];//route url
@@ -680,7 +698,7 @@ forLocalNotification:(UILocalNotification *)notification
             if (u && u.length>0) {
                 NSString *mode=[_pushPayload valueForKey:@"mode"];
                 if ([mode isEqualToString:@"OpenApp"] || [mode isEqualToString:@"WakeApp"]) {//OpenApp && WakeApp
-                    [self handleUrl:[NSURL URLWithString:u] title:[apsDic valueForKey:@"alert"]];
+                    [self handleUrl:[NSURL URLWithString:u] title:alertTitle];
                 }
                 else{//InApp
                 }
@@ -692,7 +710,7 @@ forLocalNotification:(UILocalNotification *)notification
                     case 0://0--职位订阅
                     {
                         if (![UIApplication sharedApplication].statusBarHidden) {
-                            LNNotification* notification = [LNNotification notificationWithMessage:apsDic[@"alert"]];
+                            LNNotification* notification = [LNNotification notificationWithMessage:alertTitle];
                             [[LNNotificationCenter defaultCenter] presentNotification:notification forApplicationIdentifier:kBundleIdentifier];
                         }
                         
@@ -753,7 +771,7 @@ forLocalNotification:(UILocalNotification *)notification
 //                            }
 //                            else{
 //                                if (![UIApplication sharedApplication].statusBarHidden) {
-//                                    LNNotification* notification = [LNNotification notificationWithMessage:apsDic[@"alert"]];
+//                                    LNNotification* notification = [LNNotification notificationWithMessage:alertTitle];
 //                                    [[LNNotificationCenter defaultCenter] presentNotification:notification forApplicationIdentifier:kBundleIdentifier];
 //                                }
 //                                
@@ -770,7 +788,7 @@ forLocalNotification:(UILocalNotification *)notification
                     default:
                     {
                         if (![UIApplication sharedApplication].statusBarHidden) {
-                            LNNotification* notification = [LNNotification notificationWithMessage:apsDic[@"alert"]];
+                            LNNotification* notification = [LNNotification notificationWithMessage:alertTitle];
                             [[LNNotificationCenter defaultCenter] presentNotification:notification forApplicationIdentifier:kBundleIdentifier];
                         }
                         
