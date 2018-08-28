@@ -180,7 +180,7 @@ static NSMutableDictionary *gSessionOfUIWebView = nil;//缓存HTML5相关Session
         } else {
             user.basicAuth = @"";
         }
-        NSString *myUserStr=[[user dic] JSONRepresentation];
+        NSString *myUserStr=[NSString safeStringFromObject:[user dic]];
         return myUserStr;
     };
     _jsContext[@"HJM_sharePage"] = ^(NSDictionary *param) {
@@ -510,7 +510,7 @@ static NSMutableDictionary *gSessionOfUIWebView = nil;//缓存HTML5相关Session
     } else {
         user.basicAuth = @"";
     }
-    NSString *myUserStr=[[[[user dic] JSONRepresentation] stringByReplacingOccurrencesOfString:@"'" withString:@"&#39;"]stringByReplacingOccurrencesOfString:@"\\\"" withString:@"&quot;"];//注入js屏蔽'"
+    NSString *myUserStr=[[[NSString safeStringFromObject:[user dic]] stringByReplacingOccurrencesOfString:@"'" withString:@"&#39;"]stringByReplacingOccurrencesOfString:@"\\\"" withString:@"&quot;"];//注入js屏蔽'"
     
     NSMutableString *_getUserCode=[[NSMutableString alloc]init];
     [_getUserCode appendFormat:@"var script = document.createElement('script');"];

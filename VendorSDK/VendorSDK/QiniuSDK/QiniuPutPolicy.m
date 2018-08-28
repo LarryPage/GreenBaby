@@ -8,7 +8,6 @@
 #import "QiniuPutPolicy.h"
 #import <CommonCrypto/CommonHMAC.h>
 #import "QiniuGTMBase64.h"
-#import "JSON.h"
 
 @implementation QiniuPutPolicy
 
@@ -78,9 +77,16 @@
     }
     [dic setObject:deadlineNumber forKey:@"deadline"];
     
-    NSString *json = [dic JSONRepresentation];
+    if ([NSJSONSerialization isValidJSONObject:dic]) {
+        NSError *error;
+        NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dic options:0 error:&error];
+        if(!error){
+            NSString *json = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+            return json;
+        }
+    }
     
-    return json;
+    return nil;
 }
 
 @end

@@ -205,7 +205,7 @@ SINGLETON_IMP(NetworkCenter)
                 }
                 
                 //2.保存本地
-                [[FFCache currentCache] setString:[response JSONRepresentation] forKey:cacheKey withTimeoutInterval:60*60*24*7];//7天
+                [[FFCache currentCache] setString:[NSString safeStringFromObject:response] forKey:cacheKey withTimeoutInterval:60*60*24*7];//7天
             }
             else{//code>0
                 [[TKAlertCenter defaultCenter] postAlertWithMessage:error.domain];

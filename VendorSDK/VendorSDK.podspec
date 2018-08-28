@@ -13,7 +13,7 @@ Pod::Spec.new do |s|
   s.source       = { :git => "http://github.com/lixiangcheng1/VendorSDK.git", :tag => "#{s.version}" }  #项目地址，这里不支持ssh的地址，验证不通过，只支持HTTP和HTTPS，最好使用HTTPS
 
   s.source_files       = ["*/**/*.{h,m,mm,c,cc,hpp,cpp}"] #代码源文件地址，**/*表示Classes目录及其子目录下所有文件，如果有多个目录下则用逗号分开，如果需要在项目中分组显示，这里也要做相应的设置
-  s.resources          = ["*/**/*.{xcassets,plist,json,xib,storyboard,png,jpg,gif}","*.{plist,json,xib,storyboard,png,jpg,gif}"]  #资源文件地址
+  s.resources          = ["*/**/*.{xcassets,json,xib,storyboard,png,jpg,gif}","*.{json,xib,storyboard,png,jpg,gif}"]  #资源文件地址
   s.exclude_files      = "VendorSDK.xcodeproj", "VendorSDK/Info.plist"
   s.prefix_header_file = 'VendorSDK/PrefixHeader.pch'  #公开头文件地址
   s.frameworks         = 'UIKit','Foundation','CoreGraphics' #所需的framework，多个用逗号隔开

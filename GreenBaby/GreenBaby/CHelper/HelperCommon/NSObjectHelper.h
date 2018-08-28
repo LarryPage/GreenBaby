@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import <objc/runtime.h>
 #import "FMDB.h"
+#import "SafeCategories.h"
+#import "Configs.h"
 
 #define JSONInterface(klass) protocol klass <NSObject> @end\
 @interface klass
@@ -269,9 +271,9 @@ typedef NS_ENUM(NSInteger, PropertyNameState) {
 #pragma mark sqlite3
 /**  Tables:注value存储为dic的josn字符串 */
 /**  1.META (key TEXT PRIMARY KEY  NOT NULL,value TEXT) */
-/**  {(ClassName)CurRecordTableName,[dic JSONRepresentation]} */
+/**  {(ClassName)CurRecordTableName,[NSString safeStringFromObject:dic]} */
 /**  2.(ClassName)RecordTableName(key TEXT PRIMARY KEY  NOT NULL,value TEXT) */
-/**  {record_id,[dic JSONRepresentation]} */
+/**  {record_id,[NSString safeStringFromObject:dic]} */
 /**  sql语名:http://www.runoob.com/sqlite/sqlite-tutorial.html */
 + (FMDatabaseQueue *)getFMDBQueue;
 

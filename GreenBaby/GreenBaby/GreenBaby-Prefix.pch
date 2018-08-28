@@ -28,7 +28,6 @@
     //******************Vendors******************//
     //MARC -fno-objc-arc
     #include "MeBase64.h"//加密|解析responsebase64数据流
-    #import "JSON.h"//object<=>josnstring: JSONValue<=>JSONRepresentation
     #import "FFCache.h"//response缓存
     #import "MLNavigationController.h"
     #import "NSAttributedString+Attributes.h"

@@ -33,7 +33,6 @@
  */
 
 #import "MJGeocoder.h"
-#import "JSON.h"
 
 @implementation MJGeocoder
 
@@ -112,7 +111,9 @@
     [receivedData release];
     
 	//result as dictionary dictionary
-	NSDictionary *resultDict = [geocodingResponse JSONValue];
+	NSData *data=[geocodingResponse dataUsingEncoding:NSUTF8StringEncoding];
+    NSError *error;
+    NSDictionary *resultDict=[NSJSONSerialization JSONObjectWithData:data options:0 error:&error];
     [geocodingResponse release];
     
 	NSString *status = [resultDict valueForKey:@"status"];

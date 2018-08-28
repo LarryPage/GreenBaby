@@ -864,7 +864,7 @@ static const char *getPropertyType(const char *attributes) {
                 NSDictionary* dict=nil;
                 FMResultSet *rs = [db executeQuery:@"SELECT * FROM META WHERE key = ?",tableName];
                 if ([rs next]) {
-                    dict = [[rs stringForColumn:@"value"] JSONValue];
+                    dict = [[rs stringForColumn:@"value"] jsonValueDecoded];
                 }
                 [rs close];
                 
@@ -956,8 +956,8 @@ static const char *getPropertyType(const char *attributes) {
                 NSString* tableName = [Configs performSelector:bSel];
                 [[self getFMDBQueue] inTransaction:^(FMDatabase *db, BOOL *rollback){
                     [db executeUpdate:@"DELETE FROM META WHERE key = ?",tableName];
-                    [db executeUpdate:@"INSERT INTO META (key,value) VALUES (?,?)",tableName,[dic JSONRepresentation]];
-                    //[db executeUpdate:@"UPDATE META SET value = ? WHERE key = ?",[dic JSONRepresentation],tableName];
+                    [db executeUpdate:@"INSERT INTO META (key,value) VALUES (?,?)",tableName,[NSString safeStringFromObject:dic]];
+                    //[db executeUpdate:@"UPDATE META SET value = ? WHERE key = ?",[NSString safeStringFromObject:dic],tableName];
                 }];
             }
         }
@@ -1063,7 +1063,7 @@ static const char *getPropertyType(const char *attributes) {
                 NSString *sql=[NSString stringWithFormat:@"SELECT * FROM %@",tableName];
                 FMResultSet *rs = [db executeQuery:sql];
                 while ([rs next]) {
-                    [recordDicArray addObject:[[rs stringForColumn:@"value"] JSONValue]];
+                    [recordDicArray addObject:[[rs stringForColumn:@"value"] jsonValueDecoded]];
                 }
                 [rs close];
             }];
@@ -1212,7 +1212,7 @@ static const char *getPropertyType(const char *attributes) {
             [[self getFMDBQueue] inTransaction:^(FMDatabase *db, BOOL *rollback){
                 NSString *recordid=[record valueForKeyPath:@"record_id"];
                 NSString *sql1=[NSString stringWithFormat:@"DELETE FROM %@ WHERE key = '%@'",tableName,recordid];
-                NSString *sql2=[NSString stringWithFormat:@"INSERT INTO %@ (key,value) VALUES ('%@','%@')",tableName,recordid,[[record dic] JSONRepresentation]];
+                NSString *sql2=[NSString stringWithFormat:@"INSERT INTO %@ (key,value) VALUES ('%@','%@')",tableName,recordid,[NSString safeStringFromObject:[record dic]]];
                 [db executeUpdate:sql1];
                 [db executeUpdate:sql2];
             }];
@@ -1251,7 +1251,7 @@ static const char *getPropertyType(const char *attributes) {
             for (id record in records) {
                 NSString *recordid=[record valueForKeyPath:@"record_id"];
                 NSString *sql1=[NSString stringWithFormat:@"DELETE FROM %@ WHERE key = '%@'",tableName,recordid];
-                NSString *sql2=[NSString stringWithFormat:@"INSERT INTO %@ (key,value) VALUES ('%@','%@')",tableName,recordid,[[record dic] JSONRepresentation]];
+                NSString *sql2=[NSString stringWithFormat:@"INSERT INTO %@ (key,value) VALUES ('%@','%@')",tableName,recordid,[NSString safeStringFromObject:[record dic]]];
                 [db executeUpdate:sql1];
                 [db executeUpdate:sql2];
             }
@@ -1311,7 +1311,7 @@ static const char *getPropertyType(const char *attributes) {
             NSString* tableName = [Configs performSelector:bSel];
             [[self getFMDBQueue] inDatabase:^(FMDatabase *db){
                 NSString *recordid=[record valueForKeyPath:@"record_id"];
-                NSString *sql=[NSString stringWithFormat:@"UPDATE %@ SET value = '%@' WHERE key = '%@'",tableName,[[record dic] JSONRepresentation],recordid];
+                NSString *sql=[NSString stringWithFormat:@"UPDATE %@ SET value = '%@' WHERE key = '%@'",tableName,[NSString safeStringFromObject:[record dic]],recordid];
                 [db executeUpdate:sql];
             }];
         }
