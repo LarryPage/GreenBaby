@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface APIParseErrorViewController : BaseViewController
+@interface APIParseErrorViewController : UIViewController
 
 - (id)initWithHtml:(NSString *)html title:(NSString *)title;
 

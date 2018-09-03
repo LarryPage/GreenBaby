@@ -12,7 +12,7 @@
     NSString *_html;
     NSString *_title;
 }
-@property(nonatomic, strong) IBOutlet UIWebView *webView;
+@property(nonatomic, strong) UIWebView *webView;
 @end
 
 @implementation APIParseErrorViewController
@@ -29,12 +29,13 @@
 }
 
 - (id)initWithHtml:(NSString *)html title:(NSString *)title{
-    if (self = [super initWithNibName:@"APIParseErrorViewController" bundle:nil]) {
+    if (self = [super initWithNibName:nil bundle:nil]) {
         _html=html;
         _title=title;
     }
     return self;
 }
+
 
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
@@ -46,8 +47,14 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     self.title =_title;
-    //right bar
+    self.navigationItem.leftBarButtonItem=[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(leftBtn:)];
     self.navigationItem.rightBarButtonItems=nil;
+    
+    self.webView=[[UIWebView alloc] initWithFrame:self.view.bounds];
+    self.webView.translatesAutoresizingMaskIntoConstraints = NO;
+    [self.view addSubview:self.webView];
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_webView]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_webView)]];
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_webView]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_webView)]];
     
     //隐藏uiwebview 后面灰背景的方法
     _webView.backgroundColor = [UIColor clearColor];
@@ -73,7 +80,7 @@
 
 #pragma mark - Action
 
-- (void)back{
+- (IBAction)leftBtn:(id)sender{
     if (self.presentingViewController){
         [self dismissViewControllerAnimated:YES completion:nil];
     }
