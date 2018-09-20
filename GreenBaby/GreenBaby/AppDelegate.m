@@ -650,7 +650,7 @@ forLocalNotification:(UILocalNotification *)notification
 - (void)handlePushPayload{
     //测试push notification
 //    _pushPayload=nil;
-//    NSString *pushStr=@"{\"aps\" : {\"alert\" : \"你的订阅有新的５个职位 \ue415 \", \"badge\" : \"1\", \"sound\" : \"default\"}, \"m\" : \"1" , \"u\" : \"greenbaby://huijiame.com/activity\"}";//有表情
+//    NSString *pushStr=@"{\"aps\" : {\"alert\" : \"你的订阅有新的５个职位 \ue415 \", \"badge\" : \"1\", \"sound\" : \"default\"}, \"m\" : \"1\" , \"u\" : \"greenbaby://huijiame.com/activity\"}";//有表情
 //    _pushPayload=[NSMutableDictionary dictionaryWithDictionary:[pushStr jsonValueDecoded]];
 //    CLog(@"receive Test push:%@", _pushPayload);
     /*

@@ -340,6 +340,7 @@ constructingBodyWithBlock:formdataBlock
 #endif
     }
     else{
+        CLog(@"调用结果:Url:%@\nMethod:%@\nparam:%@\npostData:%@\nHeaders:%@\nresponseString:%@",task.currentRequest.URL,task.currentRequest.HTTPMethod,paramDic,[[NSString alloc] initWithData:task.currentRequest.HTTPBody encoding:NSUTF8StringEncoding],task.currentRequest.allHTTPHeaderFields,response);
         switch (apiType) {
             case kApiTypeGetImage:
                 completionBlock(nil, response);//response:UIImage
