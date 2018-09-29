@@ -94,6 +94,7 @@
         cell.accessoryView = accessoryIV;
     } else {
         cell.accessoryType = UITableViewCellAccessoryNone;
+        cell.accessoryView = nil;
     }
     
     cell.accessoryType = UITableViewCellAccessoryNone;
