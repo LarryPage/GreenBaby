@@ -8,13 +8,6 @@
 
 #import "Configs.h"
 
-//api text:
-#ifndef DEBUG
-NSString *APIServer = @"http://api.huijiame.com"; // release版本:
-#else
-NSString *APIServer = @"http://api.huijiame.com"; // debug版本:
-#endif
-
 NSString *FileServer = @"http://adhoc.qiniudn.com";//@"file.huijiame.com"
 
 // baiduMobStat app key ID

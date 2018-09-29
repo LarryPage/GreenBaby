@@ -7,6 +7,7 @@
 //
 
 #import "CustomTabBarController.h"
+#import "AboutViewController.h"
 
 @implementation CustomTabBarController
 
@@ -107,7 +108,7 @@
     //nc3.tabBarItem.imageInsets = imageInset;
     nc3.navigationBar.translucent = NO; //7,0 default Yes
     
-    UIViewController *vc4 = [[BaseViewController alloc] init];
+    UIViewController *vc4 = [[AboutViewController alloc] init];
     UINavigationController* nc4 = [[NavRootViewController alloc]initWithRootViewController:vc4];
     nc4.tabBarItem.image = [[UIImage imageNamed:@"TabBar4"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     nc4.tabBarItem.selectedImage = [[UIImage imageNamed:@"TabBar4_hl"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];//ios7.0

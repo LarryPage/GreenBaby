@@ -16,6 +16,8 @@
 @property (nonatomic, assign) NSInteger push_status;//推送是否关闭
 @property (nonatomic, assign) double lon;
 @property (nonatomic, assign) double lat;
+@property (nonatomic, assign) NSInteger isShowDebug;  //是否在系统设置中显示开发设置 默认 0
+@property (nonatomic, assign) NSInteger apiEnv;  //api环境 0-develop 1-sit 2-product 默认 0 
 
 @property (nonatomic, strong) NSString *welcome_img;  //欢迎图
 

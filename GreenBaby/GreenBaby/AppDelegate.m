@@ -42,6 +42,8 @@
             device.pushToken = @"";
             device.vid = [UIDevice imei];
             device.imei = [UIDevice imei];
+            device.isShowDebug = 0;
+            device.apiEnv = 2;//api环境 0-develop 1-sit 2-product
             [DeviceModel saveCurRecord:device];
         }
         [self registerAPNS];

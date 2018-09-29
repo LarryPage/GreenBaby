@@ -8,7 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-extern NSString *APIServer;
 extern NSString *FileServer;
 
 extern NSString *baiduMobStatAPPKey;
@@ -45,6 +44,10 @@ extern NSString *QiniuSecretKey;
 extern NSString *QiniuBucketNameImg;
 
 // AppMacro
+//0-develop版本:http://dev.api.huijiame.com
+//1-sit版本:http://sit.api.huijiame.com
+//2-product版本:http://api.huijiame.com
+#define kAPIList [NSArray arrayWithObjects:@"http://dev.api.huijiame.com",@"http://sit.api.huijiame.com",@"http://api.huijiame.com",nil]
 #define kGender [NSArray arrayWithObjects:@"女",@"男",@"保密",nil]
 #define kShareImageNames [NSArray arrayWithObjects:@"weixin",@"pengyouquan",@"qq",@"qqspace",@"qqweibo",@"weibo",@"douban",@"renren",@"kaixin",@"qqpengyou",nil]
 #define kShareTitles [NSArray arrayWithObjects:@"微信好友",@"微信朋友圈",@"QQ",@"QQ空间",@"腾讯微博",@"新浪微博",@"豆瓣",@"人人网",@"开心网",@"腾讯朋友",nil]

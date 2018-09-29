@@ -172,7 +172,8 @@ SINGLETON_IMP(NetworkCenter)
 
 //所有枚举类型
 - (void)getPublicData{
-    NSString *cacheKey=[NSString stringWithFormat:@"%@_%@_%@",NSStringFromSelector(_cmd),APIServer,kVersion];
+    DeviceModel *device = [DeviceModel loadCurRecord];
+    NSString *cacheKey=[NSString stringWithFormat:@"%@_%@_%@",NSStringFromSelector(_cmd),[kAPIList safeObjectAtIndex:device.apiEnv],kVersion];
     cacheKey=[cacheKey md5Hash];
     if(![[FFCache currentCache] hasCacheForKey:cacheKey]){
         [API getPublicDataOnCompletion:^(NSError *error,id response){

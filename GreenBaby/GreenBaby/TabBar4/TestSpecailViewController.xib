@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TestSpecailViewController">
+            <connections>
+                <outlet property="resultTable" destination="7rf-cM-aog" id="Sto-aH-6mE"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="7rf-cM-aog">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <color key="separatorColor" red="0.87843137250000003" green="0.87843137250000003" blue="0.87843137250000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <inset key="separatorInset" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="lGD-Gf-4a7"/>
+                        <outlet property="delegate" destination="-1" id="0N4-it-abE"/>
+                    </connections>
+                </tableView>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="7rf-cM-aog" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="CDh-MM-f0c"/>
+                <constraint firstItem="7rf-cM-aog" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="Jj4-Qv-dyQ"/>
+                <constraint firstAttribute="bottom" secondItem="7rf-cM-aog" secondAttribute="bottom" id="g6N-fA-zfc"/>
+                <constraint firstAttribute="trailing" secondItem="7rf-cM-aog" secondAttribute="trailing" id="v66-W4-nRe"/>
+            </constraints>
+        </view>
+    </objects>
+</document>

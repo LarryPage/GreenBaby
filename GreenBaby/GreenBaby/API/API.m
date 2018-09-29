@@ -22,7 +22,8 @@
  *  @return 基础URLStr http://api.abc.com
  */
 + (NSString *)apiUrl{
-    return APIServer;
+    DeviceModel *device = [DeviceModel loadCurRecord];
+    return [kAPIList safeObjectAtIndex:device.apiEnv];
 }
 
 /**

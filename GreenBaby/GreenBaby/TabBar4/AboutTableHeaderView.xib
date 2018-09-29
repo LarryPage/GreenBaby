@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="gOj-Cn-K2h" customClass="AboutTableHeaderView">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="160"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Icon" translatesAutoresizingMaskIntoConstraints="NO" id="kyg-5t-Qjx">
+                    <rect key="frame" x="145" y="37.5" width="85" height="85"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="85" id="1Ed-KE-u7K"/>
+                        <constraint firstAttribute="height" constant="85" id="I1T-Es-FOx"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="土拨鼠 版本：1.0.1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wun-Zk-TI1">
+                    <rect key="frame" x="129" y="127.5" width="117.5" height="17"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="Wun-Zk-TI1" firstAttribute="top" secondItem="kyg-5t-Qjx" secondAttribute="bottom" constant="5" id="1Ly-wv-B09"/>
+                <constraint firstItem="kyg-5t-Qjx" firstAttribute="centerY" secondItem="gOj-Cn-K2h" secondAttribute="centerY" id="Ek8-aA-hPA"/>
+                <constraint firstItem="Wun-Zk-TI1" firstAttribute="centerX" secondItem="gOj-Cn-K2h" secondAttribute="centerX" id="Uhb-2x-O6A"/>
+                <constraint firstItem="kyg-5t-Qjx" firstAttribute="centerX" secondItem="gOj-Cn-K2h" secondAttribute="centerX" id="o8b-Va-Ott"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="iconIV" destination="kyg-5t-Qjx" id="u3y-g6-d3N"/>
+                <outlet property="nameVersionLbl" destination="Wun-Zk-TI1" id="RzZ-z6-a8x"/>
+            </connections>
+            <point key="canvasLocation" x="33.5" y="-146"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="Icon" width="90" height="90"/>
+    </resources>
+</document>
