@@ -20,9 +20,9 @@
     //来自three20的代码，看看当前的窗口是否存在一个responder，从而判别iPhone的键盘是否打开了
     //隐藏键盘
 //    if ([UIWindow isKeyboardVisible]) {
-//        [[[UIApplication sharedApplication].keyWindow findFirstResponder] resignFirstResponder];
+//        [[[AppDelegate sharedAppDelegate].window findFirstResponder] resignFirstResponder];
 //    }
-	UIWindow* window = [UIApplication sharedApplication].keyWindow;//多个UIWindow中显示的哪个，一般数组中只有一个UIWindow,可多个
+	UIWindow* window = [AppDelegate sharedAppDelegate].window;//多个UIWindow中显示的哪个，一般数组中只有一个UIWindow,可多个
     CLog(@"window.tag=%@",@(window.tag));
 	return !![window findFirstResponder];
 }
@@ -55,7 +55,7 @@
 @implementation UIWindow (Extensions)
 
 - (UIViewController*)topViewController {
-    //return [self topViewControllerWithRootViewController:[UIApplication sharedApplication].keyWindow.rootViewController];
+    //return [self topViewControllerWithRootViewController:[AppDelegate sharedAppDelegate].window.rootViewController];
     
     //避免UIAlertController没完全消失时
     UIWindow *window = [[UIApplication sharedApplication] keyWindow];

@@ -695,7 +695,7 @@
                 [self presentViewController:pick animated:YES completion:nil];
             }
             else{
-                [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:pick animated:YES completion:nil];
+                [[AppDelegate sharedAppDelegate].window.rootViewController presentViewController:pick animated:YES completion:nil];
             }
         }
             break;

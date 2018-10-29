@@ -157,7 +157,7 @@
         UserModel *user = [UserModel loadCurRecord];
         if (user && user.user_id) {
             CustomTabBarController *mtabBarController = [[CustomTabBarController alloc] init];
-            [UIApplication sharedApplication].keyWindow.rootViewController = mtabBarController;
+            [AppDelegate sharedAppDelegate].window.rootViewController = mtabBarController;
         } else {//登录/注册
             UIViewController *vc = [[StartViewController alloc] init];
             UINavigationController *nc = [[NavRootViewController alloc] initWithRootViewController:vc];

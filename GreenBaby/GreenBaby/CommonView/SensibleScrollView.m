@@ -15,7 +15,7 @@
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     //隐藏键盘
     if ([UIWindow isKeyboardVisible]) {
-        [[[UIApplication sharedApplication].keyWindow findFirstResponder] resignFirstResponder];
+        [[[AppDelegate sharedAppDelegate].window findFirstResponder] resignFirstResponder];
     }
     
     [super touchesBegan:touches withEvent:event];

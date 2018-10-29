@@ -36,7 +36,7 @@
     UIAlertAction *cancel=[UIAlertAction actionWithTitle:bTitle_ style:UIAlertActionStyleCancel handler:^(UIAlertAction *action){
     }];
     [alert addAction:cancel];
-    [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:alert animated:YES completion:nil];
+    [[AppDelegate sharedAppDelegate].window.rootViewController presentViewController:alert animated:YES completion:nil];
 }
 
 + (void)showWithTitle:(NSString *)title
@@ -75,7 +75,7 @@ destructiveButtonTitle:(NSString *)destructiveButtonTitle
         [alert addAction:destructive];
     }
     
-    [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:alert animated:YES completion:nil];
+    [[AppDelegate sharedAppDelegate].window.rootViewController presentViewController:alert animated:YES completion:nil];
 }
 
 @end
@@ -133,7 +133,7 @@ destructiveButtonTitle:(NSString *)destructiveButtonTitle
     popover.sourceView = sourceView;
     popover.sourceRect = sourceView.bounds;
     popover.permittedArrowDirections = UIPopoverArrowDirectionAny;
-    [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:alert animated:YES completion:nil];
+    [[AppDelegate sharedAppDelegate].window.rootViewController presentViewController:alert animated:YES completion:nil];
 }
 
 @end
