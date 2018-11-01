@@ -96,6 +96,7 @@ SINGLETON_IMP(FFATManager)
         vc.hidesBottomBarWhenPushed = YES;
         [[AppDelegate sharedAppDelegate].window.topViewController.navigationController pushViewController:vc animated:YES];
         
+        [_navigationController setNeedsStatusBarAppearanceUpdate];//ios7 刷新状态栏样式
         [self.navigationController shrink];
         return;
     }
@@ -104,6 +105,7 @@ SINGLETON_IMP(FFATManager)
         vc.hidesBottomBarWhenPushed = YES;
         [[AppDelegate sharedAppDelegate].window.topViewController.navigationController pushViewController:vc animated:YES];
         
+        [_navigationController setNeedsStatusBarAppearanceUpdate];//ios7 刷新状态栏样式
         [self.navigationController shrink];
         return;
     }else if([pluginModel.pluginName isEqualToString:@"FLEX"]) {
