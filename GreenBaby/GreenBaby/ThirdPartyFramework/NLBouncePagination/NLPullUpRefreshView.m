@@ -177,10 +177,10 @@
 - (float)contentOffsetBottom:(UIScrollView *)scrollView
 {
     //modify by lxc
-//    CLog(@"scrollView.contentOffset.y:%@",@(scrollView.contentOffset.y));
-//    CLog(@"scrollView.bounds.size.height:%@",@(scrollView.bounds.size.height));
-//    CLog(@"scrollView.contentInset.bottom:%@",@(scrollView.contentInset.bottom));
-//    CLog(@"scrollView.contentSize.height:%@",@(scrollView.contentSize.height));
+//    NSLog(@"scrollView.contentOffset.y:%@",@(scrollView.contentOffset.y));
+//    NSLog(@"scrollView.bounds.size.height:%@",@(scrollView.bounds.size.height));
+//    NSLog(@"scrollView.contentInset.bottom:%@",@(scrollView.contentInset.bottom));
+//    NSLog(@"scrollView.contentSize.height:%@",@(scrollView.contentSize.height));
     if (scrollView.contentSize.height>scrollView.bounds.size.height) {
         return scrollView.contentSize.height+REFRESHER_HEIGHT - (scrollView.contentOffset.y + scrollView.bounds.size.height - scrollView.contentInset.bottom);
     }

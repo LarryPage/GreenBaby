@@ -23,7 +23,7 @@
 //        [[[AppDelegate sharedAppDelegate].window findFirstResponder] resignFirstResponder];
 //    }
 	UIWindow* window = [AppDelegate sharedAppDelegate].window;//多个UIWindow中显示的哪个，一般数组中只有一个UIWindow,可多个
-    CLog(@"window.tag=%@",@(window.tag));
+    NSLog(@"window.tag=%@",@(window.tag));
 	return !![window findFirstResponder];
 }
 - (UIView*)findFirstResponder {

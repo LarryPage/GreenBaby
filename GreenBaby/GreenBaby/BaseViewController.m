@@ -28,7 +28,7 @@
 }
 
 - (void)dealloc{
-    CLog(@"%@: %@",NSStringFromClass([self class]), NSStringFromSelector(_cmd));
+    NSLog(@"%@: %@",NSStringFromClass([self class]), NSStringFromSelector(_cmd));
 }
 
 - (void)viewDidLoad {
@@ -155,7 +155,7 @@
     [[BaiduMobStat defaultStat] pageviewEndWithName:NSStringFromClass([self class])];
     [AppDelegate sharedAppDelegate].p_pid=[NSString stringWithFormat:@"%@",@(self.view.tag)];
     double gapTime = [[NSDate date] timeIntervalSince1970] - [AppDelegate sharedAppDelegate].timestamp;
-    CLog(@"[%@]停留时长:%@",NSStringFromClass([self class]),@(gapTime));
+    NSLog(@"[%@]停留时长:%@",NSStringFromClass([self class]),@(gapTime));
     //[self logEventWithCat:@"0" action:@"101" type:@"102" val:@(gapTime).stringValue ext:nil];
 }
 

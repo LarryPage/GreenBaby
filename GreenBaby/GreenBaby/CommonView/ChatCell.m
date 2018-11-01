@@ -391,7 +391,7 @@
 #pragma mark Clipboard
 
 - (void) copy: (id) sender{
-    //CLog(@"Copy handler, label: “%@”.", self.message.content);
+    //NSLog(@"Copy handler, label: “%@”.", self.message.content);
     UIPasteboard *pboard = [UIPasteboard generalPasteboard];
     pboard.string = self.message.content;
 }

@@ -17,7 +17,7 @@
         BaseViewController *curVC=(BaseViewController *)[[AppDelegate sharedAppDelegate].window topViewController];
         
         NSURL *routeUrl = parameters[kFFRouteURLKey];
-        CLog(@"%@:%@:%@",[routeUrl scheme],[routeUrl path],[routeUrl query]);
+        NSLog(@"%@:%@:%@",[routeUrl scheme],[routeUrl path],[routeUrl query]);
         //NSArray *paths=[[routeUrl path] componentsSeparatedByString:@"/"];
         //NSDictionary *params=[[routeUrl query] queryDictionaryUsingEncoding:NSUTF8StringEncoding];
         NSString *url = parameters[@"url"];

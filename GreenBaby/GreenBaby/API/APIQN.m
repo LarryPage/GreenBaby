@@ -46,7 +46,7 @@ NSString *tokenWithScope(NSString *scope){
     manager.responseSerializer.acceptableContentTypes = nil;
     //manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"text/html",@"application/json; charset=utf-8",@"text/json", @"text/plain", nil];
     
-    CLog(@"开始调用 %@", kQiniuUpHost);
+    NSLog(@"开始调用 %@", kQiniuUpHost);
     
     NSMutableDictionary *paramDic=[NSMutableDictionary dictionary];
     [paramDic setObject:tokenWithScope(scope) forKey:@"token"];
@@ -126,7 +126,7 @@ void parseQNResponse(NSURLSessionDataTask *task,NSError *error,id response,NSStr
         
 #ifndef RELEASE
         NSString *responseString = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
-        CLog(@"responseString : %@",responseString);
+        NSLog(@"responseString : %@",responseString);
         
         if (responseData) {
             NSString *style = [NSString stringWithFormat:@"<style type=\"text/css\"> \n"

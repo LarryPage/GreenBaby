@@ -82,7 +82,7 @@ static NSMutableDictionary<NSString*, FFRoute *> *routeMap;
     {
         if(FF_ROUTE_LOG_ENABLED)
         {
-            CLog(@"URL为空");
+            NSLog(@"URL为空");
         }
         return nil;
     }
@@ -92,7 +92,7 @@ static NSMutableDictionary<NSString*, FFRoute *> *routeMap;
     {
         if(FF_ROUTE_LOG_ENABLED)
         {
-            CLog(@"没有找到对应的Route");
+            NSLog(@"没有找到对应的Route");
         }
         return nil;
     }
@@ -123,7 +123,7 @@ static NSMutableDictionary<NSString*, FFRoute *> *routeMap;
 #else
     if(FF_ROUTE_LOG_ENABLED)
     {
-        CLog(@"执行Route降级操作!");
+        NSLog(@"执行Route降级操作!");
     }
     
     BaseViewController *curVC=(BaseViewController *)[[AppDelegate sharedAppDelegate].window topViewController];

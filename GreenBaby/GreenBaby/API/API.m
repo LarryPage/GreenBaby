@@ -182,7 +182,7 @@
     manager.responseSerializer.acceptableContentTypes = nil;
     //manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"text/html",@"application/json; charset=utf-8",@"text/json", @"text/plain", nil];
     
-    CLog(@"开始调用 %@", [self fullURLWithPath:path]);
+    NSLog(@"开始调用 %@", [self fullURLWithPath:path]);
     switch (apiType) {
         case kApiTypeGet:
         {
@@ -322,7 +322,7 @@ constructingBodyWithBlock:formdataBlock
         
 #ifndef RELEASE
         NSString *responseString = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
-        CLog(@"responseString : %@",responseString);
+        NSLog(@"responseString : %@",responseString);
         
         if (responseData) {
             NSString *style = [NSString stringWithFormat:@"<style type=\"text/css\"> \n"
@@ -341,7 +341,7 @@ constructingBodyWithBlock:formdataBlock
 #endif
     }
     else{
-        CLog(@"调用结果:Url:%@\nMethod:%@\nparam:%@\npostData:%@\nHeaders:%@\nresponseString:%@",task.currentRequest.URL,task.currentRequest.HTTPMethod,paramDic,[[NSString alloc] initWithData:task.currentRequest.HTTPBody encoding:NSUTF8StringEncoding],task.currentRequest.allHTTPHeaderFields,response);
+        NSLog(@"调用结果:Url:%@\nMethod:%@\nparam:%@\npostData:%@\nHeaders:%@\nresponseString:%@",task.currentRequest.URL,task.currentRequest.HTTPMethod,paramDic,[[NSString alloc] initWithData:task.currentRequest.HTTPBody encoding:NSUTF8StringEncoding],task.currentRequest.allHTTPHeaderFields,response);
         switch (apiType) {
             case kApiTypeGetImage:
                 completionBlock(nil, response);//response:UIImage

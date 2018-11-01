@@ -239,7 +239,7 @@ static NSMutableDictionary *routeControllersMap = nil;
     {
         if(FF_ROUTE_LOG_ENABLED)
         {
-            CLog(@"开始查询路由。。。。");
+            NSLog(@"开始查询路由。。。。");
         }
     }
     _FFRouteItem * matchedRoute = nil;
@@ -264,14 +264,14 @@ static NSMutableDictionary *routeControllersMap = nil;
     {
         if(FF_ROUTE_LOG_ENABLED)
         {
-            CLog(@"URL:%@ 没有被任何imp注册",[URL absoluteString]);
+            NSLog(@"URL:%@ 没有被任何imp注册",[URL absoluteString]);
         }
     }
     else
     {
         if(FF_ROUTE_LOG_ENABLED)
         {
-            CLog(@"找到匹配路由:%@",matchedRoute.pattern);
+            NSLog(@"找到匹配路由:%@",matchedRoute.pattern);
         }
         NSMutableDictionary *finalParameters = [NSMutableDictionary dictionary];
         NSDictionary *queryParameters = [URL.query FFRoute_URLParameterDictionary];
@@ -286,13 +286,13 @@ static NSMutableDictionary *routeControllersMap = nil;
         }
         if(FF_ROUTE_LOG_ENABLED)
         {
-            CLog(@"匹配路由参数:%@",finalParameters);
-            CLog(@"开始执行Route回调block,impClass为:%@",matchedRoute.impClass);
+            NSLog(@"匹配路由参数:%@",finalParameters);
+            NSLog(@"开始执行Route回调block,impClass为:%@",matchedRoute.impClass);
         }
         didRoute = matchedRoute.handlerBlock(finalParameters);
         if(FF_ROUTE_LOG_ENABLED)
         {
-            CLog(@"结束执行Route回调block");
+            NSLog(@"结束执行Route回调block");
         }
     }
     return didRoute;

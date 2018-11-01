@@ -9,7 +9,7 @@
 #import "AboutViewController.h"
 #import "AboutTableHeaderView.h"
 #import "PrivacyViewController.h"
-#import "TestSpecailViewController.h"
+#import "FFATManager.h"
 
 @interface AboutViewController ()
 @property (nonatomic,weak) IBOutlet UITableView *resultTable;
@@ -83,10 +83,12 @@
 - (void)logoTap:(UIGestureRecognizer *)tap
 {
     DeviceModel *device = [DeviceModel loadCurRecord];
-    if (device.isShowDebug==0) {
-        device.isShowDebug=1;
+    if (device.isShowAssistiveTouch==0) {
+        device.isShowAssistiveTouch=1;
+        [[FFATManager sharedInstance] showAssistiveTouch];
     } else {
-        device.isShowDebug=0;
+        device.isShowAssistiveTouch=0;
+        [[FFATManager sharedInstance] dismiss];
     }
     [DeviceModel saveCurRecord:device];
 }
@@ -114,11 +116,8 @@
         {
             switch (indexPath.row) {
                 case 0:
-                    cell.textLabel.text=@"服务协议";
-                    break;
-                case 1:
                 default:
-                    cell.textLabel.text=@"开发设置";
+                    cell.textLabel.text=@"服务协议";
                     break;
             }
         }
@@ -131,8 +130,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    DeviceModel *device = [DeviceModel loadCurRecord];
-    return device.isShowDebug==1?2:1;
+    return 1;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -193,16 +191,9 @@
         {
             switch (indexPath.row) {
                 case 0:
-                {
-                    UIViewController *vc=[[PrivacyViewController alloc] init];
-                    vc.hidesBottomBarWhenPushed = YES;
-                    [self.navigationController pushViewController:vc animated:YES];
-                }
-                    break;
-                case 1:
                 default:
                 {
-                    UIViewController *vc=[[TestSpecailViewController alloc] init];
+                    UIViewController *vc=[[PrivacyViewController alloc] init];
                     vc.hidesBottomBarWhenPushed = YES;
                     [self.navigationController pushViewController:vc animated:YES];
                 }

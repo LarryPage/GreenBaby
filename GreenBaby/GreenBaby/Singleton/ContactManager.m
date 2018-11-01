@@ -194,7 +194,7 @@ void AddressBookExternalChangeCallback(ABAddressBookRef notifyAddressBook,CFDict
     if(mContacts == nil)
     {
         [condition signal];
-        CLog(@"contacts is null, begin to get Contacts");
+        NSLog(@"contacts is null, begin to get Contacts");
         return nil;
     }
     else

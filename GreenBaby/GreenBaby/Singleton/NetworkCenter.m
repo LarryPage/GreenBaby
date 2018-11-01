@@ -111,14 +111,14 @@ SINGLETON_IMP(NetworkCenter)
 - (void)postContact{
     NSMutableArray *allContacts = [[ContactManager sharedInstance] getContacts];
     if (allContacts.count==0) {
-        CLog(@"通讯录数据为空次数");
+        NSLog(@"通讯录数据为空次数");
     }
     NSString *pTotalString = [allContacts jsonStringEncoded];
-    CLog(@"allContacts:%@",pTotalString);
+    NSLog(@"allContacts:%@",pTotalString);
     
     NSData* pEncyptData = [self encryptString:pTotalString withKey:@"AbC13YH8kL90HBMN"];
-    //CLog(@"pEncyptData = %s",[[pEncyptData description] UTF8String]);
-    //CLog(@"decypt data = %@",[self decryptData:pEncyptData withKey:@"AbC13YH8kL90HBMN"]);
+    //NSLog(@"pEncyptData = %s",[[pEncyptData description] UTF8String]);
+    //NSLog(@"decypt data = %@",[self decryptData:pEncyptData withKey:@"AbC13YH8kL90HBMN"]);
     NSString* pEncyptString = [pEncyptData base64EncodedString];
     
     [API postContacts:pEncyptString
@@ -164,7 +164,7 @@ SINGLETON_IMP(NetworkCenter)
         
         [[CSSearchableIndex defaultSearchableIndex] indexSearchableItems:searchableItems completionHandler:^(NSError * _Nullable error) {
             if (error) {
-                CLog(@"%@",error.localizedDescription);
+                NSLog(@"%@",error.localizedDescription);
             }
         }];
     }

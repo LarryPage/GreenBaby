@@ -256,31 +256,31 @@
         if (strongSelf == nil) return;
         
         if ([placemarks count] > 0 && error == nil) {
-            CLog(@"CLGeocoder finished...");
-            CLog(@"Found %@ placemark(s).", @([placemarks count]));
+            NSLog(@"CLGeocoder finished...");
+            NSLog(@"Found %@ placemark(s).", @([placemarks count]));
             CLPlacemark *firstPlacemark = [placemarks objectAtIndex:0];
             
-            CLog(@"Longitude = %f", firstPlacemark.location.coordinate.longitude);
-            CLog(@"Latitude = %f", firstPlacemark.location.coordinate.latitude);
+            NSLog(@"Longitude = %f", firstPlacemark.location.coordinate.longitude);
+            NSLog(@"Latitude = %f", firstPlacemark.location.coordinate.latitude);
             
-            CLog(@"country:%@",firstPlacemark.country);//中国
-            CLog(@"ISOcountryCode:%@",firstPlacemark.ISOcountryCode);//CN
-            CLog(@"locality:%@",firstPlacemark.locality);//上海市
-            CLog(@"subLocality:%@",firstPlacemark.subLocality);//浦东新区
-            CLog(@"postalCode:%@",firstPlacemark.postalCode);//200127
-            CLog(@"thoroughfare:%@",firstPlacemark.thoroughfare);//峨山路
-            CLog(@"subThoroughfare:%@",firstPlacemark.subThoroughfare);//137号
-            CLog(@"administrativeArea:%@",firstPlacemark.administrativeArea);//上海市
+            NSLog(@"country:%@",firstPlacemark.country);//中国
+            NSLog(@"ISOcountryCode:%@",firstPlacemark.ISOcountryCode);//CN
+            NSLog(@"locality:%@",firstPlacemark.locality);//上海市
+            NSLog(@"subLocality:%@",firstPlacemark.subLocality);//浦东新区
+            NSLog(@"postalCode:%@",firstPlacemark.postalCode);//200127
+            NSLog(@"thoroughfare:%@",firstPlacemark.thoroughfare);//峨山路
+            NSLog(@"subThoroughfare:%@",firstPlacemark.subThoroughfare);//137号
+            NSLog(@"administrativeArea:%@",firstPlacemark.administrativeArea);//上海市
             _placemark=nil;
             _placemark = firstPlacemark;
             
             self.location.subtitle=[self adressString];
         }
         else if ([placemarks count] == 0 && error == nil) {
-            CLog(@"CLGeocoder Found no placemarks.");
+            NSLog(@"CLGeocoder Found no placemarks.");
         }
         else if (error != nil) {
-            CLog(@"CLGeocoder error:%@", error);
+            NSLog(@"CLGeocoder error:%@", error);
             
             if (!_placemark && _geoCount<3) {
                 [self performSelector:@selector(startReverseGeocoder) withObject:nil afterDelay:1.0];
@@ -307,21 +307,21 @@
         if (strongSelf == nil) return;
         
         if ([placemarks count] > 0 && error == nil) {
-            CLog(@"CLGeocoder finished...");
-            CLog(@"Found %@ placemark(s).", @([placemarks count]));
+            NSLog(@"CLGeocoder finished...");
+            NSLog(@"Found %@ placemark(s).", @([placemarks count]));
             CLPlacemark *firstPlacemark = [placemarks objectAtIndex:0];
             
-            CLog(@"Longitude = %f", firstPlacemark.location.coordinate.longitude);
-            CLog(@"Latitude = %f", firstPlacemark.location.coordinate.latitude);
+            NSLog(@"Longitude = %f", firstPlacemark.location.coordinate.longitude);
+            NSLog(@"Latitude = %f", firstPlacemark.location.coordinate.latitude);
             
-            CLog(@"country:%@",firstPlacemark.country);//中国
-            CLog(@"ISOcountryCode:%@",firstPlacemark.ISOcountryCode);//CN
-            CLog(@"locality:%@",firstPlacemark.locality);//上海市
-            CLog(@"subLocality:%@",firstPlacemark.subLocality);//浦东新区
-            CLog(@"postalCode:%@",firstPlacemark.postalCode);//200127
-            CLog(@"thoroughfare:%@",firstPlacemark.thoroughfare);//峨山路
-            CLog(@"subThoroughfare:%@",firstPlacemark.subThoroughfare);//137号
-            CLog(@"administrativeArea:%@",firstPlacemark.administrativeArea);//上海市
+            NSLog(@"country:%@",firstPlacemark.country);//中国
+            NSLog(@"ISOcountryCode:%@",firstPlacemark.ISOcountryCode);//CN
+            NSLog(@"locality:%@",firstPlacemark.locality);//上海市
+            NSLog(@"subLocality:%@",firstPlacemark.subLocality);//浦东新区
+            NSLog(@"postalCode:%@",firstPlacemark.postalCode);//200127
+            NSLog(@"thoroughfare:%@",firstPlacemark.thoroughfare);//峨山路
+            NSLog(@"subThoroughfare:%@",firstPlacemark.subThoroughfare);//137号
+            NSLog(@"administrativeArea:%@",firstPlacemark.administrativeArea);//上海市
             _placemark=nil;
             _placemark = firstPlacemark;
             
@@ -351,10 +351,10 @@
             //[self recenterMap];
         }
         else if ([placemarks count] == 0 && error == nil) {
-            CLog(@"CLGeocoder Found no placemarks.");
+            NSLog(@"CLGeocoder Found no placemarks.");
         }
         else if (error != nil) {
-            CLog(@"CLGeocoder error:%@", error);
+            NSLog(@"CLGeocoder error:%@", error);
             
             if (!_placemark && _geoCount<3) {
                 [self performSelector:@selector(startForwardGeocoder) withObject:nil afterDelay:1.0];

@@ -96,6 +96,7 @@
     #import "LocationManager.h"
     #import "NetworkCenter.h"
     #import "PayCenter.h"
+    #import "CLogger.h"
     #import "API.h"
     #import "APIQN.h"
 #endif

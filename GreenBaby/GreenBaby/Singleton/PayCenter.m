@@ -82,7 +82,7 @@ SINGLETON_IMP(PayCenter)
     //在这里将token和地址发送到自己的服务器，有自己的服务器与银行和商家进行接口调用和支付将结果返回到这里
     //我们根据结果生成对应的状态对象，根据状态对象显示不同的支付结构
     //状态对象
-    CLog(@"%@",payment.token);
+    NSLog(@"%@",payment.token);
     
     // When the async call is done, send the callback.
     // Available cases are:
@@ -102,7 +102,7 @@ SINGLETON_IMP(PayCenter)
 //支付完成的代理方法
 -(void)paymentAuthorizationViewControllerDidFinish:(PKPaymentAuthorizationViewController *)controller{
     [controller dismissViewControllerAnimated:YES completion:nil];
-    CLog(@"支付完成");
+    NSLog(@"支付完成");
 }
 
 /* -------------   1.微信支付   ------------- */
@@ -123,9 +123,9 @@ SINGLETON_IMP(PayCenter)
     
     if(dict == nil){
         //错误提示
-        CLog(@"%@\n\n",[req getDebugifo]);
+        NSLog(@"%@\n\n",[req getDebugifo]);
     }else{
-        CLog(@"%@\n\n",[req getDebugifo]);
+        NSLog(@"%@\n\n",[req getDebugifo]);
         //[self alert:@"确认" msg:@"下单成功，点击OK后调起支付！"];
         
         NSMutableString *stamp  = [dict objectForKey:@"timestamp"];
@@ -203,7 +203,7 @@ SINGLETON_IMP(PayCenter)
     if (!orderString) {
         orderString = [NSString stringWithFormat:@"%@&sign=\"%@\"&sign_type=\"%@\"",
                        orderSpec, signedString, @"RSA"];
-        CLog(@"orderString = %@",orderString);
+        NSLog(@"orderString = %@",orderString);
         
         [[AlipaySDK defaultService] payOrder:orderString fromScheme:appScheme callback:^(NSDictionary *resultDic) {
             NSInteger resultStatus=[resultDic[@"resultStatus"] integerValue];
@@ -211,28 +211,28 @@ SINGLETON_IMP(PayCenter)
             switch (resultStatus) {
                 case 9000:
                     pay_status=0;
-                    CLog(@"订单支付成功:reslut = %@",resultDic);
+                    NSLog(@"订单支付成功:reslut = %@",resultDic);
                     break;
                 case 6001:
                     pay_status=2;
-                    CLog(@"用户中途取消:reslut = %@",resultDic);
+                    NSLog(@"用户中途取消:reslut = %@",resultDic);
                     break;
                 case 6002:
                     pay_status=2;
-                    CLog(@"网络连接出错:reslut = %@",resultDic);
+                    NSLog(@"网络连接出错:reslut = %@",resultDic);
                     break;
                 case 4000:
                     pay_status=1;
-                    CLog(@"订单支付失败:reslut = %@",resultDic);
+                    NSLog(@"订单支付失败:reslut = %@",resultDic);
                     break;
                 /*
                  case 8000:
                  pay_status=3;
-                 CLog(@"正在处理中:reslut = %@",resultDic);
+                 NSLog(@"正在处理中:reslut = %@",resultDic);
                  break;
                  */
                 default:
-                    CLog(@"reslut = %@",resultDic);
+                    NSLog(@"reslut = %@",resultDic);
                     //[[TKAlertCenter defaultCenter] postAlertWithMessage:resultDic[@"memo"]];
                     [[TKAlertCenter defaultCenter] postAlertWithMessage:@"支付失败!"];
                     break;
@@ -268,28 +268,28 @@ SINGLETON_IMP(PayCenter)
         switch (resultStatus) {
             case 9000:
                 pay_status=0;
-                CLog(@"订单支付成功:reslut = %@",resultDic);
+                NSLog(@"订单支付成功:reslut = %@",resultDic);
                 break;
             case 6001:
                 pay_status=2;
-                CLog(@"用户中途取消:reslut = %@",resultDic);
+                NSLog(@"用户中途取消:reslut = %@",resultDic);
                 break;
             case 6002:
                 pay_status=2;
-                CLog(@"网络连接出错:reslut = %@",resultDic);
+                NSLog(@"网络连接出错:reslut = %@",resultDic);
                 break;
             case 4000:
                 pay_status=1;
-                CLog(@"订单支付失败:reslut = %@",resultDic);
+                NSLog(@"订单支付失败:reslut = %@",resultDic);
                 break;
             /*
              case 8000:
              pay_status=3;
-             CLog(@"正在处理中:reslut = %@",resultDic);
+             NSLog(@"正在处理中:reslut = %@",resultDic);
              break;
              */
             default:
-                CLog(@"reslut = %@",resultDic);
+                NSLog(@"reslut = %@",resultDic);
                 //[[TKAlertCenter defaultCenter] postAlertWithMessage:resultDic[@"memo"]];
                 [[TKAlertCenter defaultCenter] postAlertWithMessage:@"支付失败!"];
                 break;

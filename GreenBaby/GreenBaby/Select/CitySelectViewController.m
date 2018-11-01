@@ -473,19 +473,19 @@
 #pragma mark UISearchControllerDelegate
 
 - (void)presentSearchController:(UISearchController *)searchController{
-    CLog(@"presentSearchController");
+    NSLog(@"presentSearchController");
 }
 - (void)willPresentSearchController:(UISearchController *)searchController{
-    CLog(@"willPresentSearchController");
+    NSLog(@"willPresentSearchController");
 }
 - (void)didPresentSearchController:(UISearchController *)searchController{
-    CLog(@"didPresentSearchController");
+    NSLog(@"didPresentSearchController");
 }
 - (void)willDismissSearchController:(UISearchController *)searchController{
-    CLog(@"willDismissSearchController");
+    NSLog(@"willDismissSearchController");
 }
 - (void)didDismissSearchController:(UISearchController *)searchController{
-    CLog(@"didDismissSearchController");
+    NSLog(@"didDismissSearchController");
 }
 
 #pragma mark UISearchResultsUpdating

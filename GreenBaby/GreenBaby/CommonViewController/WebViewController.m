@@ -169,7 +169,7 @@ static NSMutableDictionary *gSessionOfUIWebView = nil;//缓存HTML5相关Session
     _jsContext = [self.webView valueForKeyPath:@"documentView.webView.mainFrame.javaScriptContext"];
     _jsContext.exceptionHandler = ^(JSContext *context, JSValue *exceptionValue) {
         context.exception = exceptionValue;
-        CLog(@"异常信息：%@", exceptionValue);
+        NSLog(@"异常信息：%@", exceptionValue);
     };
     WEAKSELF
     _jsContext[@"HJM_userInfo"] = ^{
@@ -184,7 +184,7 @@ static NSMutableDictionary *gSessionOfUIWebView = nil;//缓存HTML5相关Session
         return myUserStr;
     };
     _jsContext[@"HJM_sharePage"] = ^(NSDictionary *param) {
-        CLog(@"param:%@", param);  //分享
+        NSLog(@"param:%@", param);  //分享
         [weakSelf updateShareContent:param];
     };
     /*
@@ -534,7 +534,7 @@ static NSMutableDictionary *gSessionOfUIWebView = nil;//缓存HTML5相关Session
 //    NSLog(@"%@",HTMLSource);
     
     id userAgent = [webView stringByEvaluatingJavaScriptFromString:@"navigator.userAgent"];
-    CLog(@"userAgent:%@", userAgent);
+    NSLog(@"userAgent:%@", userAgent);
     
     //2第二种方式  主动调用JS方法
 //    NSString *functionJS = [NSString stringWithFormat:@"test(%@);",myUserStr];

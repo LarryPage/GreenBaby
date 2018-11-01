@@ -163,17 +163,7 @@ NSLog(@"文件名->:%s \n方法->:%s \n行->:%d", __FILE__, __PRETTY_FUNCTION__,
 # define CFP							;
 #endif
 
-#ifdef DEBUG
-#define NSLog(format, ...) printf("[%s] %s [第%d行] %s\n", __TIME__, __FUNCTION__, __LINE__, [[NSString stringWithFormat:format, ## __VA_ARGS__] UTF8String]);
-#else
-#define NSLog(format, ...)
-#endif
-
-#ifdef DEBUG
-#define CLog(format, ...) NSLog(format, ## __VA_ARGS__)
-#else
-#define CLog(format, ...)
-#endif
+#define NSLog(format, ...) [[CLogger sharedInstance] addLogMsg:[NSString stringWithFormat:format, ##__VA_ARGS__] file:[NSString stringWithUTF8String:__FILE__] function:[NSString stringWithUTF8String:__PRETTY_FUNCTION__] line:__LINE__]
 
 #if __LP64__
 #define NSI "ld"

@@ -129,7 +129,7 @@
     // Switch the indicator when more than 50% of the previous/next page is visible
 //    CGFloat pageHeight = self.scrollView.frame.size.height;
 //    int curentScrollPage = floor((self.scrollView.contentOffset.y - pageHeight / 2) / pageHeight) + 1;
-//    CLog(@"curentScrollPage:%d",curentScrollPage);
+//    NSLog(@"curentScrollPage:%d",curentScrollPage);
 }
 
 //滚动开始

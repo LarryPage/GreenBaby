@@ -139,7 +139,7 @@ static FMDatabaseQueue *gFMDBQueue = nil;
     else{
         map = [NSMutableDictionary dictionary];
         [self replacedKeyMapForHierarchyOfClass:klass onDictionary:map];
-        //CLog(@"%@:%@",NSStringFromClass(klass),map);
+        //NSLog(@"%@:%@",NSStringFromClass(klass),map);
         [gReplacedKeyMapsOfClass setObject:map forKey:NSStringFromClass(klass)];
     }
     return map;
@@ -671,7 +671,7 @@ static const char *getPropertyType(const char *attributes) {
     else{
         properties = [NSMutableDictionary dictionary];
         [self propertiesForHierarchyOfClass:klass onDictionary:properties];
-        //CLog(@"%@:%@",NSStringFromClass(klass),properties);
+        //NSLog(@"%@:%@",NSStringFromClass(klass),properties);
         [gPropertiesOfClass setObject:properties forKey:NSStringFromClass(klass)];
     }
     return properties;

@@ -996,7 +996,7 @@
 #pragma mark UIScrollViewDelegate
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
-    //CLog(@"BeginDragging:");
+    //NSLog(@"BeginDragging:");
     [self hideInputView];
 }
 
@@ -1330,7 +1330,7 @@
                 scope:QiniuBucketNameImg
                 extra:nil
         progressBlock:^(NSProgress *progress) {
-            CLog(@"上传进度:%@",@(progress.fractionCompleted));
+            NSLog(@"上传进度:%@",@(progress.fractionCompleted));
 //            dispatch_async(dispatch_get_main_queue(), ^{
 //                [self.progressView setProgress:progress.fractionCompleted];
 //            });

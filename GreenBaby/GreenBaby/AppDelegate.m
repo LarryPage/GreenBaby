@@ -11,6 +11,7 @@
 #import "ContactManager.h"
 #import "LocationManager.h"
 #import "NetworkCenter.h"
+#import "FFATManager.h"
 
 @interface AppDelegate ()
 
@@ -42,9 +43,12 @@
             device.pushToken = @"";
             device.vid = [UIDevice imei];
             device.imei = [UIDevice imei];
-            device.isShowDebug = 0;
+            device.isShowAssistiveTouch = 0;
             device.apiEnv = 2;//api环境 0-develop 1-sit 2-product
             [DeviceModel saveCurRecord:device];
+        }
+        if (device.isShowAssistiveTouch) {
+            [[FFATManager sharedInstance] showAssistiveTouch];
         }
         [self registerAPNS];
         //[self setupShortcutItems];
@@ -90,7 +94,7 @@ void UncaughtExceptionHandler(NSException *exception){
     NSString *name = [exception name];
     NSString *reason = [exception reason];
     NSArray *symbols = [exception callStackSymbols];
-    CLog(@"Exception:\n%@\n%@\n%@",name,reason,symbols);
+    NSLog(@"Exception:\n%@\n%@\n%@",name,reason,symbols);
     
     NSMutableString *crash = [NSMutableString string];
     [exception.callStackSymbols enumerateObjectsUsingBlock:^(NSString * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
@@ -236,7 +240,7 @@ void UncaughtExceptionHandler(NSException *exception){
     
     // Override point for customization after application launch.
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    //CLog(@"height:%f",KUIScreeHeight);
+    //NSLog(@"height:%f",KUIScreeHeight);
     //INLog(@"LocalizedString:%@",[Configs LocalizedString:@"SaveSuccessTitle"]);
     [self.window setBackgroundColor:DefaultWindowBgColor];
     //[window setBackgroundColor:[[UIColor alloc] initWithCGColor:[[UIColor colorWithPatternImage:[UIImage imageNamed:@"global_bg.png"]] CGColor]];
@@ -279,7 +283,7 @@ void UncaughtExceptionHandler(NSException *exception){
     // 2.Handle local notification 定时本地通知
     UILocalNotification *localNotif = [launchOptions objectForKey:UIApplicationLaunchOptionsLocalNotificationKey];
     if (localNotif) {
-        CLog(@"Recieved Local Notification %@",localNotif);
+        NSLog(@"Recieved Local Notification %@",localNotif);
         
         _pushPayload=nil;
         NSString *u=localNotif.userInfo[@"u"];
@@ -292,7 +296,7 @@ void UncaughtExceptionHandler(NSException *exception){
         }
         _pushPayload=[NSMutableDictionary dictionaryWithDictionary:[pushStr jsonValueDecoded]];
         [_pushPayload setValue:@"OpenApp" forKey:@"mode"];
-        CLog(@"receive load push:%@", _pushPayload);
+        NSLog(@"receive load push:%@", _pushPayload);
         // it will be handled in applicationDidBecomeActive
     }
     
@@ -337,7 +341,7 @@ void UncaughtExceptionHandler(NSException *exception){
                         }
                     }
                     else{
-                        CLog(@"版本检查完成，没有可更新的版本。");
+                        NSLog(@"版本检查完成，没有可更新的版本。");
                     }
                 }
             }
@@ -360,7 +364,7 @@ void UncaughtExceptionHandler(NSException *exception){
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
     //大概5s的时间处理要完成的任务,若需要长时间运行任务，如下
     //[application beginBackgroundTaskWithExpirationHandler:^{
-    //    CLog(@"begin Background Task With Expiration Handler");
+    //    NSLog(@"begin Background Task With Expiration Handler");
     //}];
     if([[self.window topViewController] isKindOfClass:[BaseViewController class]]) {
         BaseViewController *curVC=(BaseViewController *)[self.window topViewController];
@@ -428,7 +432,7 @@ void UncaughtExceptionHandler(NSException *exception){
 #ifdef __IPHONE_8_0
 - (BOOL)application:(nonnull UIApplication *)application continueUserActivity:(nonnull NSUserActivity *)userActivity restorationHandler:(nonnull void (^)(NSArray * _Nullable))restorationHandler {
     NSString *itemID = userActivity.userInfo[@"kCSSearchableItemActivityIdentifier"];
-    CLog(@"根据[itemID:%@]跳转",itemID);
+    NSLog(@"根据[itemID:%@]跳转",itemID);
     return YES;
 }
 #endif
@@ -470,7 +474,7 @@ void UncaughtExceptionHandler(NSException *exception){
   sourceApplication:(NSString *)sourceApplication
          annotation:(id)annotation
 {
-    CLog(@"source app-%@, des app-%@",sourceApplication,application);
+    NSLog(@"source app-%@, des app-%@",sourceApplication,application);
     
     if ([sourceApplication isEqualToString:@"com.tencent.mqq"]) {
         return [TencentOAuth HandleOpenURL:url];
@@ -488,28 +492,28 @@ void UncaughtExceptionHandler(NSException *exception){
                                                           switch (resultStatus) {
                                                               case 9000:
                                                                   pay_status=0;
-                                                                  CLog(@"订单支付成功:reslut = %@",resultDic);
+                                                                  NSLog(@"订单支付成功:reslut = %@",resultDic);
                                                                   break;
                                                               case 6001:
                                                                   pay_status=2;
-                                                                  CLog(@"用户中途取消:reslut = %@",resultDic);
+                                                                  NSLog(@"用户中途取消:reslut = %@",resultDic);
                                                                   break;
                                                               case 6002:
                                                                   pay_status=2;
-                                                                  CLog(@"网络连接出错:reslut = %@",resultDic);
+                                                                  NSLog(@"网络连接出错:reslut = %@",resultDic);
                                                                   break;
                                                               case 4000:
                                                                   pay_status=1;
-                                                                  CLog(@"订单支付失败:reslut = %@",resultDic);
+                                                                  NSLog(@"订单支付失败:reslut = %@",resultDic);
                                                                   break;
                                                               /*
                                                                case 8000:
                                                                pay_status=3;
-                                                               CLog(@"正在处理中:reslut = %@",resultDic);
+                                                               NSLog(@"正在处理中:reslut = %@",resultDic);
                                                                break;
                                                                */
                                                               default:
-                                                                  CLog(@"reslut = %@",resultDic);
+                                                                  NSLog(@"reslut = %@",resultDic);
                                                                   //[[TKAlertCenter defaultCenter] postAlertWithMessage:resultDic[@"memo"]];
                                                                   [[TKAlertCenter defaultCenter] postAlertWithMessage:@"支付失败!"];
                                                                   break;
@@ -520,7 +524,7 @@ void UncaughtExceptionHandler(NSException *exception){
         }
         if ([url.host isEqualToString:@"platformapi"]){//支付宝钱包快登授权返回 authCode
             [[AlipaySDK defaultService] processAuthResult:url standbyCallback:^(NSDictionary *resultDic) {
-                CLog(@"result = %@",resultDic);
+                NSLog(@"result = %@",resultDic);
                 //发出消息
                 [[NSNotificationCenter defaultCenter] postNotificationName:KNOTIFICATION_ALIPAY object:nil userInfo:nil];
             }];
@@ -554,7 +558,7 @@ void UncaughtExceptionHandler(NSException *exception){
 - (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)localNotif {
     // Handle the notificaton when the app is running
     if (localNotif) {
-        CLog(@"Recieved Local Notification %@",localNotif);
+        NSLog(@"Recieved Local Notification %@",localNotif);
         
         _pushPayload=nil;
         NSString *u=localNotif.userInfo[@"u"];
@@ -567,7 +571,7 @@ void UncaughtExceptionHandler(NSException *exception){
         }
         _pushPayload=[NSMutableDictionary dictionaryWithDictionary:[pushStr jsonValueDecoded]];
         [_pushPayload setValue:@"WakeApp" forKey:@"mode"];
-        CLog(@"receive load push:%@", _pushPayload);
+        NSLog(@"receive load push:%@", _pushPayload);
         
         if ([[UIApplication sharedApplication] applicationState] == UIApplicationStateActive) {
             [self performSelector:@selector(handlePushPayload) withObject:nil afterDelay:0.0];
@@ -604,7 +608,7 @@ forLocalNotification:(UILocalNotification *)notification
 
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)pToken {
     NSString *str = [[[pToken description] stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"<> "]] stringByReplacingOccurrencesOfString:@" " withString:@""];
-    CLog(@"regisger push:%@", str);
+    NSLog(@"regisger push:%@", str);
     
     DeviceModel *device = [DeviceModel loadCurRecord];
     device.pushToken = str;
@@ -613,7 +617,7 @@ forLocalNotification:(UILocalNotification *)notification
 }
 
 - (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
-    CLog(@"fail to register push: %@", error);
+    NSLog(@"fail to register push: %@", error);
     
     DeviceModel *device = [DeviceModel loadCurRecord];
     device.pushToken = @"";
@@ -622,7 +626,7 @@ forLocalNotification:(UILocalNotification *)notification
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo{
-    CLog(@"receive push:%@", userInfo);
+    NSLog(@"receive push:%@", userInfo);
     _pushPayload=nil;
     _pushPayload = [NSMutableDictionary dictionaryWithDictionary:userInfo];
     
@@ -654,7 +658,7 @@ forLocalNotification:(UILocalNotification *)notification
 //    _pushPayload=nil;
 //    NSString *pushStr=@"{\"aps\" : {\"alert\" : \"你的订阅有新的５个职位 \ue415 \", \"badge\" : \"1\", \"sound\" : \"default\"}, \"m\" : \"1\" , \"u\" : \"greenbaby://huijiame.com/activity\"}";//有表情
 //    _pushPayload=[NSMutableDictionary dictionaryWithDictionary:[pushStr jsonValueDecoded]];
-//    CLog(@"receive Test push:%@", _pushPayload);
+//    NSLog(@"receive Test push:%@", _pushPayload);
     /*
     {
         aps =     {
@@ -690,7 +694,7 @@ forLocalNotification:(UILocalNotification *)notification
         else if (apsDic && [apsDic[@"alert"] isKindOfClass:[NSDictionary class]]){
             alertTitle=apsDic[@"alert"][@"title"];
         }
-        CLog(@"push alertTitle[1]:%@", alertTitle);
+        NSLog(@"push alertTitle[1]:%@", alertTitle);
         
         NSString *m=_pushPayload[@"m"];//消息 id
         NSString *u=_pushPayload[@"u"];//route url
@@ -872,7 +876,7 @@ forLocalNotification:(UILocalNotification *)notification
 }
 
 -(void) onResp:(BaseResp*)resp{
-    CLog(@"%@",resp);
+    NSLog(@"%@",resp);
     
     if ([resp isKindOfClass:[SendAuthResp class]]) {
         switch (resp.errCode) {

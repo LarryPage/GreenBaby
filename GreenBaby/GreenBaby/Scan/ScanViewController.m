@@ -313,7 +313,7 @@
     
     // do something useful with results
     for(ZBarSymbol *sym in syms) {
-        CLog(@"%@",[NSString stringWithFormat:@"typeName:%@ data:%@",sym.typeName,sym.data]);
+        NSLog(@"%@",[NSString stringWithFormat:@"typeName:%@ data:%@",sym.typeName,sym.data]);
         NSString *scanCode=sym.data.lowercaseString;//http://www.rrlt.com/resume/preview_wap?jkey=***&rid=***&from=singlemessage&isappinstalled=1&uid=123456
         if ([scanCode hasPrefix:@"http://www.rrlt.com/resume/preview_wap"]) {
             [_readerView stop];
@@ -374,7 +374,7 @@
         break;
     
     // EXAMPLE: do something useful with the barcode data
-    CLog(@"%@",[NSString stringWithFormat:@"typeName:%@ data:%@",symbol.typeName,symbol.data]);
+    NSLog(@"%@",[NSString stringWithFormat:@"typeName:%@ data:%@",symbol.typeName,symbol.data]);
     
     // EXAMPLE: do something useful with the barcode image
     //resultImage.image =[info objectForKey: UIImagePickerControllerOriginalImage];
@@ -390,7 +390,7 @@
 
 - (void) imagePickerControllerDidCancel: (UIImagePickerController*) picker
 {
-    CLog(@"imagePickerControllerDidCancel:\n");
+    NSLog(@"imagePickerControllerDidCancel:\n");
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {//iphone
         [picker dismissViewControllerAnimated:YES completion:nil];
     }
@@ -402,7 +402,7 @@
 - (void) readerControllerDidFailToRead: (ZBarReaderController*) _reader
                              withRetry: (BOOL) retry
 {
-    CLog(@"readerControllerDidFailToRead: retry=%s\n",(retry) ? "YES" : "NO");
+    NSLog(@"readerControllerDidFailToRead: retry=%s\n",(retry) ? "YES" : "NO");
     if(!retry){
         if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {//iphone
             [_reader dismissViewControllerAnimated:YES completion:nil];

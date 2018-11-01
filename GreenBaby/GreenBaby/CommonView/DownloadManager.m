@@ -89,7 +89,7 @@
         [_progressAlertView setDelegate:self];
         // You may use a Block, rather than a delegate.
 //        [_progressAlertView setOnButtonTouchUpInside:^(CustomIOS7AlertView *alertView, NSInteger buttonIndex) {
-//            CLog(@"Block: Button at position %d is clicked on alertView %d.", buttonIndex, [alertView tag]);
+//            NSLog(@"Block: Button at position %d is clicked on alertView %d.", buttonIndex, [alertView tag]);
 //            [_progressAlertView close];
 //        }];
         
@@ -196,7 +196,7 @@
 #pragma mark CustomIOS7AlertViewDelegate
 
 - (void)customIOS7dialogButtonTouchUpInside: (CustomIOS7AlertView *)alertView clickedButtonAtIndex: (NSInteger)buttonIndex{
-//    CLog(@"Delegate: Button at position %d is clicked on alertView %d.", buttonIndex, [alertView tag]);
+//    NSLog(@"Delegate: Button at position %d is clicked on alertView %d.", buttonIndex, [alertView tag]);
 //    [alertView close];
     
     switch ([alertView tag]) {
@@ -259,7 +259,7 @@
     NSNumber *partial = [NSNumber numberWithFloat:([resourceLength floatValue] / bytes)];
     NSNumber *total = [NSNumber numberWithFloat:([totalFileLength floatValue] / bytes)];
     label.text = [NSString stringWithFormat:@"%@ KB / %@ KB", [formatter stringFromNumber:partial], [formatter stringFromNumber:total]];
-    CLog(@"process:%@",label.text);
+    NSLog(@"process:%@",label.text);
 }
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error 
