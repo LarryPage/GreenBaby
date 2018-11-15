@@ -12,7 +12,7 @@
 
 @property (nonatomic, assign) NSInteger user_id;
 @property (nonatomic, strong) NSString *username;  //用户名
-@property (nonatomic, strong) NSString *password;  //加密－密码
+@property (nonatomic, strong) NSString *password;  //md5加密－密码
 @property (nonatomic, strong) NSString *basicAuth; //script 脚本代码注入
 
 @property (nonatomic, strong) NSString *mobile;

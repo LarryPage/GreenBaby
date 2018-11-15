@@ -146,5 +146,7 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<true/>
+	<key>buildingDate</key>
+	<string>1111-11-11</string>
 </dict>
 </plist>

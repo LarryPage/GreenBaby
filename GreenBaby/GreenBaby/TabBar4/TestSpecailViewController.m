@@ -124,13 +124,17 @@
     return view;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
-    return 1;
-}
-
 - (UIView *) tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
-    UIView *view= [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, 1)];
+    UIView *view= [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, 40)];
     view.backgroundColor=[UIColor clearColor];
+    
+    UILabel *lbl=[[UILabel alloc] initWithFrame:view.bounds];
+    lbl.font=CFont(14);
+    lbl.textColor=UIColorFromRGB(0x666666);
+    lbl.text=[NSString stringWithFormat:@"当前构建日期:%@",[[[NSBundle mainBundle] infoDictionary] objectForKey:@"buildingDate"]];
+    lbl.textAlignment=NSTextAlignmentCenter;
+    [view addSubview:lbl];
+    
     return view;
 }
 
