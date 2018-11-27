@@ -22,10 +22,12 @@
         //NSDictionary *params=[[routeUrl query] queryDictionaryUsingEncoding:NSUTF8StringEncoding];
         NSString *url = parameters[@"url"];
         NSString *title = parameters[@"title"];
-        BOOL navBarHidden = [parameters[@"hide_navbar"] integerValue];
+        BOOL navBarHidden = [parameters[@"navbarhidden"] integerValue];
+        NSString *navBarBgColor = parameters[@"navbarbgcolor"];
         
         WebViewController *vc = [[WebViewController alloc] initWithUrl:url title:title];
         vc.navBarHidden=navBarHidden;
+        vc.navBarBgColor=navBarBgColor;
         vc.hidesBottomBarWhenPushed=YES;
         [curVC.navigationController pushViewController:vc animated:YES];
         

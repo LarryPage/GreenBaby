@@ -24,6 +24,8 @@ static NSMutableDictionary *gSessionOfUIWebView = nil;//缓存HTML5相关Session
 @property (nonatomic, strong) WBUIWebView *webView;
 @property (nonatomic, strong) UIRotationGestureRecognizer *rotationGesture;
 @property (nonatomic, strong, readwrite) JSContext *jsContext;
+@property (nonatomic, strong) NSString *leftBtnCallBackFunction;
+@property (nonatomic, strong) NSString *rightBtnCallBackFunction;
 @end
 
 @implementation WebViewController
@@ -68,8 +70,6 @@ static NSMutableDictionary *gSessionOfUIWebView = nil;//缓存HTML5相关Session
     if (!([_url hasPrefix:@"http://"] || [_url hasPrefix:@"https://"])) {
         _url = [NSString stringWithFormat:@"http://%@", _url];
     }
-    self.edgesForExtendedLayout = UIRectEdgeNone;
-    self.automaticallyAdjustsScrollViewInsets = YES;
     //WBUIWebView
     self.webView = [[WBUIWebView alloc] initWithFrame:self.view.bounds];
     self.webView.translatesAutoresizingMaskIntoConstraints = NO;
@@ -92,6 +92,20 @@ static NSMutableDictionary *gSessionOfUIWebView = nil;//缓存HTML5相关Session
     CGRect barFrame = CGRectMake(0, navigaitonBarBounds.size.height - progressBarHeight, navigaitonBarBounds.size.width, progressBarHeight);
     _progressView = [[NJKWebViewProgressView alloc] initWithFrame:barFrame];
     _progressView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin;
+    
+    //修复下拉刷新位置错误 代码开始
+    if ([self respondsToSelector:@selector(automaticallyAdjustsScrollViewInsets)]) {
+        self.edgesForExtendedLayout = UIRectEdgeNone;
+        self.automaticallyAdjustsScrollViewInsets = NO;
+        
+        if (self.navBarHidden) {
+            UIEdgeInsets insets = self.webView.scrollView.contentInset;
+            insets.top = IS_IPHONE_X?-44:-20;
+            insets.bottom = -1;
+            self.webView.scrollView.contentInset = insets;
+            self.webView.scrollView.scrollIndicatorInsets = insets;
+        }
+    }
     
     //隐藏uiwebview 后面灰背景的方法
     _webView.backgroundColor = [UIColor clearColor];
@@ -124,12 +138,24 @@ static NSMutableDictionary *gSessionOfUIWebView = nil;//缓存HTML5相关Session
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:self.navBarHidden animated:YES];
     [self.navigationController.navigationBar addSubview:_progressView];
+    
+    if (self.navBarBgColor && self.navBarBgColor.length>=6) {
+        UIColor *navBarTintColor=[UIColor colorWithHexString:self.navBarBgColor];
+        self.navigationController.navigationBar.barTintColor=navBarTintColor;//the bar background
+        [self.navigationController.navigationBar setBackgroundImage:[UIImage createImageWithColor:navBarTintColor] forBarMetrics:UIBarMetricsDefault];
+    }
+    
+    //页面载入完成回调
+    NSString *functionJS = @"viewOnResume();";
+    [self.webView stringByEvaluatingJavaScriptFromString:functionJS];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
     [_progressView removeFromSuperview];
+    
+    [self setNavigationBarAttribute:self.navigationController.navigationBar];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -161,6 +187,49 @@ static NSMutableDictionary *gSessionOfUIWebView = nil;//缓存HTML5相关Session
 }
 
 #pragma mark Action
+
+- (void)back {
+    if (self.leftBtnCallBackFunction.length > 0) {
+        //回调
+        [self.webView stringByEvaluatingJavaScriptFromString:self.leftBtnCallBackFunction];
+    }
+    else{
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+}
+
+- (IBAction)rightBtn:(id)sender{
+    if (self.rightBtnCallBackFunction.length > 0) {
+        //回调
+        [self.webView stringByEvaluatingJavaScriptFromString:self.rightBtnCallBackFunction];
+    }
+    else{
+        ShareSheet *shareSheet = [ShareSheet initImageNames:@[@"weixin",@"pengyouquan"]
+                                                     titles:@[@"微信好友",@"微信朋友圈"]
+                                                 completion:^(NSInteger buttonIndex, id welkSelf){
+                                                     if (![WXApi isWXAppSupportApi]) {
+                                                         [[TKAlertCenter defaultCenter] postAlertWithMessage:@"当前微信的版本不支持OpenApi"];
+                                                     }
+                                                     else{
+                                                         WXMediaMessage *message = [WXMediaMessage message];
+                                                         message.title = _title;
+                                                         message.description = _content;
+                                                         [message setThumbImage:_thumbImage];
+                                                         WXWebpageObject *ext = [WXWebpageObject object];
+                                                         ext.webpageUrl = _url;
+                                                         message.mediaObject = ext;
+                                                         
+                                                         SendMessageToWXReq* req = [[SendMessageToWXReq alloc] init];
+                                                         req.bText = NO;
+                                                         req.message = message;
+                                                         req.scene = buttonIndex == 0 ? WXSceneSession : WXSceneTimeline;
+                                                         [WXApi sendReq:req];
+                                                     }
+                                                 }];
+        shareSheet.tipLbl.text = @"分享广播通知到";
+        [shareSheet show];
+    }
+}
 
 //2.JavaScriptCore，IOS7以后才开放的API,注意weakSelf(内存释放)
 //交互
@@ -197,15 +266,21 @@ static NSMutableDictionary *gSessionOfUIWebView = nil;//缓存HTML5相关Session
      title = "\U6211\U5206\U4eab\U7684\U9875\U9762";
      }
      */
+    // 登录成功后回调
+    _jsContext[@"HJM_loginResult"] = ^(NSString *token) {
+        // token 回调给app
+        JSValue *function = weakSelf.jsContext[@"testCallback"];//js里的全局方法：testCallback
+        [function callWithArguments:@[token]];
+    };
     //页面跳转的控制
     _jsContext[@"HJM_pushWebView"] = ^(NSString *url, NSString *title, NSInteger isCreate) {
         dispatch_async(dispatch_get_main_queue(), ^{
+            NSURL *Url=[NSURL URLWithString:url];
             if (isCreate) {
-                NSURL *Url=[NSURL URLWithString:url];
                 [[AppDelegate sharedAppDelegate] handleUrl:Url title:title];
             }
             else{
-                NSMutableURLRequest *urlRequest = [[NSMutableURLRequest alloc] initWithURL: [NSURL URLWithString:url]];
+                NSMutableURLRequest *urlRequest = [[NSMutableURLRequest alloc] initWithURL: Url];
                 [weakSelf.webView loadRequest:urlRequest];
             }
         });
@@ -292,18 +367,182 @@ static NSMutableDictionary *gSessionOfUIWebView = nil;//缓存HTML5相关Session
         
         return (idx!=-1)?1:0;
     };
-    // 登录成功后回调
-    _jsContext[@"HJM_loginResult"] = ^(NSString *token) {
-        // token 回调给app
-        JSValue *jsv_testCallback = weakSelf.jsContext[@"testCallback"];//js里的全局方法：testCallback
-        [jsv_testCallback callWithArguments:@[token]];
+    _jsContext[@"setBounces"] = ^(BOOL yesNO){
+        weakSelf.webView.scrollView.bounces = !yesNO;
     };
-    _jsContext[@"HJM_enableDebugMode"] = ^(int isEnable) {
-        //调试开关, 通过手势打开 isEnable:为0时关，非0时开。默认是开启的
-        [weakSelf.webView removeGestureRecognizer:weakSelf.rotationGesture];
-        if (isEnable) {
-            [weakSelf.webView addGestureRecognizer:weakSelf.rotationGesture];
-        }
+    _jsContext[@"execHttpRequest"] = ^(NSString *path, NSString *params, NSString *method, NSString *version, NSString *successFunName, NSString *failureFunName) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            NSDictionary *paramDic=[NSDictionary safeDictionaryFromObject:params];
+            ApiType apiType=kApiTypePost;
+            if ([method isEqualToString:@"get"]) {
+                apiType=kApiTypeGet;
+            }
+            else if ([method isEqualToString:@"post"]) {
+                apiType=kApiTypePost;
+            }
+            else if ([method isEqualToString:@"delete"]) {
+                apiType=kApiTypeDelete;
+            }
+            else if ([method isEqualToString:@"put"]) {
+                apiType=kApiTypePut;
+            }
+            [API executeRequestWithPath:path paramDic:paramDic auth:YES apiType:apiType formdataBlock:nil progressBlock:nil completionBlock:^(NSError *error, id responseDic) {
+                if (!error) {
+                    JSValue *function = weakSelf.jsContext[successFunName];
+                    [function callWithArguments:@[responseDic]];
+                }
+                else{
+                    JSValue *function = weakSelf.jsContext[failureFunName];
+                    NSMutableDictionary *errorDic=[NSMutableDictionary dictionary];
+                    [errorDic setObject:@(error.code) forKey:@"code"];
+                    [errorDic setObject:error.domain forKey:@"domain"];
+                    [errorDic setObject:error.userInfo forKey:@"userInfo"];
+                    [function callWithArguments:@[errorDic]];
+                }
+            }];
+        });
+    };
+    //上导航相关
+    _jsContext[@"showTitleBar"] = ^(NSInteger isShow) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            weakSelf.navBarHidden=isShow==0?YES:NO;
+            if (weakSelf.navBarHidden) {
+                UIEdgeInsets insets = weakSelf.webView.scrollView.contentInset;
+                insets.top = IS_IPHONE_X?-44:-20;
+                insets.bottom = -1;
+                weakSelf.webView.scrollView.contentInset = insets;
+                weakSelf.webView.scrollView.scrollIndicatorInsets = insets;
+            }
+            [weakSelf.navigationController setNavigationBarHidden:weakSelf.navBarHidden animated:YES];
+        });
+    };
+    _jsContext[@"setTitleText"] = ^(NSString *strJson) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            NSDictionary *param=[NSDictionary safeDictionaryFromObject:strJson];
+            NSString *navbarbgcolor = [param objectForKey:@"navbarbgcolor"];
+            NSString *title = [param objectForKey:@"title"];
+            NSString *titleColor = [param objectForKey:@"titleColor"];
+            
+            weakSelf.navBarBgColor=navbarbgcolor;
+            if (weakSelf.navBarBgColor && weakSelf.navBarBgColor.length>=6) {
+                UIColor *navBarTintColor=[UIColor colorWithHexString:weakSelf.navBarBgColor];
+                weakSelf.navigationController.navigationBar.barTintColor=navBarTintColor;//the bar background
+                [weakSelf.navigationController.navigationBar setBackgroundImage:[UIImage createImageWithColor:navBarTintColor] forBarMetrics:UIBarMetricsDefault];
+            }
+            
+            weakSelf.title = title;
+            
+            if (titleColor && titleColor.length>=6){
+                UIColor *navBarTitleColor=[UIColor colorWithHexString:titleColor];
+                [weakSelf.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:navBarTitleColor, NSForegroundColorAttributeName, DefaultNavTitleFont, NSFontAttributeName, nil]];
+            }
+        });
+    };
+    
+    _jsContext[@"setLeftButton"] = ^(NSString *strJson) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (strJson.length == 0) {
+                weakSelf.backBtn.hidden = YES;
+                weakSelf.leftBtnCallBackFunction = nil;
+            } else {
+                weakSelf.rightBtn.hidden = NO;
+                NSDictionary *param=[NSDictionary safeDictionaryFromObject:strJson];
+                NSString *icon = [param objectForKey:@"icon"];
+                NSString *title = [param objectForKey:@"title"];
+                NSString *titleColor = [param objectForKey:@"titleColor"];
+                NSString *callback = [param objectForKey:@"callback"];
+                
+                if (icon.length > 0) {
+                    if (icon.isUrl) {
+                        CGFloat sizeWH = 44*KUIScale;
+                        NSString *iconUrl = [NSString stringWithFormat:@"%@?imageView/1/w/%@/h/%@/q/100",icon,@(sizeWH),@(sizeWH)];
+                        NSURL *url=[NSURL URLWithString:iconUrl];
+                        SDWebImageManager *manager = [SDWebImageManager sharedManager];
+                        [manager loadImageWithURL:url
+                                          options:SDWebImageRetryFailed
+                                         progress:nil
+                                        completed:^(UIImage *image, NSData *data, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
+                                            if (image) {
+                                                // do something with image
+                                                [weakSelf.backBtn setImage:image forState:UIControlStateNormal];
+                                                [weakSelf.backBtn setImage:image forState:UIControlStateHighlighted];
+                                                [weakSelf.backBtn setTitle:nil forState:UIControlStateNormal];
+                                                [weakSelf.backBtn setTitle:nil forState:UIControlStateHighlighted];
+                                            }
+                                        }];
+                    }
+                    else{
+                        [weakSelf.backBtn setImage:[UIImage imageNamed:icon] forState:UIControlStateNormal];
+                        [weakSelf.backBtn setImage:[UIImage imageNamed:icon] forState:UIControlStateHighlighted];
+                        [weakSelf.backBtn setTitle:nil forState:UIControlStateNormal];
+                        [weakSelf.backBtn setTitle:nil forState:UIControlStateHighlighted];
+                    }
+                } else {
+                    [weakSelf.backBtn setImage:nil forState:UIControlStateNormal];
+                    [weakSelf.backBtn setImage:nil forState:UIControlStateHighlighted];
+                    [weakSelf.backBtn setTitle:title forState:UIControlStateNormal];
+                    [weakSelf.backBtn setTitle:title forState:UIControlStateHighlighted];
+                    
+                    if (titleColor.length>=6) {
+                        [weakSelf.backBtn setTitleColor:[UIColor colorWithHexString:titleColor] forState:UIControlStateNormal];
+                    }
+                }
+                weakSelf.leftBtnCallBackFunction = callback;
+            }
+        });
+    };
+    
+    _jsContext[@"setRightButton"] = ^(NSString *strJson) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (strJson.length == 0) {
+                weakSelf.rightBtn.hidden = YES;
+                weakSelf.rightBtnCallBackFunction = nil;
+            } else {
+                weakSelf.rightBtn.hidden = NO;
+                NSDictionary *param=[NSDictionary safeDictionaryFromObject:strJson];
+                NSString *icon = [param objectForKey:@"icon"];
+                NSString *title = [param objectForKey:@"title"];
+                NSString *titleColor = [param objectForKey:@"titleColor"];
+                NSString *callback = [param objectForKey:@"callback"];
+                
+                if (icon.length > 0) {
+                    if (icon.isUrl) {
+                        CGFloat sizeWH = 44*KUIScale;
+                        NSString *iconUrl = [NSString stringWithFormat:@"%@?imageView/1/w/%@/h/%@/q/100",icon,@(sizeWH),@(sizeWH)];
+                        NSURL *url=[NSURL URLWithString:iconUrl];
+                        SDWebImageManager *manager = [SDWebImageManager sharedManager];
+                        [manager loadImageWithURL:url
+                                          options:SDWebImageRetryFailed
+                                         progress:nil
+                                        completed:^(UIImage *image, NSData *data, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
+                                            if (image) {
+                                                // do something with image
+                                                [weakSelf.rightBtn setImage:image forState:UIControlStateNormal];
+                                                [weakSelf.rightBtn setImage:image forState:UIControlStateHighlighted];
+                                                [weakSelf.rightBtn setTitle:nil forState:UIControlStateNormal];
+                                                [weakSelf.rightBtn setTitle:nil forState:UIControlStateHighlighted];
+                                            }
+                                        }];
+                    }
+                    else{
+                        [weakSelf.rightBtn setImage:[UIImage imageNamed:icon] forState:UIControlStateNormal];
+                        [weakSelf.rightBtn setImage:[UIImage imageNamed:icon] forState:UIControlStateHighlighted];
+                        [weakSelf.rightBtn setTitle:nil forState:UIControlStateNormal];
+                        [weakSelf.rightBtn setTitle:nil forState:UIControlStateHighlighted];
+                    }
+                } else {
+                    [weakSelf.rightBtn setImage:nil forState:UIControlStateNormal];
+                    [weakSelf.rightBtn setImage:nil forState:UIControlStateHighlighted];
+                    [weakSelf.rightBtn setTitle:title forState:UIControlStateNormal];
+                    [weakSelf.rightBtn setTitle:title forState:UIControlStateHighlighted];
+                    
+                    if (titleColor.length>=6) {
+                        [weakSelf.rightBtn setTitleColor:[UIColor colorWithHexString:titleColor] forState:UIControlStateNormal];
+                    }
+                }
+                weakSelf.rightBtnCallBackFunction = callback;
+            }
+        });
     };
     //cache相关
     _jsContext[@"HJM_writeCache"] = ^(NSString *key,NSString *value) {
@@ -374,6 +613,14 @@ static NSMutableDictionary *gSessionOfUIWebView = nil;//缓存HTML5相关Session
         //memory缓存
         gSessionOfUIWebView = [[NSMutableDictionary alloc] init];
     };
+    //调试相关
+    _jsContext[@"HJM_enableDebugMode"] = ^(int isEnable) {
+        //调试开关, 通过手势打开 isEnable:为0时关，非0时开。默认是开启的
+        [weakSelf.webView removeGestureRecognizer:weakSelf.rotationGesture];
+        if (isEnable) {
+            [weakSelf.webView addGestureRecognizer:weakSelf.rotationGesture];
+        }
+    };
 }
 
 //旋转手势触发方法
@@ -420,49 +667,10 @@ static NSMutableDictionary *gSessionOfUIWebView = nil;//缓存HTML5相关Session
     }];
 }
 
-- (void)rightBtn:(UIButton *)sender{
-    ShareSheet *shareSheet = [ShareSheet initImageNames:@[@"weixin",@"pengyouquan"]
-                                                 titles:@[@"微信好友",@"微信朋友圈"]
-                                             completion:^(NSInteger buttonIndex, id welkSelf){
-                                                 if (![WXApi isWXAppSupportApi]) {
-                                                     [[TKAlertCenter defaultCenter] postAlertWithMessage:@"当前微信的版本不支持OpenApi"];
-                                                 }
-                                                 else{
-                                                     WXMediaMessage *message = [WXMediaMessage message];
-                                                     message.title = _title;
-                                                     message.description = _content;
-                                                     [message setThumbImage:_thumbImage];
-                                                     WXWebpageObject *ext = [WXWebpageObject object];
-                                                     ext.webpageUrl = _url;
-                                                     message.mediaObject = ext;
-                                                     
-                                                     SendMessageToWXReq* req = [[SendMessageToWXReq alloc] init];
-                                                     req.bText = NO;
-                                                     req.message = message;
-                                                     req.scene = buttonIndex == 0 ? WXSceneSession : WXSceneTimeline;
-                                                     [WXApi sendReq:req];
-                                                 }
-                                             }];
-    shareSheet.tipLbl.text = @"分享广播通知到";
-    [shareSheet show];
-}
-
 - (void)updateShareContent:(NSDictionary *)param
 {
     NSInteger isShare = [[param objectForKey:@"isShare"] integerValue];
-    if (isShare) {
-        // Create a custom right button
-        UIButton *rightBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        rightBtn.frame = CGRectMake(0, 0, 44, 44);
-        [rightBtn setImage:[UIImage imageNamed:@"Btn_Action"] forState:UIControlStateNormal];
-        [rightBtn setImage:[UIImage imageNamed:@"Btn_Action_hl"] forState:UIControlStateHighlighted];
-        [rightBtn addTarget:self action:@selector(rightBtn:) forControlEvents:UIControlEventTouchUpInside];
-        UIBarButtonItem *rightBarItem = [[UIBarButtonItem alloc] initWithCustomView:rightBtn];
-        
-        UIBarButtonItem *rightSeperator = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
-        rightSeperator.width = -20;//此处修改到边界的距离，请自行测试
-        [self.navigationItem setRightBarButtonItems:@[rightSeperator, rightBarItem]];
-    }
+    self.rightBtn.hidden=!isShare;
     
     _title = [param objectForKey:@"title"];
     _content = [param objectForKey:@"content"];
@@ -539,6 +747,10 @@ static NSMutableDictionary *gSessionOfUIWebView = nil;//缓存HTML5相关Session
     //2第二种方式  主动调用JS方法
 //    NSString *functionJS = [NSString stringWithFormat:@"test(%@);",myUserStr];
 //    [self.webView stringByEvaluatingJavaScriptFromString:functionJS];
+    
+    //页面载入完成回调
+    NSString *functionJS = @"viewDidLoad();";
+    [self.webView stringByEvaluatingJavaScriptFromString:functionJS];
     
     [self setJSContext];
 }

@@ -7,7 +7,7 @@
 //
 
 /*调用:
- urlstr = @"greenbaby://huijiame.com/common/web?url=url&title=网页名&hide_navbar=1";
+ urlstr = @"greenbaby://huijiame.com/common/web?url=url&title=网页名&navbarhidden=1&navbarbgcolor=9870FE";
  url = [NSURL URLWithString:urlstr];
  if([FFRouteManager canRouteURL:url]){
     [FFRouteManager routeURL:url];
@@ -17,7 +17,7 @@
     }];
  }
  else{//降级
-    [FFRouteManager routeReduceURL:url];//将打开网页:  https://huijiame.com/common/web?url=url&title=网页名&hide_navbar=1
+    [FFRouteManager routeReduceURL:url];//将打开网页:  https://huijiame.com/common/web?url=url&title=网页名&navbarhidden=1&navbarbgcolor=9870FE
  }
  */
 

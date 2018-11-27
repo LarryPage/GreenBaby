@@ -9,7 +9,7 @@
 /*
  使用方式：
         1.调度方式统一使用NSURL
-        2.URL的Scheme统一为：greenbaby,内部：greenbabyin，外部：greenbabyout 例如：greenbabyin://marketing/scan?adddd=dafdf&afdfsadfsdf=123445
+        2.URL的Scheme统一为：greenbaby,内部：greenbabyin，外部：greenbabyout 例如：greenbabyin://huijiame.com/marketing/scan?adddd=dafdf&afdfsadfsdf=123445
         3.绑定URL和事件处理回调Block，在程序初始化时，直接在内存中绑定事件URL和具体事件回调block的方式:
         + (void)addRoute:(NSString *)routePattern handler:(BOOL (^)(NSDictionary *parameters))handlerBlock impClass:(Class)impClass;
         4.执行Route操作
@@ -17,8 +17,12 @@
  
         备注：
         支持模糊匹配，模糊匹配符为"*"
-        例如 greenbabyin://marketing/scan?adddd=dafdf&afdfsadfsdf=123445 能被greenbabyin://marketing/ * 匹配 也能被greenbabyin:// * /scan匹配
+        例如 greenbabyin://huijiame.com/marketing/scan?adddd=dafdf&afdfsadfsdf=123445 能被greenbabyin://huijiame.com/marketing/ * 匹配 也能被greenbabyin:// * /scan匹配
         模糊匹配优先级低于精确匹配
+ 
+        5.降级操作
+        + (void)routeReduceURL:(NSURL *)URL;
+        例如：将打开网页:  https://huijiame.com/marketing/scan?adddd=dafdf&afdfsadfsdf=123445
  */
 
 #import <Foundation/Foundation.h>

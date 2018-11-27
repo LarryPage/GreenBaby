@@ -460,7 +460,8 @@ void UncaughtExceptionHandler(NSException *exception){
         
         NSDictionary *params=[[url query] queryDictionaryUsingEncoding:NSUTF8StringEncoding];
         WebViewController *vc = [[WebViewController alloc]initWithUrl:[url absoluteString] title:title];
-        vc.navBarHidden=[params[@"hide_navbar"] integerValue];
+        vc.navBarHidden=[params[@"navbarhidden"] integerValue];
+        vc.navBarBgColor=params[@"navbarbgcolor"];
         vc.hidesBottomBarWhenPushed=YES;
         [curVC.navigationController pushViewController:vc animated:YES];
     }

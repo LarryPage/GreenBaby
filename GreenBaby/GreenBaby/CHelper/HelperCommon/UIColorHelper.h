@@ -115,8 +115,8 @@
 // 建立颜色
 + (UIColor *)randomColor;
 + (UIColor *)colorWithRGBHex:(UInt32)hex;
-+ (UIColor *)colorWithString:(NSString *)stringToConvert;
-+ (UIColor *)colorWithHexString:(NSString *)stringToConvert;
++ (UIColor *)colorWithString:(NSString *)stringToConvert;//例子，stringToConvert {12,254,255,255}
++ (UIColor *)colorWithHexString:(NSString *)stringToConvert;//例子，stringToConvert #ffffff
 + (UIColor *)colorWithName:(NSString *)cssColorName;
 + (UIColor *)crayonWithName:(NSString *)crayonColorName;
 + (UIColor *)color:(UIColor *)color_ withAlpha:(float)alpha_;
