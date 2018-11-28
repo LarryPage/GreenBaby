@@ -145,7 +145,7 @@ static NSMutableDictionary *gSessionOfUIWebView = nil;//缓存HTML5相关Session
         [self.navigationController.navigationBar setBackgroundImage:[UIImage createImageWithColor:navBarTintColor] forBarMetrics:UIBarMetricsDefault];
     }
     
-    //页面载入完成回调
+    //页面显示回调
     NSString *functionJS = @"viewOnResume();";
     [self.webView stringByEvaluatingJavaScriptFromString:functionJS];
 }
@@ -370,7 +370,7 @@ static NSMutableDictionary *gSessionOfUIWebView = nil;//缓存HTML5相关Session
     _jsContext[@"setBounces"] = ^(BOOL yesNO){
         weakSelf.webView.scrollView.bounces = !yesNO;
     };
-    _jsContext[@"execHttpRequest"] = ^(NSString *path, NSString *params, NSString *method, NSString *version, NSString *successFunName, NSString *failureFunName) {
+    _jsContext[@"execHttpRequest"] = ^(NSString *path, NSString *params, NSString *method, NSString *successFunName, NSString *failureFunName) {
         dispatch_async(dispatch_get_main_queue(), ^{
             NSDictionary *paramDic=[NSDictionary safeDictionaryFromObject:params];
             ApiType apiType=kApiTypePost;
@@ -388,8 +388,9 @@ static NSMutableDictionary *gSessionOfUIWebView = nil;//缓存HTML5相关Session
             }
             [API executeRequestWithPath:path paramDic:paramDic auth:YES apiType:apiType formdataBlock:nil progressBlock:nil completionBlock:^(NSError *error, id responseDic) {
                 if (!error) {
+                    NSString *arg=[NSString safeStringFromObject:responseDic];
                     JSValue *function = weakSelf.jsContext[successFunName];
-                    [function callWithArguments:@[responseDic]];
+                    [function callWithArguments:@[arg]];
                 }
                 else{
                     JSValue *function = weakSelf.jsContext[failureFunName];
@@ -397,7 +398,8 @@ static NSMutableDictionary *gSessionOfUIWebView = nil;//缓存HTML5相关Session
                     [errorDic setObject:@(error.code) forKey:@"code"];
                     [errorDic setObject:error.domain forKey:@"domain"];
                     [errorDic setObject:error.userInfo forKey:@"userInfo"];
-                    [function callWithArguments:@[errorDic]];
+                    NSString *arg=[NSString safeStringFromObject:errorDic];
+                    [function callWithArguments:@[arg]];
                 }
             }];
         });
@@ -416,7 +418,7 @@ static NSMutableDictionary *gSessionOfUIWebView = nil;//缓存HTML5相关Session
             [weakSelf.navigationController setNavigationBarHidden:weakSelf.navBarHidden animated:YES];
         });
     };
-    _jsContext[@"setTitleText"] = ^(NSString *strJson) {
+    _jsContext[@"setTitleBar"] = ^(NSString *strJson) {
         dispatch_async(dispatch_get_main_queue(), ^{
             NSDictionary *param=[NSDictionary safeDictionaryFromObject:strJson];
             NSString *navbarbgcolor = [param objectForKey:@"navbarbgcolor"];
@@ -430,11 +432,12 @@ static NSMutableDictionary *gSessionOfUIWebView = nil;//缓存HTML5相关Session
                 [weakSelf.navigationController.navigationBar setBackgroundImage:[UIImage createImageWithColor:navBarTintColor] forBarMetrics:UIBarMetricsDefault];
             }
             
-            weakSelf.title = title;
+            UILabel *titleLabel = (UILabel *)weakSelf.navigationItem.titleView;
+            titleLabel.text = title;
             
             if (titleColor && titleColor.length>=6){
                 UIColor *navBarTitleColor=[UIColor colorWithHexString:titleColor];
-                [weakSelf.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:navBarTitleColor, NSForegroundColorAttributeName, DefaultNavTitleFont, NSFontAttributeName, nil]];
+                titleLabel.textColor=navBarTitleColor;
             }
         });
     };
@@ -735,7 +738,7 @@ static NSMutableDictionary *gSessionOfUIWebView = nil;//缓存HTML5相关Session
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView {
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
-	self.title = [webView stringByEvaluatingJavaScriptFromString:@"document.title"];
+//    self.title = [webView stringByEvaluatingJavaScriptFromString:@"document.title"];
     
 //    NSString *JsToGetHTMLSource = @"document.getElementsByTagName('html')[0].innerHTML";
 //    NSString *HTMLSource = [webView stringByEvaluatingJavaScriptFromString:JsToGetHTMLSource];
@@ -748,7 +751,7 @@ static NSMutableDictionary *gSessionOfUIWebView = nil;//缓存HTML5相关Session
 //    NSString *functionJS = [NSString stringWithFormat:@"test(%@);",myUserStr];
 //    [self.webView stringByEvaluatingJavaScriptFromString:functionJS];
     
-    //页面载入完成回调
+    //html页面载入完成回调
     NSString *functionJS = @"viewDidLoad();";
     [self.webView stringByEvaluatingJavaScriptFromString:functionJS];
     
