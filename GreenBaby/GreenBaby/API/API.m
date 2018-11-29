@@ -353,7 +353,7 @@ constructingBodyWithBlock:formdataBlock
             {
                 NSInteger code = [[NSNumber safeNumberFromObject:response[@"code"]] integerValue];
                 if (code == 0){// API调用成功
-                    completionBlock(nil, [NSDictionary safeDictionaryFromObject:response[@"data"]]);
+                    completionBlock(nil, [NSDictionary safeDictionaryFromObject:response]);
                 }
                 else if (code == 401) {//token过期，请登录
                     BaseViewController *curVC=(BaseViewController *)[[AppDelegate sharedAppDelegate].window topViewController];

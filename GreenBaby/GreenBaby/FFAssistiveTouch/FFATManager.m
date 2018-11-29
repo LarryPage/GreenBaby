@@ -109,7 +109,13 @@ SINGLETON_IMP(FFATManager)
         [self.navigationController shrink];
         return;
     }else if([pluginModel.pluginName isEqualToString:@"FLEX"]) {
-        //[[FLEXManager sharedManager] showExplorer];
+        UIViewController *topViewController=[AppDelegate sharedAppDelegate].window.topViewController;
+        if([topViewController isKindOfClass:[WebViewController class]]){
+            [(WebViewController *)topViewController openDebug];
+        }
+        else{
+            //[[FLEXManager sharedManager] showExplorer];
+        }
         [self.navigationController shrink];
         return;
     }else if([pluginModel.pluginName isEqualToString:@"刷新"]) {

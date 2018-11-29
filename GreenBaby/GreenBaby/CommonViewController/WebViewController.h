@@ -18,5 +18,5 @@
 @property (nonatomic, copy) void (^actionHandler)(void);
 
 - (id)initWithUrl:(NSString *)url title:(NSString *)title;
-
+- (void)openDebug;
 @end

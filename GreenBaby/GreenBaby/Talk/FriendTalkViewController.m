@@ -1263,7 +1263,8 @@
                           NSMutableArray *moreList=[NSMutableArray array];
                           
                           //数据处理
-                          NSArray *msgs = response[@"message_list"];
+                          NSDictionary *dateDic=[NSDictionary safeDictionaryFromObject:response[@"data"]];
+                          NSArray *msgs = dateDic[@"message_list"];
                           if (msgs && msgs.count>0) {
                               for (NSDictionary *msgDic in msgs) {
                                   MessageModel *msg = [[MessageModel alloc] initWithDic:msgDic];
@@ -1406,7 +1407,8 @@
                            NSMutableArray *moreList=[NSMutableArray array];
                            
                            //数据处理
-                           NSArray *msgs = response[@"message_list"];
+                           NSDictionary *dateDic=[NSDictionary safeDictionaryFromObject:response[@"data"]];
+                           NSArray *msgs = dateDic[@"message_list"];
                            if (msgs && msgs.count>0) {
                                for (NSDictionary *msgDic in msgs) {
                                    MessageModel *msg = [[MessageModel alloc] initWithDic:msgDic];

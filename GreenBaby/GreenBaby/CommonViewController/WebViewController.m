@@ -22,7 +22,6 @@ static NSMutableDictionary *gSessionOfUIWebView = nil;//缓存HTML5相关Session
     NJKWebViewProgress *_progressProxy;
 }
 @property (nonatomic, strong) WBUIWebView *webView;
-@property (nonatomic, strong) UIRotationGestureRecognizer *rotationGesture;
 @property (nonatomic, strong, readwrite) JSContext *jsContext;
 @property (nonatomic, strong) NSString *leftBtnCallBackFunction;
 @property (nonatomic, strong) NSString *rightBtnCallBackFunction;
@@ -80,8 +79,6 @@ static NSMutableDictionary *gSessionOfUIWebView = nil;//缓存HTML5相关Session
     [self.view addSubview:self.webView];
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_webView]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_webView)]];
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_webView]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_webView)]];
-    self.rotationGesture = [[UIRotationGestureRecognizer alloc] initWithTarget:self action:@selector(rotationGesture:)];
-    [self.webView addGestureRecognizer:self.rotationGesture];
     /*添加进度条*/
     _progressProxy = [[NJKWebViewProgress alloc] init];
     _webView.wb_delegate = _progressProxy;
@@ -616,28 +613,11 @@ static NSMutableDictionary *gSessionOfUIWebView = nil;//缓存HTML5相关Session
         //memory缓存
         gSessionOfUIWebView = [[NSMutableDictionary alloc] init];
     };
-    //调试相关
-    _jsContext[@"HJM_enableDebugMode"] = ^(int isEnable) {
-        //调试开关, 通过手势打开 isEnable:为0时关，非0时开。默认是开启的
-        [weakSelf.webView removeGestureRecognizer:weakSelf.rotationGesture];
-        if (isEnable) {
-            [weakSelf.webView addGestureRecognizer:weakSelf.rotationGesture];
-        }
-    };
 }
 
-//旋转手势触发方法
--(void)rotationGesture:(id)sender
-{
-    UIRotationGestureRecognizer *gesture = sender;
-    if(gesture.state==UIGestureRecognizerStateChanged)
-    {
-        if (gesture.rotation>3.14 || gesture.rotation<-3.14) {
-            WBWebDebugConsoleViewController * controller = [[WBWebDebugConsoleViewController alloc] initWithConsole:_webView.console];
-            
-            [self.navigationController pushViewController:controller animated:YES];
-        }
-    }
+- (void)openDebug{
+    WBWebDebugConsoleViewController * controller = [[WBWebDebugConsoleViewController alloc] initWithConsole:_webView.console];
+    [self.navigationController pushViewController:controller animated:YES];
 }
 
 - (void)webDebugAddContextMenuItems

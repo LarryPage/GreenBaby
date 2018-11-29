@@ -462,8 +462,9 @@
                      weakSelf.error=error;
                      weakSelf.isLoading=NO;
                      if (!error) {
+                         NSDictionary *dateDic=[NSDictionary safeDictionaryFromObject:response[@"data"]];
                          NSMutableArray *moreList=[NSMutableArray array];
-                         NSArray *records = response[@"message_list"];
+                         NSArray *records = dateDic[@"message_list"];
                          if (records && records.count>0) {
                              for (NSDictionary *recordDic in records) {
                                  MessageModel *record=[[MessageModel alloc] initWithDic:recordDic];

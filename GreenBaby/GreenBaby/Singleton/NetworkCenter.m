@@ -178,7 +178,7 @@ SINGLETON_IMP(NetworkCenter)
     if(![[FFCache currentCache] hasCacheForKey:cacheKey]){
         [API getPublicDataOnCompletion:^(NSError *error,id response){
             if (!error) {
-                NSDictionary *dateDic = response;
+                NSDictionary *dateDic=[NSDictionary safeDictionaryFromObject:response[@"data"]];
                 if (dateDic && dateDic.count>0) {
                     //"0":订单&钱包
                     DeviceModel *device = [DeviceModel loadCurRecord];
@@ -219,7 +219,7 @@ SINGLETON_IMP(NetworkCenter)
 - (void)getMessageCount{
     [API getMessageCountOnCompletion:^(NSError *error,id response){
         if (!error) {
-            NSDictionary *dateDic = response;
+            NSDictionary *dateDic=[NSDictionary safeDictionaryFromObject:response[@"data"]];
             
             if (dateDic && dateDic.count>0) {
                 UserModel *user = [UserModel loadCurRecord];
@@ -290,7 +290,8 @@ SINGLETON_IMP(NetworkCenter)
 - (void)getWelcomeImg{
     [API getWelcomeImgOnCompletion:^(NSError *error,id response){
         if (!error) {
-            NSString *welcome_img=response[@"welcome_img"];
+            NSDictionary *dateDic=[NSDictionary safeDictionaryFromObject:response[@"data"]];
+            NSString *welcome_img=dateDic[@"welcome_img"];
             NSURL *url=[NSURL URLWithString:welcome_img];
             SDWebImageManager *manager = [SDWebImageManager sharedManager];
             [manager loadImageWithURL:url

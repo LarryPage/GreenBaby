@@ -319,7 +319,7 @@ void UncaughtExceptionHandler(NSException *exception){
     if ([kBundleIdentifier isEqualToString:@"com.dianshang.wanhui.InHouse"]) {
         [API appVersionCheckOnCompletion:^(NSError *error,id response){
             if (!error) {
-                NSDictionary *dateDic = response;
+                NSDictionary *dateDic = [NSDictionary safeDictionaryFromObject:response[@"data"]];
                 if (dateDic && [dateDic isKindOfClass:[NSDictionary class]]) {
                     if (dateDic.count>0) {
                         NSString *version=dateDic[@"version"];
