@@ -383,9 +383,9 @@ static NSMutableDictionary *gSessionOfUIWebView = nil;//缓存HTML5相关Session
             else if ([method isEqualToString:@"put"]) {
                 apiType=kApiTypePut;
             }
-            [API executeRequestWithPath:path paramDic:paramDic auth:YES apiType:apiType formdataBlock:nil progressBlock:nil completionBlock:^(NSError *error, id responseDic) {
+            [API executeRequestWithPath:path paramDic:paramDic auth:YES apiType:apiType formdataBlock:nil progressBlock:nil completionBlock:^(NSError *error, id response) {
                 if (!error) {
-                    NSString *arg=[NSString safeStringFromObject:responseDic];
+                    NSString *arg=[NSString safeStringFromObject:response];
                     JSValue *function = weakSelf.jsContext[successFunName];
                     [function callWithArguments:@[arg]];
                 }
