@@ -10,11 +10,12 @@
 #import "NJKWebViewProgress.h"
 #import "NJKWebViewProgressView.h"
 #import <JavaScriptCore/JavaScriptCore.h>
+#import "AppJSObject.h"
 #import "ShareSheet.h"
 
 static NSMutableDictionary *gSessionOfUIWebView = nil;//缓存HTML5相关Session变量
 
-@interface WebViewController ()<UIWebViewDelegate,NJKWebViewProgressDelegate>{
+@interface WebViewController ()<UIWebViewDelegate,NJKWebViewProgressDelegate,AppJSObjectDelegate>{
     NSString *_title;
     NSString *_content;
     UIImage *_thumbImage;
@@ -233,12 +234,15 @@ static NSMutableDictionary *gSessionOfUIWebView = nil;//缓存HTML5相关Session
 //http://blog.csdn.net/woaifen3344/article/details/42742893
 - (void)setJSContext{  //Js 使用
     _jsContext = [self.webView valueForKeyPath:@"documentView.webView.mainFrame.javaScriptContext"];
+    AppJSObject *jsObject = [AppJSObject new];
+    jsObject.delegate = self;
+    _jsContext[@"HJM"] = jsObject;
     _jsContext.exceptionHandler = ^(JSContext *context, JSValue *exceptionValue) {
         context.exception = exceptionValue;
         NSLog(@"异常信息：%@", exceptionValue);
     };
     WEAKSELF
-    _jsContext[@"HJM_userInfo"] = ^{
+    _jsContext[@"HJM"][@"userInfo"] = ^{
         UserModel *user = [UserModel loadCurRecord];
         if (user && user.user_id) {
             NSString *authString = [NSString stringWithFormat:@"%@:%@", user.username, user.password];
@@ -249,7 +253,7 @@ static NSMutableDictionary *gSessionOfUIWebView = nil;//缓存HTML5相关Session
         NSString *myUserStr=[NSString safeStringFromObject:[user dic]];
         return myUserStr;
     };
-    _jsContext[@"HJM_sharePage"] = ^(NSDictionary *param) {
+    _jsContext[@"HJM"][@"sharePage"] = ^(NSDictionary *param) {
         NSLog(@"param:%@", param);  //分享
         [weakSelf updateShareContent:param];
     };
@@ -264,13 +268,13 @@ static NSMutableDictionary *gSessionOfUIWebView = nil;//缓存HTML5相关Session
      }
      */
     // 登录成功后回调
-    _jsContext[@"HJM_loginResult"] = ^(NSString *token) {
+    _jsContext[@"HJM"][@"loginResult"] = ^(NSString *token) {
         // token 回调给app
         JSValue *function = weakSelf.jsContext[@"testCallback"];//js里的全局方法：testCallback
         [function callWithArguments:@[token]];
     };
     //页面跳转的控制
-    _jsContext[@"HJM_pushWebView"] = ^(NSString *url, NSString *title, NSInteger isCreate) {
+    _jsContext[@"HJM"][@"pushWebView"] = ^(NSString *url, NSString *title, NSInteger isCreate) {
         dispatch_async(dispatch_get_main_queue(), ^{
             NSURL *Url=[NSURL URLWithString:url];
             if (isCreate) {
@@ -282,12 +286,12 @@ static NSMutableDictionary *gSessionOfUIWebView = nil;//缓存HTML5相关Session
             }
         });
     };
-    _jsContext[@"HJM_popWebView"] = ^() {
+    _jsContext[@"HJM"][@"popWebView"] = ^() {
         dispatch_async(dispatch_get_main_queue(), ^{
             [weakSelf.navigationController popViewControllerAnimated:YES];
         });
     };
-    _jsContext[@"HJM_backWebView"] = ^(NSString *tag, NSString *newUrl, NSString *newTitle) {
+    _jsContext[@"HJM"][@"backWebView"] = ^(NSString *tag, NSString *newUrl, NSString *newTitle) {
         dispatch_async(dispatch_get_main_queue(), ^{
             if ([tag isEqualToString:@""]) {
                 UIViewController *vc=weakSelf.navigationController.viewControllers[weakSelf.navigationController.viewControllers.count-2];
@@ -346,10 +350,10 @@ static NSMutableDictionary *gSessionOfUIWebView = nil;//缓存HTML5相关Session
         });
     };
     //功能性接口
-    _jsContext[@"HJM_setWebViewTag"] = ^(NSString *tag) {
+    _jsContext[@"HJM"][@"setWebViewTag"] = ^(NSString *tag) {
         weakSelf.urlTag=tag;
     };
-    _jsContext[@"HJM_checkWebView"] = ^(NSString *tag) {
+    _jsContext[@"HJM"][@"checkWebView"] = ^(NSString *tag) {
         NSInteger idx=-1;
         for (NSInteger i=weakSelf.navigationController.viewControllers.count-1; i>=0; i--) {
             UIViewController *vc=weakSelf.navigationController.viewControllers[i];
@@ -364,10 +368,10 @@ static NSMutableDictionary *gSessionOfUIWebView = nil;//缓存HTML5相关Session
         
         return (idx!=-1)?1:0;
     };
-    _jsContext[@"setBounces"] = ^(BOOL yesNO){
+    _jsContext[@"HJM"][@"setBounces"] = ^(BOOL yesNO){
         weakSelf.webView.scrollView.bounces = !yesNO;
     };
-    _jsContext[@"execHttpRequest"] = ^(NSString *path, NSString *params, NSString *method, NSString *successFunName, NSString *failureFunName) {
+    _jsContext[@"HJM"][@"execHttpRequest"] = ^(NSString *path, NSString *params, NSString *method, NSString *successFunName, NSString *failureFunName) {
         dispatch_async(dispatch_get_main_queue(), ^{
             NSDictionary *paramDic=[NSDictionary safeDictionaryFromObject:params];
             ApiType apiType=kApiTypePost;
@@ -394,7 +398,7 @@ static NSMutableDictionary *gSessionOfUIWebView = nil;//缓存HTML5相关Session
                     NSMutableDictionary *errorDic=[NSMutableDictionary dictionary];
                     [errorDic setObject:@(error.code) forKey:@"code"];
                     [errorDic setObject:error.domain forKey:@"domain"];
-                    [errorDic setObject:error.userInfo forKey:@"userInfo"];
+                    [errorDic setObject:error.localizedDescription forKey:@"userInfo"];
                     NSString *arg=[NSString safeStringFromObject:errorDic];
                     [function callWithArguments:@[arg]];
                 }
@@ -402,7 +406,7 @@ static NSMutableDictionary *gSessionOfUIWebView = nil;//缓存HTML5相关Session
         });
     };
     //上导航相关
-    _jsContext[@"showTitleBar"] = ^(NSInteger isShow) {
+    _jsContext[@"HJM"][@"showTitleBar"] = ^(NSInteger isShow) {
         dispatch_async(dispatch_get_main_queue(), ^{
             weakSelf.navBarHidden=isShow==0?YES:NO;
             if (weakSelf.navBarHidden) {
@@ -415,7 +419,7 @@ static NSMutableDictionary *gSessionOfUIWebView = nil;//缓存HTML5相关Session
             [weakSelf.navigationController setNavigationBarHidden:weakSelf.navBarHidden animated:YES];
         });
     };
-    _jsContext[@"setTitleBar"] = ^(NSString *strJson) {
+    _jsContext[@"HJM"][@"setTitleBar"] = ^(NSString *strJson) {
         dispatch_async(dispatch_get_main_queue(), ^{
             NSDictionary *param=[NSDictionary safeDictionaryFromObject:strJson];
             NSString *navbarbgcolor = [param objectForKey:@"navbarbgcolor"];
@@ -439,7 +443,7 @@ static NSMutableDictionary *gSessionOfUIWebView = nil;//缓存HTML5相关Session
         });
     };
     
-    _jsContext[@"setLeftButton"] = ^(NSString *strJson) {
+    _jsContext[@"HJM"][@"setLeftButton"] = ^(NSString *strJson) {
         dispatch_async(dispatch_get_main_queue(), ^{
             if (strJson.length == 0) {
                 weakSelf.backBtn.hidden = YES;
@@ -492,7 +496,7 @@ static NSMutableDictionary *gSessionOfUIWebView = nil;//缓存HTML5相关Session
         });
     };
     
-    _jsContext[@"setRightButton"] = ^(NSString *strJson) {
+    _jsContext[@"HJM"][@"setRightButton"] = ^(NSString *strJson) {
         dispatch_async(dispatch_get_main_queue(), ^{
             if (strJson.length == 0) {
                 weakSelf.rightBtn.hidden = YES;
@@ -545,13 +549,13 @@ static NSMutableDictionary *gSessionOfUIWebView = nil;//缓存HTML5相关Session
         });
     };
     //cache相关
-    _jsContext[@"HJM_writeCache"] = ^(NSString *key,NSString *value) {
+    _jsContext[@"HJM"][@"writeCache"] = ^(NSString *key,NSString *value) {
         NSMutableDictionary *dic=[NSMutableDictionary dictionaryWithDictionary:[[NSUserDefaults standardUserDefaults] dictionaryForKey:@"UIWebViewCache"]];
         [dic setValue:value forKey:key];
         [[NSUserDefaults standardUserDefaults] setObject:dic forKey:@"UIWebViewCache"];
         [[NSUserDefaults standardUserDefaults] synchronize];
     };
-    _jsContext[@"HJM_readCache"] = ^(NSString *key) {
+    _jsContext[@"HJM"][@"readCache"] = ^(NSString *key) {
         NSMutableDictionary *dic=[NSMutableDictionary dictionaryWithDictionary:[[NSUserDefaults standardUserDefaults] dictionaryForKey:@"UIWebViewCache"]];
         NSString *value=[dic objectForKey:key];
         if (!value) {
@@ -559,7 +563,7 @@ static NSMutableDictionary *gSessionOfUIWebView = nil;//缓存HTML5相关Session
         }
         return value;
     };
-    _jsContext[@"HJM_removeCache"] = ^(NSString *keyList) {
+    _jsContext[@"HJM"][@"removeCache"] = ^(NSString *keyList) {
         __block NSMutableDictionary *dic=[NSMutableDictionary dictionaryWithDictionary:[[NSUserDefaults standardUserDefaults] dictionaryForKey:@"UIWebViewCache"]];
         
         NSArray *keys=[keyList componentsSeparatedByString:@","];
@@ -571,12 +575,12 @@ static NSMutableDictionary *gSessionOfUIWebView = nil;//缓存HTML5相关Session
         [[NSUserDefaults standardUserDefaults] setObject:dic forKey:@"UIWebViewCache"];
         [[NSUserDefaults standardUserDefaults] synchronize];
     };
-    _jsContext[@"HJM_removeAllCache"] = ^() {
+    _jsContext[@"HJM"][@"removeAllCache"] = ^() {
         [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"UIWebViewCache"];
         [[NSUserDefaults standardUserDefaults] synchronize];
     };
     //Session相关
-    _jsContext[@"HJM_writeSession"] = ^(NSString *key,NSString *value) {
+    _jsContext[@"HJM"][@"writeSession"] = ^(NSString *key,NSString *value) {
         //memory缓存
         if (!gSessionOfUIWebView) {
             gSessionOfUIWebView = [[NSMutableDictionary alloc] init];
@@ -585,7 +589,7 @@ static NSMutableDictionary *gSessionOfUIWebView = nil;//缓存HTML5相关Session
         [gSessionOfUIWebView setValue:value forKey:key];
         
     };
-    _jsContext[@"HJM_readSession"] = ^(NSString *key) {
+    _jsContext[@"HJM"][@"readSession"] = ^(NSString *key) {
         //memory缓存
         if (!gSessionOfUIWebView) {
             gSessionOfUIWebView = [[NSMutableDictionary alloc] init];
@@ -597,7 +601,7 @@ static NSMutableDictionary *gSessionOfUIWebView = nil;//缓存HTML5相关Session
         }
         return value;
     };
-    _jsContext[@"HJM_removeSession"] = ^(NSString *keyList) {
+    _jsContext[@"HJM"][@"removeSession"] = ^(NSString *keyList) {
         //memory缓存
         if (!gSessionOfUIWebView) {
             gSessionOfUIWebView = [[NSMutableDictionary alloc] init];
@@ -609,7 +613,7 @@ static NSMutableDictionary *gSessionOfUIWebView = nil;//缓存HTML5相关Session
             [gSessionOfUIWebView removeObjectForKey:key];
         }];
     };
-    _jsContext[@"HJM_removeAllSession"] = ^() {
+    _jsContext[@"HJM"][@"removeAllSession"] = ^() {
         //memory缓存
         gSessionOfUIWebView = [[NSMutableDictionary alloc] init];
     };
@@ -746,5 +750,7 @@ static NSMutableDictionary *gSessionOfUIWebView = nil;//缓存HTML5相关Session
 -(void)webViewProgress:(NJKWebViewProgress *)webViewProgress updateProgress:(float)progress{
     [_progressView setProgress:progress animated:YES];
 }
+
+#pragma mark - AppJSObjectDelegate
 
 @end
