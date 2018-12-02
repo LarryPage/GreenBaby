@@ -286,9 +286,26 @@ static NSMutableDictionary *gSessionOfUIWebView = nil;//缓存HTML5相关Session
             }
         });
     };
-    _jsContext[@"HJM"][@"popWebView"] = ^() {
+    _jsContext[@"BRC"][@"popWebView"] = ^(NSInteger pageNum) {
         dispatch_async(dispatch_get_main_queue(), ^{
-            [weakSelf.navigationController popViewControllerAnimated:YES];
+            if (pageNum>1 && pageNum<weakSelf.navigationController.viewControllers.count) {
+                UIViewController *lastVc = weakSelf.navigationController.viewControllers.lastObject;
+                
+                NSMutableArray *navigationArray = [NSMutableArray array];
+                for (NSInteger i = 0; i < pageNum-1; i++) {
+                    UIViewController *vc = [weakSelf.navigationController.viewControllers objectAtIndex:i];
+                    [navigationArray addObject:vc];
+                }
+                
+                if (![navigationArray containsObject:lastVc]) {
+                    [navigationArray addObject:lastVc];
+                }
+                weakSelf.navigationController.viewControllers = navigationArray;
+                [weakSelf.navigationController popViewControllerAnimated:YES];
+            }
+            else{
+                [weakSelf.navigationController popViewControllerAnimated:YES];
+            }
         });
     };
     _jsContext[@"HJM"][@"backWebView"] = ^(NSString *tag, NSString *newUrl, NSString *newTitle) {
