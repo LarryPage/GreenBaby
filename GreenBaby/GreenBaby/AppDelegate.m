@@ -455,7 +455,7 @@ void UncaughtExceptionHandler(NSException *exception){
             [FFRouteManager routeReduceURL:url];
         }
     }
-    else if ([FFRouteManager isHttpURL:url]){//是否是http,https开口的url
+    else if ([FFRouteManager isHttpURL:url] || [url.scheme isEqualToString:@"file"]){//是否是http,https开口的url
         BaseViewController *curVC=(BaseViewController *)[self.window topViewController];
         
         NSDictionary *params=[[url query] queryDictionaryUsingEncoding:NSUTF8StringEncoding];

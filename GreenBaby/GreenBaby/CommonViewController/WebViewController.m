@@ -67,7 +67,7 @@ static NSMutableDictionary *gSessionOfUIWebView = nil;//缓存HTML5相关Session
     // Do any additional setup after loading the view from its nib.
     //self.title = url;
     
-    if (!([_url hasPrefix:@"http://"] || [_url hasPrefix:@"https://"])) {
+    if (!([_url hasPrefix:@"http://"] || [_url hasPrefix:@"https://"] || [_url hasPrefix:@"file://"])) {
         _url = [NSString stringWithFormat:@"http://%@", _url];
     }
     //WBUIWebView
