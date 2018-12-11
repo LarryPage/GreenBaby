@@ -187,7 +187,7 @@
 	_active = YES;
 	_alertView.transform = CGAffineTransformIdentity;
 	_alertView.alpha = 0;
-	[[UIApplication sharedApplication].keyWindow addSubview:_alertView];
+	[[UIApplication sharedApplication].delegate.window addSubview:_alertView];
 
 	
 	
