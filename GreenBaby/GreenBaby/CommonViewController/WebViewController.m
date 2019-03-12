@@ -422,6 +422,38 @@ static NSMutableDictionary *gSessionOfUIWebView = nil;//缓存HTML5相关Session
             }];
         });
     };
+    _jsContext[@"HJM"][@"execApiRequest"] = ^(NSString *path, NSString *params, NSString *method, JSValue *successfunction,JSValue *failurefunction) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            NSDictionary *paramDic=[NSDictionary safeDictionaryFromObject:params];
+            ApiType apiType=kApiTypePost;
+            if ([method isEqualToString:@"get"]) {
+                apiType=kApiTypeGet;
+            }
+            else if ([method isEqualToString:@"post"]) {
+                apiType=kApiTypePost;
+            }
+            else if ([method isEqualToString:@"delete"]) {
+                apiType=kApiTypeDelete;
+            }
+            else if ([method isEqualToString:@"put"]) {
+                apiType=kApiTypePut;
+            }
+            [API executeRequestWithPath:path paramDic:paramDic auth:YES apiType:apiType formdataBlock:nil progressBlock:nil completionBlock:^(NSError *error, id response) {
+                if (!error) {
+                    NSString *arg=[NSString safeStringFromObject:response];
+                    [successfunction callWithArguments:@[arg]];
+                }
+                else{
+                    NSMutableDictionary *errorDic=[NSMutableDictionary dictionary];
+                    [errorDic setObject:@(error.code) forKey:@"code"];
+                    [errorDic setObject:error.domain forKey:@"domain"];
+                    [errorDic setObject:error.localizedDescription forKey:@"userInfo"];
+                    NSString *arg=[NSString safeStringFromObject:errorDic];
+                    [failurefunction callWithArguments:@[arg]];
+                }
+            }];
+        });
+    };
     //上导航相关
     _jsContext[@"HJM"][@"showTitleBar"] = ^(NSInteger isShow) {
         dispatch_async(dispatch_get_main_queue(), ^{
