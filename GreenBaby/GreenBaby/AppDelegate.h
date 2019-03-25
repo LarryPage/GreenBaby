@@ -50,6 +50,7 @@
 #import "StartViewController.h"
 #import "CustomTabBarController.h"
 #import "WebViewController.h"
+#import "WKWebViewController.h"
 #import "FFRouteImp.h"
 
 #define PushRegistNotification      @"PushRegistNotification"//注册远程通知DeviceToken

@@ -21,11 +21,13 @@
         //NSArray *paths=[[routeUrl path] componentsSeparatedByString:@"/"];
         //NSDictionary *params=[[routeUrl query] queryDictionaryUsingEncoding:NSUTF8StringEncoding];
         NSString *url = parameters[@"url"];
+//        NSString *url = @"http://192.168.1.101:3000";
         NSString *title = parameters[@"title"];
         BOOL navBarHidden = [parameters[@"navbarhidden"] integerValue];
         NSString *navBarBgColor = parameters[@"navbarbgcolor"];
         
         WebViewController *vc = [[WebViewController alloc] initWithUrl:url title:title];
+//        WKWebViewController *vc = [[WKWebViewController alloc] initWithUrl:url title:title];
         vc.navBarHidden=navBarHidden;
         vc.navBarBgColor=navBarBgColor;
         vc.hidesBottomBarWhenPushed=YES;

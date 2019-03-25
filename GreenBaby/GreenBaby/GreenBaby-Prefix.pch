@@ -78,9 +78,6 @@
     #import "NJKWebViewProgress.h"//网页加载进度条
     #import "NJKWebViewProgressView.h"
     #import "FFRouteManager.h"//route管理
-    #import "WBUIWebView.h"//网页浏览器+调试器
-    #import "WBWebViewConsole.h"
-    #import "WBWebDebugConsoleViewController.h"
     #import "THProgressView.h"//进度条
     #import "LSImageListScrollView.h"//跑马灯
     //#import "FSCalendar.h"//日历

@@ -113,6 +113,9 @@ SINGLETON_IMP(FFATManager)
         if([topViewController isKindOfClass:[WebViewController class]]){
             [(WebViewController *)topViewController openDebug];
         }
+        else if([topViewController isKindOfClass:[WKWebViewController class]]){
+            [(WKWebViewController *)topViewController openDebug];
+        }
         else{
             //[[FLEXManager sharedManager] showExplorer];
         }

@@ -9,6 +9,7 @@ target 'GreenBaby' do
     pod 'AFNetworking'#AFN 网络请求解析
 #    pod 'AFNetworking', '~> 2.6.3'
     pod 'Reachability'#网络状况监听
+    pod 'WBWebViewConsole', :git => 'https://github.com/LarryPage/WBWebViewConsole.git'#网页浏览器+调试器
     pod 'iCarousel'
     pod 'Masonry'#AL布局
     pod 'FMDB'#SQLite库管理

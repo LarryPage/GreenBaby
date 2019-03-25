@@ -14,45 +14,46 @@ PODS:
   - AFNetworking/Serialization (3.2.1)
   - AFNetworking/UIKit (3.2.1):
     - AFNetworking/NSURLSession
-  - BaiduMobStat (4.8.1)
+  - BaiduMobStat (4.9.1)
   - Bugly (2.5.0)
-  - FMDB (2.7.2):
-    - FMDB/standard (= 2.7.2)
-  - FMDB/standard (2.7.2)
+  - FMDB (2.7.5):
+    - FMDB/standard (= 2.7.5)
+  - FMDB/standard (2.7.5)
   - iCarousel (1.8.3)
   - libqrencode (3.4.2)
-  - libwebp (0.6.1):
-    - libwebp/core (= 0.6.1)
-    - libwebp/dec (= 0.6.1)
-    - libwebp/demux (= 0.6.1)
-    - libwebp/dsp (= 0.6.1)
-    - libwebp/enc (= 0.6.1)
-    - libwebp/mux (= 0.6.1)
-    - libwebp/utils (= 0.6.1)
-    - libwebp/webp (= 0.6.1)
-  - libwebp/core (0.6.1):
+  - libwebp (1.0.2):
+    - libwebp/core (= 1.0.2)
+    - libwebp/dec (= 1.0.2)
+    - libwebp/demux (= 1.0.2)
+    - libwebp/dsp (= 1.0.2)
+    - libwebp/enc (= 1.0.2)
+    - libwebp/mux (= 1.0.2)
+    - libwebp/utils (= 1.0.2)
+    - libwebp/webp (= 1.0.2)
+  - libwebp/core (1.0.2):
     - libwebp/webp
-  - libwebp/dec (0.6.1):
+  - libwebp/dec (1.0.2):
     - libwebp/core
-  - libwebp/demux (0.6.1):
+  - libwebp/demux (1.0.2):
     - libwebp/core
-  - libwebp/dsp (0.6.1):
+  - libwebp/dsp (1.0.2):
     - libwebp/core
-  - libwebp/enc (0.6.1):
+  - libwebp/enc (1.0.2):
     - libwebp/core
-  - libwebp/mux (0.6.1):
+  - libwebp/mux (1.0.2):
     - libwebp/core
-  - libwebp/utils (0.6.1):
+  - libwebp/utils (1.0.2):
     - libwebp/core
-  - libwebp/webp (0.6.1)
+  - libwebp/webp (1.0.2)
   - Masonry (1.1.0)
   - MBProgressHUD (1.1.0)
   - Reachability (3.2)
-  - SDWebImage/Core (4.4.1)
-  - SDWebImage/WebP (4.4.1):
-    - libwebp (~> 0.5)
+  - SDWebImage/Core (4.2.3)
+  - SDWebImage/WebP (4.2.3):
+    - libwebp
     - SDWebImage/Core
   - VendorSDK (1.0)
+  - WBWebViewConsole (1.0.2)
   - ZBarSDK-hicool (0.0.1):
     - ZBarSDK-hicool/zbar (= 0.0.1)
   - ZBarSDK-hicool/zbar (0.0.1)
@@ -70,6 +71,7 @@ DEPENDENCIES:
   - Reachability
   - SDWebImage/WebP
   - VendorSDK (from `../VendorSDK`)
+  - WBWebViewConsole (from `https://github.com/LarryPage/WBWebViewConsole.git`)
   - ZBarSDK-hicool
 
 SPEC REPOS:
@@ -90,22 +92,30 @@ SPEC REPOS:
 EXTERNAL SOURCES:
   VendorSDK:
     :path: "../VendorSDK"
+  WBWebViewConsole:
+    :git: https://github.com/LarryPage/WBWebViewConsole.git
+
+CHECKOUT OPTIONS:
+  WBWebViewConsole:
+    :commit: 3abc5308f058c2b4cbefe9324ea6419c35cc320e
+    :git: https://github.com/LarryPage/WBWebViewConsole.git
 
 SPEC CHECKSUMS:
   AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
-  BaiduMobStat: 4104ba9d7ce7308dbed3c78fe6131eea1ec232c5
+  BaiduMobStat: e2dbfd44f1535adf3c0001cbd3212eb61c4fe639
   Bugly: 3ca9f255c01025582df26f9222893b383c7e4b4e
-  FMDB: 6198a90e7b6900cfc046e6bc0ef6ebb7be9236aa
+  FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
   iCarousel: d782f635afac190c49bb8ee455882284cff8b85f
   libqrencode: 43dc34b89af83ea4b07c409cd8e09c87aa3a1c9f
-  libwebp: 0f01098c6c17175391af621b2f14150f3ca16e16
+  libwebp: b068a3bd7c45f7460f6715be7bed1a18fd5d6b48
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
   MBProgressHUD: e7baa36a220447d8aeb12769bf0585582f3866d9
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
-  SDWebImage: 47e9b5b925cbce75946c23f0c42dd19464189af4
+  SDWebImage: 791bb72962b3492327ddcac4b1880bd1b5458431
   VendorSDK: e82087c461542529eac0256550011cc5c2a895e5
+  WBWebViewConsole: 1288737d136b44a281cc654828339127f959e21c
   ZBarSDK-hicool: ee679a29fde9431ab705b230a1bc64d5727c043b
 
-PODFILE CHECKSUM: 4890779153ae47c512a61ef6a17eeba9a90df898
+PODFILE CHECKSUM: 2a8689a306c8696673e3f4fe97ef6d0b9eaa1dce
 
 COCOAPODS: 1.5.3
