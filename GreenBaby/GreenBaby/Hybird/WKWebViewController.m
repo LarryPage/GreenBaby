@@ -101,6 +101,10 @@
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_webView]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_webView)]];
     
     [self.webView addObserver:self forKeyPath:@"estimatedProgress" options:NSKeyValueObservingOptionNew context:nil];
+//    [self.webView evaluateJavaScript:@"navigator.userAgent"
+//                   completionHandler:^(id _Nullable response, NSError * _Nullable error) {
+//                       NSLog(@"userAgent：%@",response);
+//                   }];
     //修复下拉刷新位置错误 代码开始
     if ([self respondsToSelector:@selector(automaticallyAdjustsScrollViewInsets)]) {
         self.edgesForExtendedLayout = UIRectEdgeNone;
