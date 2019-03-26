@@ -277,37 +277,46 @@ static NSMutableDictionary *gSessionOfWKWebView = nil;//缓存HTML5相关Session
 
 #pragma mark 3.cache相关
 - (void)writeCache:(NSDictionary *)paramsDic{
-    NSString *key = [NSString safeStringFromObject:[paramsDic objectForKey:@"key"]];
-    NSString *value = [NSString safeStringFromObject:[paramsDic objectForKey:@"value"]];
+    NSArray *list = [NSArray safeArrayFromObject:[paramsDic objectForKey:@"list"]];
     
-    NSMutableDictionary *dic=[NSMutableDictionary dictionaryWithDictionary:[[NSUserDefaults standardUserDefaults] dictionaryForKey:@"WKWebViewCache"]];
-    [dic setValue:value forKey:key];
+    __block NSMutableDictionary *dic=[NSMutableDictionary dictionaryWithDictionary:[[NSUserDefaults standardUserDefaults] dictionaryForKey:@"WKWebViewCache"]];
+    [list enumerateObjectsUsingBlock:^(NSDictionary *obj, NSUInteger idx, BOOL *stop) {
+        NSString *key = [NSString safeStringFromObject:[obj objectForKey:@"key"]];
+        NSString *value = [NSString safeStringFromObject:[obj objectForKey:@"value"]];
+        [dic setValue:value forKey:key];
+    }];
     [[NSUserDefaults standardUserDefaults] setObject:dic forKey:@"WKWebViewCache"];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 - (void)readCache:(NSDictionary *)paramsDic :(void(^)(id response))callBack{
-    NSString *key = [NSString safeStringFromObject:[paramsDic objectForKey:@"key"]];
+    NSArray *list = [NSArray safeArrayFromObject:[paramsDic objectForKey:@"list"]];
     
+    __block NSMutableArray *recordList=[NSMutableArray array];
     NSMutableDictionary *dic=[NSMutableDictionary dictionaryWithDictionary:[[NSUserDefaults standardUserDefaults] dictionaryForKey:@"WKWebViewCache"]];
-    NSString *value=[dic objectForKey:key];
-    if (!value) {
-        value=@"";
-    }
+    [list enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        NSString *key = obj;
+        NSString *value=[dic objectForKey:key];
+        
+        NSMutableDictionary *recordDic=[NSMutableDictionary dictionary];
+        if (value) {
+            [recordDic setObject:key forKey:@"key"];
+            [recordDic setObject:value forKey:@"value"];
+        }
+        [recordList safeAddObject:recordDic];
+    }];
     
     NSMutableDictionary *resultDic=[NSMutableDictionary dictionary];
-    [resultDic setObject:value forKey:@"value"];
+    [resultDic setObject:recordList forKey:@"list"];
     NSString *arg=[NSString safeStringFromObject:resultDic];
     callBack(arg);
 }
 
 - (void)removeCache:(NSDictionary *)paramsDic{
-    NSString *keyList = [NSString safeStringFromObject:[paramsDic objectForKey:@"keyList"]];
+    NSArray *list = [NSArray safeArrayFromObject:[paramsDic objectForKey:@"list"]];
     
     __block NSMutableDictionary *dic=[NSMutableDictionary dictionaryWithDictionary:[[NSUserDefaults standardUserDefaults] dictionaryForKey:@"WKWebViewCache"]];
-    
-    NSArray *keys=[keyList componentsSeparatedByString:@","];
-    [keys enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+    [list enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         NSString *key = obj;
         [dic removeObjectForKey:key];
     }];
@@ -323,46 +332,56 @@ static NSMutableDictionary *gSessionOfWKWebView = nil;//缓存HTML5相关Session
 
 #pragma mark 4.Session相关
 - (void)writeSession:(NSDictionary *)paramsDic{
-    NSString *key = [NSString safeStringFromObject:[paramsDic objectForKey:@"key"]];
-    NSString *value = [NSString safeStringFromObject:[paramsDic objectForKey:@"value"]];
+    NSArray *list = [NSArray safeArrayFromObject:[paramsDic objectForKey:@"list"]];
     
     //memory缓存
     if (!gSessionOfWKWebView) {
         gSessionOfWKWebView = [[NSMutableDictionary alloc] init];
     }
     
-    [gSessionOfWKWebView setValue:value forKey:key];
+    [list enumerateObjectsUsingBlock:^(NSDictionary *obj, NSUInteger idx, BOOL *stop) {
+        NSString *key = [NSString safeStringFromObject:[obj objectForKey:@"key"]];
+        NSString *value = [NSString safeStringFromObject:[obj objectForKey:@"value"]];
+        [gSessionOfWKWebView setValue:value forKey:key];
+    }];
 }
 
 - (void)readSession:(NSDictionary *)paramsDic :(void(^)(id response))callBack{
-    NSString *key = [NSString safeStringFromObject:[paramsDic objectForKey:@"key"]];
+    NSArray *list = [NSArray safeArrayFromObject:[paramsDic objectForKey:@"list"]];
     
     //memory缓存
     if (!gSessionOfWKWebView) {
         gSessionOfWKWebView = [[NSMutableDictionary alloc] init];
     }
     
-    NSString *value=[gSessionOfWKWebView objectForKey:key];
-    if (!value) {
-        value=@"";
-    }
+    __block NSMutableArray *recordList=[NSMutableArray array];
+    [list enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        NSString *key = obj;
+        NSString *value=[gSessionOfWKWebView objectForKey:key];
+        
+        NSMutableDictionary *recordDic=[NSMutableDictionary dictionary];
+        if (value) {
+            [recordDic setObject:key forKey:@"key"];
+            [recordDic setObject:value forKey:@"value"];
+        }
+        [recordList safeAddObject:recordDic];
+    }];
     
     NSMutableDictionary *resultDic=[NSMutableDictionary dictionary];
-    [resultDic setObject:value forKey:@"value"];
+    [resultDic setObject:recordList forKey:@"list"];
     NSString *arg=[NSString safeStringFromObject:resultDic];
     callBack(arg);
 }
 
 - (void)removeSession:(NSDictionary *)paramsDic{
-    NSString *keyList = [NSString safeStringFromObject:[paramsDic objectForKey:@"keyList"]];
+    NSArray *list = [NSArray safeArrayFromObject:[paramsDic objectForKey:@"list"]];
     
     //memory缓存
     if (!gSessionOfWKWebView) {
         gSessionOfWKWebView = [[NSMutableDictionary alloc] init];
     }
     
-    NSArray *keys=[keyList componentsSeparatedByString:@","];
-    [keys enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+    [list enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         NSString *key = obj;
         [gSessionOfWKWebView removeObjectForKey:key];
     }];
