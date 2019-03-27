@@ -266,11 +266,14 @@
         if (completion) { completion(); }
     }
     else {
-        //UIViewController *vc = [[LoginViewController alloc] init];
-        UIViewController *vc = [[BaseViewController alloc] init];
-        NavRootViewController *nc = [[NavRootViewController alloc] initWithRootViewController:vc];
-        nc.navigationBar.translucent = NO;
-        [self presentViewController:nc animated:YES completion:nil];
+//        BaseViewController *curVC=(BaseViewController *)[[AppDelegate sharedAppDelegate].window topViewController];
+//        if(![curVC isKindOfClass:[LoginViewController class]]){
+            //UIViewController *vc = [[LoginViewController alloc] init];
+            UIViewController *vc = [[BaseViewController alloc] init];
+            NavRootViewController *nc = [[NavRootViewController alloc] initWithRootViewController:vc];
+            nc.navigationBar.translucent = NO;
+            [self presentViewController:nc animated:YES completion:nil];
+//        }
     }
     return isLogin;
 }

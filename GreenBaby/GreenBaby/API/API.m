@@ -357,12 +357,14 @@ constructingBodyWithBlock:formdataBlock
                 }
                 else if (code == 401) {//token过期，请登录
                     BaseViewController *curVC=(BaseViewController *)[[AppDelegate sharedAppDelegate].window topViewController];
-                    //UIViewController *vc = [[LoginViewController alloc] init];
-                    UIViewController *vc = [[BaseViewController alloc] init];
-                    UINavigationController *nc = [[NavRootViewController alloc] initWithRootViewController:vc];
-                    //UINavigationController *nc = [[UINavigationController alloc] initWithRootViewController:vc];
-                    nc.navigationBar.translucent = NO;
-                    [curVC presentViewController:nc animated:YES completion:nil];
+//                    if(![curVC isKindOfClass:[LoginViewController class]]){
+                        //UIViewController *vc = [[LoginViewController alloc] init];
+                        UIViewController *vc = [[BaseViewController alloc] init];
+                        UINavigationController *nc = [[NavRootViewController alloc] initWithRootViewController:vc];
+                        //UINavigationController *nc = [[UINavigationController alloc] initWithRootViewController:vc];
+                        nc.navigationBar.translucent = NO;
+                        [curVC presentViewController:nc animated:YES completion:nil];
+//                    }
                 }
                 else if (code == 1212) {  //此版本放弃使用，请升级到最新版本
                     [UIAlertController showWithTitle:@"提示"
