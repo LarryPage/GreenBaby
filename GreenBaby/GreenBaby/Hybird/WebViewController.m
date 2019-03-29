@@ -91,11 +91,9 @@ static NSMutableDictionary *gSessionOfUIWebView = nil;//缓存HTML5相关Session
     _webView.wb_delegate = _progressProxy;
     _progressProxy.webViewProxyDelegate = self;
     _progressProxy.progressDelegate = self;
-    CGFloat progressBarHeight = 2.f;
-    CGRect navigaitonBarBounds = self.navigationController.navigationBar.bounds;
-    CGRect barFrame = CGRectMake(0, navigaitonBarBounds.size.height - progressBarHeight, navigaitonBarBounds.size.width, progressBarHeight);
-    _progressView = [[NJKWebViewProgressView alloc] initWithFrame:barFrame];
-    _progressView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin;
+    CGFloat progressHeight = 2.f;
+    CGRect progressFrame = CGRectMake(0, 0, SCREEN_WIDTH, progressHeight);;
+    _progressView = [[NJKWebViewProgressView alloc] initWithFrame:progressFrame];
     
     //修复下拉刷新位置错误 代码开始
     if ([self respondsToSelector:@selector(automaticallyAdjustsScrollViewInsets)]) {
@@ -141,7 +139,7 @@ static NSMutableDictionary *gSessionOfUIWebView = nil;//缓存HTML5相关Session
 {
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:self.navBarHidden animated:YES];
-    [self.navigationController.navigationBar addSubview:_progressView];
+    [self.webView addSubview:_progressView];
     
     if (self.navBarBgColor && self.navBarBgColor.length>=6) {
         UIColor *navBarTintColor=[UIColor colorWithHexString:self.navBarBgColor];
