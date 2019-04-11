@@ -102,7 +102,7 @@ static NSMutableDictionary *gSessionOfWKWebView = nil;//缓存HTML5相关Session
             UIViewController *lastVc = weakSelf.navigationController.viewControllers.lastObject;
             
             NSMutableArray *navigationArray = [NSMutableArray array];
-            for (NSInteger i = 0; i < pageNum-1; i++) {
+            for (NSInteger i = 0; i < weakSelf.navigationController.viewControllers.count-pageNum; i++) {
                 UIViewController *vc = [weakSelf.navigationController.viewControllers objectAtIndex:i];
                 [navigationArray addObject:vc];
             }
