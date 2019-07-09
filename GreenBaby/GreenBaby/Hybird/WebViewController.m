@@ -58,6 +58,7 @@ static NSMutableDictionary *gSessionOfUIWebView = nil;//缓存HTML5相关Session
 }
 
 - (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
     _progressProxy.webViewProxyDelegate = nil;
     _progressProxy.progressDelegate = nil;
     _progressProxy = nil;

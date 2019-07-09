@@ -4,7 +4,7 @@
 
 __functionIndexMap = {};
 
-function calliOSFunction(namespace, functionName, args, callback) {
+function callIOSFunction(namespace, functionName, args, callback) {
     if (!window.webkit.messageHandlers[namespace]) return;
     var wrap = {
         "method": functionName,
@@ -45,91 +45,91 @@ var BRC = {};
 //******************Hybrid方法******************//
 //****************1.页面跳转的控制****************//
 BRC.pushWebView = function (params) {
-    calliOSFunction("BRC", "pushWebView", params, null);
+    callIOSFunction("BRC", "pushWebView", params, null);
 };
 
 BRC.popWebView = function (params) {
-    calliOSFunction("BRC", "popWebView", params, null);
+    callIOSFunction("BRC", "popWebView", params, null);
 };
 
 BRC.backWebView = function (params) {
-    calliOSFunction("BRC", "backWebView", params, null);
+    callIOSFunction("BRC", "backWebView", params, null);
 };
 //****************2.功能性接口*******************//
 BRC.setWebViewTag = function (params) {
-    calliOSFunction("BRC", "setWebViewTag", params, null);
+    callIOSFunction("BRC", "setWebViewTag", params, null);
 };
 
 BRC.checkWebView = function (params,callBackName) {
-    calliOSFunction("BRC", "checkWebView", params, callBackName);
+    callIOSFunction("BRC", "checkWebView", params, callBackName);
 };
 
 BRC.setBounces = function (params) {
-    calliOSFunction("BRC", "setBounces", params, null);
+    callIOSFunction("BRC", "setBounces", params, null);
 };
 
 BRC.getUserInfo = function (callBackName) {
-    calliOSFunction("BRC", "getUserInfo", null, callBackName);
+    callIOSFunction("BRC", "getUserInfo", null, callBackName);
 };
 
 BRC.showLogin = function () {
-    calliOSFunction("BRC", "showLogin", null, null);
+    callIOSFunction("BRC", "showLogin", null, null);
 };
 
 BRC.execApiRequest = function (params,callBackName) {
-    calliOSFunction("BRC", "execApiRequest", params, callBackName);
+    callIOSFunction("BRC", "execApiRequest", params, callBackName);
 };
 //****************3.cache相关*******************//
 BRC.writeCache = function (params) {
-    calliOSFunction("BRC", "writeCache", params, null);
+    callIOSFunction("BRC", "writeCache", params, null);
 };
 
 BRC.readCache = function (params,callBackName) {
-    calliOSFunction("BRC", "readCache", params, callBackName);
+    callIOSFunction("BRC", "readCache", params, callBackName);
 };
 
 BRC.removeCache = function (params) {
-    calliOSFunction("BRC", "removeCache", params, null);
+    callIOSFunction("BRC", "removeCache", params, null);
 };
 
 BRC.removeAllCache = function () {
-    calliOSFunction("BRC", "removeAllCache", null, null);
+    callIOSFunction("BRC", "removeAllCache", null, null);
 };
 //****************4.Session相关*******************//
 BRC.writeSession = function (params) {
-    calliOSFunction("BRC", "writeSession", params, null);
+    callIOSFunction("BRC", "writeSession", params, null);
 };
 
 BRC.readSession = function (params,callBackName) {
-    calliOSFunction("BRC", "readSession", params, callBackName);
+    callIOSFunction("BRC", "readSession", params, callBackName);
 };
 
 BRC.removeSession = function (params) {
-    calliOSFunction("BRC", "removeSession", params, null);
+    callIOSFunction("BRC", "removeSession", params, null);
 };
 
 BRC.removeAllSession = function () {
-    calliOSFunction("BRC", "removeAllSession", null, null);
+    callIOSFunction("BRC", "removeAllSession", null, null);
 };
 //****************5.上导航 Title Bar*****************//
 BRC.showTitleBar = function (params) {
-    calliOSFunction("BRC", "showTitleBar", params, null);
+    callIOSFunction("BRC", "showTitleBar", params, null);
 };
 
 BRC.setTitleBar = function (params) {
-    calliOSFunction("BRC", "setTitleBar", params, null);
+    callIOSFunction("BRC", "setTitleBar", params, null);
 };
 
 BRC.setLeftButton = function (params) {
-    calliOSFunction("BRC", "setLeftButton", params, null);
+    callIOSFunction("BRC", "setLeftButton", params, null);
 };
 
 BRC.setRightButton = function (params) {
-    calliOSFunction("BRC", "setRightButton", params, null);
+    callIOSFunction("BRC", "setRightButton", params, null);
 };
 
 BRC.setRightButtonShare = function (params) {
-    calliOSFunction("BRC", "setRightButtonShare", params, null);
+    callIOSFunction("BRC", "setRightButtonShare", params, null);
 };
 //********************************************//
 

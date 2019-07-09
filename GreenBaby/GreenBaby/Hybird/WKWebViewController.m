@@ -45,6 +45,7 @@
 }
 
 - (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
     [_webView removeObserver:self forKeyPath:@"estimatedProgress"];
     [_progressLayer removeFromSuperlayer];
     _progressLayer = nil;
