@@ -184,12 +184,6 @@
     [super viewDidAppear:animated];
     
     [self webDebugAddContextMenuItems];
-    
-    //BRC_backWebView for7.1
-    if(_actionHandler){
-        _actionHandler();
-        _actionHandler=nil;
-    }
 }
 
 - (void)viewDidDisappear:(BOOL)animated
@@ -197,6 +191,12 @@
     [super viewDidDisappear:animated];
     
     [self webDebugRemoveContextMenuItems];
+    
+    //BRC_backWebView for7.1
+    if(_actionHandler){
+        _actionHandler();
+        _actionHandler=nil;
+    }
 }
 
 - (void)didReceiveMemoryWarning

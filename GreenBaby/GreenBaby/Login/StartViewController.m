@@ -33,13 +33,14 @@
 }
 
 - (void)back {
-    CitySelectViewController *vc=[[CitySelectViewController alloc] init];
-    vc.curSelectId=@"123";
-    WEAKSELF
-    vc.selectCompletion=^(NSString *selectId){
-        [weakSelf showHudInView:self.view hint:@"请稍等..."];
-    };
-    [self.navigationController pushViewController:vc animated:YES];
+//    CitySelectViewController *vc=[[CitySelectViewController alloc] init];
+//    vc.curSelectId=@"123";
+//    WEAKSELF
+//    vc.selectCompletion=^(NSString *selectId){
+//        [weakSelf showHudInView:self.view hint:@"请稍等..."];
+//    };
+//    [self.navigationController pushViewController:vc animated:YES];
+    [FFRouteManager routeURL:[NSURL URLWithString:@"greenbaby://huijiame.com/common/web?url=https://brcagent.lybrc.com.cn/h5/activity/lifeHome/index.html?phone=13012345678#/"]];
 }
 
 @end
