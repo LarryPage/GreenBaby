@@ -15,6 +15,7 @@
 @property (nonatomic, assign) NSInteger regionid;
 @property (nonatomic, strong) NSString *regionname;
 //@property (nonatomic, strong) JSONMutableArray(CityModel) *citys;
+//@property (nonatomic, strong) NSMutableArray *citys;
 
 @property (nonatomic, strong) NSString *record_id;//PK,用于数据存储
 

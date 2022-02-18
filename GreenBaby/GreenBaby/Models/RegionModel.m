@@ -26,4 +26,11 @@
     return dic;
 }
 
+//数组属性中需要转换的记录类型(优先使用模型定义中标明的数组属性元素类型，否则用此方法标明,同时解决swift引用类嵌套问题）
++(NSDictionary *)objectClassInArray{
+    return @{
+        @"citys" : [CityModel class]
+    };
+}
+
 @end

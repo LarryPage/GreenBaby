@@ -25,6 +25,12 @@ static NSCache *gPropertiesOfClass = nil;
  */
 static NSCache *gReplacedKeyMapsOfClass = nil;
 /**
+ 缓存要解析的类中数组属性要转换的记录类型
+ countLimit=500
+ 最大缓存500个Model定义（同上）
+ */
+static NSCache *gObjectClassInArraysOfClass = nil;
+/**
  缓存不要处理(解析或归档)的的类的propertyName
  countLimit=500
  最大缓存500个Model定义（同上）
@@ -164,6 +170,44 @@ static FMDatabaseQueue *gFMDBQueue = nil;
     }];
 }
 
++ (NSDictionary *)objectClassInArray{
+    return nil;
+}
+
++ (NSDictionary *)objectClassInArrayOfClass:(Class)klass{
+    //memory缓存
+    if (!gObjectClassInArraysOfClass) {
+        gObjectClassInArraysOfClass = [[NSCache alloc] init];
+        gObjectClassInArraysOfClass.name=@"AutuParser.ObjectClassInArraysOfClass";
+        gObjectClassInArraysOfClass.countLimit=500;
+    }
+    NSMutableDictionary * map=[gObjectClassInArraysOfClass objectForKey:NSStringFromClass(klass)];
+    if (map) {
+    }
+    else{
+        map = [NSMutableDictionary dictionary];
+        [self objectClassInArrayForHierarchyOfClass:klass onDictionary:map];
+        //NSLog(@"%@:%@",NSStringFromClass(klass),map);
+        [gObjectClassInArraysOfClass setObject:map forKey:NSStringFromClass(klass)];
+    }
+    return map;
+}
+
++ (void)objectClassInArrayForHierarchyOfClass:(Class)class onDictionary:(NSMutableDictionary *)map{
+    if (class == NULL) {
+        return;
+    }
+    
+    if (class == [NSObject class]) {
+    }
+    
+    [self objectClassInArrayForHierarchyOfClass:[class superclass] onDictionary:map];
+    
+    [[class objectClassInArray] enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+        [map safeSetObject:obj forKey:key];
+    }];
+}
+
 + (NSArray *)ignoredParserPropertyNames{
     return nil;
 }
@@ -220,18 +264,20 @@ static FMDatabaseQueue *gFMDBQueue = nil;
         return [self getValueFromDic:value key:[keys componentsJoinedByString:@"."]];
     }
     else{
-        return [dic valueForKey:key];;
+        return [dic valueForKey:key];
     }
 }
 
 + (void)KeyValueDecoderForObject:(id)object dic:(NSDictionary *)dic{
     NSDictionary *propertysDic = [self propertiesOfObject:object];
     NSDictionary *keyMap = [self replacedKeyMapOfClass:[object class]];
+    NSDictionary *objectClassInArrayMap = [self objectClassInArrayOfClass:[object class]];
     NSDictionary *ignoredPropertyNames = [self ignoredPropertyNamesOfClass:[object class]];
     [propertysDic enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
         PropertyNameState propertyNameState=[[ignoredPropertyNames valueForKey:key] integerValue];
         if (!(propertyNameState & PropertyNameStateIgnoredParser)) {
             NSString *jsonKeyName=(keyMap && [keyMap valueForKey:key])?[keyMap valueForKey:key]:key;
+            id recordClassInArray=(objectClassInArrayMap && [objectClassInArrayMap valueForKey:key])?[objectClassInArrayMap valueForKey:key]:nil;
             //id jsonValue=[dic valueForKey:jsonKeyName];
             //jsonKeyName支持education.teacherResume 多层级使用
             id jsonValue=[self getValueFromDic:dic key:jsonKeyName];
@@ -291,7 +337,34 @@ static FMDatabaseQueue *gFMDBQueue = nil;
                     
                     NSArray *records = [NSArray safeArrayFromObject:jsonValue];
                     for (NSObject *record in records) {
-                        [value safeAddObject:record];
+                        if (recordClassInArray) {
+                            if ([recordClassInArray isKindOfClass:[NSNumber class]]) {
+                                [value safeAddObject:[NSNumber safeNumberFromObject:record]];
+                            }
+                            else if ([recordClassInArray isKindOfClass:[NSString class]]) {
+                                [value safeAddObject:[NSString safeStringFromObject:record]];
+                            }
+                            else if ([recordClassInArray isKindOfClass:[NSMutableString class]]) {
+                                [value safeAddObject:[NSMutableString safeStringFromObject:record]];
+                            }
+                            else if ([recordClassInArray isKindOfClass:[NSDictionary class]]) {
+                                [value safeAddObject:[NSDictionary safeDictionaryFromObject:record]];
+                            }
+                            else if ([recordClassInArray isKindOfClass:[NSMutableDictionary class]]) {
+                                [value safeAddObject:[NSMutableDictionary safeDictionaryFromObject:record]];
+                            }
+                            else{
+                                if ([record isKindOfClass:[NSDictionary class]]) {
+                                    if([recordClassInArray instancesRespondToSelector:@selector(initWithDic:)]){
+                                        [value safeAddObject:[[recordClassInArray alloc] initWithDic:(NSDictionary *)record]];
+                                    }
+                                    
+                                }
+                            }
+                        }
+                        else{
+                            [value safeAddObject:record];
+                        }
                     }
                     
                     [object setValue:value forKeyPath:key];
@@ -299,9 +372,35 @@ static FMDatabaseQueue *gFMDBQueue = nil;
                 else if ([obj isEqualToString:NSStringFromClass([NSSet class])] || [obj isEqualToString:NSStringFromClass([NSMutableSet class])]) {
                     NSMutableSet *value=[[NSMutableSet alloc] init];
                     
-                    NSSet *records = [NSSet safeSetFromObject:jsonValue];
+                    NSArray *records = [NSArray safeArrayFromObject:jsonValue];
                     for (NSObject *record in records) {
-                        [value safeAddObject:record];
+                        if (recordClassInArray) {
+                            if ([recordClassInArray isKindOfClass:[NSNumber class]]) {
+                                [value safeAddObject:[NSNumber safeNumberFromObject:record]];
+                            }
+                            else if ([recordClassInArray isKindOfClass:[NSString class]]) {
+                                [value safeAddObject:[NSString safeStringFromObject:record]];
+                            }
+                            else if ([recordClassInArray isKindOfClass:[NSMutableString class]]) {
+                                [value safeAddObject:[NSMutableString safeStringFromObject:record]];
+                            }
+                            else if ([recordClassInArray isKindOfClass:[NSDictionary class]]) {
+                                [value safeAddObject:[NSDictionary safeDictionaryFromObject:record]];
+                            }
+                            else if ([recordClassInArray isKindOfClass:[NSMutableDictionary class]]) {
+                                [value safeAddObject:[NSMutableDictionary safeDictionaryFromObject:record]];
+                            }
+                            else{
+                                if ([record isKindOfClass:[NSDictionary class]]) {
+                                    if([recordClassInArray instancesRespondToSelector:@selector(initWithDic:)]){
+                                        [value safeAddObject:[[recordClassInArray alloc] initWithDic:(NSDictionary *)record]];
+                                    }
+                                }
+                            }
+                        }
+                        else{
+                            [value safeAddObject:record];
+                        }
                     }
                     
                     [object setValue:value forKeyPath:key];
@@ -309,9 +408,35 @@ static FMDatabaseQueue *gFMDBQueue = nil;
                 else if ([obj isEqualToString:NSStringFromClass([NSOrderedSet class])] || [obj isEqualToString:NSStringFromClass([NSMutableOrderedSet class])]) {
                     NSMutableOrderedSet *value=[[NSMutableOrderedSet alloc] init];
                     
-                    NSOrderedSet *records = [NSOrderedSet safeOrderedSetFromObject:jsonValue];
+                    NSArray *records = [NSArray safeArrayFromObject:jsonValue];
                     for (NSObject *record in records) {
-                        [value safeAddObject:record];
+                        if (recordClassInArray) {
+                            if ([recordClassInArray isKindOfClass:[NSNumber class]]) {
+                                [value safeAddObject:[NSNumber safeNumberFromObject:record]];
+                            }
+                            else if ([recordClassInArray isKindOfClass:[NSString class]]) {
+                                [value safeAddObject:[NSString safeStringFromObject:record]];
+                            }
+                            else if ([recordClassInArray isKindOfClass:[NSMutableString class]]) {
+                                [value safeAddObject:[NSMutableString safeStringFromObject:record]];
+                            }
+                            else if ([recordClassInArray isKindOfClass:[NSDictionary class]]) {
+                                [value safeAddObject:[NSDictionary safeDictionaryFromObject:record]];
+                            }
+                            else if ([recordClassInArray isKindOfClass:[NSMutableDictionary class]]) {
+                                [value safeAddObject:[NSMutableDictionary safeDictionaryFromObject:record]];
+                            }
+                            else{
+                                if ([record isKindOfClass:[NSDictionary class]]) {
+                                    if([recordClassInArray instancesRespondToSelector:@selector(initWithDic:)]){
+                                        [value safeAddObject:[[recordClassInArray alloc] initWithDic:(NSDictionary *)record]];
+                                    }
+                                }
+                            }
+                        }
+                        else{
+                            [value safeAddObject:record];
+                        }
                     }
                     
                     [object setValue:value forKeyPath:key];
@@ -465,11 +590,13 @@ static FMDatabaseQueue *gFMDBQueue = nil;
 + (void)KeyValueEncoderForObject:(id)object dic:(NSMutableDictionary *)dic{
     NSDictionary *propertysDic = [self propertiesOfObject:object];
     NSDictionary *keyMap = [self replacedKeyMapOfClass:[object class]];
+    NSDictionary *objectClassInArrayMap = [self objectClassInArrayOfClass:[object class]];
     NSDictionary *ignoredPropertyNames = [self ignoredPropertyNamesOfClass:[object class]];
     [propertysDic enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
         PropertyNameState propertyNameState=[[ignoredPropertyNames valueForKey:key] integerValue];
         if (!(propertyNameState & PropertyNameStateIgnoredParser)) {
             NSString *jsonKeyName=(keyMap && [keyMap valueForKey:key])?[keyMap valueForKey:key]:key;
+            id recordClassInArray=(objectClassInArrayMap && [objectClassInArrayMap valueForKey:key])?[objectClassInArrayMap valueForKey:key]:nil;
             id value=[object valueForKeyPath:key];
             
             if (value) {
@@ -533,8 +660,31 @@ static FMDatabaseQueue *gFMDBQueue = nil;
                     
                     NSArray *records=value;
                     [records enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-                        NSObject *record = (NSObject *)obj;
-                        [jsonValue safeAddObject:record];
+                        if (recordClassInArray) {
+                            if ([recordClassInArray isKindOfClass:[NSNumber class]]) {
+                                [jsonValue safeAddObject:obj];
+                            }
+                            else if ([recordClassInArray isKindOfClass:[NSString class]]) {
+                                [jsonValue safeAddObject:obj?obj:@""];
+                            }
+                            else if ([recordClassInArray isKindOfClass:[NSMutableString class]]) {
+                                [jsonValue safeAddObject:obj?obj:@""];
+                            }
+                            else if ([recordClassInArray isKindOfClass:[NSDictionary class]]) {
+                                [jsonValue safeAddObject:obj?obj:[NSMutableDictionary dictionary]];
+                            }
+                            else if ([recordClassInArray isKindOfClass:[NSMutableDictionary class]]) {
+                                [jsonValue safeAddObject:obj?obj:[NSMutableDictionary dictionary]];
+                            }
+                            else{
+                                if([recordClassInArray instancesRespondToSelector:@selector(dic)]){
+                                    [jsonValue safeAddObject:[obj dic]];
+                                }
+                            }
+                        }
+                        else{
+                            [jsonValue safeAddObject:obj];
+                        }
                     }];
                     //[dic setValue:jsonValue forKey:jsonKeyName];
                     //jsonKeyName支持education.teacherResume 多层级使用
@@ -545,8 +695,31 @@ static FMDatabaseQueue *gFMDBQueue = nil;
                     
                     NSSet *records=value;
                     [records enumerateObjectsUsingBlock:^(id obj, BOOL *stop) {
-                        NSObject *record = (NSObject *)obj;
-                        [jsonValue safeAddObject:record];
+                        if (recordClassInArray) {
+                            if ([recordClassInArray isKindOfClass:[NSNumber class]]) {
+                                [jsonValue safeAddObject:obj];
+                            }
+                            else if ([recordClassInArray isKindOfClass:[NSString class]]) {
+                                [jsonValue safeAddObject:obj?obj:@""];
+                            }
+                            else if ([recordClassInArray isKindOfClass:[NSMutableString class]]) {
+                                [jsonValue safeAddObject:obj?obj:@""];
+                            }
+                            else if ([recordClassInArray isKindOfClass:[NSDictionary class]]) {
+                                [jsonValue safeAddObject:obj?obj:[NSMutableDictionary dictionary]];
+                            }
+                            else if ([recordClassInArray isKindOfClass:[NSMutableDictionary class]]) {
+                                [jsonValue safeAddObject:obj?obj:[NSMutableDictionary dictionary]];
+                            }
+                            else{
+                                if([recordClassInArray instancesRespondToSelector:@selector(dic)]){
+                                    [jsonValue safeAddObject:[obj dic]];
+                                }
+                            }
+                        }
+                        else{
+                            [jsonValue safeAddObject:obj];
+                        }
                     }];
                     //[dic setValue:jsonValue forKey:jsonKeyName];
                     //jsonKeyName支持education.teacherResume 多层级使用
@@ -557,8 +730,31 @@ static FMDatabaseQueue *gFMDBQueue = nil;
                     
                     NSOrderedSet *records=value;
                     [records enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-                        NSObject *record = (NSObject *)obj;
-                        [jsonValue safeAddObject:record];
+                        if (recordClassInArray) {
+                            if ([recordClassInArray isKindOfClass:[NSNumber class]]) {
+                                [jsonValue safeAddObject:obj];
+                            }
+                            else if ([recordClassInArray isKindOfClass:[NSString class]]) {
+                                [jsonValue safeAddObject:obj?obj:@""];
+                            }
+                            else if ([recordClassInArray isKindOfClass:[NSMutableString class]]) {
+                                [jsonValue safeAddObject:obj?obj:@""];
+                            }
+                            else if ([recordClassInArray isKindOfClass:[NSDictionary class]]) {
+                                [jsonValue safeAddObject:obj?obj:[NSMutableDictionary dictionary]];
+                            }
+                            else if ([recordClassInArray isKindOfClass:[NSMutableDictionary class]]) {
+                                [jsonValue safeAddObject:obj?obj:[NSMutableDictionary dictionary]];
+                            }
+                            else{
+                                if([recordClassInArray instancesRespondToSelector:@selector(dic)]){
+                                    [jsonValue safeAddObject:[obj dic]];
+                                }
+                            }
+                        }
+                        else{
+                            [jsonValue safeAddObject:obj];
+                        }
                     }];
                     //[dic setValue:jsonValue forKey:jsonKeyName];
                     //jsonKeyName支持education.teacherResume 多层级使用
